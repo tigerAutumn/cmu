@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cc.newex.dax.perpetual.data.MarketDataShardingRepository">
+	<insert id="createMarketDataIfNotExists"
+		parameterType="java.lang.String">
+		CREATE TABLE IF NOT EXISTS
+		<include refid="Table_Name" />
+		(
+		  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+		  `contract_code` varchar(255) NOT NULL COMMENT '是Base和Quote之间的组合 P_BTC_USDT，R_BTC_USDT1109',
+		  `open` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '开盘价',
+		  `high` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '最高价',
+		  `low` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '最低价',
+		  `close` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '收盘价',
+		  `amount` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '成交张数',
+  		  `size` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '成交价值',
+		  `type` int(11) NOT NULL DEFAULT '0' COMMENT '0:1分钟 1:5分钟 2:15分钟 3:日 4:周 5:月',
+		  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+		  `modify_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+		  PRIMARY KEY (`id`),
+		  KEY `idx_md` (`created_date`)
+		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8  COMMENT='K线';
+	</insert>
+
+	<select id="getHighPrice" resultType="java.math.BigDecimal">
+		select max(high) high from
+		<include refid="Table_Name" />
+		<if test="example != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<select id="getLowPrice" resultType="java.math.BigDecimal">
+		select min(low) low from
+		<include refid="Table_Name" />
+		<if test="example != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<select id="selectSumAmount" resultType="java.math.BigDecimal">
+		select sum(amount) from
+		<include refid="Table_Name" />
+		<if test="example != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<select id="selectSumSize" resultType="java.math.BigDecimal">
+		select sum(size) from
+		<include refid="Table_Name" />
+		<if test="example != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+</mapper>

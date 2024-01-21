@@ -1,0 +1,41 @@
+#
+# newex
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  market:
+    send:
+      serverLocation: @newex.market.send.serverLocation@
+    dataKey: newex_spider
+#
+# spring 
+#
+spring:
+  application:
+    name: @newex.app.name@
+#
+# logging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+
+

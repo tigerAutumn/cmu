@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>工单页</title>
+    <script th:src="@{'/js/modules/workorder/work.js?v='+${rnd}}"></script>
+    <style>
+        .talk_show {
+            background: #fff;
+            font-size: 16px;
+            margin: 0px auto;
+            overflow: auto;
+        }
+
+        .atalk {
+            margin: 10px;
+        }
+
+        .atalk span {
+            display: inline-block;
+            background: #0181cc;
+            border-radius: 10px;
+            color: #fff;
+            padding: 5px 10px;
+        }
+
+        .btalk {
+            margin: 10px;
+            text-align: right;
+        }
+
+        .btalk span {
+            display: inline-block;
+            background: #ef8201;
+            text-align: left;
+            border-radius: 10px;
+            color: #fff;
+            padding: 5px 10px;
+        }
+
+        .clear {
+
+            clear: both;
+            display: block;
+
+            content: ".";
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="workOrderId" name="workOrderId" type="hidden" value=""/>
+<input id="tabIndex" name="tabIndex" type="hidden" value=""/>
+<input id="userId" name="userId" type="hidden" value=""/>
+<div id="reset-work-dlg" title="转发工单">
+    <form id="reset-work-form" name="reset-work-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>组织机构:</td>
+                    <td>
+                        <select class="easyui-combotree" id="groupId" name="groupId"
+                                data-options=""
+                                style="width: 160px"></select>
+                    </td>
+                    <td>选择转发用户:</td>
+                    <td colspan="3">
+                        <input id="userList" name="userList" class="easyui-combobox"/>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+<div style="border: 0px solid #ccc;width: 100%; height: 100%;">
+    <div style="width: 30%;float: left;height:847px; border-right: 1px solid #ccc;">
+        <div style="">
+            <div style="background: #f4f4f4;">
+                <div style="float: left;padding: 10px; ">
+                    <label id="username" style="font-size: 16px; font-weight: bold;"></label>
+                </div>
+                <div style="float: right;padding: 5px;">
+                    <select class="easyui-combobox" id="work-combox"
+                            data-options="onChange:function(){WorkMVC.Controller.updateUser()}"
+                            name="work-combox" style="width: 100px">
+                        <option value="1">上班中</option>
+                        <option value="2">已休息</option>
+                        <option value="3">已下班</option>
+                    </select>
+                </div>
+                <div style="float: right; padding: 10px; font-weight: bold;">工作状态:</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div id="tabl" class="easyui-tabs" style="height: 35px;">
+            <div title="已受理">
+
+            </div>
+            <div title="已回复">
+
+            </div>
+            <div title="等待中">
+
+            </div>
+            <div title="待确定">
+
+            </div>
+            <div title="已解决">
+
+            </div>
+
+        </div>
+        <div style="width: 100%;height:100%;">
+            <div class="toolbar">
+                <select class="easyui-combobox" id="filedName" name="filedName" style="width: 100px">
+                    <option selected="selected" value="">全部</option>
+                    <option value="0">工单ID</option>
+                    <option value="1">用户姓名</option>
+                    <option value="2">用户ID</option>
+                </select>
+                关键字：<input class="easyui-textbox" type="text" id="keyword" name="keyword"
+                           style="width: 100px" data-options=""/>
+
+                <a id="btn-tab1-search" href="#" class="easyui-linkbutton" iconCls="icon-search"> 搜索 </a>
+            </div>
+            <div style="height: 100%; padding: 2px">
+                <div id="mine-tab1" style="height:auto;"></div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 50%; float: left;border-right: 0px solid #ccc;">
+        <div style="width: 100%; height: 100%;">
+            <div style="background: #f4f4f4;padding: 10px;border-bottom:1px solid #ccc; height: 10%;">
+                <div style="float: left;">
+                    <div style="font-weight: bold"><label id="c_name"></label></div>
+                    <div style="padding-top: 5px;font-weight: bold;"><label id="c_desc"></label></div>
+                </div>
+                <div style="float: right;">
+                    <a id="btn-send-transmit" href="#" style="background: #00bbee; color: #ffffff;"
+                       class="easyui-linkbutton">转发工单</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div id="p" class="easyui-panel" style="height:100%;padding:10px;width: 100%;">
+                <div class="talk_show" id="words">
+                </div>
+
+            </div>
+            <div style="height: 20%">
+                <div style="padding-top: 30px;padding-left: 10px; padding-right: 10px; ">
+                    <input class="easyui-textbox" data-options="multiline:true,prompt:'请输入...'" type="text"
+                           id="remarks"
+                           name="remarks"
+                           style="width: 100%;height: 100px; "/>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="float: left;">
+                        <a id="btn-upload" href="#" style="background: #00bbee; color: #ffffff;"
+                           class="easyui-linkbutton">上传附件</a>
+                    </div>
+                    <div style="float: left; padding-left: 10px;">
+                        <a id="btn-wait" href="#" style="background: #00bbee;color: #ffffff;"
+                           class="easyui-linkbutton">置为等待</a>
+                    </div>
+                    <div style="float: left;  padding-left: 10px;">
+                        <a id="btn-Solve" href="#" style="background: #00bbee;color: #ffffff;"
+                           class="easyui-linkbutton">问题解决</a>
+                    </div>
+                    <div style="float: right;">
+                        <a id="btn-send" href="#" style="background:#00bb00;color: #ffffff;"
+                           class="easyui-linkbutton">
+                            发 送 </a>
+                    </div>
+                    <div class="clear">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 19.8%;;float: left;border-left:1px solid #ccc;">
+        <div id="tab_right" class="easyui-tabs" style="height: 847px;width: 100%;">
+            <div title="用户信息">
+                <div style="padding: 10px;">
+                    <div style="font-weight: bold;">基本信息</div>
+                    <div style="padding-top: 10px;">用户ID：<label id="user_id" name="user_id"></label></div>
+                    <div style="padding-top: 10px;">昵称：<label id="user_name" name="user_name"></label></div>
+                    <div style="padding-top: 10px;">真实姓名：<label id="user_realname" name="user_realname"></label></div>
+                    <div style="padding-top: 10px;">银行卡号：<label id="user_card" name="user_card"></label></div>
+                    <div style="padding-top: 10px;">电话：<label id="user_phone" name="user_phone"></label></div>
+                    <div style="padding-top: 10px;">邮箱：<label id="user_email" name="user_email"></label></div>
+                    <div style="padding-top: 10px;">支付宝账号：<label></label></div>
+                    <div style="padding-top: 10px;">来源：<label>平台</label></div>
+                    <div style="padding-top: 10px;">备注：<label></label></div>
+                </div>
+            </div>
+            <div title="充值记录">
+                <div style="height: 100%; padding: 2px">
+                    <div id="RedrawMoney-record-datagrid" style="height: auto;"></div>
+                </div>
+            </div>
+            <div title="提现记录">
+                <div style="height: 100%; padding: 2px">
+                    <div id="extract-record-datagrid" style="height: auto;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="ds-dlg" style="width:400px;height:160px;padding:2px;" closed="true">
+    <form id="ds-form" name="ds-form" method="post" enctype="multipart/form-data">
+            <table cellpadding="5" class="form-table">
+                <tr>
+                    <td>请选择文件:</td>
+                    <td><input class="easyui-filebox" id="file" name="file"
+                               data-options="multiple:true,buttonText:'选择附件'"
+                               style="width: 300px"/>
+                    </td>
+                </tr>
+                <div id="ms" style="font-size: 30px; padding-top: 25px;font-size: 25px; "></div>
+            </table>
+    </form>
+</div>
+</body>
+</html>

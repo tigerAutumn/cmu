@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.boss.admin.data.UserRepository">
+    <sql id="Non_Sensitive_Column_List">
+        group_id ,roles ,account  ,name ,email ,telephone ,status ,type ,totp_key,image_path ,duty_status ,order_num ,comment ,created_date ,updated_date,broker_id
+    </sql>
+    <select id="selectUserWithoutSensitiveInfo" resultMap="UserMap" parameterType="java.util.Map">
+        select id,
+        <include refid="Non_Sensitive_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+
+    <select id="selectUserInfoByGroupIds" resultMap="UserMap" parameterType="java.util.Map">
+        select id,
+        <include refid="Non_Sensitive_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where 1=1 and duty_status=1 and group_id in (#{groupIds})
+    </select>
+</mapper>

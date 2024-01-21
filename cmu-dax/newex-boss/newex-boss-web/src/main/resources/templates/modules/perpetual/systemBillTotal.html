@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约账单管理</title>
+    <script th:src="@{'/js/modules/perpetual/systemBillTotal.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    币对Code:
+    <input id="query-pairCode" name="query-pairCode" class="easyui-combobox" style="width: 150px"/>
+
+    起始时间：<input class="easyui-datetimebox" id="query-startTime" name="query-startTime" style="width: 200px"/>
+    结束时间：<input class="easyui-datetimebox" id="query-endTime" name="query-endTime" style="width: 200px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+</div>
+<div style="height: 94%; padding: 1px">
+    <input type="hidden" id="action" name="action"/>
+    <!--数据表格-->
+    <div id="systemBillTotal-datagrid">
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>中奖纪录</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/winRecord.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    用户名：<input class="easyui-textbox" type="text" id="winRecord-username" name="winRecord-username" style="width: 100px"/>
+    奖品级别：<input class="easyui-textbox" type="text" id="winRecord-level" name="winRecord-level" style="width: 100px"/>
+    起始时间：<input class="easyui-datebox" id="winRecord-startTime" name="winRecord-startTime" style="width: 200px"/>
+    结束时间：<input class="easyui-datebox" id="winRecord-endTime" name="winRecord-endTime" style="width: 200px"/>
+    <a id="winRecord-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <a id="winRecord-btn-export" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">导出</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="winRecord-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增中奖纪录 -->
+<div id="winRecord-dlg">
+    <form id="winRecord-form" name="winRecord-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" hidden/>
+
+            <tr>
+                <td>用户ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input class="easyui-textbox" id="username" data-options="required:true" name="username" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>奖品级别</td>
+                <td>
+                    <input class="easyui-textbox" id="level" data-options="required:true" name="level" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>奖品描述</td>
+                <td>
+                    <input class="easyui-textbox" id="desc" data-options="required:true" name="desc" style="width: 450px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

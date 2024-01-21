@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.users.data.UserInviteRecordRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="UserInviteRecordMap" type="cc.newex.dax.users.domain.UserInviteRecord">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="invite_user_id" property="inviteUserId" jdbcType="BIGINT" />
+    <result column="invite_code" property="inviteCode" jdbcType="VARCHAR" />
+    <result column="activity_code" property="activityCode" jdbcType="VARCHAR" />
+    <result column="currency_num" property="currencyNum" jdbcType="DOUBLE" />
+    <result column="currency_id" property="currencyId" jdbcType="INTEGER" />
+    <result column="invite_currency_num" property="inviteCurrencyNum" jdbcType="DOUBLE" />
+    <result column="invite_currency_id" property="inviteCurrencyId" jdbcType="INTEGER" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    user_invite_record
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    user_id, user_name, invite_user_id, invite_code, activity_code, currency_num, currency_id, 
+    invite_currency_num, invite_currency_id, created_date, updated_date, broker_id
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.userId != null">
+      user_id,
+    </if>
+    <if test="record.userName != null">
+      user_name,
+    </if>
+    <if test="record.inviteUserId != null">
+      invite_user_id,
+    </if>
+    <if test="record.inviteCode != null">
+      invite_code,
+    </if>
+    <if test="record.activityCode != null">
+      activity_code,
+    </if>
+    <if test="record.currencyNum != null">
+      currency_num,
+    </if>
+    <if test="record.currencyId != null">
+      currency_id,
+    </if>
+    <if test="record.inviteCurrencyNum != null">
+      invite_currency_num,
+    </if>
+    <if test="record.inviteCurrencyId != null">
+      invite_currency_id,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.userId != null">
+      #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.userName != null">
+      #{record.userName,jdbcType=VARCHAR},
+    </if>
+    <if test="record.inviteUserId != null">
+      #{record.inviteUserId,jdbcType=BIGINT},
+    </if>
+    <if test="record.inviteCode != null">
+      #{record.inviteCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.activityCode != null">
+      #{record.activityCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.currencyNum != null">
+      #{record.currencyNum,jdbcType=DOUBLE},
+    </if>
+    <if test="record.currencyId != null">
+      #{record.currencyId,jdbcType=INTEGER},
+    </if>
+    <if test="record.inviteCurrencyNum != null">
+      #{record.inviteCurrencyNum,jdbcType=DOUBLE},
+    </if>
+    <if test="record.inviteCurrencyId != null">
+      #{record.inviteCurrencyId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.userId,jdbcType=BIGINT},
+    #{record.userName,jdbcType=VARCHAR},
+    #{record.inviteUserId,jdbcType=BIGINT},
+    #{record.inviteCode,jdbcType=VARCHAR},
+    #{record.activityCode,jdbcType=VARCHAR},
+    #{record.currencyNum,jdbcType=DOUBLE},
+    #{record.currencyId,jdbcType=INTEGER},
+    #{record.inviteCurrencyNum,jdbcType=DOUBLE},
+    #{record.inviteCurrencyId,jdbcType=INTEGER},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.userId != null">
+      user_id = #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.userName != null">
+      user_name = #{record.userName,jdbcType=VARCHAR},
+    </if>
+    <if test="record.inviteUserId != null">
+      invite_user_id = #{record.inviteUserId,jdbcType=BIGINT},
+    </if>
+    <if test="record.inviteCode != null">
+      invite_code = #{record.inviteCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.activityCode != null">
+      activity_code = #{record.activityCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.currencyNum != null">
+      currency_num = #{record.currencyNum,jdbcType=DOUBLE},
+    </if>
+    <if test="record.currencyId != null">
+      currency_id = #{record.currencyId,jdbcType=INTEGER},
+    </if>
+    <if test="record.inviteCurrencyNum != null">
+      invite_currency_num = #{record.inviteCurrencyNum,jdbcType=DOUBLE},
+    </if>
+    <if test="record.inviteCurrencyId != null">
+      invite_currency_id = #{record.inviteCurrencyId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    user_id = VALUES(user_id), user_name = VALUES(user_name), invite_user_id = VALUES(invite_user_id), invite_code = VALUES(invite_code), activity_code = VALUES(activity_code), currency_num = VALUES(currency_num), currency_id = VALUES(currency_id), invite_currency_num = VALUES(invite_currency_num), invite_currency_id = VALUES(invite_currency_id), created_date = VALUES(created_date), updated_date = VALUES(updated_date), broker_id = VALUES(broker_id)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="UserInviteRecordMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="UserInviteRecordMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="UserInviteRecordMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" resultMap="UserInviteRecordMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="UserInviteRecordMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

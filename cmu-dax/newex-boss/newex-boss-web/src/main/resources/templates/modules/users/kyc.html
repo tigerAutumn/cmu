@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>个人信息</title>
+    <script th:src="@{'/js/modules/users/kyc.js?v='+${rnd}}"></script>
+    <style>
+        .clear {
+            clear: both;
+            display: block;
+            content: ".";
+        }
+
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table1 {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table1 th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table1 td, .table th {
+            border: 0px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+
+        .table1 tr.alter {
+            background-color: #f5fafe;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+
+        .table tr.alter {
+            background-color: #f5fafe;
+        }
+
+        #details label {
+
+        }
+
+        .kyc2-pictures {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .kyc2-pictures > li {
+            float: left;
+            width: 33.3%;
+            height: 33.3%;
+            margin: 0 -1px -1px 0;
+            overflow: hidden;
+        }
+
+        .kyc2-pictures > li > img {
+            width: 275px;
+            height: 275px;
+            padding: 10px;
+            cursor: -webkit-zoom-in;
+            cursor: zoom-in;
+        }
+
+        .kyc1-pictures {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .kyc1-pictures > li {
+            float: left;
+            width: 50%;
+            height: 50%;
+            margin: 0 -1px -1px 0;
+            overflow: hidden;
+        }
+
+        .kyc1-pictures > li > img {
+            width: 275px;
+            height: 275px;
+            padding: 15px 70px;
+            cursor: -webkit-zoom-in;
+            cursor: zoom-in;
+        }
+
+    </style>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    <div>
+
+        用户：<select class="easyui-combobox" id="profile-userProperty" name="profile-userProperty" style="width: 120px">
+        <option value="-1">全部</option>
+        <option value="1">用户ID</option>
+        <option value="2">用户邮箱</option>
+        <option value="3">用户手机号</option>
+    </select>
+        <input class="easyui-textbox" type="text" id="profile-userValue" name="profile-userValue" style="width: 120px"/>
+
+        证件号码：<input class="easyui-textbox" type="text" id="profile-cardNumber" name="profile-cardNumber"
+                    style="width: 120px"/>
+        国&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;籍：<select class="easyui-combobox" id="profile-country" name="profile-country" style="width: 120px">
+        <option selected="selected" value="0">全部</option>
+        <option value="1">国内</option>
+        <option value="2">国际</option>
+    </select>
+        认证状态：<select class="easyui-combobox" id="profile-status" name="profile-status" style="width: 120px">
+        <option selected="selected" value="">全部</option>
+        <option value="4">待审核</option>
+        <option value="1">审核通过</option>
+        <option value="2">驳回</option>
+        <option value="3">其他异常</option>
+    </select>
+        KYC级别：<select class="easyui-combobox" id="profile-level" name="profile-level" style="width: 120px">
+        <option selected="selected" value="">全部</option>
+        <option value="1">KYC1</option>
+        <option value="2">KYC2</option>
+    </select>
+
+    </div>
+    <div style="margin-top: 5px;">
+        受理范围：<select class="easyui-combobox" id="profile-range" name="profile-range" style="width: 120px">
+        <option selected="selected" value="">全部</option>
+        <option value="0">申请时间</option>
+        <option value="1">审核时间</option>
+    </select>
+        开始时间：<input class="easyui-datetimebox" id="beginTime" name="beginTime" labelPosition="top" style="width:120px;">
+        结束时间：<input class="easyui-datetimebox" id="endTime" name="endTime" labelPosition="top" style="width:120px;">
+        受理客服：<input class="easyui-textbox" type="text" id="profile-dealUserId" name="profile-dealUserId"
+                    style="width: 120px" data-options=""/>
+
+        <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+        <input id="modal-action" type="hidden" name="action" value=""/>
+    </div>
+</div>
+<div style="height: 90%; padding: 1px">
+    <div id="kyc-datagrid"></div>
+</div>
+
+<div id="report-detail-dlg" title="个人认证详情">
+    <form id="reset-up-form" name="reset-up-form" method="post">
+        <input id="uuId" name="uuId" type="hidden" value=""/>
+        <input id="userId" name="userId" type="hidden" value=""/>
+        <input id="level" name="level" type="hidden" value=""/>
+        <input id="countryCode" name="countryCode" type="hidden" value=""/>
+        <input id="mobile" name="mobile" type="hidden" value=""/>
+        <input id="email" name="email" type="hidden" value=""/>
+
+        <div id="details" style="padding: 10px;font-size: 16px; line-height: 180%;">
+            <table width="100%" class="table">
+                <tr>
+                    <td style="width: 50px;">用户ID:</td>
+                    <td><label
+                            id="profile-detail-userId"/></td>
+                    <td style="width: 50px;">手机号:</td>
+                    <td><label
+                            id="profile-detail-mobile"/></td>
+                    <td style="width: 50px;">邮箱:</td>
+                    <td><label id="profile-detail-email"/></td>
+                </tr>
+
+            </table>
+
+            <table width="100%" class="table" style="margin-top: 10px;">
+                <tr>
+                    <td colspan="4" style="width: 50px;color: #000;font-weight: bold;">KYC1认证信息</td>
+
+                </tr>
+                <tr>
+                    <td style="width: 50px;">姓名:</td>
+                    <td style=""><label id="profile-detail-allName"/></td>
+                    <td style="width: 50px;">当前状态:</td>
+
+                    <td style="width: 50px;"><label style="font-size: 18px;color: #ff0000;" id="profile-detail-firstStatus"/></td>
+
+                </tr>
+                <tr>
+                    <td style="width: 50px;">国家：</td>
+
+                    <td>
+                        <label id="profile-detail-country"/>
+                    </td>
+                    <td style="width: 50px;">证件类型：</td>
+                    <td>
+                        <label id="profile-detail-cardType"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="width: 50px;">性别：</td>
+
+                    <td>
+                        <label id="profile-detail-gender"/>
+                    </td>
+                    <td style="width: 50px;">证件号码：</td>
+                    <td>
+                        <label id="profile-detail-cardNumber"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="width: 50px;">有效期：</td>
+
+                    <td colspan="3">
+                        <label id="profile-detail-validDate"/>
+                    </td>
+
+
+                </tr>
+            </table>
+            <div style="margin-top: 10px;"></div>
+            <table id="hide6" width="100%" class="table1" style="display: none;">
+                <tr>
+                    <td style="text-align: center;">
+                        <h3>证件正面</h3>
+                    </td>
+                    <td style="text-align: center;">
+                        <h3>证件反面</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ul class="kyc1-pictures">
+                            <li>
+                                <img id="profile-detail-frontImg" src="">
+                            </li>
+                            <li>
+                                <img id="profile-detail-backImg" src="">
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div style="margin: 10px;">
+
+            <table id="hide5" width="100%" class="table" style="display: none">
+                <tr>
+                    <td style="font-weight: bold;color: #000;">KYC2认证信息</td>
+                    <td style="">视频认证</td>
+                    <td style="">当前状态:</td>
+                    <td style=""><label style="font-size: 18px;color: #ff0000; " id="profile-detail-status"/></td>
+                </tr>
+
+                <tr>
+                    <div style="margin-top: 10px;"></div>
+                    <table id="hide5-1" width="100%" class="table1" style="display: none; padding: 10px;">
+                        <tr>
+                            <td style="text-align: center;">
+                                <h3>Face++活体照片</h3>
+                            </td>
+                            <td colspan="2" style="text-align: center;">
+                                Face++ Request Id：<label id="profile-detail-requestId"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <ul class="kyc2-pictures">
+                                    <li>
+                                        <img id="profile-detail-facePlusImg" src="">
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+
+                <tr>
+                    <table id="hide2" width="100%" class="table" style="display: none;">
+                        <tr>
+                            <td>地址1:</td>
+                            <td><label style="" id="profile-detail-addiess1"/></td>
+                            <td>地址2:</td>
+                            <td><label style="" id="profile-detail-addiess2"/></td>
+                        </tr>
+                        <tr>
+                            <td>地址3:</td>
+                            <td><label style="" id="profile-detail-addiess3"/></td>
+                            <td>城市:</td>
+                            <td><label style="" id="profile-detail-city"/></td>
+                        </tr>
+                        <tr>
+                            <td>邮编:</td>
+                            <td colspan="3"><label style="" id="profile-detail-zipCode"/></td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+
+                    <div style="margin-top: 10px;"></div>
+                    <table id="hide1" width="100%" class="table1" style="display: none;padding: 10px;">
+                        <tr>
+                            <td style="text-align: center;">
+                                <h3>证件正面</h3>
+                            </td>
+                            <td style="text-align: center;">
+                                <h3>手持证件照</h3>
+                            </td>
+                            <td style="text-align: center;">
+                                <h3>住址证明</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <ul class="kyc2-pictures">
+                                    <li>
+                                        <img id="profile-detail-cardImg" src="">
+                                    </li>
+                                    <li>
+                                        <img id="profile-detail-handsImg" src="">
+                                    </li>
+                                    <li>
+                                        <img id="profile-detail-addressImg" src="">
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                </tr>
+            </table>
+        </div>
+
+        <table class="table1" style="margin: 10px; width: 98%; ">
+            <tr>
+                <td width="80px;" style="padding-top: 20px;">理由:</td>
+                <td style="padding-top: 20px;">
+                    <input type="text" id="kyc-reason-locale" name="kyc-reason-locale" style="width: 15%;"/>
+                    <input type="text" id="kyc-reason-all" name="kyc-reason-all" style="width: 65%;"/>&nbsp;&nbsp;
+                    <!--
+                    <a href="javascript:void(0)" onclick="$('#add-reason-dlg').dialog('open')">添加新理由</a>-->
+                </td>
+            </tr>
+            <tr>
+                <td width="95px;"></td>
+                <td style="padding-top: 20px;">
+                    <input class="easyui-textbox" data-options="multiline:true" type="text" id="leavingMessage"
+                           name="leavingMessage"
+                           style="width: 80%;height: 100px"/></td>
+            </tr>
+            <tr>
+                <td width="95px;">备注:</td>
+                <td style="padding-top: 20px;">
+                    <input class="easyui-textbox" data-options="multiline:true" type="text" id="remarks"
+                           name="remarks"
+                           style="width: 80%;height: 100px"/></td>
+            </tr>
+            <tr style="">
+                <td width="80px;">操作记录:</td>
+                <td style="line-height: 200%;padding-left: 12px;padding-top: 20px;padding-bottom: 30px;">
+                    <div style="width: 80%;" id="report-detail-comment"/>
+
+                    <!--2018-05-09 18:34:31 客服王洋 审核：改为通过，原因：已确认，没有问题。备注：空<br/>-->
+
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+</div>
+
+<div id="add-reason-dlg">
+    <form id="add-reason-form" name="add-reason-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td>内容:</td>
+                <td>
+                    <input class="easyui-textbox" data-options="multiline:true" type="text" id="reason"
+                           name="reason" style="width: 500px;height: 100px;"/>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

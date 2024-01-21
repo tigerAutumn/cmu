@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>法币 - 币种管理</title>
+    <script th:src="@{'/js/modules/asset/c2c-currency.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    币种简称:<input class="easyui-textbox" type="text" id="currency-symbol" name="currency-symbol" style="width: 150px"/>
+
+    可否划转:<input class="easyui-combobox" type="text" id="currency-transfer" name="currency-transfer" style="width: 150px"/>
+
+    上线状态:<input class="easyui-combobox" type="text" id="currency-online" name="currency-online" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="currency-datagrid"></div>
+</div>
+<div id="currency-dlg">
+    <form id="currency-form" name="currency-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+
+            <tr>
+                <td>币种简称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="symbol" name="symbol"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>币种全称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="fullName" name="fullName"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种符号:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sign" name="sign"
+                           style="width: 350px"/>
+                </td>
+
+                <td>币种图片:</td>
+                <td>
+                    <input class="easyui-filebox" name="imgfile"
+                           id="imgfile"
+                           data-options="onChange:function(){imgupdate()},prompt:'选择图片',buttonText:'&nbsp;选&nbsp;择&nbsp;',"
+                           style="width:350px">
+                    <input class="easyui-textbox" id="currencyPictureUrl" type="hidden" name="currencyPictureUrl"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>产品线:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="biz" name="biz" style="width: 350px"/>
+                </td>
+
+                <td>上线状态:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="online" name="online" style="width: 350px"/>
+                </td>
+            <tr>
+
+            <tr>
+                <td>可否划转:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="transfer" name="transfer" style="width: 350px"/>
+                </td>
+
+                <td>资金列表是否展示:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="isAssetVisible" name="isAssetVisible" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>发行价格:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="issuePrice" name="issuePrice"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>价格小数位数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="decimalPlaces" name="decimalPlaces"
+                           data-options="required:true, min:0" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>单笔订单最小额:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="minOrderTotalPerOrder" name="minOrderTotalPerOrder"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>单笔订单最大额:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="maxOrderTotalPerOrder" name="maxOrderTotalPerOrder"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>广告单最小额:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="minOrderTotalPerTradingOrder" name="minOrderTotalPerTradingOrder"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>广告单最大额:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="maxOrderTotalPerTradingOrder" name="maxOrderTotalPerTradingOrder"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>未完成订单限制:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="maxIncompleteOrderTotalPerUser" name="maxIncompleteOrderTotalPerUser"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>广告单买单保证金:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="deposit" name="deposit"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>商家佣金费率:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="platformCommissionRate" name="platformCommissionRate"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>关联的DApps:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="dapps" name="dapps"
+                           data-options="" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种类型:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="type" name="type"
+                           data-options="" style="width: 350px"/>
+                </td>
+
+                <td>排序:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <input class="easyui-textbox" type="hidden" id="createdDate" name="createdDate"/>
+            </tr>
+
+            <tr>
+                <td>上线板块:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="zone" name="zone" style="width: 350px"/>
+                </td>
+
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           style="width: 350px" data-options="required:true"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

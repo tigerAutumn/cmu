@@ -1,0 +1,228 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    *font-size: 63%;
+}
+
+body {
+    font-size: 1.2em;
+    line-height: 1.2;
+    color: #333;
+    font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+    overflow: hidden;
+    *overflow: hidden;
+    background-color: #f6f7fb;
+    min-height: 500px;
+}
+
+img {
+    border: 0;
+}
+
+.logo-bg {
+    position: relative;
+    min-width: 500px;
+}
+
+.logo-bg img {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 47px;
+    left: 0;
+    min-width: 500px;
+}
+
+.login-from {
+    position: absolute;
+    width: 310px;
+    height: 310px;
+    padding: 20px 30px;
+    left: 50%;
+    top: 50%;
+    border: solid 1px #d3d3d1;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin-left: -185px;
+    margin-top: -175px;
+}
+
+.login-from .login-title {
+    font: 22px 微软雅黑;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #007aff;
+}
+
+.login-from from {
+    margin: 0 0 20px
+}
+
+.login-from .item1 {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.login-from .item1 span.login7-ico {
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    background: url(../images/login7.png) 0 0 no-repeat;
+    margin: 13px 0px 0px 3px;
+}
+
+.login-from .item1 span.login7-ico1 {
+    background: url(../images/login7.png) 0 -24px no-repeat;
+}
+
+.login-from .txt {
+    margin-bottom: 0;
+    width: 262px;
+    height: 42px;
+    padding: 4px 10px 4px 35px;
+    border: 1px solid #dadada;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+}
+
+button.btn {
+    display: block;
+    width: 100%;
+    background-color: #3596eb;
+    padding: 11px 20px;
+    line-height: 20px;
+    border: 0px;
+    cursor: pointer;
+    font-size: 17.5px;
+    font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.login-from .item2 {
+    margin-bottom: 0px;
+}
+
+.login-from .item3 {
+    padding: 0px 15px 24px 15px;
+    font-size: 14px;
+}
+
+.login-from .info-box {
+    height: 20px;
+    width: 100%;
+}
+
+.item3 .fl-r {
+    float: right;
+}
+
+.item3 .input-check {
+    vertical-align: bottom;
+    margin-right: 6px;
+}
+
+.header {
+    height: 47px;
+    width: 100%;
+    background: #2d3a4c;
+}
+
+.logo1 {
+    overflow: hidden;
+}
+
+.logo1 a {
+    display: block;
+    float: left;
+    margin: 0 0px 0px 20px;
+}
+
+.logo1 span {
+    display: block;
+    float: left;
+}
+
+.logo1 .line1 {
+    height: 25px;
+    width: 2px;
+    background: 0 0 no-repeat;
+    margin: 13px 17px 0px 17px;
+}
+
+.logo1 .header-dis {
+    color: #fff;
+    font-size: 32px;
+    font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+    margin-top: 13px;
+}
+
+.hint-box {
+    text-align: left;
+    color: #ff1800;
+    font-size: 14px;
+    padding: 0px;
+}
+
+.hide {
+    display: block
+}
+
+.login-from .hint-box {
+    display: none;
+}
+
+.login-from span.lab-tip {
+    margin-left: 10px;
+}
+
+.header2 {
+    height: 67px;
+    width: 100%;
+    min-width: 500px;
+    background: #405573;
+}
+
+.header2 img {
+    margin-top: 10px;
+}
+
+.header2 .header-dis {
+    margin-top: 16px;
+    margin-left: 14px;
+}
+
+.ml0 {
+    margin-left: 0;
+}
+
+.texts {
+    left: 40%;
+    top: 50%;
+    margin-left: -350px;
+    margin-top: -75px;
+    position: absolute;
+    text-align: right;
+}
+
+.texts h1 {
+    color: #405573;
+    font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.texts p {
+    color: #7c8085;
+    font-size: 24px;
+}

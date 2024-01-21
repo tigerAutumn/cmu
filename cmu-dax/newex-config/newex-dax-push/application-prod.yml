@@ -1,0 +1,30 @@
+#
+# redis配置
+#
+spring:
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    password: xxx
+#
+# websocket配置
+#
+websocket:
+  ip: 0.0.0.0
+  isEpoll: false
+  port: 8104
+#
+# jwt
+#
+jwt:
+  cryptoKey: Dk4nIS49RksJJRoB
+  secret: ZwwXGHRDUy1wUWgv
+#
+# client
+#
+newex:
+  feignClient:
+    dax:
+      users: newex-dax-users
+      market: newex-dax-market
+      portfolio: newex-dax-portfolio

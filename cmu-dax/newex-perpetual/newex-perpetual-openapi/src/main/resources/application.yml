@@ -1,0 +1,109 @@
+#
+# server
+#
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+#
+#  datasource
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.perpetual.datasource.biz.url@
+        username: @newex.perpetual.datasource.biz.username@
+        password: @newex.perpetual.datasource.biz.password@
+        max-active: 10
+        min-idle: 0
+    config:
+      online: @newex.perpetual.config.online@
+      module: 2
+      dk-currency: @newex.perpetual.config.dkCurrency@
+  security:
+    csrf.enabled: false
+    xss.enabled: false
+    exception-advice: false
+    jwt.exception-advice: false
+  web:
+    support.exception-advice: false
+  feignClient:
+    dax:
+      asset: @newex.feignClient.dax.asset@
+      users: @newex.feignClient.dax.users@
+      integration: @newex.feignClient.dax.integration@
+      market: @newex.feignClient.dax.market@
+  openapi:
+    interceptor:
+      auth:
+        exclude-url-patterns: /api/v1/perpetual/public/**
+    apikey:
+      prefix: '@newex.openapi.apikey.prefix@'
+      passphrase-salt:
+        algorithm: 'HmacMD5'
+        hash-iterations: 1
+        start-index: 10
+        end-index: 20
+    rate-limiter:
+      api-key-rate-limiter:
+        max-request-times: 50
+        seconds: 2
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  aop:
+    proxy-target-class: true
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool:
+      max-active: @spring.redis.pool.max-active@
+      max-idle: @spring.redis.pool.max-idle@
+      max-wait: @spring.redis.pool.max-wait@
+      min-idle: @spring.redis.pool.min-idle@
+#
+# logging config file location
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false

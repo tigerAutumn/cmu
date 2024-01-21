@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>交易黑名单</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/rushPrize.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div style="height: 96%; padding: 1px">
+    <div id="rush-prize-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+
+<div id="rush-prize-dlg">
+    <form id="rush-prize-form" name="rush-prize-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>期数</td>
+                <td>
+                    <input id="periodNo" name="periodNo" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>持仓CT最小值</td>
+                <td>
+                    <input class="easyui-textbox" id="minHoldAmount" name="minHoldAmount" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种ID</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyId" name="currencyId" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种简称</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyCode" name="currencyCode" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种数量</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyAmount" name="currencyAmount" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>份数</td>
+                <td>
+                    <input class="easyui-textbox" id="numbers" name="numbers" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>显示的份数</td>
+                <td>
+                    <input class="easyui-textbox" id="displayNumbers" name="displayNumbers" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>已抢购的份数</td>
+                <td>
+                    <input class="easyui-textbox" id="rushNumbers" name="rushNumbers" style="width: 450px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.perpetual.data.UserPositionRepository">
+
+    <sql id="Update_Set_From_Base_Bean">
+
+        <if test="record.amount != null">
+            amount = #{record.amount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.closingAmount != null">
+            closing_amount = #{record.closingAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.openMargin != null">
+            open_margin = #{record.openMargin,jdbcType=DECIMAL},
+        </if>
+        <if test="record.maintenanceMargin != null">
+            maintenance_margin = #{record.maintenanceMargin,jdbcType=DECIMAL},
+        </if>
+        <if test="record.fee != null">
+            fee = #{record.fee,jdbcType=DECIMAL},
+        </if>
+        <if test="record.price != null">
+            price = #{record.price,jdbcType=DECIMAL},
+        </if>
+        <if test="record.size != null">
+            size = #{record.size,jdbcType=DECIMAL},
+        </if>
+        <if test="record.preLiqudatePrice != null">
+            pre_liqudate_price = #{record.preLiqudatePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="record.liqudatePrice != null">
+            liqudate_price = #{record.liqudatePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="record.brokerPrice != null">
+            broker_price = #{record.brokerPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="record.realizedSurplus != null">
+            realized_surplus = #{record.realizedSurplus,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderMargin != null">
+            order_margin = #{record.orderMargin,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderFee != null">
+            order_fee = #{record.orderFee,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderLongAmount != null">
+            order_long_amount = #{record.orderLongAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderShortAmount != null">
+            order_short_amount = #{record.orderShortAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderLongSize != null">
+            order_long_size = #{record.orderLongSize,jdbcType=DECIMAL},
+        </if>
+        <if test="record.orderShortSize != null">
+            order_short_size = #{record.orderShortSize,jdbcType=DECIMAL},
+        </if>
+        <if test="record.modifyDate != null">
+            modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
+
+    <select id="selectBatchPosition" resultMap="UserPositionMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table_Name"/>
+        WHERE user_id IN
+        <foreach collection="set" item="userId" open="(" separator=","
+                 close=")">
+            #{userId}
+        </foreach>
+        AND contract_code = #{contractCode} AND broker_id = #{brokerId}
+    </select>
+    <select id="getUserIdGroupByBase" resultType="java.lang.Long" parameterType="java.util.Map">
+        SELECT
+        user_id
+        FROM
+        <include refid="Table_Name"/>
+        WHERE base = #{base} AND broker_id= #{brokerId} AND amount &gt; 0 GROUP BY base HAVING(count(1) &gt;= #{count})
+    </select>
+
+    <select id="sumUserPositionAmount" resultType="java.math.BigDecimal" parameterType="java.util.Map">
+        SELECT
+        SUM(amount)
+        FROM
+        <include refid="Table_Name"/>
+        WHERE contract_code = #{contractCode}
+    </select>
+
+    <select id="selectBaseInfoForClearPosition" resultMap="UserPositionMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+
+    <update id="batchUpdateBaseInfo" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Base_Bean"/>
+            </set>
+            where id = #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+</mapper>

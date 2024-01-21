@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>模版管理</title>
+    <script th:src="@{'/js/modules/integration/message-templates.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    邮件主题:<input class="easyui-textbox" type="text" id="subject" name="subject"/>
+    模版语言:<input class="easyui-combobox" id="locale" name="locale" style="width: 200px"/>
+    模版类型:<select class="easyui-combobox" id="type" name="type" style="width: 200px">
+    <option value="">-请选择-</option>
+    <option value="mail">mail</option>
+    <option value="sms">sms</option>
+</select>
+    模版编码:<input class="easyui-textbox" type="text" id="code" name="code"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="ds-datagrid"></div>
+</div>
+<div id="ds-dlg">
+    <form id="ds-form" name="ds-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+
+                <tr>
+                    <td>模版编码:</td>
+                    <td><input class="easyui-textbox" type="text" id="temp_code" name="code"
+                               data-options="required:true"
+                               style="width: 350px"/></td>
+                </tr>
+                <tr>
+                    <td>模版语言:</td>
+                    <td><input class="easyui-combobox" id="temp_locale" name="locale" style="width: 350px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>模版类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="temp_type" name="type" style="width: 350px">
+                            <option value="">-请选择-</option>
+                            <option value="mail">mail</option>
+                            <option value="sms">sms</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>模版签名:</td>
+                    <td><input class="easyui-textbox" type="text" id="temp_sign" name="sign"
+                               data-options="required:true"
+                               style="width: 350px"/></td>
+                </tr>
+                <tr>
+                    <td>邮件主题:</td>
+                    <td><input class="easyui-textbox" type="text" id="temp_subject" name="subject"
+                               data-options="required:true"
+                               style="width: 350px"/></td>
+                </tr>
+                <tr>
+                    <td>模版内容:</td>
+                    <td style="padding-top:10px;">
+                        <input class="easyui-textbox" data-options="multiline:true" type="text" id="temp_content"
+                               name="content"
+                               style="width: 99%;height: 150px"/></td>
+
+                </tr>
+                <input id="id" type="hidden" name="id" value=""/>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>发币活动</title>
+    <script th:src="@{'/js/modules/extra/activity/currencyAwardRecord.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    活动名称:<input class="easyui-textbox" type="text" id="activity-id" name="activity-id" style="width: 150px"/>
+    用户编号:<input class="easyui-textbox" type="text" id="user-id" name="user-id" style="width: 150px"/>
+    币种: <input class="easyui-combobox" id="currency-code" name="currency-code" style="width: 180px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="currencyAward-datagrid"></div>
+</div>
+
+
+<div id="preview-dlg">
+    <div style="padding: 20px">
+        活动名称:<input class="easyui-textbox" type="text" id="activity-code" name="activity-code" style="width: 150px"/>
+        短信模版:<input class="easyui-textbox" type="text" id="activity-sms-code" name="activity-sms-code" style="width: 150px"/>
+        邮件模版:<input class="easyui-textbox" type="text" id="activity-mail-code" name="activity-mail-code" style="width: 150px"/>
+        共<a href="#"><span id="detail-number">0</span></a>条数据
+    </div>
+
+    <div style="height: 96%; padding: 2px">
+        <div id="detail-datagrid"></div>
+    </div>
+</div>
+
+<div id="currencyAward-dlg">
+    <form id="currencyAward-form" name="user-form" method="post">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>活动标识:</td>
+                <td colspan="3">
+                    <input class="easyui-combobox" data-options="required:true" id="code" name="code"
+                           style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户数据:</td>
+                <td>
+                    <textarea placeholder="用户id,币种,数量" class="text-area" id="area" name="area" wrap="hard"
+                              style="width: 500px ; height: 200px"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>

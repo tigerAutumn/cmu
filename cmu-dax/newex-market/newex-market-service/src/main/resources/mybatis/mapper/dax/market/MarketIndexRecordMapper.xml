@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.market.data.MarketIndexRecordRepository">
+							  <!-- CodeBuilder  Generated-->
+  <resultMap id=" MarketIndexRecordMap" type="cc.newex.dax.market.domain.MarketIndexRecord">
+  					 <id column="id" property="id" jdbcType="BIGINT" />
+							<result column="market_from" property="marketFrom" jdbcType="INTEGER" />
+							<result column="price" property="price" jdbcType="DECIMAL" />
+							<result column="middle_price" property="middlePrice" jdbcType="DECIMAL" />
+							<result column="invalid" property="invalid" jdbcType="TINYINT" />
+							<result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+			  </resultMap>
+  <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+	<sql id="Base_Column_List_Without_Id">
+  	  market_from , price , middle_price , invalid , created_date  </sql>
+  <sql id="Base_Column_List"> id ,<include refid="Base_Column_List_Without_Id"/>
+  </sql>
+    <sql id="Insert_Columns">
+     							<if test="record.marketFrom != null">market_from,</if>
+							<if test="record.price != null">price,</if>
+							<if test="record.middlePrice != null">middle_price,</if>
+							<if test="record.invalid != null">invalid,</if>
+							<if test="record.createdDate != null">created_date,</if>
+			    </sql>
+    <sql id="Insert_Values">
+    							<if test="record.marketFrom != null">#{record.marketFrom,jdbcType=INTEGER},</if>
+							<if test="record.price != null">#{record.price,jdbcType=DECIMAL},</if>
+							<if test="record.middlePrice != null">#{record.middlePrice,jdbcType=DECIMAL},</if>
+							<if test="record.invalid != null">#{record.invalid,jdbcType=TINYINT},</if>
+							<if test="record.createdDate != null">#{record.createdDate,jdbcType=TIMESTAMP},</if>
+			    </sql>
+    <sql id="Batch_Insert_Values">
+  #{record.marketFrom,jdbcType=INTEGER},
+		 					 #{record.price,jdbcType=DECIMAL},
+		 					 #{record.middlePrice,jdbcType=DECIMAL},
+		 					 #{record.invalid,jdbcType=TINYINT},
+		 					 #{record.createdDate,jdbcType=TIMESTAMP},
+		 	    </sql>
+	<sql id="Batch_Insert_Values_On_DuplicateKey">
+ 	#{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values"/>
+	</sql>
+    <sql id="Update_Set_From_Bean">
+	 							<if test="record.marketFrom != null">market_from = #{record.marketFrom,jdbcType=INTEGER} ,</if>
+							<if test="record.price != null">price = #{record.price,jdbcType=DECIMAL} ,</if>
+							<if test="record.middlePrice != null">middle_price = #{record.middlePrice,jdbcType=DECIMAL} ,</if>
+							<if test="record.invalid != null">invalid = #{record.invalid,jdbcType=TINYINT} ,</if>
+							<if test="record.createdDate != null">created_date = #{record.createdDate,jdbcType=TIMESTAMP} ,</if>
+			    </sql>
+	<!-- insert -->
+	<insert id="insert" parameterType="java.util.Map">
+				<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+		        insert into ${shardTable.name}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into ${shardTable.name}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+	<insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+		insert into ${shardTable.name}
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List"/>
+		</trim>
+		values
+		<foreach collection="records" item="record" index="index" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<include refid="Batch_Insert_Values_On_DuplicateKey"/>
+			</trim>
+		</foreach>
+		ON DUPLICATE KEY UPDATE 
+  market_from = VALUES(market_from)  , 				price = VALUES(price)  , 				middle_price = VALUES(middle_price)  , 				invalid = VALUES(invalid)  , 				created_date = VALUES(created_date)  						</insert>
+	<!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from ${shardTable.name} where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from ${shardTable.name}
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from ${shardTable.name} where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+			#{record.id,jdbcType=BIGINT}
+		</foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+	<update id="updateById" parameterType="java.util.Map">
+        update ${shardTable.name}
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+		where id = #{record.id,jdbcType=BIGINT}
+	</update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update ${shardTable.name}
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update ${shardTable.name}
+            <set>
+            	<include refid="Update_Set_From_Bean"/>
+            </set>
+			where id=#{record.id,jdbcType=BIGINT}
+		</foreach>
+    </update>
+	 <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap=" MarketIndexRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from ${shardTable.name}
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap=" MarketIndexRecordMap" parameterType="java.util.Map">
+      select
+      <if test="example != null and example.distinct">
+        distinct
+      </if>
+      <include refid="Base_Column_List"/>
+      from ${shardTable.name}
+      <if test="example != null">
+        <include refid="Example_Where_Clause"/>
+      </if>
+      <if test="example != null and example.orderByClause != null">
+        order by ${example.orderByClause}
+      </if>
+    </select>
+    <select id="selectOneByExample" resultMap=" MarketIndexRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from ${shardTable.name}
+		<if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap=" MarketIndexRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from ${shardTable.name}
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+			#{record.id,jdbcType=BIGINT}
+		</foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from ${shardTable.name}
+       <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from ${shardTable.name}
+		<if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap=" MarketIndexRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from ${shardTable.name}
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+	 <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>个人信息</title>
+    <script th:src="@{'/js/modules/users/invite.js?v='+${rnd}}"></script>
+    <style>
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+
+        .table tr.alter {
+            background-color: #f5fafe;
+        }
+
+        .btn {
+            width: 150px;
+            background-color: #3596eb;
+            padding: 11px 20px;
+            line-height: 20px;
+            border: 1px;
+            font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+            color: #fff;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    用户ID:<input class="easyui-textbox" type="text" id="search-id" name="individual-id"
+                style="width: 160px" data-options=""/>
+
+    用户邮箱:<input class="easyui-textbox" type="text" id="search-email" name="individual-email"
+                style="width: 160px" data-options=""/>
+    用户手机:<input class="easyui-textbox" type="text" id="search-mobile" name="individual-mobile"
+                style="width: 160px" data-options=""/>
+    会员等级<select class="easyui-combobox" style="width: 160px" id="search-title">
+    <option value="">--请选择--</option>
+    <option value="VIP">会员</option>
+    <option value="ANGEL">天使</option>
+    <option value="PARTNER">合伙人</option>
+</select>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+</div>
+<div style="height: 93%;padding:2px">
+    <div id="user-datagrid"></div>
+</div>
+<div id="user-detail-dlg" title="用户详情">
+    <div id="user-tab" class="easyui-tabs" style="width:100%;height:100%;">
+        <div title="用户信息" style="padding: 20px">
+            <table width="100%" class="table">
+                <tr>
+                    <td>用户ID：</td>
+                    <td><label id="userId"/></td>
+                    <td>用户email：</td>
+                    <td><label id="email"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>手机号：</td>
+                    <td><label id="mobile"/></td>
+                    <td>用户姓名：</td>
+                    <td><label id="name"/></td>
+                </tr>
+                <tr>
+                    <td>用户身份：</td>
+                    <td><label id="user-title"/></td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                <tr class="alter">
+                    <td>邀请人ID：</td>
+                    <td><label id="invite-userId"/></td>
+                    <td>邀请人email：</td>
+                    <td><label id="invite-email"/></td>
+                </tr>
+                <tr>
+                    <td>邀请人手机号：</td>
+                    <td><label id="invite-mobile"/></td>
+                    <td>邀请人姓名：</td>
+                    <td><label id="invite-name"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>邀请人身份：</td>
+                    <td><label id="invite-title"/></td>
+                </tr>
+            </table>
+        </div>
+        <div title="已邀请好友">
+            <div style="height: 98%;padding:2px">
+                <div id="invite-datagrid"></div>
+            </div>
+        </div>
+        <div title="已发放奖励">
+            <div style="height: 98%;padding:2px">
+                <div id="reward-datagrid"></div>
+            </div>
+        </div>
+        <div title="用户操作" style="padding: 20px">
+            <input id="title-user-id" hidden name="title-user-id">
+            <button id="btn-operation" type="button" class="btn">删除当前等级并解锁</button>
+        </div>
+
+    </div>
+</div>
+<div id="user-co-work-dlg" style="padding: 40px">
+    合伙人ID
+    <input class="easyui-textbox" type="text" id="userId-co-work" name="userId-co-work">
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>渠道管理</title>
+    <script th:src="@{'/js/modules/extra/content/channel.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div id="toolbar" class="toolbar">
+    渠道简称:<input class="easyui-textbox" type="text" id="search-channelName" name="search-channelName" style="width: 200px"/>
+    渠道全称:<input class="easyui-textbox" type="text" id="search-channelFullName" name="search-channelFullName" style="width: 200px"/>
+    渠道码:<input class="easyui-textbox" type="text" id="search-channelCode" name="search-channelCode" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+</div>
+<div style="height: 93%;padding:2px">
+    <div id="channel-datagrid"></div>
+</div>
+<div id="channel-dlg">
+    <form id="channel-form" name="channel-form" method="post">
+        <input id="id" name="id" hidden/>
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td width="150px">渠道简称</td>
+                <td colspan="5"><input id="channelName" name="channelName" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+            </tr>
+            <tr>
+                <td width="150px">渠道全称</td>
+                <td colspan="5"><input id="channelFullName" name="channelFullName" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+            </tr>
+            <tr>
+                <td width="150px">渠道链接</td>
+                <td colspan="5"><input id="channeLink" name="channeLink" class="easyui-textbox" readonly style="width: 500px"/></td>
+            </tr>
+            <tr>
+                <td width="150px">渠道码</td>
+                <td colspan="5"><input id="channelCode" name="channelCode" class="easyui-textbox" readonly style="width: 500px"/></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

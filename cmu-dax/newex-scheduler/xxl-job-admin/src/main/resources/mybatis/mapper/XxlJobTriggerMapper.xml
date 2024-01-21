@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.dao.XxlJobTriggerDao">
+	
+	<resultMap id="XxlJobTrigger" type="com.xxl.job.admin.core.model.XxlJobTrigger" >
+		<result column="TRIGGER_NAME" property="triggerName" />
+		<result column="TRIGGER_GROUP" property="triggerGroup" />
+		<result column="JOB_NAME" property="jobName" />
+		<result column="JOB_GROUP" property="jobGroup" />
+		<result column="PRIORITY" property="priority" />
+		<result column="TRIGGER_STATE" property="triggerState" />
+		<result column="TRIGGER_TYPE" property="triggerType" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.TRIGGER_NAME,
+		t.TRIGGER_GROUP,
+		t.JOB_NAME,
+		t.JOB_GROUP,
+		t.PRIORITY,
+		t.TRIGGER_STATE,
+		t.TRIGGER_TYPE
+	</sql>
+
+
+	<select id="find" parameterType="java.lang.Integer" resultMap="XxlJobTrigger">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_JOB_QRTZ_TRIGGERS AS t
+		WHERE JOB_NAME=#{jobId}
+		LIMIT 1
+	</select>
+	
+	<select id="findAll" parameterType="java.util.HashMap" resultMap="XxlJobTrigger">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_JOB_QRTZ_TRIGGERS AS t
+		ORDER BY id DESC
+	</select>
+	
+
+
+</mapper>

@@ -1,0 +1,145 @@
+#
+# tomcat server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+#
+# newex
+#
+newex:
+  asset:
+    datasource:
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.223:3306/asset?characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        max-active: 10
+        min-idle: 0
+    reconciliation:
+      biz: spot,c2c,perpetual
+    luckywin:
+      host: http://luckywin-airdrop.test.winchain.vip
+      apiId: xxx
+      apiKey: xxx
+  app:
+    name: newex-dax-asset
+    version: 1.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: dev
+  exchange:
+    luckywin:
+      account: 10120671
+  feignClient:
+    wallet:
+      core: newex-wallet-core
+    dax:
+      spot: newex-dax-spot
+      c2c: newex-dax-c2c
+      users: newex-dax-users
+      integration: newex-dax-integration
+      portfolio: newex-dax-portfolio
+      extra: newex-dax-extra
+      perpetual: newex-dax-perpetual-rest
+  security:
+    csrf:
+      referer-pattern: all
+      exclude-path-patterns: /admin/**,/inner/**
+    xss:
+      url-patterns: /v1/*
+    jwt:
+      secret: 'ZwwXGHRDUy1wUWgv'
+      crypto-key: 'Dk4nIS49RksJJRoB'
+      exclude-path-patterns: /customError/**,/admin/**,/inner/**,/v1/asset/open/**
+    frozen:
+      biz-type: 'asset'
+      url-patterns:
+        include-url-patterns: /v1/asset/**/withdraw
+  net:
+      pubKey: xxx
+  ucenter:
+    redis:
+      host: 192.168.1.225
+      port: 16379
+      timeout: 60000
+      password: xxx
+      pool:
+         max-active: 10
+         max-idle: 5
+         max-wait: -1
+         min-idle: 2
+  payToken:
+    defaultUser: 7
+  innerProxy: http://innerproxy.cmx.com
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    password: xxx
+    pool:
+       max-active: 10
+       max-idle: 5
+       max-wait: -1
+       min-idle: 2
+#
+# logging
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-asset
+  level:
+    default: INFO
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002
+
+#
+# xxl
+#
+xxl:
+  job:
+    accessToken: 'newex_!*0127aim'
+    admin:
+      addresses: http://coinmex-scheduler-admin-0.coinmex-scheduler-admin:7001/
+    executor:
+      appname: xxl-job-executor-asset
+      ip:
+      port: 7003
+      logpath: /home/admin/logs/newex/newex-asset/jobhandler
+      logretentiondays: 3

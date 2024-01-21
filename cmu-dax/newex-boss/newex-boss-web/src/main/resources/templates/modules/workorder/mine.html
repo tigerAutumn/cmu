@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>我的工单</title>
+    <script th:src="@{'/js/modules/workorder/mine.js?v='+${rnd}}"></script>
+    <style>
+        .talk_show {
+            height: 420px;
+            background: #fff;
+            font-size: 16px;
+            margin: 0px auto;
+            overflow: auto;
+        }
+
+        .atalk {
+            margin: 10px;
+        }
+
+        .atalk span {
+            display: inline-block;
+            background: #0181cc;
+            border-radius: 10px;
+            color: #fff;
+            padding: 5px 10px;
+        }
+
+        .btalk {
+            margin: 10px;
+            text-align: right;
+        }
+
+        .btalk span {
+            display: inline-block;
+            background: #ef8201;
+            border-radius: 10px;
+            color: #fff;
+            padding: 5px 10px;
+        }
+
+        .clear {
+
+            clear: both;
+            display: block;
+
+            content: ".";
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    派发类型:<select class="easyui-combobox" id="mine-type" name="mine-type" style="width: 200px">
+    <option selected="selected" value="">全部</option>
+    <option value="0">派发</option>
+    <option value="1">转发</option>
+</select>
+    问题分类:<input id="mine-classify" style="width: 200px;" name="mine-classify"
+                class="easyui-combotree"/>
+    状态:<input id="mine-status" name="mine-status" class="easyui-combobox" style="width: 200px"/>
+
+    工单ID：<input class="easyui-textbox" type="text" id="mine-id" name="mine-id"
+                style="width: 200px" data-options=""/>
+    用户ID：<input class="easyui-textbox" type="text" id="mine-userid" name="mine-userid"
+                style="width: 200px" data-options=""/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="mine-datagrid"></div>
+</div>
+
+</body>
+</html>

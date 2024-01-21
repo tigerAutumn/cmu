@@ -1,0 +1,66 @@
+#
+# newex config
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  extra:
+    datasource:
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: @newex.extra.datasource.master.url@
+        username: @newex.extra.datasource.master.username@
+        password: @newex.extra.datasource.master.password@
+        pool-name: @newex.app.name@-hikari
+        minimum-idle: 5
+        maximum-pool-size: 20
+        connection-test-query: 'SELECT 1'
+  feignClient:
+    dax:
+      spot: @newex.feignClient.dax.spot@
+      users: @newex.feignClient.dax.users@
+
+#
+# loggging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+
+#
+# spring
+#
+spring:
+  redis:
+    host: '@spring.redis.host@'
+    password: '@spring.redis.password@'
+    pool:
+      max-active: '@spring.redis.pool.max-active@'
+      max-idle: '@spring.redis.pool.max-idle@'
+      max-wait: '@spring.redis.pool.max-wait@'
+      min-idle: '@spring.redis.pool.min-idle@'
+    port: '@spring.redis.port@'
+    timeout: '@spring.redis.timeout@'
+
+xxl:
+  job:
+    accessToken: @xxl.job.accessToken@
+    admin:
+      addresses: @xxl.job.admin.addresses@
+    executor:
+      appname: @xxl.job.executor.appname@
+      ip: @xxl.job.executor.ip@
+      port: @xxl.job.executor.port@
+      logpath: @xxl.job.executor.logpath@
+      logretentiondays: @xxl.job.executor.logretentiondays@

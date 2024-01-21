@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>发币活动</title>
+    <script th:src="@{'/js/modules/extra/activity/currencyAwardDetail.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    活动id:<input class="easyui-textbox" type="text" id="activity-id" name="activity-id" style="width: 150px"/>
+    活动名称:<input class="easyui-textbox" type="text" id="activity-name" name="activity-name" style="width: 150px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="activity-datagrid"></div>
+</div>
+<div id="activity-dlg">
+    <form id="activity-form" name="user-form" method="post">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>活动标识:</td>
+                <td colspan="3">
+                    <input class="easyui-combobox" data-options="required:true" id="code" name="code"
+                           style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户数据:</td>
+                <td>
+                    <textarea placeholder="用户id,币种,数量" class="text-area" id="area" name="area" wrap="hard"
+                              style="width: 500px ; height: 200px"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="detail-datagrid"></div>
+</div>
+</body>
+</html>

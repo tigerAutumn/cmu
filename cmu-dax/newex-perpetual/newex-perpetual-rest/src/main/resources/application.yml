@@ -1,0 +1,118 @@
+#
+# tomcat server
+#
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+#
+# spring
+#
+spring:
+  application:
+    name: @newex.app.name@
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool:
+      max-active: @spring.redis.pool.max-active@
+      max-idle: @spring.redis.pool.max-idle@
+      max-wait: @spring.redis.pool.max-wait@
+      min-idle: @spring.redis.pool.min-idle@
+#
+# logging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+#
+# newex
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+  ucenter:
+    redis:
+      host: @newex.ucenter.redis.host@
+      port: @newex.ucenter.redis.port@
+      timeout: @newex.ucenter.redis.timeout@
+      password: @newex.ucenter.redis.password@
+      pool:
+        max-active: @newex.ucenter.redis.pool.max-active@
+        max-idle: @newex.ucenter.redis.pool.max-idle@
+        max-wait: @newex.ucenter.redis.pool.max-wait@
+        min-idle: @newex.ucenter.redis.pool.min-idle@
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.perpetual.datasource.biz.url@
+        username: @newex.perpetual.datasource.biz.username@
+        password: @newex.perpetual.datasource.biz.password@
+        max-active: 10
+        min-idle: 0
+    config:
+      online: @newex.perpetual.config.online@
+      dk-currency: @newex.perpetual.config.dkCurrency@
+      systemBillPhones: @newex.perpetual.config.systemBillPhones@
+    dk-currency:
+      cmdk
+  security:
+    csrf:
+      referer-pattern: @newex.security.csrf.refererPattern@
+      exclude-path-patterns: @newex.security.csrf.excludePathPatterns@
+    xss:
+      url-patterns: @newex.security.xss.urlPatterns@
+    jwt:
+      secret: '@newex.security.jwt.secret@'
+      crypto-key: '@newex.security.jwt.cryptoKey@'
+      exclude-path-patterns: @newex.security.jwt.exclude-path-patterns@
+      validate-ip-and-device: false
+    frozen:
+      biz-type: 'contracts'
+      url-patterns:
+        include-url-patterns: /v1/perpetual/products/**/order*,/v1/perpetual/products/**/order/**
+        exclude-url-patterns: @newex.security.jwt.exclude-path-patterns@
+  feignClient:
+    dax:
+      users: @newex.feignClient.dax.users@
+      integration: @newex.feignClient.dax.integration@
+      asset: @newex.feignClient.dax.asset@
+      market: @newex.feignClient.dax.market@

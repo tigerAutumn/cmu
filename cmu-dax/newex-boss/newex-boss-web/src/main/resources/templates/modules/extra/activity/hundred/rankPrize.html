@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>排行榜奖品配置</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/rankPrize.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div style="height: 96%; padding: 1px">
+    <div id="rank-prize-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增排行榜奖品纪录 -->
+<div id="rank-prize-dlg">
+    <form id="rank-prize-form" name="rank-prize-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+
+            <tr>
+                <td>期数</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="term" name="term"
+                           data-options="required:true, min:1, prompt: '请输入正数'" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券商</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排名最小值</td>
+                <td>
+                    <input id="fromIndex" name="fromIndex" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排名最大值</td>
+                <td>
+                    <input class="easyui-textbox" id="toIndex" data-options="required:true" name="toIndex" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>奖品描述</td>
+                <td>
+                    <input class="easyui-textbox" id="description" data-options="required:true" name="description" style="width: 450px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

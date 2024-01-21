@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>交易黑名单</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/rushRecord.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+
+<div class="toolbar">
+    期数：<input class="easyui-textbox" type="text" id="rush-record-periodNo" name="winRecord-username" style="width: 100px"/>
+    起始时间：<input class="easyui-datebox" id="rush-record-startTime" name="rush-record-startTime" style="width: 200px"/>
+    结束时间：<input class="easyui-datebox" id="rush-record-endTime" name="rush-record-endTime" style="width: 200px"/>
+    状态：<select class="easyui-combobox" id="rush-record-status" name="rush-record-status" style="width: 200px">
+    <option value="" selected>全部</option>
+    <option value="1">处理中</option>
+    <option value="2">成功</option>
+    <option value="3">失败</option>
+</select>
+    <a id="rush-record-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <a id="rush-record-btn-export" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">导出</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="rush-record-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增交易黑名单纪录 -->
+<div id="rush-record-dlg">
+    <form id="rush-record-form" name="rush-record-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>用户ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>期数</td>
+                <td>
+                    <input class="easyui-textbox" id="periodNo" name="periodNo" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>奖品ID</td>
+                <td>
+                    <input class="easyui-textbox" id="rushPrizeId" name="rushPrizeId" style="width: 450px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>币种ID</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyId" name="currencyId" style="width: 450px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>币种简称</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyCode" name="currencyCode" style="width: 450px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>币种数量</td>
+                <td>
+                    <input class="easyui-textbox" id="currencyAmount" name="currencyAmount" style="width: 450px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>状态</td>
+                <td>
+                    <select class="easyui-combobox" id="status" name="status" style="width: 450px">
+                        <option value="1" selected>处理中</option>
+                        <option value="2">成功</option>
+                        <option value="3">失败</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

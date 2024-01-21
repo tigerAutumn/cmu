@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>配置管理</title>
+    <script th:src="@{'/js/modules/extra/activity/config.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 93%;padding:2px">
+    <div id="config-datagrid"></div>
+</div>
+<div id="config-dlg">
+    <form id="config-form" name="config-form" method="post">
+        <table th:cols="4" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td style="width: 100px;">活动Id</td>
+                <td colspan="3"><input id="actId" name="actId" class="easyui-textbox" style="width:200px;"></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">活动key</td>
+                <td><input id="actKey" name="actKey" class="easyui-textbox" data-options="required:true" style="width: 200px"/></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">活动名称</td>
+                <td><input id="actName" name="actName" class="easyui-textbox" data-options="required:true" style="width: 300px"/></td>
+             </tr>
+            <tr>
+                <td style="width: 100px;">活动时间</td>
+                <td colspan="3"><input class="easyui-datetimebox" id="startDate" data-options="required:true" name="startDate" style="width:150px;">——<input
+                        class="easyui-datetimebox" id="endDate"
+                        name="endDate" data-options="required:true" style="width:150px;"></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">排序</td>
+                <td colspan=""><input id="actSort" name="actSort" class="easyui-textbox" data-options="required:true" style="width:200px;"/></td>
+            </tr>
+
+            <tr>
+                <td style="width: 100px;">白名单</td>
+                <td colspan="3"><input class="easyui-tagbox" id="whileList" name="whileList" data-options="required:true" style="width: 300px"></td>
+            </tr>
+            </table>
+    </form>
+</div>
+</body>
+</html>

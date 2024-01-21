@@ -1,0 +1,120 @@
+#
+# tomcat server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+  session:
+    timeout: 3600
+#
+# newex
+#
+newex:
+  app:
+    name: newex-dax-boss
+    version: 1.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: dev
+  boss:
+    datasource:
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.223:3306/boss?characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        pool-name: newex-dax-boss-hikari
+        minimum-idle: 5
+        maximum-pool-size: 20
+        connection-test-query: 'SELECT 1'
+  security:
+    csrf:
+      referer-pattern: all
+      exclude-path-patterns: /admin/**,/inner/**
+    xss:
+      url-patterns: /v1/*
+  fileupload:
+    oss:
+      vpc-endpoint: https://oss-cn-beijing.aliyuncs.com
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      access-key-id: xxx
+      access-key-secret: xxx
+      bucket-name: sg-coinmex-test-tk
+      path: cmx/test/boss
+      region: oss-cn-beijing
+      extraPath: extra
+  feignClient:
+    dax:
+      asset: newex-dax-asset
+      c2c: newex-dax-c2c
+      users: newex-dax-users
+      extra: newex-dax-extra
+      spot: newex-dax-spot
+      integration: newex-dax-integration
+      activity: newex-dax-activity
+      portfolio: newex-dax-portfolio
+      market: newex-dax-market
+      perpetual: newex-dax-perpetual-rest
+  web:
+    support:
+      message-converter:
+        enabled: false
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  thymeleaf:
+    mode: HTML
+  aop:
+    proxy-target-class: true
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    password: xxx
+    pool:
+       max-active: 10
+       max-idle: 5
+       max-wait: -1
+       min-idle: 2
+#
+# logging
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-boss
+  level:
+    default: INFO
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002

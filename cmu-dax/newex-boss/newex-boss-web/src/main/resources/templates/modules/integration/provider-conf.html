@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>信息提供者配置管理</title>
+    <script th:src="@{'/vendor/easyui/datagrid-cellediting.js'}"></script>
+    <script th:src="@{'/js/modules/integration/provider-conf.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    属性:<select class="easyui-combobox" id="field-name" name="fieldName" style="width: 200px">
+    <option value="name">名称</option>
+    <option value="type">类型</option>
+    <option value="region">服务地区</option>
+    <option value="memo">备注</option>
+</select> 关键字:<input class="easyui-textbox" type="text" id="keyword" name="keyword" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="providerConf-datagrid"></div>
+</div>
+<div id="providerConf-dlg">
+    <form id="providerConf-form" name="providerConf-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+                <tr>
+                    <td>名称:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="name" name="name"
+                                           data-options="required:true" style="width: 480px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>类型:</td>
+                    <td><select class="easyui-combobox" id="type" name="type" style="width: 200px">
+                        <option selected="selected" value="sms">短信</option>
+                        <option value="mail">邮件</option>
+                        <option value="ip">IP地址</option>
+                        <option value="bank">银行三要素</option>
+                    </select>
+                    </td>
+                    <td>服务地区:</td>
+                    <td><select class="easyui-combobox" id="region" name="region" style="width: 200px">
+                        <option selected="selected" value="china">国内</option>
+                        <option value="international">国际</option>
+                        <option value="all">全部</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>权重:</td>
+                    <td><input class="easyui-textbox" type="text" id="weight" name="weight"
+                               data-options="required:true" style="width: 200px"/>
+                    </td>
+                    <td>状态:</td>
+                    <td><select class="easyui-combobox" id="status" name="status" style="width: 200px">
+                        <option selected="selected" value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>券商:</td>
+                    <td><input class="easyui-combobox" id="brokerId" data-options="required:true" name="brokerId" style="width: 200px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top">配置项:</td>
+                    <td colspan="3">
+                        <div id="providerConf-options-datagrid" style="width: 480px"></div>
+                        <input id="options" type="hidden" name="options"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="memo" name="memo"
+                                           data-options="required:false" style="width: 480px"/>
+                        <input id="providerConfId" type="hidden" name="id"/>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

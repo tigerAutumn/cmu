@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.extra.data.customer.WorkOrderRepository">
+    <select id="listByExample" resultMap="WorkOrderMap" parameterType="java.util.Map">
+        select id,
+        <include refid="Base_Column_List_Without_Id"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 10
+    </select>
+
+    <select id="getOrderNumber" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(id) from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+    <select id="getListByExample" resultMap="WorkOrderMap" parameterType="java.util.Map">
+        select id,
+        <include refid="Base_Column_List_Without_Id"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+</mapper>

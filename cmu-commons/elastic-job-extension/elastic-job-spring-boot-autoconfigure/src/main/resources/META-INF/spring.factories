@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cc.newex.extension.autoconfigure.ZkRegistryCenterAutoConfigure,\
+  cc.newex.extension.autoconfigure.JobRegisterBean

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.users.data.UserInfoRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="UserInfoMap" type="cc.newex.dax.users.domain.UserInfo">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="trade_password" property="tradePassword" jdbcType="VARCHAR" />
+    <result column="google_code" property="googleCode" jdbcType="VARCHAR" />
+    <result column="authorities" property="authorities" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="area_code" property="areaCode" jdbcType="INTEGER" />
+    <result column="anti_phishing_code" property="antiPhishingCode" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="INTEGER" />
+    <result column="frozen" property="frozen" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="reg_from" property="regFrom" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="reg_ip" property="regIp" jdbcType="BIGINT" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    user_info
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    parent_id, uid, email, mobile, password, trade_password, google_code, authorities, 
+    nickname, real_name, avatar, area_code, anti_phishing_code, channel, frozen, type, 
+    reg_from, status, version, reg_ip, memo, created_date, updated_date, broker_id
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.parentId != null">
+      parent_id,
+    </if>
+    <if test="record.uid != null">
+      uid,
+    </if>
+    <if test="record.email != null">
+      email,
+    </if>
+    <if test="record.mobile != null">
+      mobile,
+    </if>
+    <if test="record.password != null">
+      password,
+    </if>
+    <if test="record.tradePassword != null">
+      trade_password,
+    </if>
+    <if test="record.googleCode != null">
+      google_code,
+    </if>
+    <if test="record.authorities != null">
+      authorities,
+    </if>
+    <if test="record.nickname != null">
+      nickname,
+    </if>
+    <if test="record.realName != null">
+      real_name,
+    </if>
+    <if test="record.avatar != null">
+      avatar,
+    </if>
+    <if test="record.areaCode != null">
+      area_code,
+    </if>
+    <if test="record.antiPhishingCode != null">
+      anti_phishing_code,
+    </if>
+    <if test="record.channel != null">
+      channel,
+    </if>
+    <if test="record.frozen != null">
+      frozen,
+    </if>
+    <if test="record.type != null">
+      type,
+    </if>
+    <if test="record.regFrom != null">
+      reg_from,
+    </if>
+    <if test="record.status != null">
+      status,
+    </if>
+    <if test="record.version != null">
+      version,
+    </if>
+    <if test="record.regIp != null">
+      reg_ip,
+    </if>
+    <if test="record.memo != null">
+      memo,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.parentId != null">
+      #{record.parentId,jdbcType=BIGINT},
+    </if>
+    <if test="record.uid != null">
+      #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.email != null">
+      #{record.email,jdbcType=VARCHAR},
+    </if>
+    <if test="record.mobile != null">
+      #{record.mobile,jdbcType=VARCHAR},
+    </if>
+    <if test="record.password != null">
+      #{record.password,jdbcType=VARCHAR},
+    </if>
+    <if test="record.tradePassword != null">
+      #{record.tradePassword,jdbcType=VARCHAR},
+    </if>
+    <if test="record.googleCode != null">
+      #{record.googleCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.authorities != null">
+      #{record.authorities,jdbcType=VARCHAR},
+    </if>
+    <if test="record.nickname != null">
+      #{record.nickname,jdbcType=VARCHAR},
+    </if>
+    <if test="record.realName != null">
+      #{record.realName,jdbcType=VARCHAR},
+    </if>
+    <if test="record.avatar != null">
+      #{record.avatar,jdbcType=VARCHAR},
+    </if>
+    <if test="record.areaCode != null">
+      #{record.areaCode,jdbcType=INTEGER},
+    </if>
+    <if test="record.antiPhishingCode != null">
+      #{record.antiPhishingCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.channel != null">
+      #{record.channel,jdbcType=INTEGER},
+    </if>
+    <if test="record.frozen != null">
+      #{record.frozen,jdbcType=INTEGER},
+    </if>
+    <if test="record.type != null">
+      #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.regFrom != null">
+      #{record.regFrom,jdbcType=INTEGER},
+    </if>
+    <if test="record.status != null">
+      #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.version != null">
+      #{record.version,jdbcType=BIGINT},
+    </if>
+    <if test="record.regIp != null">
+      #{record.regIp,jdbcType=BIGINT},
+    </if>
+    <if test="record.memo != null">
+      #{record.memo,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.parentId,jdbcType=BIGINT},
+    #{record.uid,jdbcType=VARCHAR},
+    #{record.email,jdbcType=VARCHAR},
+    #{record.mobile,jdbcType=VARCHAR},
+    #{record.password,jdbcType=VARCHAR},
+    #{record.tradePassword,jdbcType=VARCHAR},
+    #{record.googleCode,jdbcType=VARCHAR},
+    #{record.authorities,jdbcType=VARCHAR},
+    #{record.nickname,jdbcType=VARCHAR},
+    #{record.realName,jdbcType=VARCHAR},
+    #{record.avatar,jdbcType=VARCHAR},
+    #{record.areaCode,jdbcType=INTEGER},
+    #{record.antiPhishingCode,jdbcType=VARCHAR},
+    #{record.channel,jdbcType=INTEGER},
+    #{record.frozen,jdbcType=INTEGER},
+    #{record.type,jdbcType=INTEGER},
+    #{record.regFrom,jdbcType=INTEGER},
+    #{record.status,jdbcType=INTEGER},
+    #{record.version,jdbcType=BIGINT},
+    #{record.regIp,jdbcType=BIGINT},
+    #{record.memo,jdbcType=VARCHAR},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.parentId != null">
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+    </if>
+    <if test="record.uid != null">
+      uid = #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.email != null">
+      email = #{record.email,jdbcType=VARCHAR},
+    </if>
+    <if test="record.mobile != null">
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+    </if>
+    <if test="record.password != null">
+      password = #{record.password,jdbcType=VARCHAR},
+    </if>
+    <if test="record.tradePassword != null">
+      trade_password = #{record.tradePassword,jdbcType=VARCHAR},
+    </if>
+    <if test="record.googleCode != null">
+      google_code = #{record.googleCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.authorities != null">
+      authorities = #{record.authorities,jdbcType=VARCHAR},
+    </if>
+    <if test="record.nickname != null">
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+    </if>
+    <if test="record.realName != null">
+      real_name = #{record.realName,jdbcType=VARCHAR},
+    </if>
+    <if test="record.avatar != null">
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+    </if>
+    <if test="record.areaCode != null">
+      area_code = #{record.areaCode,jdbcType=INTEGER},
+    </if>
+    <if test="record.antiPhishingCode != null">
+      anti_phishing_code = #{record.antiPhishingCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.channel != null">
+      channel = #{record.channel,jdbcType=INTEGER},
+    </if>
+    <if test="record.frozen != null">
+      frozen = #{record.frozen,jdbcType=INTEGER},
+    </if>
+    <if test="record.type != null">
+      type = #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.regFrom != null">
+      reg_from = #{record.regFrom,jdbcType=INTEGER},
+    </if>
+    <if test="record.status != null">
+      status = #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.version != null">
+      version = #{record.version,jdbcType=BIGINT},
+    </if>
+    <if test="record.regIp != null">
+      reg_ip = #{record.regIp,jdbcType=BIGINT},
+    </if>
+    <if test="record.memo != null">
+      memo = #{record.memo,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    parent_id = VALUES(parent_id), uid = VALUES(uid), email = VALUES(email), mobile = VALUES(mobile), password = VALUES(password), trade_password = VALUES(trade_password), google_code = VALUES(google_code), authorities = VALUES(authorities), nickname = VALUES(nickname), real_name = VALUES(real_name), avatar = VALUES(avatar), area_code = VALUES(area_code), anti_phishing_code = VALUES(anti_phishing_code), channel = VALUES(channel), frozen = VALUES(frozen), type = VALUES(type), reg_from = VALUES(reg_from), status = VALUES(status), version = VALUES(version), reg_ip = VALUES(reg_ip), memo = VALUES(memo), created_date = VALUES(created_date), updated_date = VALUES(updated_date), broker_id = VALUES(broker_id)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="UserInfoMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="UserInfoMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="UserInfoMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" resultMap="UserInfoMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="UserInfoMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

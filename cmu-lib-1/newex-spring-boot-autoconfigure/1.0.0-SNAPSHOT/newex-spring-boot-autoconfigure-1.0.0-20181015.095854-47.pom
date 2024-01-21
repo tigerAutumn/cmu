@@ -1,0 +1,147 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.commons</groupId>
+        <artifactId>newex-spring-boot</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>newex-spring-boot-autoconfigure</artifactId>
+    <name>newex-spring-boot-autoconfigurer</name>
+    <description>NewEX交易组Spring Boot AutoConfigure项目</description>
+    <dependencies>
+        <!-- Compile -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+        <!-- Optional -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- commons jars -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- memcached starter -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-memcached</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- fileupload starter -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-fileupload</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- web-support-starter -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-spring-support</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- swagger starter -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- security starter -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-security</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-security-jwt</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- open api -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-openapi-support</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- refresh spring-cloud-config -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-spring-cloud-config-client</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- kms spring-cloud-config -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-kms-spring-cloud-config</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--user center / session -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-ucenter-support</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--rate limiter -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-ratelimiter</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- broker -->
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-broker</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.perpetual.data.UserBalanceRepository">
+    <select id="selectForUpdate" resultMap="UserBalanceMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table_Name"/>
+        WHERE user_id=#{userId} AND broker_id=#{brokerId} AND currency_code=#{currencyCode}
+        LIMIT 1 FOR UPDATE
+    </select>
+    <select id="selectBatchForUpdate" resultMap="UserBalanceMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table_Name"/>
+        WHERE user_id IN
+        <foreach collection="set" item="userId" open="(" separator=","
+                 close=")">
+            #{userId}
+        </foreach>
+        AND currency_code = #{currencyCode} AND broker_id = #{brokerId}
+        ORDER BY user_id ASC FOR UPDATE
+    </select>
+    <select id="selectAllUserIdForUpdate" resultMap="UserBalanceMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table_Name"/>
+        WHERE currency_code = #{currencyCode} AND broker_id = #{brokerId}
+        ORDER BY user_id ASC FOR UPDATE
+    </select>
+    <!-- 机器人账户的钱也是钱包转来的，不用减 -->
+    <select id="selectSumBalanceByCurrencyCode" resultMap="UserBalanceMap" parameterType="java.util.Map">
+        select sum(available_balance+frozen_balance+position_size+position_margin+position_fee+order_margin+order_fee)
+        as available_balance, sum(position_size) as position_size from
+        <include refid="Table_Name"/>
+        where currency_code = #{currencyCode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByBalanceGreaterThanZero" resultMap="UserBalanceMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where user_id=#{userId} AND broker_id=#{brokerId} and available+hold>0
+    </select>
+
+    <select id="selectAllUserId" resultType="java.lang.Long" parameterType="java.util.Map">
+        select
+        user_id
+        from
+        <include refid="Table_Name"/>
+        WHERE currency_code = #{currencyCode} AND broker_id = #{brokerId}
+    </select>
+    <update id="updateEnvByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            env = #{record.env,jdbcType=INTEGER}
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+</mapper>

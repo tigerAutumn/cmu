@@ -1,0 +1,46 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.dax</groupId>
+        <artifactId>newex-dax-parent</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>newex-asset</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>newex交易平台-资金管理服务项目</description>
+    <modules>
+        <module>newex-asset-dto</module>
+        <module>newex-asset-service</module>
+        <module>newex-asset-rest</module>
+        <module>newex-asset-client</module>
+        <module>newex-asset-jobs</module>
+    </modules>
+    <properties>
+        <project.gitlab.group>https://gitlab.com/newex-dax</project.gitlab.group>
+        <project.gitlab.url>git@gitlab.newex.cc:newex-dax/newex-asset.git</project.gitlab.url>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- newex-dax-asset modules -->
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-asset-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-asset-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-users-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.dao.XxlJobUserDao">
+	
+	<resultMap id="XxlJobUser" type="com.xxl.job.admin.core.model.XxlJobUser" >
+		<result column="id" property="id" />
+		<result column="type" property="type" />
+		<result column="user_name" property="userName" />
+		<result column="password" property="password" />
+		<result column="add_time" property="addTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id,
+		t.type,
+		t.user_name,
+		t.password,
+		t.add_time
+	</sql>
+
+	<select id="login" parameterType="java.lang.String" resultMap="XxlJobUser">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_CUSTOM_QRTZ_USER AS t
+		WHERE t.user_name = #{userName} and password = #{password}
+	</select>
+
+	<insert id="save" parameterType="com.xxl.job.admin.core.model.XxlJobUser" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO XXL_CUSTOM_QRTZ_USER ( `type`, `user_name`, `password`, `add_time`)
+		values ( #{type}, #{userName}, #{password}, now());
+	</insert>
+
+	<update id="update" parameterType="com.xxl.job.admin.core.model.XxlJobUser" >
+		UPDATE XXL_CUSTOM_QRTZ_USER
+		SET `type` = #{type},
+		`user_name` = #{userName},
+		`password` = #{password},
+		`add_time` = now()
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer" >
+		DELETE FROM XXL_CUSTOM_QRTZ_USER
+		WHERE id = #{id}
+	</delete>
+
+	<select id="loadById" parameterType="java.lang.Integer" resultMap="XxlJobUser">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_CUSTOM_QRTZ_USER AS t
+		WHERE t.id = #{id}
+	</select>
+
+	<select id="findAll" parameterType="java.util.HashMap" resultMap="XxlJobUser">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_CUSTOM_QRTZ_USER AS t
+	</select>
+
+	<select id="getUserByUserName" parameterType="java.lang.String" resultMap="XxlJobUser">
+		SELECT <include refid="Base_Column_List" />
+		FROM XXL_CUSTOM_QRTZ_USER AS t
+		WHERE t.user_name = #{userName}
+	</select>
+
+</mapper>

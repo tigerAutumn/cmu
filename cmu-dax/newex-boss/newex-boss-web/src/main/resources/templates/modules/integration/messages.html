@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>信息管理</title>
+    <script th:src="@{'/js/modules/integration/messages.js?v='+${rnd}}"></script>
+    <style>
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    <form id="message">
+        手机号码:<input class="easyui-textbox" type="text" id="phoneNumber" name="phoneNumber"/>
+        邮件地址:<input class="easyui-textbox" type="text" id="emailaddress" name="emailaddress"/>
+        是否发送:<select class="easyui-combobox" id="sent" name="sent" style="width: 180px">
+        <option value="">-请选择-</option>
+        <option value="true">是</option>
+        <option value="false">否</option>
+    </select>
+        模板语言:<input class="easyui-combobox" id="locale" name="locale" style="width: 180px"/>
+    </select>
+
+
+        <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+        <input id="modal-action" type="hidden" name="action" value=""/>
+    </form>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="ds-datagrid"></div>
+</div>
+
+<div id="mass-ds-dlg">
+    <form id="ds-form" name="ds-form" method="post">
+        <center>
+            <table width="100%" class="table">
+
+                <tr>
+                    <td>邮件主题:</td>
+                    <td><label id="email_subject"></label></td>
+                </tr>
+                <tr>
+                    <td>模版编码:</td>
+                    <td><label id="email_templateCode"></label></td>
+
+                </tr>
+                <tr>
+                    <td>模板语言:</td>
+                    <td><label id="email_locale"></label></td>
+                </tr>
+                <tr>
+                    <td>是否发送</td>
+                    <td><label id="email_sent"></label></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td><label id="email_createdDate"></label></td>
+                </tr>
+                <tr>
+                    <td>手机号码</td>
+                    <td><label id="email_phoneNumber"></label></td>
+                </tr>
+                <tr>
+                    <td>邮件地址:</td>
+                    <td><label id="email_emailAddress"></label></td>
+                </tr>
+
+                <tr>
+                    <td>内容:</td>
+                    <td style="padding-top:10px;"><label id="email_content"></label></td>
+                </tr>
+                <tr>
+                    <td>模版参数:</td>
+                    <td style="padding-top:10px;"><label id="email_templateParams"></label></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

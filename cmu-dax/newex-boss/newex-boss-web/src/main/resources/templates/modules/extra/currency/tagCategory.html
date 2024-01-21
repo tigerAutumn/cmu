@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>标签分类</title>
+    <script th:src="@{'/js/modules/extra/currency/tagCategory.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    分类名称:<input class="easyui-textbox" type="text" id="tagCategory-name" name="tagCategory-name"/>
+
+    类别:<select class="easyui-combobox" id="tagCategory-type" name="tagCategory-type" style="width: 150px">
+    <option value="-1">全部</option>
+    <option value="1">币种标签</option>
+    <option value="2">币对标签</option>
+</select>
+    语言:<input class="easyui-combobox" type="text" id="tagCategory-locale" name="tagCategory-locale" style="width: 200px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="tagCategory-datagrid"></div>
+</div>
+<div id="tagCategory-dlg">
+    <form id="tagCategory-form" name="tagCategory-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+
+            <tr>
+                <td>选择语言:</td>
+                <td>
+                    <input class="easyui-combobox" data-options="required:true" id="locale" name="locale"
+                            style="width: 400px" />
+                </td>
+            </tr>
+            <tr>
+                <td>类别:</td>
+                <td>
+                    <select class="easyui-combobox" data-options="required:true" id="type" name="type"
+                            style="width: 400px">
+                        <option value="1">币种标签</option>
+                        <option value="2">币对标签</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>分类名称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="name" name="name"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>分类编码:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="code" name="code"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>分类排序:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

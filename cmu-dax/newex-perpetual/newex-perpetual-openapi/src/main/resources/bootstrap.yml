@@ -1,0 +1,55 @@
+#
+# spring cloud eureka
+#
+eureka:
+  client:
+    service-url:
+      defaultZone: @spring.cloud.eureka.serviceUrl@
+  instance:
+    prefer-ip-address: true
+#
+# spring cloud config
+#
+spring:
+  application:
+    name: @newex.app.name@
+  cloud:
+    config:
+      name: @spring.cloud.config.name@
+      profile: @spring.cloud.config.profile@
+      enabled: @spring.cloud.config.enabled@
+      discovery:
+        enabled: @spring.cloud.config.discovery.enabled@
+        service-id: @spring.cloud.config.serviceId@
+      fail-fast: true
+      #uri: http://10.0.11.26:8762/
+#
+# spring cloud fegin
+#
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 40000
+hystrix:
+  enabled: true
+  threadpool:
+    default:
+      coreSize: 200 ##并发执行的最大线程数，默认10
+  command:
+      default:
+        circuitBreaker:
+           requestVolumeThreshold: 1000 ##熔断器失败个数，默认20
+        execution:
+           timeout:
+             enabled: true ##开始超时设置
+           isolation:
+              thread:
+                 timeoutInMilliseconds: 30000
+        fallback:
+          isolation:
+            semaphore:
+              maxConcurrentRequests: 50 ##回退的最大线程数
+
+

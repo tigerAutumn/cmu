@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>券商管理</title>
+    <script th:src="@{'/js/modules/admin/broker.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 96%; padding: 1px">
+    <div id="broker-datagrid"></div>
+</div>
+<div id="broker-dlg">
+    <form id="broker-form" name="broker-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>券商域名:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="brokerHosts" id="brokerHosts"
+                                           data-options="required:true,multiline:true,prompt:'同一ID匹配多个域名，请按逗号隔开'"
+                                           style="width: 380px;height: 100px"/></td>
+                </tr>
+
+                <tr>
+                    <td>券商名称:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="brokerName" id="brokerName"
+                                           data-options="required:true" style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>状态:</td>
+                    <td>
+                        <select class="easyui-combobox" id="status" name="status" style="width: 380px">
+                            <option selected value="0">启用</option>
+                            <option value="1">禁用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>签名：</td>
+                    <td><input class="easyui-textbox" type="text" name="sign" id="sign"
+                               data-options="required:true" style="width: 380px"/></td>
+                    <input id="brokerId" type="hidden" name="id"/>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

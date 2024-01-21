@@ -1,0 +1,81 @@
+#
+# newex config
+#
+newex:
+  app:
+    name: newex-extra-scheduler
+    version: 2.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: test
+  extra:
+    datasource:
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.223:3306/extra?characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        pool-name: newex-dax-extra-hikari
+        minimum-idle: 5
+        maximum-pool-size: 20
+        connection-test-query: 'SELECT 1'
+  feignClient:
+    dax:
+      spot: newex-dax-spot
+      users: newex-dax-users
+
+
+
+
+#
+# loggging
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-extra-scheduler
+  level:
+    default: WARN
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+
+#
+# spring
+#
+spring:
+  redis:
+    host: 192.168.1.225
+    password: xxx
+    pool:
+      max-active: 800
+      max-idle: 300
+      max-wait: 2000
+      min-idle: 2
+    port: 16379
+    timeout: 60000
+
+#
+# xxl-job
+#
+xxl:
+  job:
+    accessToken: 'newex_!*0127aim'
+    admin:
+      addresses: http://coinmex-scheduler-admin-0.coinmex-scheduler-admin:7001/
+    executor:
+      appname: xxl-job-executor-extra
+      ip:
+      port: 7001
+      logpath: /home/admin/logs/newex/newex-extra-scheduler/jobhandler
+      logretentiondays: 3
+
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>指数管理</title>
+    <script th:src="@{'/js/modules/spot/spot-index.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div style="height: 94%; padding: 1px">
+    <div id="spotIndex-datagrid"></div>
+</div>
+<div id="spotIndex-dlg">
+    <form id="spotIndex-form" name="spotIndex-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>币种ID:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="symbol" name="symbol"
+                           data-options="readonly:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种简称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="symbolName" name="symbolName"
+                           data-options="readonly:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="status" name="status"
+                           data-options="" style="width: 400px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.UserLimitedBehaviorRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="UserLimitedBehaviorMap" type="cc.newex.dax.users.domain.UserLimitedBehavior">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="ip_address" property="ipAddress" jdbcType="BIGINT"/>
+        <result column="ip_region" property="ipRegion" jdbcType="VARCHAR"/>
+        <result column="device_id" property="deviceId" jdbcType="VARCHAR"/>
+        <result column="maximum" property="maximum" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">user_limited_behavior</sql>
+    <sql id="Base_Column_List_Without_Id">
+        type ,login_name ,ip_address ,ip_region ,device_id ,maximum ,created_date ,updated_date
+    </sql>
+    <sql id="Base_Column_List">
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.type != null">type,</if>
+        <if test="record.loginName != null">login_name,</if>
+        <if test="record.ipAddress != null">ip_address,</if>
+        <if test="record.ipRegion != null">ip_region,</if>
+        <if test="record.deviceId != null">device_id,</if>
+        <if test="record.maximum != null">maximum,</if>
+        <if test="record.createdDate != null">created_date,</if>
+        <if test="record.updatedDate != null">updated_date,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.type != null">#{record.type,jdbcType=INTEGER},</if>
+        <if test="record.loginName != null">#{record.loginName,jdbcType=VARCHAR},</if>
+        <if test="record.ipAddress != null">#{record.ipAddress,jdbcType=BIGINT},</if>
+        <if test="record.ipRegion != null">#{record.ipRegion,jdbcType=VARCHAR},</if>
+        <if test="record.deviceId != null">#{record.deviceId,jdbcType=VARCHAR},</if>
+        <if test="record.maximum != null">#{record.maximum,jdbcType=INTEGER},</if>
+        <if test="record.createdDate != null">#{record.createdDate,jdbcType=TIMESTAMP},</if>
+        <if test="record.updatedDate != null">#{record.updatedDate,jdbcType=TIMESTAMP},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        #{record.type,jdbcType=INTEGER},
+        #{record.loginName,jdbcType=VARCHAR},
+        #{record.ipAddress,jdbcType=BIGINT},
+        #{record.ipRegion,jdbcType=VARCHAR},
+        #{record.deviceId,jdbcType=VARCHAR},
+        #{record.maximum,jdbcType=INTEGER},
+        #{record.createdDate,jdbcType=TIMESTAMP},
+        #{record.updatedDate,jdbcType=TIMESTAMP},
+    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.type != null">type = #{record.type,jdbcType=INTEGER} ,</if>
+        <if test="record.loginName != null">login_name = #{record.loginName,jdbcType=VARCHAR} ,</if>
+        <if test="record.ipAddress != null">ip_address = #{record.ipAddress,jdbcType=BIGINT} ,</if>
+        <if test="record.ipRegion != null">ip_region = #{record.ipRegion,jdbcType=VARCHAR} ,</if>
+        <if test="record.deviceId != null">device_id = #{record.deviceId,jdbcType=VARCHAR} ,</if>
+        <if test="record.maximum != null">maximum = #{record.maximum,jdbcType=INTEGER} ,</if>
+        <if test="record.createdDate != null">created_date = #{record.createdDate,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.updatedDate != null">updated_date = #{record.updatedDate,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        type = VALUES(type) , login_name = VALUES(login_name) , ip_address = VALUES(ip_address) , ip_region =
+        VALUES(ip_region) , device_id = VALUES(device_id) , maximum = VALUES(maximum) , created_date =
+        VALUES(created_date) , updated_date = VALUES(updated_date)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id=#{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="UserLimitedBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="UserLimitedBehaviorMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="UserLimitedBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="UserLimitedBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="UserLimitedBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

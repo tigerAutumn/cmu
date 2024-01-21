@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>标签分类</title>
+    <script th:src="@{'/js/modules/portfolio/indexPortfolio.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    产品名称:<input class="easyui-textbox" type="text" id="indexPortfolio-name" name="indexPortfolio-name"/>
+
+    发行方ID:<input class="easyui-textbox" type="text" id="indexPortfolio-issuerId" name="indexPortfolio-issuerId"/>
+
+    混合指数:<input class="easyui-textbox" type="text" id="indexPortfolio-mixedIndexName" name="indexPortfolio-mixedIndexName"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="indexPortfolio-datagrid"></div>
+</div>
+<div id="indexPortfolio-dlg">
+    <form id="indexPortfolio-form" name="indexPortfolio-form" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="zhId" name="zhId"/>
+        <input type="hidden" id="enId" name="enId"/>
+        <input type="hidden" id="purchId" name="purchId"/>
+        <input type="hidden" id="redeemId" name="redeemId"/>
+        <input type="hidden" id="manageId" name="manageId"/>
+
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">产品信息</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>产品类型:</td>
+                <td colspan="2">
+                    <input type="text" id="portfolioType" name="portfolioType" style="width: 300px"/>
+                </td>
+
+                <td>产品名称:</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="name" name="name"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>产品副标题(中文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="zhSubtitle" name="zhSubtitle"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>产品副标题(英文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="enSubtitle" name="enSubtitle"
+                           data-options="" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>产品介绍(中文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="zhProductIntro" name="zhProductIntro"
+                           data-options="multiline:true" style="width: 300px;height: 100px"/>
+                </td>
+
+                <td>产品介绍(英文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="enProductIntro" name="enProductIntro"
+                           data-options="multiline:true" style="width: 300px;height: 100px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">发行方信息</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>发行方ID:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="issuerId" name="issuerId"
+                           data-options="required:true, min:0" style="width: 300px"/>
+                </td>
+
+                <td>发行方LOGO:</td>
+                <td colspan="2">
+                    <input type="text" id="issuerLogo-file" name="issuerLogo-file" style="width: 300px"/>
+                    <input type="hidden" id="issuerLogo" name="issuerLogo"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>发行方名称(中文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="zhIssuerName" name="zhIssuerName"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>发行方名称(英文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="enIssuerName" name="enIssuerName"
+                           data-options="" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>发行方介绍(中文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="zhIssuerIntro" name="zhIssuerIntro"
+                           data-options="multiline:true" style="width: 300px;height: 100px"/>
+                </td>
+
+                <td>发行方介绍(英文):</td>
+                <td colspan="2">
+                    <input class="easyui-textbox" type="text" id="enIssuerIntro" name="enIssuerIntro"
+                           data-options="multiline:true" style="width: 300px;height: 100px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">混合指数</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>对应混合指数：</td>
+                <td colspan="5">
+                    <input type="text" id="mixedIndexName" name="mixedIndexName" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">申购配置</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>预售时间：</td>
+                <td colspan="2">
+                    <input class="easyui-datetimebox" type="text" id="prePurchStart" name="prePurchStart" style="width: 300px"/>
+                </td>
+
+                <td>初始申购时间:</td>
+                <td colspan="2">
+                    <input class="easyui-datetimebox" type="text" id="purchStart" name="purchStart"
+                           data-options="" style="width: 145px"/>
+                    -
+                    <input class="easyui-datetimebox" type="text" id="purchEnd" name="purchEnd"
+                           data-options="" style="width: 145px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>初始申购总额:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="purchLimit" name="purchLimit"
+                           data-options="required:true, min:0, precision:8, suffix:' USDT', prompt:'以USDT计'" style="width: 300px"/>
+                </td>
+
+                <td>交易数量最大小数位:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="maxSizeDigit" name="maxSizeDigit"
+                           data-options="required:true, min:0" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>最低申购额度:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="minPurch" name="minPurch"
+                           data-options="required:true, min:0, precision:8, suffix:' USDT', prompt:'以USDT计'" style="width: 300px"/>
+                </td>
+
+                <td>个人最大申购额度:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="personLimit" name="personLimit"
+                           data-options="required:true, min:0, precision:8, suffix:' USDT', prompt:'以USDT计'" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>中途申购:</td>
+                <td colspan="2">
+                    <input class="easyui-switchbutton" id="midwaySwitch-switch" style="width:300px;"/>
+                    <input type="hidden" id="midwaySwitch" name="midwaySwitch" value="0"/>
+                </td>
+                <td>中途申购时间:</td>
+                <td colspan="2">
+                    <input type="text" id="midwayPurchTime" name="midwayPurchTime" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>每次申购总额:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="midwayPurchLimit" name="midwayPurchLimit"
+                           data-options="min:0" style="width: 300px"/>
+                </td>
+                <td>每次申购时段:</td>
+                <td colspan="2">
+                    <input class="easyui-datetimebox" type="text" id="midwayPurchStart" name="midwayPurchStart"
+                           data-options="" style="width: 145px"/>
+                    -
+                    <input class="easyui-datetimebox" type="text" id="midwayPurchEnd" name="midwayPurchEnd"
+                           data-options="" style="width: 145px"/>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">费用配置</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>赎回为成分:</td>
+                <td colspan="2">
+                    <input class="easyui-switchbutton" id="redeemComponent-switch" style="width:300px;"/>
+                    <input type="hidden" id="redeemComponent" name="redeemComponent" value="0"/>
+                </td>
+
+                <td>赎回为USDT:</td>
+                <td colspan="2">
+                    <input class="easyui-switchbutton" id="redeemUsdt-switch" style="width:300px;"/>
+                    <input type="hidden" id="redeemUsdt" name="redeemUsdt" value="0"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>划转至币币:</td>
+                <td colspan="2">
+                    <input class="easyui-switchbutton" id="transferSpot-switch" style="width:300px;"/>
+                    <input type="hidden" id="transferSpot" name="transferSpot" value="0"/>
+                </td>
+
+                <td>申购手续费:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="purchFee" name="purchFee"
+                           data-options="required:true, precision:8" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>赎回手续费:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="redeemFee" name="redeemFee"
+                           data-options="required:true, precision:8" style="width: 300px"/>
+                </td>
+
+                <td>组合管理费:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="manageFee" name="manageFee"
+                           data-options="required:true, min:0, precision:8" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">统计数据</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>持仓人数:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="holdNumber" name="holdNumber"
+                           data-options="min:0, readonly:true" style="width: 300px"/>
+                </td>
+
+                <td>平台发行份额:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="issueTotal" name="issueTotal"
+                           data-options="min:0, precison:8, readonly:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="6">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td colspan="2">
+                    <input type="text" id="envStatus" name="envStatus" style="width: 300px"/>
+                </td>
+
+                <td>排序:</td>
+                <td colspan="2">
+                    <input class="easyui-numberbox" type="text" id="sort" name="sort"
+                           data-options="" style="width: 300px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

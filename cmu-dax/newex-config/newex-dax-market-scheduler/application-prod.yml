@@ -1,0 +1,111 @@
+#
+# server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 1000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 50
+  connection-timeout: 5000
+#
+#  数据库配置
+#
+newex:
+  futures:
+    datasource:
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.223:3306/market?autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        max-active: 100
+        min-idle: 10
+    config:
+        phone: 1120000000
+        signName: coinmex
+  feignClient:
+    dax.integration: newex-dax-integration
+  common:
+    evn: test
+    adminEmail: wx0126@126.com
+
+  swagger:
+    base-package: cc.newex.dax.futures.controller
+    title: newex-Futures
+    description: newex交易系统
+    terms-of-service-url: http://www.newex.com
+    version: 2.0
+    contact:
+      name: coinmex
+  security:
+    csrf:
+      referer-pattern: all
+    xss:
+      url-patterns: /v1/*,/api/*
+      exclude-url-patterns:
+  app:
+    name:
+    version: 2.0
+    domain: coinmex.com
+    env:
+      name: prod
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    test-on-borrow: true
+    password: xxx
+    pool:
+       max-active: 600
+       max-idle: 200
+       max-wait: 2000
+       min-idle: 2
+#
+# logging config file location
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-market-scheduler
+  level:
+    default: WARN
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+
+xxl:
+  job:
+    accessToken: 'newex_!*0127aim'
+    admin:
+      addresses: http://coinmex-scheduler-admin-0.coinmex-scheduler-admin:7001/
+    executor:
+      appname: xxl-job-executor-market
+      ip:
+      port: 7003
+      logpath: /home/admin/logs/newex/newex-market-scheduler/jobhandler
+      logretentiondays: 3
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002
+

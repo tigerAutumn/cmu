@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>币对管理</title>
+    <script th:src="@{'/js/modules/spot/product.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    交易货币:<input id="currency-name" name="currency-name" class="easyui-combobox" style="width: 150px"/>
+
+    计价货币:<select class="easyui-combobox" id="cash-name" name="cash-name" style="width: 150px">
+    <option selected="selected" value="">全部</option>
+    <option value="1">BTC</option>
+    <option value="2">ETH</option>
+    <option value="6">USDT</option>
+    <option value="35">NEO</option>
+</select>
+
+    是否开启杠杆:<select class="easyui-combobox" id="recharge-name" name="recharge-name" style="width: 150px">
+    <option selected="selected" value="">全部</option>
+    <option value="1">是</option>
+    <option value="0">否</option>
+</select>
+
+    是否已上线:<select class="easyui-combobox" id="golive-name" name="golive-name" style="width: 150px">
+    <option selected="selected" value="">全部</option>
+    <option value="1">上线</option>
+    <option value="0">下线</option>
+    <option value="2">预发</option>
+</select>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="user-datagrid"></div>
+</div>
+<div id="user-dlg">
+    <form id="user-form" name="user-form" method="post">
+        <table cellpadding="5" style="margin: 10px auto" class="form-table">
+            <tr>
+                <td>交易货币:</td>
+                <td>
+                    <input id="baseCurrency" style="width: 350px;" name="baseCurrency"
+                           class="easyui-combobox"/>
+                    <input type="hidden" id="baseCurrencyCode" name="baseCurrencyCode"/>
+                </td>
+
+                <td>计价货币:</td>
+                <td>
+                    <input class="easyui-combobox" id="quoteCurrency" style="width: 350px" name="quoteCurrency"
+                           data-options="required:true"/>
+                    <input type="hidden" id="quoteCurrencyCode" name="quoteCurrencyCode"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否上线:</td>
+                <td>
+                    <select class="easyui-combobox" id="online" name="online" style="width: 350px">
+                        <option selected="selected" value="1">上线</option>
+                        <option value="0">下线</option>
+                        <option value="2">预发</option>
+                    </select>
+                </td>
+
+                <td>上线板块:</td>
+                <td>
+                    <input type="text" id="zone" class="easyui-combobox" name="zone" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否开启观察期:</td>
+                <td>
+                    <input type="text" id="status" name="status" style="width: 350px"/>
+                </td>
+
+                <td>观察期时间:</td>
+                <td>
+                    <input class="easyui-datebox" id="expireDate" name="expireDate" style="width: 350px"/>
+                </td>
+            <tr>
+
+            <tr>
+                <td>交易币利率:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="baseInterestRate" name="baseInterestRate"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+
+                <td>计价币利率:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="quoteInterestRate" name="quoteInterestRate"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>交易数量小数位数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="maxSizeDigit" name="maxSizeDigit"
+                           style="width: 350px" data-options="prompt:'≥0', required:true, min:0"/>
+                </td>
+
+                <td>交易数量最小变动单位:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="baseIncrement" name="baseIncrement"
+                           style="width: 350px" data-options="prompt:'≥0，≤8',required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>交易价格小数位数:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="maxPriceDigit" name="maxPriceDigit"
+                           style="width: 350px" data-options="prompt:'≥0',required:true"/>
+                </td>
+
+                <td>交易价格最小变动单位:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="quoteIncrement" name="quoteIncrement"
+                           style="width: 350px" data-options="prompt:'≥0，≤8',required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>最小委托量:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="minTradeSize" name="minTradeSize"
+                           style="width: 350px" data-options="prompt:'>0',required:true"/>
+                </td>
+
+                <td>计价货币数量单位精读:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="quotePrecision" name="quotePrecision"
+                           style="width: 350px" data-options="prompt:'≥0',required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否开启杠杆:</td>
+                <td>
+                    <select class="easyui-combobox" id="marginOpen" name="marginOpen" style="width: 350px">
+                        <option value='0'>关闭</option>
+                        <option selected="selected" value='1'>开启</option>
+                    </select>
+                </td>
+
+                <td>最大杠杆倍数:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="maxMarginLeverage" name="maxMarginLeverage"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>杠杆预爆仓风险系数:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="marginRiskPreRatio" name="marginRiskPreRatio"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>杠杆爆仓风险系数:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="marginRiskRatio" name="marginRiskRatio"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>交易货币杠杆限额:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="quoteLimit" name="quoteLimit"
+                           data-options="prompt:'≥0',required:true" style="width: 350px" title="1000"/>
+                </td>
+
+                <td>交易货币杠杆用户限额:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="quoteUserLimit" name="quoteUserLimit"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>计价货币杠杆限额:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="baseLimit" name="baseLimit"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+
+                <td>计价货币杠杆用户限额:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="baseUserLimit" name="baseUserLimit"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>最新成交价:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="lastPrice" name="lastPrice"
+                           data-options="prompt:'≥0',required:true" style="width: 350px"/>
+                </td>
+
+                <td>合并深度档位:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="mergeType" name="mergeType"
+                           style="width: 350px" data-options="prompt:'0-1,多个档位以英文逗号分割',required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>挂单手续费:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="makerRate" name="makerRate"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>吃单手续费:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="tickerRate" name="tickerRate"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>name:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="name" name="name"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>google验证码:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="currencyVerification" name="currencyVerification"
+                           data-options="" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排序:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           style="width: 350px" data-options="required:true"/>
+                </td>
+                <td> 券商：</td>
+                <td><input class="easyui-tagbox" id="brokerIds" data-options="required:true" name="brokerIds" style="width: 350px"></td>
+
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="currencyPair-tag-dlg">
+    <div id="currencyPair-tag-tabs" class="easyui-tabs" style="width:900px;height:500px">
+        <input type="hidden" id="currencyPair-code" name="code"/>
+        <input type="hidden" id="currencyPair-id" name="id"/>
+        <input type="hidden" id="currency-code" name="currencyCode"/>
+        <ul id="tag-tree" class="tag-tree">
+        </ul>
+    </div>
+</div>
+
+<div id="batch-cancel-dlg">
+    <form id="batch-cancel-form" name="batch-cancel-form" method="post">
+        <input type="hidden" id="cancelCode" name="cancelCode"/>
+
+        <table cellpadding="5" style="margin: 10px auto" class="form-table">
+            <tr>
+                <td>用户ID:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="userId" name="userId"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

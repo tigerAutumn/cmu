@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.boss.admin.data.PermissionRepository">
+    <resultMap id="PermissionWithModulePathMap" type="cc.newex.dax.boss.admin.domain.Permission" extends="PermissionMap">
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectAllWithModulePath" resultMap="PermissionWithModulePathMap">
+        select t1.*, t2.path
+        from admin_permission t1
+        inner join admin_module t2 ON t1.module_id = t2.id
+    </select>
+</mapper>

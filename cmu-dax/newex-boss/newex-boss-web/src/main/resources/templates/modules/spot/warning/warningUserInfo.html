@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>告警用户配置</title>
+    <script th:src="@{'/js/modules/spot/warning/warningUserInfo.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    Email:<input class="easyui-textbox" id="warningUserInfo-email" name="warningUserInfo-email" style="width: 150px"/>
+    手机号:<input class="easyui-textbox" id="warningUserInfo-mobile" name="warningUserInfo-mobile" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="warningUserInfo-datagrid"></div>
+</div>
+<div id="warningUserInfo-dlg">
+    <form id="warningUserInfo-form" name="warningUserInfo-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="email" name="email"
+                           data-options="" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>手机号:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="mobile" name="mobile"
+                           data-options="" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户名称:</td>
+                <td>
+                    <input class="easyui-textbox" id="username" name="username"
+                           data-options="required:true" style="width:500px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>通知方式:</td>
+                <td>
+                    <input class="easyui-combobox" id="type" name="type"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

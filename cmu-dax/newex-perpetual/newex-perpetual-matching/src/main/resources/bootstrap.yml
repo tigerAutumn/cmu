@@ -1,0 +1,25 @@
+#
+# spring cloud eureka
+#
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: @spring.cloud.eureka.serviceUrl@
+  instance:
+    prefer-ip-address: true
+    appname: @newex.app.name@
+#
+# spring cloud config
+#
+spring:
+  application:
+    name: @newex.app.name@
+  cloud:
+    config:
+      name: @spring.cloud.config.name@
+      profile: @spring.cloud.config.profile@
+      enabled: @spring.cloud.config.enabled@
+      discovery:
+        enabled: @spring.cloud.config.discovery.enabled@
+        service-id: @spring.cloud.config.serviceId@
+      fail-fast: true

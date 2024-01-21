@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.extra.data.cgm.ProjectApplyInfoRepository">
+    <!-- CodeBuilder Generated -->
+    <resultMap id="ProjectApplyInfoMap" type="cc.newex.dax.extra.domain.cgm.ProjectApplyInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="token_info_id" property="tokenInfoId" jdbcType="BIGINT"/>
+        <result column="locale" property="locale" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="website" property="website" jdbcType="VARCHAR"/>
+        <result column="white_paper" property="whitePaper" jdbcType="VARCHAR"/>
+        <result column="project_info" property="projectInfo" jdbcType="LONGVARCHAR"/>
+        <result column="project_stage" property="projectStage" jdbcType="LONGVARCHAR"/>
+        <result column="project_objective" property="projectObjective" jdbcType="LONGVARCHAR"/>
+        <result column="project_progress" property="projectProgress" jdbcType="LONGVARCHAR"/>
+        <result column="see" property="see" jdbcType="TINYINT"/>
+        <result column="github_url" property="githubUrl" jdbcType="VARCHAR"/>
+        <result column="team" property="team" jdbcType="LONGVARCHAR"/>
+        <result column="team_counselor" property="teamCounselor" jdbcType="LONGVARCHAR"/>
+        <result column="fulltime_number" property="fulltimeNumber" jdbcType="INTEGER"/>
+        <result column="no_fulltime_number" property="noFulltimeNumber" jdbcType="INTEGER"/>
+        <result column="raise" property="raise" jdbcType="TINYINT"/>
+        <result column="raise_total" property="raiseTotal" jdbcType="VARCHAR"/>
+        <result column="raise_price" property="raisePrice" jdbcType="VARCHAR"/>
+        <result column="raise_invest" property="raiseInvest" jdbcType="INTEGER"/>
+        <result column="raise_ratio" property="raiseRatio" jdbcType="VARCHAR"/>
+        <result column="raise_date" property="raiseDate" jdbcType="VARCHAR"/>
+        <result column="raise_rule" property="raiseRule" jdbcType="LONGVARCHAR"/>
+        <result column="ico" property="ico" jdbcType="TINYINT"/>
+        <result column="ico_total" property="icoTotal" jdbcType="VARCHAR"/>
+        <result column="ico_price" property="icoPrice" jdbcType="VARCHAR"/>
+        <result column="ico_invest" property="icoInvest" jdbcType="INTEGER"/>
+        <result column="ico_ratio" property="icoRatio" jdbcType="VARCHAR"/>
+        <result column="ico_date" property="icoDate" jdbcType="VARCHAR"/>
+        <result column="ico_rule" property="icoRule" jdbcType="LONGVARCHAR"/>
+        <result column="telegram_link" property="telegramLink" jdbcType="VARCHAR"/>
+        <result column="telegram_link_members" property="telegramLinkMembers" jdbcType="VARCHAR"/>
+        <result column="wechat_link" property="wechatLink" jdbcType="VARCHAR"/>
+        <result column="wechat_link_members" property="wechatLinkMembers" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="kakao_talk" property="kakaoTalk" jdbcType="VARCHAR"/>
+        <result column="twitter" property="twitter" jdbcType="VARCHAR"/>
+        <result column="facebook" property="facebook" jdbcType="VARCHAR"/>
+        <result column="weibo" property="weibo" jdbcType="VARCHAR"/>
+        <result column="reddit" property="reddit" jdbcType="VARCHAR"/>
+        <result column="others" property="others" jdbcType="VARCHAR"/>
+        <result column="wallet_type" property="walletType" jdbcType="INTEGER"/>
+        <result column="contract" property="contract" jdbcType="VARCHAR"/>
+        <result column="wallet" property="wallet" jdbcType="LONGVARCHAR"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <result column="company_position" property="companyPosition" jdbcType="VARCHAR"/>
+        <result column="product_address" property="productAddress" jdbcType="VARCHAR"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">
+    project_apply_info
+  </sql>
+    <sql id="Base_Column_List_Without_Id">
+    token_info_id, locale, company, website, white_paper, project_info, project_stage,
+    project_objective, project_progress, see, github_url, team, team_counselor, fulltime_number,
+    no_fulltime_number, raise, raise_total, raise_price, raise_invest, raise_ratio, raise_date,
+    raise_rule, ico, ico_total, ico_price, ico_invest, ico_ratio, ico_date, ico_rule,
+    telegram_link, telegram_link_members, wechat_link, wechat_link_members, qq, kakao_talk,
+    twitter, facebook, weibo, reddit, others, wallet_type, contract, wallet, created_date,
+    updated_date, company_position, product_address, broker_id
+  </sql>
+    <sql id="Base_Column_List">
+        id,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.tokenInfoId != null">
+            token_info_id,
+        </if>
+        <if test="record.locale != null">
+            locale,
+        </if>
+        <if test="record.company != null">
+            company,
+        </if>
+        <if test="record.website != null">
+            website,
+        </if>
+        <if test="record.whitePaper != null">
+            white_paper,
+        </if>
+        <if test="record.projectInfo != null">
+            project_info,
+        </if>
+        <if test="record.projectStage != null">
+            project_stage,
+        </if>
+        <if test="record.projectObjective != null">
+            project_objective,
+        </if>
+        <if test="record.projectProgress != null">
+            project_progress,
+        </if>
+        <if test="record.see != null">
+            see,
+        </if>
+        <if test="record.githubUrl != null">
+            github_url,
+        </if>
+        <if test="record.team != null">
+            team,
+        </if>
+        <if test="record.teamCounselor != null">
+            team_counselor,
+        </if>
+        <if test="record.fulltimeNumber != null">
+            fulltime_number,
+        </if>
+        <if test="record.noFulltimeNumber != null">
+            no_fulltime_number,
+        </if>
+        <if test="record.raise != null">
+            raise,
+        </if>
+        <if test="record.raiseTotal != null">
+            raise_total,
+        </if>
+        <if test="record.raisePrice != null">
+            raise_price,
+        </if>
+        <if test="record.raiseInvest != null">
+            raise_invest,
+        </if>
+        <if test="record.raiseRatio != null">
+            raise_ratio,
+        </if>
+        <if test="record.raiseDate != null">
+            raise_date,
+        </if>
+        <if test="record.raiseRule != null">
+            raise_rule,
+        </if>
+        <if test="record.ico != null">
+            ico,
+        </if>
+        <if test="record.icoTotal != null">
+            ico_total,
+        </if>
+        <if test="record.icoPrice != null">
+            ico_price,
+        </if>
+        <if test="record.icoInvest != null">
+            ico_invest,
+        </if>
+        <if test="record.icoRatio != null">
+            ico_ratio,
+        </if>
+        <if test="record.icoDate != null">
+            ico_date,
+        </if>
+        <if test="record.icoRule != null">
+            ico_rule,
+        </if>
+        <if test="record.telegramLink != null">
+            telegram_link,
+        </if>
+        <if test="record.telegramLinkMembers != null">
+            telegram_link_members,
+        </if>
+        <if test="record.wechatLink != null">
+            wechat_link,
+        </if>
+        <if test="record.wechatLinkMembers != null">
+            wechat_link_members,
+        </if>
+        <if test="record.qq != null">
+            qq,
+        </if>
+        <if test="record.kakaoTalk != null">
+            kakao_talk,
+        </if>
+        <if test="record.twitter != null">
+            twitter,
+        </if>
+        <if test="record.facebook != null">
+            facebook,
+        </if>
+        <if test="record.weibo != null">
+            weibo,
+        </if>
+        <if test="record.reddit != null">
+            reddit,
+        </if>
+        <if test="record.others != null">
+            others,
+        </if>
+        <if test="record.walletType != null">
+            wallet_type,
+        </if>
+        <if test="record.contract != null">
+            contract,
+        </if>
+        <if test="record.wallet != null">
+            wallet,
+        </if>
+        <if test="record.createdDate != null">
+            created_date,
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date,
+        </if>
+        <if test="record.companyPosition != null">
+            company_position,
+        </if>
+        <if test="record.productAddress != null">
+            product_address,
+        </if>
+        <if test="record.brokerId != null">
+            broker_id,
+        </if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.tokenInfoId != null">
+            #{record.tokenInfoId,jdbcType=BIGINT},
+        </if>
+        <if test="record.locale != null">
+            #{record.locale,jdbcType=VARCHAR},
+        </if>
+        <if test="record.company != null">
+            #{record.company,jdbcType=VARCHAR},
+        </if>
+        <if test="record.website != null">
+            #{record.website,jdbcType=VARCHAR},
+        </if>
+        <if test="record.whitePaper != null">
+            #{record.whitePaper,jdbcType=VARCHAR},
+        </if>
+        <if test="record.projectInfo != null">
+            #{record.projectInfo,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectStage != null">
+            #{record.projectStage,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectObjective != null">
+            #{record.projectObjective,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectProgress != null">
+            #{record.projectProgress,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.see != null">
+            #{record.see,jdbcType=TINYINT},
+        </if>
+        <if test="record.githubUrl != null">
+            #{record.githubUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.team != null">
+            #{record.team,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.teamCounselor != null">
+            #{record.teamCounselor,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.fulltimeNumber != null">
+            #{record.fulltimeNumber,jdbcType=INTEGER},
+        </if>
+        <if test="record.noFulltimeNumber != null">
+            #{record.noFulltimeNumber,jdbcType=INTEGER},
+        </if>
+        <if test="record.raise != null">
+            #{record.raise,jdbcType=TINYINT},
+        </if>
+        <if test="record.raiseTotal != null">
+            #{record.raiseTotal,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raisePrice != null">
+            #{record.raisePrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseInvest != null">
+            #{record.raiseInvest,jdbcType=INTEGER},
+        </if>
+        <if test="record.raiseRatio != null">
+            #{record.raiseRatio,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseDate != null">
+            #{record.raiseDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseRule != null">
+            #{record.raiseRule,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.ico != null">
+            #{record.ico,jdbcType=TINYINT},
+        </if>
+        <if test="record.icoTotal != null">
+            #{record.icoTotal,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoPrice != null">
+            #{record.icoPrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoInvest != null">
+            #{record.icoInvest,jdbcType=INTEGER},
+        </if>
+        <if test="record.icoRatio != null">
+            #{record.icoRatio,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoDate != null">
+            #{record.icoDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoRule != null">
+            #{record.icoRule,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.telegramLink != null">
+            #{record.telegramLink,jdbcType=VARCHAR},
+        </if>
+        <if test="record.telegramLinkMembers != null">
+            #{record.telegramLinkMembers,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechatLink != null">
+            #{record.wechatLink,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechatLinkMembers != null">
+            #{record.wechatLinkMembers,jdbcType=VARCHAR},
+        </if>
+        <if test="record.qq != null">
+            #{record.qq,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kakaoTalk != null">
+            #{record.kakaoTalk,jdbcType=VARCHAR},
+        </if>
+        <if test="record.twitter != null">
+            #{record.twitter,jdbcType=VARCHAR},
+        </if>
+        <if test="record.facebook != null">
+            #{record.facebook,jdbcType=VARCHAR},
+        </if>
+        <if test="record.weibo != null">
+            #{record.weibo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reddit != null">
+            #{record.reddit,jdbcType=VARCHAR},
+        </if>
+        <if test="record.others != null">
+            #{record.others,jdbcType=VARCHAR},
+        </if>
+        <if test="record.walletType != null">
+            #{record.walletType,jdbcType=INTEGER},
+        </if>
+        <if test="record.contract != null">
+            #{record.contract,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wallet != null">
+            #{record.wallet,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.createdDate != null">
+            #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.companyPosition != null">
+            #{record.companyPosition,jdbcType=VARCHAR},
+        </if>
+        <if test="record.productAddress != null">
+            #{record.productAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.brokerId != null">
+            #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+    #{record.tokenInfoId,jdbcType=BIGINT},
+    #{record.locale,jdbcType=VARCHAR},
+    #{record.company,jdbcType=VARCHAR},
+    #{record.website,jdbcType=VARCHAR},
+    #{record.whitePaper,jdbcType=VARCHAR},
+    #{record.projectInfo,jdbcType=LONGVARCHAR},
+    #{record.projectStage,jdbcType=LONGVARCHAR},
+    #{record.projectObjective,jdbcType=LONGVARCHAR},
+    #{record.projectProgress,jdbcType=LONGVARCHAR},
+    #{record.see,jdbcType=TINYINT},
+    #{record.githubUrl,jdbcType=VARCHAR},
+    #{record.team,jdbcType=LONGVARCHAR},
+    #{record.teamCounselor,jdbcType=LONGVARCHAR},
+    #{record.fulltimeNumber,jdbcType=INTEGER},
+    #{record.noFulltimeNumber,jdbcType=INTEGER},
+    #{record.raise,jdbcType=TINYINT},
+    #{record.raiseTotal,jdbcType=VARCHAR},
+    #{record.raisePrice,jdbcType=VARCHAR},
+    #{record.raiseInvest,jdbcType=INTEGER},
+    #{record.raiseRatio,jdbcType=VARCHAR},
+    #{record.raiseDate,jdbcType=VARCHAR},
+    #{record.raiseRule,jdbcType=LONGVARCHAR},
+    #{record.ico,jdbcType=TINYINT},
+    #{record.icoTotal,jdbcType=VARCHAR},
+    #{record.icoPrice,jdbcType=VARCHAR},
+    #{record.icoInvest,jdbcType=INTEGER},
+    #{record.icoRatio,jdbcType=VARCHAR},
+    #{record.icoDate,jdbcType=VARCHAR},
+    #{record.icoRule,jdbcType=LONGVARCHAR},
+    #{record.telegramLink,jdbcType=VARCHAR},
+    #{record.telegramLinkMembers,jdbcType=VARCHAR},
+    #{record.wechatLink,jdbcType=VARCHAR},
+    #{record.wechatLinkMembers,jdbcType=VARCHAR},
+    #{record.qq,jdbcType=VARCHAR},
+    #{record.kakaoTalk,jdbcType=VARCHAR},
+    #{record.twitter,jdbcType=VARCHAR},
+    #{record.facebook,jdbcType=VARCHAR},
+    #{record.weibo,jdbcType=VARCHAR},
+    #{record.reddit,jdbcType=VARCHAR},
+    #{record.others,jdbcType=VARCHAR},
+    #{record.walletType,jdbcType=INTEGER},
+    #{record.contract,jdbcType=VARCHAR},
+    #{record.wallet,jdbcType=LONGVARCHAR},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.companyPosition,jdbcType=VARCHAR},
+    #{record.productAddress,jdbcType=VARCHAR},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.tokenInfoId != null">
+            token_info_id = #{record.tokenInfoId,jdbcType=BIGINT},
+        </if>
+        <if test="record.locale != null">
+            locale = #{record.locale,jdbcType=VARCHAR},
+        </if>
+        <if test="record.company != null">
+            company = #{record.company,jdbcType=VARCHAR},
+        </if>
+        <if test="record.website != null">
+            website = #{record.website,jdbcType=VARCHAR},
+        </if>
+        <if test="record.whitePaper != null">
+            white_paper = #{record.whitePaper,jdbcType=VARCHAR},
+        </if>
+        <if test="record.projectInfo != null">
+            project_info = #{record.projectInfo,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectStage != null">
+            project_stage = #{record.projectStage,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectObjective != null">
+            project_objective = #{record.projectObjective,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.projectProgress != null">
+            project_progress = #{record.projectProgress,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.see != null">
+            see = #{record.see,jdbcType=TINYINT},
+        </if>
+        <if test="record.githubUrl != null">
+            github_url = #{record.githubUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.team != null">
+            team = #{record.team,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.teamCounselor != null">
+            team_counselor = #{record.teamCounselor,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.fulltimeNumber != null">
+            fulltime_number = #{record.fulltimeNumber,jdbcType=INTEGER},
+        </if>
+        <if test="record.noFulltimeNumber != null">
+            no_fulltime_number = #{record.noFulltimeNumber,jdbcType=INTEGER},
+        </if>
+        <if test="record.raise != null">
+            raise = #{record.raise,jdbcType=TINYINT},
+        </if>
+        <if test="record.raiseTotal != null">
+            raise_total = #{record.raiseTotal,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raisePrice != null">
+            raise_price = #{record.raisePrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseInvest != null">
+            raise_invest = #{record.raiseInvest,jdbcType=INTEGER},
+        </if>
+        <if test="record.raiseRatio != null">
+            raise_ratio = #{record.raiseRatio,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseDate != null">
+            raise_date = #{record.raiseDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.raiseRule != null">
+            raise_rule = #{record.raiseRule,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.ico != null">
+            ico = #{record.ico,jdbcType=TINYINT},
+        </if>
+        <if test="record.icoTotal != null">
+            ico_total = #{record.icoTotal,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoPrice != null">
+            ico_price = #{record.icoPrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoInvest != null">
+            ico_invest = #{record.icoInvest,jdbcType=INTEGER},
+        </if>
+        <if test="record.icoRatio != null">
+            ico_ratio = #{record.icoRatio,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoDate != null">
+            ico_date = #{record.icoDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.icoRule != null">
+            ico_rule = #{record.icoRule,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.telegramLink != null">
+            telegram_link = #{record.telegramLink,jdbcType=VARCHAR},
+        </if>
+        <if test="record.telegramLinkMembers != null">
+            telegram_link_members = #{record.telegramLinkMembers,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechatLink != null">
+            wechat_link = #{record.wechatLink,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechatLinkMembers != null">
+            wechat_link_members = #{record.wechatLinkMembers,jdbcType=VARCHAR},
+        </if>
+        <if test="record.qq != null">
+            qq = #{record.qq,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kakaoTalk != null">
+            kakao_talk = #{record.kakaoTalk,jdbcType=VARCHAR},
+        </if>
+        <if test="record.twitter != null">
+            twitter = #{record.twitter,jdbcType=VARCHAR},
+        </if>
+        <if test="record.facebook != null">
+            facebook = #{record.facebook,jdbcType=VARCHAR},
+        </if>
+        <if test="record.weibo != null">
+            weibo = #{record.weibo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reddit != null">
+            reddit = #{record.reddit,jdbcType=VARCHAR},
+        </if>
+        <if test="record.others != null">
+            others = #{record.others,jdbcType=VARCHAR},
+        </if>
+        <if test="record.walletType != null">
+            wallet_type = #{record.walletType,jdbcType=INTEGER},
+        </if>
+        <if test="record.contract != null">
+            contract = #{record.contract,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wallet != null">
+            wallet = #{record.wallet,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="record.createdDate != null">
+            created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.companyPosition != null">
+            company_position = #{record.companyPosition,jdbcType=VARCHAR},
+        </if>
+        <if test="record.productAddress != null">
+            product_address = #{record.productAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.brokerId != null">
+            broker_id = #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        token_info_id = VALUES(token_info_id), locale = VALUES(locale), company = VALUES(company), website = VALUES(website), white_paper = VALUES(white_paper), project_info =
+        VALUES(project_info), project_stage = VALUES(project_stage), project_objective = VALUES(project_objective), project_progress = VALUES(project_progress), see = VALUES(see),
+        github_url = VALUES(github_url), team = VALUES(team), team_counselor = VALUES(team_counselor), fulltime_number = VALUES(fulltime_number), no_fulltime_number =
+        VALUES(no_fulltime_number), raise = VALUES(raise), raise_total = VALUES(raise_total), raise_price = VALUES(raise_price), raise_invest = VALUES(raise_invest), raise_ratio =
+        VALUES(raise_ratio), raise_date = VALUES(raise_date), raise_rule = VALUES(raise_rule), ico = VALUES(ico), ico_total = VALUES(ico_total), ico_price = VALUES(ico_price),
+        ico_invest = VALUES(ico_invest), ico_ratio = VALUES(ico_ratio), ico_date = VALUES(ico_date), ico_rule = VALUES(ico_rule), telegram_link = VALUES(telegram_link),
+        telegram_link_members = VALUES(telegram_link_members), wechat_link = VALUES(wechat_link), wechat_link_members = VALUES(wechat_link_members), qq = VALUES(qq), kakao_talk =
+        VALUES(kakao_talk), twitter = VALUES(twitter), facebook = VALUES(facebook), weibo = VALUES(weibo), reddit = VALUES(reddit), others = VALUES(others), wallet_type =
+        VALUES(wallet_type), contract = VALUES(contract), wallet = VALUES(wallet), created_date = VALUES(created_date), updated_date = VALUES(updated_date), company_position =
+        VALUES(company_position), product_address = VALUES(product_address), broker_id = VALUES(broker_id)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id = #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" parameterType="java.util.Map" resultMap="ProjectApplyInfoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="ProjectApplyInfoMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="ProjectApplyInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="ProjectApplyInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="ProjectApplyInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != ''">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

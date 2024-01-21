@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>锁仓管理</title>
+    <script th:src="@{'/js/modules/asset/lockup.js?v='+${rnd}}"></script>
+    <style>
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+            width: 130px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+
+        .table tr.alter {
+            background-color: #f5fafe;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div id="lockup-tabs" class="easyui-tabs" style="height: 100%;">
+
+    <div title="锁仓列表">
+        <div class="toolbar">
+            用户：<select class="easyui-combobox" data-options="required:true" id="lockup-userProperty"
+                       name="lockup-userProperty" style="width: 100px">
+            <option value="-1">全部</option>
+            <option value="1">用户ID</option>
+            <option value="2">用户邮箱</option>
+            <option value="3">用户手机号</option>
+        </select>
+
+            <input class="easyui-textbox" type="text" id="lockup-userValue" name="lockup-userValue" style="width: 100px"/>
+
+            币种:<input id="lockup-currency" name="lockup-currency" style="width:100px;">
+
+            锁仓名称：<input class="easyui-textbox" type="text" id="lockup-name" name="lockup-name" style="width: 100px"/>
+
+            起始时间：<input class="easyui-datebox" id="lockup-startTime" name="lockup-startTime" style="width: 100px"/>
+            结束时间：<input class="easyui-datebox" id="lockup-endTime" name="lockup-endTime" style="width: 100px"/>
+
+            <a id="lockup-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 93%;padding:2px;width:100%">
+            <div id="lockup-datagrid" style="width: 100%"></div>
+        </div>
+    </div>
+    <div title="锁仓记录">
+        <div class="toolbar">
+            用户:<select class="easyui-combobox" id="lock_field" name="lock_field" style="width: 100px;height: auto">
+            <option value="-1">全部</option>
+            <option value="1">用户ID</option>
+            <option value="2">用户邮箱</option>
+            <option value="3">用户手机号</option>
+        </select>
+            <input class="easyui-textbox" id="lock_keyword" name="lock_keyword" style="width:100px;"/>
+            币种<input class="easyui-combobox" id="lock_currency" name="lock_currency" style="width:100px;"/>
+            行为<select class="easyui-combobox" id="lock_action" name="lock_action" style="width:150px;">
+            <option value="">全部</option>
+            <option value="7">解锁</option>
+            <option value="6">加锁</option>
+        </select>
+            </select>
+            开始时间 <input class="easyui-datebox" id="lock_begin_time" name="lock_begin_time" labelPosition="left" style="width:100px;">
+            结束时间<input class="easyui-datebox" id="lock_end_time" name="lock_end_time" labelPosition="left" style="width:100px;">
+
+            <a id="lock-record-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 93%;padding:2px;width:100%">
+            <div id="lock-record-datagrid" style="width: 100%"></div>
+        </div>
+    </div>
+</div>
+
+<div id="lockup-dlg">
+    <form id="lockup-form" name="lockup-plan-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           style="width: 500px" data-options="required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>*锁仓用户账户:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="accounts" name="accounts"
+                           data-options="required:true, prompt:'请输入手机号/邮箱，最多添加20个，用逗号隔开'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>*锁仓名称:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="lockPositionName" name="lockPositionName"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>*锁仓币种:</td>
+                <td colspan="3">
+                    <input id="currency" name="currency" style="width:500px;">
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>币种来源:</td>
+                <td colspan="3">
+                    <select class="easyui-combobox" data-options="required:true" id="currencySource" name="currencySource"
+                            style="width: 500px">
+                        <option value="1">用户账户</option>
+                        <option value="2">系统账户</option>
+                    </select>
+                </td>
+            </tr>-->
+
+            <tr>
+                <td>*锁仓数量:</td>
+                <td colspan="3">
+                    <input class="easyui-numberbox" type="text" id="amount" name="amount"
+                           data-options="required:true, min:0, precision:8, prompt: '请输入数量'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>参与分红:</td>
+                <td colspan="3">
+                    <select class="easyui-combobox" data-options="required:true" id="dividend" name="dividend"
+                            style="width: 500px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>释放时间:</td>
+                <td colspan="3">
+                    <input id="unlockTime" name="unlockTime" style="width:500px;" data-options="prompt: '2099-12-31'"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>释放规则</td>
+                <td colspan="3">
+                    <input id="unlockCycle" name="unlockCycle" style="width:250px;">
+                    释放
+                    <input class="easyui-numberbox" type="text" id="unlockAmount" name="unlockAmount"
+                           style="width: 220px" data-options="min:0, max:100, suffix:'%', prompt: '0%'"/>
+
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>备注说明:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="remark" name="remark"
+                           data-options="" style="width: 500px"/>
+                </td>
+            </tr>-->
+        </table>
+    </form>
+</div>
+
+
+<div id="unlock-dlg">
+    <form id="unlock-form" name="unlock-form" method="post">
+        <input type="hidden" id="unlock-Id" name="unlock-Id"/>
+
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td colspan="4" style="text-align: center;font-weight: bold;">
+                    确定要解锁码？
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" style="text-align: center;">
+                    解锁后的资产会返回币币账户下，用户可以随意提取。
+                </td>
+            </tr>
+
+            <tr>
+                <td>解锁数量:</td>
+                <td colspan="3">
+
+                    <input class="easyui-numberbox" type="text" id="unlock-amount" name="unlock-amount"
+                           data-options="required:true, min:0, precision:8, prompt: '0.00000000'" style="width: 500px"/>
+
+                </td>
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>

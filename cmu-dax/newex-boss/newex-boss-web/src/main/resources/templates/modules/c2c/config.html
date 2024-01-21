@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>用户管理</title>
+    <script th:src="@{'/js/modules/c2c/config.js?v='+${rnd}}"></script>
+    <style>
+        .clear {
+            clear: both;
+            display: block;
+            content: ".";
+        }
+
+
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="font-weight: bold;padding-top: 30px;padding-left: 10px; font-size: 20px;">基础设置</div>
+<div style="padding-top: 30px; padding-left: 30px;">
+    <div style="float: left;">用户最大未处理订单数:<label style="font-size: large" id="max_incomplete_order_quantity_per_user"></label>&nbsp;<a href="#" id="infoedita" name="infoedita"
+                                                                                                                                      class="easyui-linkbutton"
+                                                                                                                                      iconCls="icon-edit"></a></div>
+    <div style="float: left;padding-left: 50px;">商家最大处理订单数:<label style="font-size: large" id="max_incomplete_order_quantity_per_supplier"></label>&nbsp;<a href="#"
+                                                                                                                                                            name="infoeditb"
+                                                                                                                                                            id="infoeditb"
+                                                                                                                                                            class="easyui-linkbutton"
+                                                                                                                                                            iconCls="icon-edit"></a>
+    </div>
+    <div style="float: left;padding-left: 50px;">客诉订单追回手续费:
+        <label style="font-size: large" id="transfer_refund_fee"></label>%&nbsp;<a href="#" id="infoeditc" class="easyui-linkbutton" iconCls="icon-edit"></a></div>
+</div>
+<div class="clear"></div>
+</div>
+<div style="font-weight: bold;padding-top: 30px;padding-left: 10px; font-size: 20px;">限额管理</div>
+<div style="height: 30%;padding:2px;">
+    <div id="limit-datagrid"></div>
+</div>
+<div style="font-weight: bold;padding-top: 30px;padding-left: 10px; font-size: 20px;">溢价管理</div>
+<div style="height: 30%;padding:2px;">
+    <div id="spilLover-datagrid"></div>
+</div>
+<div id="limit-dlg" style="align-content: center">
+    <form id="limit-form" name="limit-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td colspan="2"> 数字货币ID
+                <td><input id="id" class="easyui-textbox" name="id" readonly></td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">数字货币名称</td>
+                <td><input id="currencySymbol" name="currencySymbol" class="easyui-textbox" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="2">单笔最小限额：</td>
+                <td>
+                    <input id="minOrderTotalPerOrder" name="minOrderTotalPerOrder" class="easyui-textbox" value="" style="width:100%">
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">单笔最大限额：</td>
+                <td>
+                    <input id="maxOrderTotalPerOrder" name="maxOrderTotalPerOrder" class="easyui-textbox" value="" style="width:100%">
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">总限额：</td>
+                <td>
+                    <input id="maxIncompleteOrderTotalPerUser" name="maxIncompleteOrderTotalPerUser" class="easyui-textbox" value="" style="width:100%">
+
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<!--<div id="over-dlg" style="align-content: center">-->
+<!--<form id="over-form" name="over-form" method="post">-->
+<!--<table cellpadding="5" style="margin: 30px auto" class="form-table">-->
+<!--<tr>-->
+<!--<td colspan="3"> 数字货币ID<span id="mid">123</span>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td colspan="3">-->
+<!--<td> 数字货币名称<span id="mname">1233</span></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td colspan="2">买入溢价：</td>-->
+<!--<td>-->
+<!--<input name="tagList" class="easyui-textbox" value="" style="width:100%">-->
+
+<!--</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td colspan="2">卖出溢价：</td>-->
+<!--<td>-->
+<!--<input name="maxLimit" class="easyui-textbox" value="" style="width:100%">-->
+
+<!--</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td colspan="2">返佣比例：</td>-->
+<!--<td>-->
+<!--<input name="totalLimit" class="easyui-textbox" value="" style="width:100%">-->
+
+<!--</td>-->
+<!--</tr>-->
+
+<!--</table>-->
+<!--</form>-->
+<!--</div>-->
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>币种监测账号配置</title>
+    <script th:src="@{'/js/modules/spot/currency/currencyMonitorUser.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    券商:<input class="easyui-combobox" id="currencyMonitorUser-brokerId" name="currencyMonitorUser-brokerId" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="currencyMonitorUser-datagrid"></div>
+</div>
+<div id="currencyMonitorUser-dlg">
+    <form id="currencyMonitorUser-form" name="currencyMonitorUser-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>券商:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户ID:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="userId" name="userId"
+                           data-options="required:true, min:1" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>账号说明:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="remark" name="remark"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input class="easyui-combobox" id="status" name="status"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

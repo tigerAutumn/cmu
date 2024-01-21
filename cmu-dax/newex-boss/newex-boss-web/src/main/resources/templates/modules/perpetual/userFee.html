@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约用户手续费管理</title>
+    <script th:src="@{'/js/modules/perpetual/userFee.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    币对Code:
+    <input id="query-pairCode" name="query-pairCode" class="easyui-combobox" style="width: 150px"/>
+
+    类型:
+    <select class="easyui-combobox" id="query-side" name="query-side" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="0">both</option>
+        <option value="1">maker</option>
+        <option value="2">taker</option>
+    </select>
+
+    券商ID:
+    <input id="query-brokerId" name="query-brokerId" class="easyui-combobox" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+</div>
+<div style="height: 94%; padding: 1px">
+    <input type="hidden" id="action" name="action"/>
+    <!--数据表格-->
+    <div id="userFee-datagrid">
+    </div>
+
+    <!--模态框-->
+    <div id="userFee-dlg">
+        <form id="userFee-form" name="userFee-form" method="post">
+            <table cellpadding="5" style="margin: 10px auto" class="form-table">
+                <input type="hidden" name="id" id="id"/>
+                <tr>
+                    <td>币对Code:</td>
+                    <td>
+                        <input id="pairCode" style="width: 300px;" name="pairCode" class="easyui-combobox" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="side" name="side" style="width: 300px">
+                            <option value="0" selected>both</option>
+                            <option value="1">maker</option>
+                            <option value="2">taker</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>用户ID:</td>
+                    <td>
+                        <input class="easyui-textbox" id="userId" name="userId" style="width: 300px" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>手续费:</td>
+                    <td>
+                        <input class="easyui-textbox" id="rate" style="width: 300px" name="rate" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>券商ID:</td>
+                    <td>
+                        <input class="easyui-combobox" id="brokerId" style="width: 300px" name="brokerId" data-options="required:true"/>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

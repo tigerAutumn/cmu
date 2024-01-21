@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>项目进展</title>
+    <script th:src="@{'/js/modules/extra/currency/currencyProgressInfo.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    币种简称:<input class="easyui-textbox" type="text" id="currencyProgressInfo-code" name="currencyProgressInfo-code" style="width: 200px"/>
+
+    语言:<input class="easyui-combobox" type="text" id="currencyProgressInfo-locale" name="currencyProgressInfo-locale" style="width: 200px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="currencyProgressInfo-datagrid"></div>
+</div>
+<div id="currencyProgressInfo-dlg">
+    <form id="currencyProgressInfo-form" name="currencyProgressInfo-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>币种简称:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="code" name="code"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>语言:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="locale" name="locale" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>更新内容:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="content" name="content"
+                           data-options="required:true, multiline:true" style="width: 400px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>发布日期:</td>
+                <td>
+                    <input class="easyui-datebox" type="text" id="publishDate" name="publishDate"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="status" name="status" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排序:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           data-options="" style="width: 400px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

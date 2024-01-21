@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>DAPP活动管理</title>
+    <script th:src="@{'/js/modules/extra/cms/dapps.js?v='+${rnd}}"></script>
+    <style>
+        .btn {
+            width: 150px;
+            background-color: #3596eb;
+            padding: 11px 20px;
+            line-height: 20px;
+            border: 1px;
+            font-family: "Microsoft Yahei", "微软雅黑", verdana, arial, sans-serif;
+            color: #fff;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 93%;padding:2px">
+    <div id="dapps-datagrid"></div>
+</div>
+<div id="dapps-dlg">
+    <form id="dapps-form" name="dapps-form" method="post">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" hidden/>
+
+            <tr>
+                <td>DAPPS标题</td>
+                <td><input id="title" name="title" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+            </tr>
+
+            <tr>
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           style="width: 500px" data-options="required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>语言</td>
+                <td>
+                    <input class="easyui-combobox" id="locale" data-options="required:true" name="locale" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>法币币种</td>
+                <td><input class="easyui-combobox" id="currency" name="currency" style="width: 500px"></td>
+            </tr>
+
+            <tr>
+                <td>交易币对</td>
+                <td><input class="easyui-combobox" id="product" name="product" style="width: 500px"></td>
+            </tr>
+
+            <tr>
+                <td>状态</td>
+                <td><select class="easyui-combobox" id="status" data-options="required:true" name="status" style="width: 500px">
+                    <option value="0">未上线</option>
+                    <option value="1">已上线</option>
+                    <option value="2">预发</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td>排序</td>
+                <td><input id="sort" name="sort" data-options="required:true" class="easyui-textbox" style="width: 500px;"/></td>
+            </tr>
+
+            <tr>
+                <td>请选择图片</td>
+                <td>
+                    <input class="easyui-filebox" id="file" name="file"
+                           data-options="buttonText:'选择封面图片'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>图片链接</td>
+                <td><input class="easyui-textbox" id="imageUrl" readonly name="imageUrl" style="width: 500px"></td>
+            </tr>
+
+            <tr>
+                <td>app链接</td>
+                <td><input class="easyui-textbox" id="appLink" data-options="required:true" name="appLink" style="width: 500px"></td>
+            </tr>
+
+            <tr>
+                <td>pc链接</td>
+                <td><input class="easyui-textbox" id="pcLink" data-options="required:true" name="pcLink" style="width: 500px"></td>
+            </tr>
+
+            <tr>
+                <td>文案解释</td>
+                <td><input class="easyui-textbox" id="text" data-options="required:true,multiline:true" name="text" style="width: 500px;height: 100px"></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

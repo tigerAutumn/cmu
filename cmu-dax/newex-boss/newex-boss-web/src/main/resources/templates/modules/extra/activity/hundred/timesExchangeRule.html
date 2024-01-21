@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>抽奖机会兑换规则</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/timesExchangeRule.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 96%; padding: 1px">
+    <div id="timesExchangeRule-datagrid"></div>
+</div>
+<div id="timesExchangeRule-dlg">
+    <form id="timesExchangeRule-form" name="timesExchangeRule-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td>抽奖次数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="totalTimes" name="totalTimes"
+                           data-options="required:true, min:1, prompt: '请输入正数'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种ID:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="currencyId" name="currencyId"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种数量:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="amount" name="amount"
+                           data-options="required:true, min:1, prompt: '请输入正数'" style="width: 500px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

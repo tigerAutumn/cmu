@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>币种监测阈值配置</title>
+    <script th:src="@{'/js/modules/spot/currency/currencyMonitorConfig.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    币种ID:<input class="easyui-combobox" id="currencyMonitorConfig-currencyId" name="currencyMonitorConfig-currencyId" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="currencyMonitorConfig-datagrid"></div>
+</div>
+<div id="currencyMonitorConfig-dlg">
+    <form id="currencyMonitorConfig-form" name="currencyMonitorConfig-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td>币种ID:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="currencyId" name="currencyId"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>报警阈值:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="threshold" name="threshold"
+                           data-options="required:true, min:0, precision:8, prompt: '请输入数量'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input class="easyui-combobox" id="status" name="status"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

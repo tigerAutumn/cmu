@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.perpetual.data.OrderConditionRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="OrderConditionMap" type="cc.newex.dax.perpetual.domain.OrderCondition">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="condition_price" property="conditionPrice" jdbcType="DECIMAL" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="contract_code" property="contractCode" jdbcType="VARCHAR" />
+    <result column="clazz" property="clazz" jdbcType="INTEGER" />
+    <result column="must_maker" property="mustMaker" jdbcType="INTEGER" />
+    <result column="side" property="side" jdbcType="VARCHAR" />
+    <result column="detail_side" property="detailSide" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="avg_price" property="avgPrice" jdbcType="DECIMAL" />
+    <result column="deal_amount" property="dealAmount" jdbcType="DECIMAL" />
+    <result column="size" property="size" jdbcType="DECIMAL" />
+    <result column="deal_size" property="dealSize" jdbcType="DECIMAL" />
+    <result column="open_margin" property="openMargin" jdbcType="DECIMAL" />
+    <result column="extra_margin" property="extraMargin" jdbcType="DECIMAL" />
+    <result column="avg_margin" property="avgMargin" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="order_from" property="orderFrom" jdbcType="INTEGER" />
+    <result column="system_type" property="systemType" jdbcType="INTEGER" />
+    <result column="relation_order_id" property="relationOrderId" jdbcType="BIGINT" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    order_condition
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    type, direction, condition_price, order_id, user_id, contract_code, clazz, must_maker, 
+    side, detail_side, amount, price, avg_price, deal_amount, size, deal_size, open_margin, 
+    extra_margin, avg_margin, status, order_from, system_type, relation_order_id, broker_id, 
+    created_date, modify_date
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.type != null">
+      type,
+    </if>
+    <if test="record.direction != null">
+      direction,
+    </if>
+    <if test="record.conditionPrice != null">
+      condition_price,
+    </if>
+    <if test="record.orderId != null">
+      order_id,
+    </if>
+    <if test="record.userId != null">
+      user_id,
+    </if>
+    <if test="record.contractCode != null">
+      contract_code,
+    </if>
+    <if test="record.clazz != null">
+      clazz,
+    </if>
+    <if test="record.mustMaker != null">
+      must_maker,
+    </if>
+    <if test="record.side != null">
+      side,
+    </if>
+    <if test="record.detailSide != null">
+      detail_side,
+    </if>
+    <if test="record.amount != null">
+      amount,
+    </if>
+    <if test="record.price != null">
+      price,
+    </if>
+    <if test="record.avgPrice != null">
+      avg_price,
+    </if>
+    <if test="record.dealAmount != null">
+      deal_amount,
+    </if>
+    <if test="record.size != null">
+      size,
+    </if>
+    <if test="record.dealSize != null">
+      deal_size,
+    </if>
+    <if test="record.openMargin != null">
+      open_margin,
+    </if>
+    <if test="record.extraMargin != null">
+      extra_margin,
+    </if>
+    <if test="record.avgMargin != null">
+      avg_margin,
+    </if>
+    <if test="record.status != null">
+      status,
+    </if>
+    <if test="record.orderFrom != null">
+      order_from,
+    </if>
+    <if test="record.systemType != null">
+      system_type,
+    </if>
+    <if test="record.relationOrderId != null">
+      relation_order_id,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.modifyDate != null">
+      modify_date,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.type != null">
+      #{record.type,jdbcType=VARCHAR},
+    </if>
+    <if test="record.direction != null">
+      #{record.direction,jdbcType=VARCHAR},
+    </if>
+    <if test="record.conditionPrice != null">
+      #{record.conditionPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.orderId != null">
+      #{record.orderId,jdbcType=BIGINT},
+    </if>
+    <if test="record.userId != null">
+      #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.contractCode != null">
+      #{record.contractCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.clazz != null">
+      #{record.clazz,jdbcType=INTEGER},
+    </if>
+    <if test="record.mustMaker != null">
+      #{record.mustMaker,jdbcType=INTEGER},
+    </if>
+    <if test="record.side != null">
+      #{record.side,jdbcType=VARCHAR},
+    </if>
+    <if test="record.detailSide != null">
+      #{record.detailSide,jdbcType=VARCHAR},
+    </if>
+    <if test="record.amount != null">
+      #{record.amount,jdbcType=DECIMAL},
+    </if>
+    <if test="record.price != null">
+      #{record.price,jdbcType=DECIMAL},
+    </if>
+    <if test="record.avgPrice != null">
+      #{record.avgPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.dealAmount != null">
+      #{record.dealAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="record.size != null">
+      #{record.size,jdbcType=DECIMAL},
+    </if>
+    <if test="record.dealSize != null">
+      #{record.dealSize,jdbcType=DECIMAL},
+    </if>
+    <if test="record.openMargin != null">
+      #{record.openMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.extraMargin != null">
+      #{record.extraMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.avgMargin != null">
+      #{record.avgMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.status != null">
+      #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.orderFrom != null">
+      #{record.orderFrom,jdbcType=INTEGER},
+    </if>
+    <if test="record.systemType != null">
+      #{record.systemType,jdbcType=INTEGER},
+    </if>
+    <if test="record.relationOrderId != null">
+      #{record.relationOrderId,jdbcType=BIGINT},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.modifyDate != null">
+      #{record.modifyDate,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.type,jdbcType=VARCHAR},
+    #{record.direction,jdbcType=VARCHAR},
+    #{record.conditionPrice,jdbcType=DECIMAL},
+    #{record.orderId,jdbcType=BIGINT},
+    #{record.userId,jdbcType=BIGINT},
+    #{record.contractCode,jdbcType=VARCHAR},
+    #{record.clazz,jdbcType=INTEGER},
+    #{record.mustMaker,jdbcType=INTEGER},
+    #{record.side,jdbcType=VARCHAR},
+    #{record.detailSide,jdbcType=VARCHAR},
+    #{record.amount,jdbcType=DECIMAL},
+    #{record.price,jdbcType=DECIMAL},
+    #{record.avgPrice,jdbcType=DECIMAL},
+    #{record.dealAmount,jdbcType=DECIMAL},
+    #{record.size,jdbcType=DECIMAL},
+    #{record.dealSize,jdbcType=DECIMAL},
+    #{record.openMargin,jdbcType=DECIMAL},
+    #{record.extraMargin,jdbcType=DECIMAL},
+    #{record.avgMargin,jdbcType=DECIMAL},
+    #{record.status,jdbcType=INTEGER},
+    #{record.orderFrom,jdbcType=INTEGER},
+    #{record.systemType,jdbcType=INTEGER},
+    #{record.relationOrderId,jdbcType=BIGINT},
+    #{record.brokerId,jdbcType=INTEGER},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.modifyDate,jdbcType=TIMESTAMP},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.type != null">
+      type = #{record.type,jdbcType=VARCHAR},
+    </if>
+    <if test="record.direction != null">
+      direction = #{record.direction,jdbcType=VARCHAR},
+    </if>
+    <if test="record.conditionPrice != null">
+      condition_price = #{record.conditionPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.orderId != null">
+      order_id = #{record.orderId,jdbcType=BIGINT},
+    </if>
+    <if test="record.userId != null">
+      user_id = #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.contractCode != null">
+      contract_code = #{record.contractCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.clazz != null">
+      clazz = #{record.clazz,jdbcType=INTEGER},
+    </if>
+    <if test="record.mustMaker != null">
+      must_maker = #{record.mustMaker,jdbcType=INTEGER},
+    </if>
+    <if test="record.side != null">
+      side = #{record.side,jdbcType=VARCHAR},
+    </if>
+    <if test="record.detailSide != null">
+      detail_side = #{record.detailSide,jdbcType=VARCHAR},
+    </if>
+    <if test="record.amount != null">
+      amount = #{record.amount,jdbcType=DECIMAL},
+    </if>
+    <if test="record.price != null">
+      price = #{record.price,jdbcType=DECIMAL},
+    </if>
+    <if test="record.avgPrice != null">
+      avg_price = #{record.avgPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.dealAmount != null">
+      deal_amount = #{record.dealAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="record.size != null">
+      size = #{record.size,jdbcType=DECIMAL},
+    </if>
+    <if test="record.dealSize != null">
+      deal_size = #{record.dealSize,jdbcType=DECIMAL},
+    </if>
+    <if test="record.openMargin != null">
+      open_margin = #{record.openMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.extraMargin != null">
+      extra_margin = #{record.extraMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.avgMargin != null">
+      avg_margin = #{record.avgMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.status != null">
+      status = #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.orderFrom != null">
+      order_from = #{record.orderFrom,jdbcType=INTEGER},
+    </if>
+    <if test="record.systemType != null">
+      system_type = #{record.systemType,jdbcType=INTEGER},
+    </if>
+    <if test="record.relationOrderId != null">
+      relation_order_id = #{record.relationOrderId,jdbcType=BIGINT},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.modifyDate != null">
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    type = VALUES(type), direction = VALUES(direction), condition_price = VALUES(condition_price), order_id = VALUES(order_id), user_id = VALUES(user_id), contract_code = VALUES(contract_code), clazz = VALUES(clazz), must_maker = VALUES(must_maker), side = VALUES(side), detail_side = VALUES(detail_side), amount = VALUES(amount), price = VALUES(price), avg_price = VALUES(avg_price), deal_amount = VALUES(deal_amount), size = VALUES(size), deal_size = VALUES(deal_size), open_margin = VALUES(open_margin), extra_margin = VALUES(extra_margin), avg_margin = VALUES(avg_margin), status = VALUES(status), order_from = VALUES(order_from), system_type = VALUES(system_type), relation_order_id = VALUES(relation_order_id), broker_id = VALUES(broker_id), created_date = VALUES(created_date), modify_date = VALUES(modify_date)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="OrderConditionMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="OrderConditionMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="OrderConditionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" resultMap="OrderConditionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="OrderConditionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

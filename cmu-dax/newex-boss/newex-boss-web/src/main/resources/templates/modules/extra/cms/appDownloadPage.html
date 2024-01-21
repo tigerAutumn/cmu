@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>App下载页</title>
+    <script th:src="@{'/js/modules/extra/cms/appDownloadPage.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    名称:<input class="easyui-textbox" type="text" id="appDownloadPage-name" name="appDownloadPage-name" style="width: 150px"/>
+
+    语言:<input class="easyui-combobox" id="appDownloadPage-locale" name="appDownloadPage-locale" style="width: 150px"/>
+
+
+    标识码:<input class="easyui-textbox" type="text" id="appDownloadPage-uid" name="appDownloadPage-uid" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="appDownloadPage-datagrid"></div>
+</div>
+<div id="appDownloadPage-dlg">
+    <form id="appDownloadPage-form" name="appDownloadPage-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">基本信息</td>
+                <td colspan="3">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>网页模板:</td>
+                <td>
+
+                    <input id="templateId" name="templateId" style="width:300px;">
+
+                </td>
+
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           style="width: 300px" data-options="required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>名称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="name" name="name"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>语言:</td>
+                <td>
+                    <input type="text" id="locale" name="locale" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>标识码:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="uid" name="uid"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>下载页链接:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="link" name="link"
+                           data-options="prompt:'系统自动生成'" style="width: 300px" readonly/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Android下载链接:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="androidUrl" name="androidUrl"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>iOS下载链接:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="iosUrl" name="iosUrl"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Logo:</td>
+                <td>
+                    <input type="text" id="logoImg-file" name="logoImg-file" style="width: 300px"/>
+                    <input type="hidden" id="logoImg" name="logoImg"/>
+                </td>
+
+                <td>状态:</td>
+                <td>
+                    <input type="text" id="status" name="status" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">第一部分内容</td>
+                <td colspan="3">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>标题:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="firstTitle" name="firstTitle"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>图片:</td>
+                <td>
+                    <input type="text" id="firstImg-file" name="firstImg-file" style="width: 300px"/>
+                    <input type="hidden" id="firstImg" name="firstImg"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="firstIntro" name="firstIntro"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">第二部分内容</td>
+                <td colspan="3">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>标题:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="secondTitle" name="secondTitle"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>图片:</td>
+                <td>
+                    <input type="text" id="secondImg-file" name="secondImg-file" style="width: 300px"/>
+                    <input type="hidden" id="secondImg" name="secondImg"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="secondIntro" name="secondIntro"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">第三部分内容</td>
+                <td colspan="3">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>特点1:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="thirdFeature1" name="thirdFeature1"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>图片1:</td>
+                <td>
+                    <input type="text" id="thirdImg1-file" name="thirdImg1-file" style="width: 300px"/>
+                    <input type="hidden" id="thirdImg1" name="thirdImg1"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介1:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="thirdIntro1" name="thirdIntro1"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>特点2:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="thirdFeature2" name="thirdFeature2"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>图片2:</td>
+                <td>
+                    <input type="text" id="thirdImg2-file" name="thirdImg2-file" style="width: 300px"/>
+                    <input type="hidden" id="thirdImg2" name="thirdImg2"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介2:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="thirdIntro2" name="thirdIntro2"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>特点3:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="thirdFeature3" name="thirdFeature3"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>图片3:</td>
+                <td>
+                    <input type="text" id="thirdImg3-file" name="thirdImg3-file" style="width: 300px"/>
+                    <input type="hidden" id="thirdImg3" name="thirdImg3"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介3:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="thirdIntro3" name="thirdIntro3"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <hr/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>特点4:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="thirdFeature4" name="thirdFeature4"
+                           data-options="" style="width: 300px"/>
+                </td>
+
+                <td>图片4:</td>
+                <td>
+                    <input type="text" id="thirdImg4-file" name="thirdImg4-file" style="width: 300px"/>
+                    <input type="hidden" id="thirdImg4" name="thirdImg4"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>简介4:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="thirdIntro4" name="thirdIntro4"
+                           data-options="multiline:true" style="width: 700px;height: 100px;"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

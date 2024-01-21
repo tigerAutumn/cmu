@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.users.data.UserSettingsRepository">
+    <!-- CodeBuilder Generated -->
+    <resultMap id="UserSettingsMap" type="cc.newex.dax.users.domain.UserSettings">
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="login_auth_flag" property="loginAuthFlag" jdbcType="INTEGER"/>
+        <result column="google_auth_flag" property="googleAuthFlag" jdbcType="INTEGER"/>
+        <result column="email_auth_flag" property="emailAuthFlag" jdbcType="INTEGER"/>
+        <result column="mobile_auth_flag" property="mobileAuthFlag" jdbcType="INTEGER"/>
+        <result column="trade_auth_flag" property="tradeAuthFlag" jdbcType="INTEGER"/>
+        <result column="login_pwd_strength" property="loginPwdStrength" jdbcType="INTEGER"/>
+        <result column="trade_pwd_strength" property="tradePwdStrength" jdbcType="INTEGER"/>
+        <result column="trade_pwd_input" property="tradePwdInput" jdbcType="INTEGER"/>
+        <result column="alipay_auth_flag" property="alipayAuthFlag" jdbcType="INTEGER"/>
+        <result column="wechat_pay_auth_flag" property="wechatPayAuthFlag" jdbcType="INTEGER"/>
+        <result column="bank_pay_auth_flag" property="bankPayAuthFlag" jdbcType="INTEGER" />
+        <result column="spot_frozen_flag" property="spotFrozenFlag" jdbcType="INTEGER"/>
+        <result column="c2c_frozen_flag" property="c2cFrozenFlag" jdbcType="INTEGER"/>
+        <result column="contracts_frozen_flag" property="contractsFrozenFlag" jdbcType="INTEGER"/>
+        <result column="asset_frozen_flag" property="assetFrozenFlag" jdbcType="INTEGER"/>
+        <result column="spot_protocol_flag" property="spotProtocolFlag" jdbcType="INTEGER"/>
+        <result column="c2c_protocol_flag" property="c2cProtocolFlag" jdbcType="INTEGER"/>
+        <result column="portfolio_protocol_flag" property="portfolioProtocolFlag" jdbcType="INTEGER"/>
+        <result column="perpetual_protocol_flag" property="perpetualProtocolFlag" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">
+    user_settings
+  </sql>
+    <sql id="Base_Column_List_Without_Id">
+    login_auth_flag, google_auth_flag, email_auth_flag, mobile_auth_flag, trade_auth_flag,
+    login_pwd_strength, trade_pwd_strength, trade_pwd_input, alipay_auth_flag, wechat_pay_auth_flag,bank_pay_auth_flag,
+    spot_frozen_flag, c2c_frozen_flag, contracts_frozen_flag, asset_frozen_flag, spot_protocol_flag,
+    c2c_protocol_flag, portfolio_protocol_flag, perpetual_protocol_flag, created_date,
+    updated_date
+  </sql>
+    <sql id="Base_Column_List">
+        user_id,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.loginAuthFlag != null">
+            login_auth_flag,
+        </if>
+        <if test="record.googleAuthFlag != null">
+            google_auth_flag,
+        </if>
+        <if test="record.emailAuthFlag != null">
+            email_auth_flag,
+        </if>
+        <if test="record.mobileAuthFlag != null">
+            mobile_auth_flag,
+        </if>
+        <if test="record.tradeAuthFlag != null">
+            trade_auth_flag,
+        </if>
+        <if test="record.loginPwdStrength != null">
+            login_pwd_strength,
+        </if>
+        <if test="record.tradePwdStrength != null">
+            trade_pwd_strength,
+        </if>
+        <if test="record.tradePwdInput != null">
+            trade_pwd_input,
+        </if>
+        <if test="record.alipayAuthFlag != null">
+            alipay_auth_flag,
+        </if>
+        <if test="record.wechatPayAuthFlag != null">
+            wechat_pay_auth_flag,
+        </if>
+        <if test="record.bankPayAuthFlag != null">
+            bank_pay_auth_flag,
+        </if>
+        <if test="record.spotFrozenFlag != null">
+            spot_frozen_flag,
+        </if>
+        <if test="record.c2cFrozenFlag != null">
+            c2c_frozen_flag,
+        </if>
+        <if test="record.contractsFrozenFlag != null">
+            contracts_frozen_flag,
+        </if>
+        <if test="record.assetFrozenFlag != null">
+            asset_frozen_flag,
+        </if>
+        <if test="record.spotProtocolFlag != null">
+            spot_protocol_flag,
+        </if>
+        <if test="record.c2cProtocolFlag != null">
+            c2c_protocol_flag,
+        </if>
+        <if test="record.portfolioProtocolFlag != null">
+            portfolio_protocol_flag,
+        </if>
+        <if test="record.perpetualProtocolFlag != null">
+            perpetual_protocol_flag,
+        </if>
+        <if test="record.createdDate != null">
+            created_date,
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date,
+        </if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.loginAuthFlag != null">
+            #{record.loginAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.googleAuthFlag != null">
+            #{record.googleAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.emailAuthFlag != null">
+            #{record.emailAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.mobileAuthFlag != null">
+            #{record.mobileAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradeAuthFlag != null">
+            #{record.tradeAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.loginPwdStrength != null">
+            #{record.loginPwdStrength,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradePwdStrength != null">
+            #{record.tradePwdStrength,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradePwdInput != null">
+            #{record.tradePwdInput,jdbcType=INTEGER},
+        </if>
+        <if test="record.alipayAuthFlag != null">
+            #{record.alipayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.wechatPayAuthFlag != null">
+            #{record.wechatPayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.bankPayAuthFlag != null">
+            #{record.bankPayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.spotFrozenFlag != null">
+            #{record.spotFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.c2cFrozenFlag != null">
+            #{record.c2cFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.contractsFrozenFlag != null">
+            #{record.contractsFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.assetFrozenFlag != null">
+            #{record.assetFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.spotProtocolFlag != null">
+            #{record.spotProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.c2cProtocolFlag != null">
+            #{record.c2cProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.portfolioProtocolFlag != null">
+            #{record.portfolioProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.perpetualProtocolFlag != null">
+            #{record.perpetualProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.createdDate != null">
+            #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+    #{record.userId,jdbcType=BIGINT},
+    #{record.loginAuthFlag,jdbcType=INTEGER},
+    #{record.googleAuthFlag,jdbcType=INTEGER},
+    #{record.emailAuthFlag,jdbcType=INTEGER},
+    #{record.mobileAuthFlag,jdbcType=INTEGER},
+    #{record.tradeAuthFlag,jdbcType=INTEGER},
+    #{record.loginPwdStrength,jdbcType=INTEGER},
+    #{record.tradePwdStrength,jdbcType=INTEGER},
+    #{record.tradePwdInput,jdbcType=INTEGER},
+    #{record.alipayAuthFlag,jdbcType=INTEGER},
+    #{record.wechatPayAuthFlag,jdbcType=INTEGER},
+    #{record.spotFrozenFlag,jdbcType=INTEGER},
+    #{record.c2cFrozenFlag,jdbcType=INTEGER},
+    #{record.contractsFrozenFlag,jdbcType=INTEGER},
+    #{record.assetFrozenFlag,jdbcType=INTEGER},
+    #{record.spotProtocolFlag,jdbcType=INTEGER},
+    #{record.c2cProtocolFlag,jdbcType=INTEGER},
+    #{record.portfolioProtocolFlag,jdbcType=INTEGER},
+    #{record.perpetualProtocolFlag,jdbcType=INTEGER},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+  </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.userId,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.userId != null">
+            user_id = #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.loginAuthFlag != null">
+            login_auth_flag = #{record.loginAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.googleAuthFlag != null">
+            google_auth_flag = #{record.googleAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.emailAuthFlag != null">
+            email_auth_flag = #{record.emailAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.mobileAuthFlag != null">
+            mobile_auth_flag = #{record.mobileAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradeAuthFlag != null">
+            trade_auth_flag = #{record.tradeAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.loginPwdStrength != null">
+            login_pwd_strength = #{record.loginPwdStrength,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradePwdStrength != null">
+            trade_pwd_strength = #{record.tradePwdStrength,jdbcType=INTEGER},
+        </if>
+        <if test="record.tradePwdInput != null">
+            trade_pwd_input = #{record.tradePwdInput,jdbcType=INTEGER},
+        </if>
+        <if test="record.alipayAuthFlag != null">
+            alipay_auth_flag = #{record.alipayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.wechatPayAuthFlag != null">
+            wechat_pay_auth_flag = #{record.wechatPayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.bankPayAuthFlag != null">
+            bank_pay_auth_flag = #{record.bankPayAuthFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.spotFrozenFlag != null">
+            spot_frozen_flag = #{record.spotFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.c2cFrozenFlag != null">
+            c2c_frozen_flag = #{record.c2cFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.contractsFrozenFlag != null">
+            contracts_frozen_flag = #{record.contractsFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.assetFrozenFlag != null">
+            asset_frozen_flag = #{record.assetFrozenFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.spotProtocolFlag != null">
+            spot_protocol_flag = #{record.spotProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.c2cProtocolFlag != null">
+            c2c_protocol_flag = #{record.c2cProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.portfolioProtocolFlag != null">
+            portfolio_protocol_flag = #{record.portfolioProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.perpetualProtocolFlag != null">
+            perpetual_protocol_flag = #{record.perpetualProtocolFlag,jdbcType=INTEGER},
+        </if>
+        <if test="record.createdDate != null">
+            created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_id,
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="record.userId != null">
+                #{record.userId,jdbcType=BIGINT},
+            </if>
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        user_id = VALUES(user_id), login_auth_flag = VALUES(login_auth_flag), google_auth_flag = VALUES(google_auth_flag), email_auth_flag = VALUES(email_auth_flag),
+        mobile_auth_flag = VALUES(mobile_auth_flag), trade_auth_flag = VALUES(trade_auth_flag), login_pwd_strength = VALUES(login_pwd_strength), trade_pwd_strength =
+        VALUES(trade_pwd_strength), trade_pwd_input = VALUES(trade_pwd_input), alipay_auth_flag = VALUES(alipay_auth_flag), wechat_pay_auth_flag = VALUES(wechat_pay_auth_flag),
+        bank_pay_auth_flag = VALUES(bank_pay_auth_flag), spot_frozen_flag = VALUES(spot_frozen_flag), c2c_frozen_flag = VALUES(c2c_frozen_flag), contracts_frozen_flag =
+        VALUES(contracts_frozen_flag), asset_frozen_flag =
+        VALUES(asset_frozen_flag), spot_protocol_flag = VALUES(spot_protocol_flag), c2c_protocol_flag = VALUES(c2c_protocol_flag), portfolio_protocol_flag =
+        VALUES(portfolio_protocol_flag), perpetual_protocol_flag = VALUES(perpetual_protocol_flag), created_date = VALUES(created_date), updated_date = VALUES(updated_date)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where user_id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where user_id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.userId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where user_id = #{record.userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where user_id = #{record.userId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" parameterType="java.util.Map" resultMap="UserSettingsMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where user_id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="UserSettingsMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="UserSettingsMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="UserSettingsMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where user_id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.userId,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="UserSettingsMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != ''">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

@@ -1,0 +1,41 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.dax</groupId>
+        <artifactId>newex-dax-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>newex-market</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>newex交易平台-行情服务项目</description>
+    <modules>
+        <module>newex-market-dto</module>
+        <module>newex-market-service</module>
+        <module>newex-market-rest</module>
+        <module>newex-market-scheduler</module>
+        <module>newex-market-client</module>
+    </modules>
+    <properties>
+        <project.gitlab.group>https://gitlab.com/newex-dax</project.gitlab.group>
+        <project.gitlab.url>git@gitlab.com:newex-dax/newex-market.git</project.gitlab.url>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- newex-dax-market modules -->
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-market-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-market-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

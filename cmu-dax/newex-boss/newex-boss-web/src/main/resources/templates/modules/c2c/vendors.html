@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>资金划转记录</title>
+    <script th:src="@{'/js/modules/c2c/vendors.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    用户ID :<input class="easyui-textbox" type="text" id="search-user" name="search-user"
+                 style="width: 200px" data-options=""/>
+    用户身份:<select class="easyui-combobox" id="isCertifiedUser" name="isCertifiedUser" style="width: 200px">
+    <option selected="selected" value="-1">全部</option>
+    <option value="1">商家</option>
+    <option value="0">普通用户</option>
+</select>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="user-datagrid" style="width: 100%"></div>
+</div>
+<div id="user-dlg" style="align-content: center">
+    <form id="user-form" name="user-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td><input class="easyui-textbox" type="text" id="userId" name="userId"
+                           data-options="required:true,prompt:'用户id'" readonly/><input class="easyui-textbox" type="hidden" id="upgrade" name="upgrade"/>
+                </td>
+            </tr>
+            <tr>
+                <td>选择标签</td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="tags" name="tags" class="easyui-tagbox" value="" style="width:100%">
+
+                </td>
+            </tr>
+            <tr>
+                <td>添加备注:</td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" id="remark" name="remark"
+                           data-options="multiline:true" style="width:300px;height:100px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+
+</div>
+</body>
+</html>

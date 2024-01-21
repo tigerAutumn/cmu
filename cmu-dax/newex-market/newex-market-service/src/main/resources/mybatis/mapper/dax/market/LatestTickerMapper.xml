@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.market.data.LatestTickerRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="LatestTickerMap" type="cc.newex.dax.market.domain.LatestTicker">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="high" property="high" jdbcType="DOUBLE"/>
+        <result column="low" property="low" jdbcType="DOUBLE"/>
+        <result column="volume" property="volume" jdbcType="DOUBLE"/>
+        <result column="volume_22" property="volume22" jdbcType="DOUBLE"/>
+        <result column="change_24" property="change24" jdbcType="DOUBLE"/>
+        <result column="last" property="last" jdbcType="DOUBLE"/>
+        <result column="buy" property="buy" jdbcType="DOUBLE"/>
+        <result column="sell" property="sell" jdbcType="DOUBLE"/>
+        <result column="open" property="open" jdbcType="DOUBLE"/>
+        <result column="market_from" property="marketFrom" jdbcType="INTEGER"/>
+        <result column="offset_buy" property="offsetBuy" jdbcType="DOUBLE"/>
+        <result column="offset_sell" property="offsetSell" jdbcType="DOUBLE"/>
+        <result column="auto" property="auto" jdbcType="TINYINT"/>
+        <result column="delay" property="delay" jdbcType="TINYINT"/>
+        <result column="order_index" property="orderIndex" jdbcType="TINYINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="base_currency" property="baseCurrency" jdbcType="INTEGER"/>
+        <result column="quote_currency" property="quoteCurrency" jdbcType="INTEGER"/>
+        <result column="moneytype" property="moneytype" jdbcType="TINYINT"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="symbol" property="symbol" jdbcType="VARCHAR"/>
+        <result column="valid" property="valid" jdbcType="TINYINT"></result>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">latest_ticker</sql>
+    <sql id="Base_Column_List_Without_Id">
+        high ,low ,volume ,volume_22 ,change_24 ,last ,buy ,sell ,open ,market_from ,offset_buy ,offset_sell ,auto
+        ,delay ,order_index ,name ,base_currency ,moneytype ,created_date,quote_currency,symbol,valid
+    </sql>
+    <sql id="Base_Column_List">
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.high != null">high,</if>
+        <if test="record.low != null">low,</if>
+        <if test="record.volume != null">volume,</if>
+        <if test="record.volume22 != null">volume_22,</if>
+        <if test="record.change24 != null">change_24,</if>
+        <if test="record.last != null">last,</if>
+        <if test="record.buy != null">buy,</if>
+        <if test="record.sell != null">sell,</if>
+        <if test="record.open != null">open,</if>
+        <if test="record.marketFrom != null">market_from,</if>
+        <if test="record.offsetBuy != null">offset_buy,</if>
+        <if test="record.offsetSell != null">offset_sell,</if>
+        <if test="record.auto != null">auto,</if>
+        <if test="record.delay != null">delay,</if>
+        <if test="record.orderIndex != null">order_index,</if>
+        <if test="record.name != null">name,</if>
+        <if test="record.baseCurrency != null">base_currency,</if>
+        <if test="record.quoteCurrency != null">quote_currency,</if>
+        <if test="record.moneytype != null">moneytype,</if>
+        <if test="record.createdDate != null">created_date,</if>
+        <if test="record.valid != null">valid,</if>
+        <if test="record.symbol != null">symbol,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.high != null">#{record.high,jdbcType=DOUBLE},</if>
+        <if test="record.low != null">#{record.low,jdbcType=DOUBLE},</if>
+        <if test="record.volume != null">#{record.volume,jdbcType=DOUBLE},</if>
+        <if test="record.volume22 != null">#{record.volume22,jdbcType=DOUBLE},</if>
+        <if test="record.change24 != null">#{record.change24,jdbcType=DOUBLE},</if>
+        <if test="record.last != null">#{record.last,jdbcType=DOUBLE},</if>
+        <if test="record.buy != null">#{record.buy,jdbcType=DOUBLE},</if>
+        <if test="record.sell != null">#{record.sell,jdbcType=DOUBLE},</if>
+        <if test="record.open != null">#{record.open,jdbcType=DOUBLE},</if>
+        <if test="record.marketFrom != null">#{record.marketFrom,jdbcType=TINYINT},</if>
+        <if test="record.offsetBuy != null">#{record.offsetBuy,jdbcType=DOUBLE},</if>
+        <if test="record.offsetSell != null">#{record.offsetSell,jdbcType=DOUBLE},</if>
+        <if test="record.auto != null">#{record.auto,jdbcType=TINYINT},</if>
+        <if test="record.delay != null">#{record.delay,jdbcType=TINYINT},</if>
+        <if test="record.orderIndex != null">#{record.orderIndex,jdbcType=TINYINT},</if>
+        <if test="record.name != null">#{record.name,jdbcType=VARCHAR},</if>
+        <if test="record.symbol != null">#{record.symbol,jdbcType=VARCHAR},</if>
+        <if test="record.baseCurrency != null">#{record.baseCurrency,jdbcType=TINYINT},</if>
+        <if test="record.quoteCurrency != null">#{record.quoteCurrency,jdbcType=TINYINT},</if>
+        <if test="record.moneytype != null">#{record.moneytype,jdbcType=TINYINT},</if>
+        <if test="record.createdDate != null">#{record.createdDate,jdbcType=TIMESTAMP},</if>
+        <if test="record.valid != null">#{record.valid,jdbcType=TIMESTAMP},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        #{record.high,jdbcType=DOUBLE},
+		 					 #{record.low,jdbcType=DOUBLE},
+		 					 #{record.volume,jdbcType=DOUBLE},
+		 					 #{record.volume22,jdbcType=DOUBLE},
+		 					 #{record.change24,jdbcType=DOUBLE},
+		 					 #{record.last,jdbcType=DOUBLE},
+		 					 #{record.buy,jdbcType=DOUBLE},
+		 					 #{record.sell,jdbcType=DOUBLE},
+		 					 #{record.open,jdbcType=DOUBLE},
+		 					 #{record.marketFrom,jdbcType=TINYINT},
+		 					 #{record.offsetBuy,jdbcType=DOUBLE},
+		 					 #{record.offsetSell,jdbcType=DOUBLE},
+		 					 #{record.auto,jdbcType=TINYINT},
+		 					 #{record.delay,jdbcType=TINYINT},
+		 					 #{record.orderIndex,jdbcType=TINYINT},
+		 					 #{record.name,jdbcType=VARCHAR},
+        #{record.symbol,jdbcType=VARCHAR},
+		 					 #{record.baseCurrency,jdbcType=TINYINT},
+		 					 #{record.quoteCurrency,jdbcType=TINYINT},
+		 					 #{record.moneytype,jdbcType=TINYINT},
+		 					 #{record.createdDate,jdbcType=TIMESTAMP},
+        #{record.valid,jdbcType=TIMESTAMP},
+		 	    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.high != null">high = #{record.high,jdbcType=DOUBLE} ,</if>
+        <if test="record.low != null">low = #{record.low,jdbcType=DOUBLE} ,</if>
+        <if test="record.volume != null">volume = #{record.volume,jdbcType=DOUBLE} ,</if>
+        <if test="record.volume22 != null">volume_22 = #{record.volume22,jdbcType=DOUBLE} ,</if>
+        <if test="record.change24 != null">change_24 = #{record.change24,jdbcType=DOUBLE} ,</if>
+        <if test="record.last != null">last = #{record.last,jdbcType=DOUBLE} ,</if>
+        <if test="record.buy != null">buy = #{record.buy,jdbcType=DOUBLE} ,</if>
+        <if test="record.sell != null">sell = #{record.sell,jdbcType=DOUBLE} ,</if>
+        <if test="record.open != null">open = #{record.open,jdbcType=DOUBLE} ,</if>
+        <if test="record.marketFrom != null">market_from = #{record.marketFrom,jdbcType=TINYINT} ,</if>
+        <if test="record.offsetBuy != null">offset_buy = #{record.offsetBuy,jdbcType=DOUBLE} ,</if>
+        <if test="record.offsetSell != null">offset_sell = #{record.offsetSell,jdbcType=DOUBLE} ,</if>
+        <if test="record.auto != null">auto = #{record.auto,jdbcType=TINYINT} ,</if>
+        <if test="record.delay != null">delay = #{record.delay,jdbcType=TINYINT} ,</if>
+        <if test="record.orderIndex != null">order_index = #{record.orderIndex,jdbcType=TINYINT} ,</if>
+        <if test="record.name != null">name = #{record.name,jdbcType=VARCHAR} ,</if>
+        <if test="record.symbol != null">symbol = #{record.symbol,jdbcType=VARCHAR} ,</if>
+        <if test="record.baseCurrency != null">base_currency = #{record.baseCurrency,jdbcType=TINYINT} ,</if>
+        <if test="record.quoteCurrency != null">quote_currency = #{record.quoteCurrency,jdbcType=TINYINT} ,</if>
+        <if test="record.moneytype != null">moneytype = #{record.moneytype,jdbcType=TINYINT} ,</if>
+        <if test="record.createdDate != null">created_date = #{record.createdDate,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.valid != null">valid = #{record.valid,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        high = VALUES(high) , low = VALUES(low) , volume = VALUES(volume) , volume_22 = VALUES(volume_22) , change_24 =
+        VALUES(change_24) , last = VALUES(last) , buy = VALUES(buy) , sell = VALUES(sell) , open = VALUES(open) ,
+        market_from = VALUES(market_from) , offset_buy = VALUES(offset_buy) , offset_sell = VALUES(offset_sell) , auto =
+        VALUES(auto) , delay = VALUES(delay) , order_index = VALUES(order_index) , name = VALUES(name) , quote_currency
+        =VALUES(quote_currency), base_currency =
+        VALUES(base_currency) , moneytype = VALUES(moneytype) , created_date = VALUES(created_date)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id=#{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="LatestTickerMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="LatestTickerMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="LatestTickerMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="LatestTickerMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="LatestTickerMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+
+    <select id="selectFiatTickers" resultMap="LatestTickerMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where valid = 1 and quote_currency = 3
+        and market_from > -1;
+    </select>
+    <select id="selectAllTickers" resultMap="LatestTickerMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        group by name,base_currency
+    </select>
+
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

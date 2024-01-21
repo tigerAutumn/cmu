@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>个人信息</title>
+    <script th:src="@{'/js/modules/users/fee.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" hidden>
+<div id="user-tab" class="easyui-tabs" style="height: 100%">
+    <div title="用户手续费等级信息" style="padding: 10px">
+        用户ID:<input class="easyui-textbox" type="text" id="fee-userId" name="fee-userId"
+                    style="width: 160px" data-options=""/>
+        <a id="btn-user-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+        <div style="height: 96%;padding:2px">
+            <div id="user-level-datagrid"></div>
+        </div>
+        <div id="user-level-dlg">
+            <form id="user-level-form" name="user-level-form" method="post">
+                <table style="margin: 30px auto" class="form-table">
+                    <tr>
+                        <td>用户Id</td>
+                        <td><input id="user-level-Id" name="userId" data-options="required:true" class="easyui-textbox" style="width:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>用户等级</td>
+                        <td><input id="user-level" name="userLevel" data-options="required:true" class="easyui-textbox" style="width:300px;"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div title="币对手续费信息" style="padding: 10px">
+        用户ID:<input class="easyui-textbox" type="text" id="search-id" name="search-id"
+                    style="width: 160px" data-options=""/>
+        币对<input class="easyui-combobox" style="width: 160px" id="search-product"/>
+        <a id="btn-prduct-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+        <div style="height: 93%;padding:2px">
+            <div id="product-fee-datagrid"></div>
+        </div>
+        <div id="product-fee-dlg">
+            <form id="product-fee-form" name="product-fee-form" method="post">
+                <table style="margin: 30px auto" class="form-table">
+                    <tr>
+                        <td>Id</td>
+                        <td><input id="id" name="id" readonly class="easyui-textbox" style="width:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>用户Id</td>
+                        <td><input id="userId" name="userId" data-options="required:true" class="easyui-textbox" style="width:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>币对</td>
+                        <td><input id="productId" name="productId" data-options="required:true" class="easyui-combobox" style="width:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>类型</td>
+                        <td><select id="side" name="side" data-options="required:true,panelHeight:100" class="easyui-combobox" style="width:300px;">
+                            <option value="0">both</option>
+                            <option value="1">maker</option>
+                            <option value="2">taker</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td>手续费</td>
+                        <td><input id="rate" name="rate" data-options="required:true,prompt:'≤0'" class="easyui-textbox" style="width:300px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>过期时间</td>
+                        <td><input id="expireDate" name="expireDate" data-options="required:true" class="easyui-datetimebox"
+                                   style="width:300px;"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

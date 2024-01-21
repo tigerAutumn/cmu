@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cc.newex.dax.perpetual.data.OrderHistoryShardingRepository">
+	<insert id="createOrderHistoryIfNotExists"
+		parameterType="java.lang.String">
+		CREATE TABLE IF NOT EXISTS
+		<include refid="Table_Name" />
+		(
+		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+		  `order_id` bigint(20) NOT NULL COMMENT '订单id',
+		  `user_id` bigint(20) NOT NULL COMMENT '用户id',
+  		  `contract_code` varchar(255) NOT NULL COMMENT '是Base和Quote之间的组合 P_BTC_USDT，R_BTC_USDT1109',
+		  `clazz` int(11) NOT NULL DEFAULT '0' COMMENT '0:下单 1:撤单',
+		  `must_maker` int(11) NOT NULL DEFAULT '0' COMMENT '被动委托：0:不care 1:只做maker，如何是taker就撤单',
+		  `side` varchar(64) NOT NULL DEFAULT 'long' COMMENT '仓位方向，long多，short空',
+		  `detail_side` varchar(64) NOT NULL COMMENT '1.开多open_long 2.开空open_short 3.平多close_long 4.平空close_short',
+		  `amount` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '委托数量',
+		  `price` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '用户订单委托价格',
+		  `avg_price` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '平均成交价格',
+		  `deal_amount` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '已成交数量',
+		  `size` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '委托价值',
+		  `deal_size` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '已经成交价值',
+		  `open_margin` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '开仓保险金',
+		  `extra_margin` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '额外价格偏移保证金',
+		  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0 等待成交 1 部分成交 2 已经成交 -1 已经撤销',
+		  `order_from` int(11) NOT NULL DEFAULT '0' COMMENT '下单来源 0网页下单,2openApi,3IOS,4android',
+		  `system_type` int(11) NOT NULL DEFAULT '0' COMMENT '10:限价 11:市价 13:强平单 14:爆仓单',
+		  `relation_order_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '订单关联id',
+		  `profit` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '该笔订单成交后对应的盈亏: 正表示盈利,负表示亏损',
+		  `fee` decimal(32,16) NOT NULL DEFAULT '0' COMMENT '该笔订单成交后交的手续费: 正表示得手续费,负表示付手续费',
+		  `reason` int(11) NOT NULL DEFAULT 0 COMMENT '该笔订单取消的理由，0是默认值，没有理由',
+		  `broker_id` int(11) NOT NULL DEFAULT 1 COMMENT '业务方ID',
+		  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+		  `modify_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+		  PRIMARY KEY (`id`),
+		  UNIQUE KEY `uk_order_id` (`order_id`),
+		  KEY `idx_orders_uId_brokerId` (`user_id`,`broker_id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT comment='订单归档表';
+	</insert>
+</mapper>

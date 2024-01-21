@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.UserBehaviorRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="UserBehaviorMap" type="cc.newex.dax.users.domain.UserBehavior">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="has_success_monitor" property="hasSuccessMonitor" jdbcType="TINYINT"/>
+        <result column="has_failure_monitor" property="hasFailureMonitor" jdbcType="TINYINT"/>
+        <result column="max_retry_limit" property="maxRetryLimit" jdbcType="INTEGER"/>
+        <result column="duration_of_freezing" property="durationOfFreezing" jdbcType="INTEGER"/>
+        <result column="notice_template_code" property="noticeTemplateCode" jdbcType="VARCHAR"/>
+        <result column="need_login" property="needLogin" jdbcType="TINYINT"/>
+        <result column="check_rule" property="checkRule" jdbcType="VARCHAR"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">user_behavior</sql>
+    <sql id="Base_Column_List_Without_Id">
+        category , name , description , has_success_monitor , has_failure_monitor , max_retry_limit ,
+        duration_of_freezing , notice_template_code , need_login , check_rule , created_date , updated_date
+    </sql>
+    <sql id="Base_Column_List">
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.category != null">category,</if>
+        <if test="record.name != null">name,</if>
+        <if test="record.description != null">description,</if>
+        <if test="record.hasSuccessMonitor != null">has_success_monitor,</if>
+        <if test="record.hasFailureMonitor != null">has_failure_monitor,</if>
+        <if test="record.maxRetryLimit != null">max_retry_limit,</if>
+        <if test="record.durationOfFreezing != null">duration_of_freezing,</if>
+        <if test="record.noticeTemplateCode != null">notice_template_code,</if>
+        <if test="record.needLogin != null">need_login,</if>
+        <if test="record.checkRule != null">check_rule,</if>
+        <if test="record.createdDate != null">created_date,</if>
+        <if test="record.updatedDate != null">updated_date,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.category != null">#{record.category,jdbcType=VARCHAR},</if>
+        <if test="record.name != null">#{record.name,jdbcType=VARCHAR},</if>
+        <if test="record.description != null">#{record.description,jdbcType=VARCHAR},</if>
+        <if test="record.hasSuccessMonitor != null">#{record.hasSuccessMonitor,jdbcType=TINYINT},</if>
+        <if test="record.hasFailureMonitor != null">#{record.hasFailureMonitor,jdbcType=TINYINT},</if>
+        <if test="record.maxRetryLimit != null">#{record.maxRetryLimit,jdbcType=INTEGER},</if>
+        <if test="record.durationOfFreezing != null">#{record.durationOfFreezing,jdbcType=INTEGER},</if>
+        <if test="record.noticeTemplateCode != null">#{record.noticeTemplateCode,jdbcType=VARCHAR},</if>
+        <if test="record.needLogin != null">#{record.needLogin,jdbcType=TINYINT},</if>
+        <if test="record.checkRule != null">#{record.checkRule,jdbcType=VARCHAR},</if>
+        <if test="record.createdDate != null">#{record.createdDate,jdbcType=TIMESTAMP},</if>
+        <if test="record.updatedDate != null">#{record.updatedDate,jdbcType=TIMESTAMP},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        #{record.category,jdbcType=VARCHAR},
+        #{record.name,jdbcType=VARCHAR},
+        #{record.description,jdbcType=VARCHAR},
+        #{record.hasSuccessMonitor,jdbcType=TINYINT},
+        #{record.hasFailureMonitor,jdbcType=TINYINT},
+        #{record.maxRetryLimit,jdbcType=INTEGER},
+        #{record.durationOfFreezing,jdbcType=INTEGER},
+        #{record.noticeTemplateCode,jdbcType=VARCHAR},
+        #{record.needLogin,jdbcType=TINYINT},
+        #{record.checkRule,jdbcType=VARCHAR},
+        #{record.createdDate,jdbcType=TIMESTAMP},
+        #{record.updatedDate,jdbcType=TIMESTAMP},
+    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=INTEGER},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.category != null">category = #{record.category,jdbcType=VARCHAR} ,</if>
+        <if test="record.name != null">name = #{record.name,jdbcType=VARCHAR} ,</if>
+        <if test="record.description != null">description = #{record.description,jdbcType=VARCHAR} ,</if>
+        <if test="record.hasSuccessMonitor != null">has_success_monitor = #{record.hasSuccessMonitor,jdbcType=TINYINT}
+            ,
+        </if>
+        <if test="record.hasFailureMonitor != null">has_failure_monitor = #{record.hasFailureMonitor,jdbcType=TINYINT}
+            ,
+        </if>
+        <if test="record.maxRetryLimit != null">max_retry_limit = #{record.maxRetryLimit,jdbcType=INTEGER} ,</if>
+        <if test="record.durationOfFreezing != null">duration_of_freezing =
+            #{record.durationOfFreezing,jdbcType=INTEGER} ,
+        </if>
+        <if test="record.noticeTemplateCode != null">notice_template_code =
+            #{record.noticeTemplateCode,jdbcType=VARCHAR} ,
+        </if>
+        <if test="record.needLogin != null">need_login = #{record.needLogin,jdbcType=TINYINT} ,</if>
+        <if test="record.checkRule != null">check_rule = #{record.checkRule,jdbcType=VARCHAR} ,</if>
+        <if test="record.createdDate != null">created_date = #{record.createdDate,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.updatedDate != null">updated_date = #{record.updatedDate,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Integer" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        category = VALUES(category) , name = VALUES(name) , description = VALUES(description) , has_success_monitor =
+        VALUES(has_success_monitor) , has_failure_monitor = VALUES(has_failure_monitor) , max_retry_limit =
+        VALUES(max_retry_limit) , duration_of_freezing = VALUES(duration_of_freezing) , notice_template_code =
+        VALUES(notice_template_code) , need_login = VALUES(need_login) , check_rule = VALUES(check_rule) , created_date
+        = VALUES(created_date) , updated_date = VALUES(updated_date)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id=#{record.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="UserBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByExample" resultMap="UserBehaviorMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="UserBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="UserBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="UserBehaviorMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

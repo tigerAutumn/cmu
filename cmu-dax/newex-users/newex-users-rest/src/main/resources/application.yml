@@ -1,0 +1,171 @@
+#
+# tomcat server
+# 
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+
+#
+# spring 
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis: 
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool: 
+       max-active: @spring.redis.pool.max-active@
+       max-idle: @spring.redis.pool.max-idle@
+       max-wait: @spring.redis.pool.max-wait@
+       min-idle: @spring.redis.pool.min-idle@
+#
+# logging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+#
+# newex
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  users:
+    datasource:
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.users.datasource.master.url@
+        username: @newex.users.datasource.master.username@
+        password: @newex.users.datasource.master.password@
+        max-active: 10
+        min-idle: 0
+    channelink:
+      uri: @newex.users.channelink.uri@
+  swagger:
+    terms-of-service-url: http://www.newex.cc
+    contact:
+      url: http://www.newex.cc
+      name: newex
+      email: admin@newex.cc
+    dockets:
+      - name: docket-web
+        group-name: '1.web/移动端外部接口文档'
+        base-package: cc.newex.dax.users.rest.controller.outer.v1
+        title: NewEx-Users
+        version: 2.0
+        description: NewEx-Users外部接口文档
+      - name: docket-admin
+        group-name: '2.feign内部接口文档'
+        base-package: cc.newex.dax.users.rest.controller.inner.v1
+        title: NewEx-Users
+        version: 2.0
+        description: NewEx-Users-内部接口文档
+  security:
+    csrf:
+      referer-pattern: @newex.security.csrf.refererPattern@
+      exclude-path-patterns: @newex.security.csrf.excludePathPatterns@
+    xss:
+      url-patterns: @newex.security.xss.urlPatterns@
+    jwt:
+      secret: '@newex.security.jwt.secret@'
+      crypto-key: '@newex.security.jwt.cryptoKey@'
+      exclude-path-patterns: /customError/**,/admin/**,/inner/**,/v1/users/membership/**,/v1/users/support/public/**,/inner/v1/users/**,/admin/v1/users/**
+      validate-ip-and-device: false
+  fileupload:
+    s3:
+      vpc-endpoint: @newex.fileupload.s3.vpc-endpoint@
+      endpoint: @newex.fileupload.s3.endpoint@
+      access-key-id: @newex.fileupload.s3.access-key-id@
+      access-key-secret: @newex.fileupload.s3.access-key-secret@
+      bucket-name: @newex.fileupload.s3.bucket-name@
+      path: @newex.fileupload.s3.path@
+      region: @newex.fileupload.s3.region@
+    oss:
+      vpc-endpoint: @newex.fileupload.oss.vpc-endpoint@
+      endpoint: @newex.fileupload.oss.endpoint@
+      access-key-id: @newex.fileupload.oss.access-key-id@
+      access-key-secret: @newex.fileupload.oss.access-key-secret@
+      bucket-name: @newex.fileupload.oss.bucket-name@
+      path: @newex.fileupload.oss.path@
+      region: @newex.fileupload.oss.region@
+  feignClient:
+    dax:
+      spot: @newex.feignClient.dax.spot@
+      integration: @newex.feignClient.dax.integration@
+  faceid:
+    api_key: @newex.faceid.api_key@
+    api_secret: @newex.faceid.api_secret@
+    ocridcard_url: @newex.faceid.ocridcard_url@
+    ocridcard_referer: @newex.faceid.ocridcard_referer@
+    token_url: @newex.faceid.token_url@
+    token_referer: @newex.faceid.token_referer@
+    result_url: @newex.faceid.result_url@
+    result_referer: @newex.faceid.result_referer@
+    verify_url: @newex.faceid.verify_url@
+    verify_referer: @newex.faceid.verify_referer@
+    return_url: @newex.faceid.return_url@
+    notify_url: @newex.faceid.notify_url@
+    precision: @newex.faceid.precision@
+    edited: @newex.faceid.edited@
+  activity:
+    url: @newex.activity.url@
+  openapi:
+    apikey:
+      prefix: @newex.openapi.apikey.prefix@
+  session:
+    max-inactive-interval: @newex.session.maxInactiveInterval@
+  ucenter:
+    redis:
+      host: @newex.ucenter.redis.host@
+      port: @newex.ucenter.redis.port@
+      timeout: @newex.ucenter.redis.timeout@
+      password: @newex.ucenter.redis.password@
+      pool:
+       max-active: @newex.ucenter.redis.pool.max-active@
+       max-idle: @newex.ucenter.redis.pool.max-idle@
+       max-wait: @newex.ucenter.redis.pool.max-wait@
+       min-idle: @newex.ucenter.redis.pool.min-idle@
+  ratelimiter:
+    ip-rate-limiter:
+      enabled: true
+      interceptor:
+        include-url-patterns: '/v1/users/support/public/username/validation,/v1/users/membership/forget-pwd/**'

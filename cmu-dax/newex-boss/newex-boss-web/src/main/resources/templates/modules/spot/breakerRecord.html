@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>熔断任务</title>
+    <script th:src="@{'/js/modules/spot/breakerRecord.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    监控币对:<input class="easyui-combobox" type="text" id="breakerRecord-productId" name="breakerRecord-productId"/>
+
+    任务ID:<input class="easyui-textbox" type="text" id="breakerRecord-id" name="breakerRecord-id"/>
+
+    策略ID:<input class="easyui-textbox" type="text" id="breakerRecord-strategyId" name="breakerRecord-strategyId"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="breakerRecord-datagrid"></div>
+</div>
+<div id="breakerRecord-dlg">
+    <form id="breakerRecord-form" name="breakerRecord-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>监控币对:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="productId" name="productId" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>熔断策略:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="strategyId" name="strategyId" style="width: 400px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

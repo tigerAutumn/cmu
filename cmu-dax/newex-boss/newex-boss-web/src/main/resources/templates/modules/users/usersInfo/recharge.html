@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 充值</title>
+</head>
+
+<body>
+
+<div th:fragment="copy" id="tabl3" class="easyui-tabs" style="height: 100%">
+    <div title="充值地址" style="width: 100%">
+        <div class="toolbar">
+            币种:<input style="width: 150px;" id="symbol-name" name="symbol-name" class="easyui-combobox"/>
+
+            <a id="RedrawMoney-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 92%;padding:1px">
+            <div id="RedrawMoney-datagrid"></div>
+        </div>
+    </div>
+
+    <div title="充值记录" style="width: 100%">
+        <div class="toolbar">
+            币种:<input style="width: 150px;" id="symbol-record-name" name="symbol-record-name" class="easyui-combobox"/>
+
+            开始时间:<input class="easyui-datetimebox" id="RedrawMoney_startDateMillis"
+                        name="his_startDateMillis" style="width:150px;">
+
+            结束时间:<input class="easyui-datetimebox" id="RedrawMoney_endDateMillis"
+                        name="RedrawMoney_endDateMillis" style="width:150px;">
+
+            <a id="RedrawMoney-record-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 92%;padding:1px">
+            <div id="RedrawMoney-record-datagrid"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

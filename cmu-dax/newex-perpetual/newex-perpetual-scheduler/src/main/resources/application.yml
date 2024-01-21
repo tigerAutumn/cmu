@@ -1,0 +1,89 @@
+#
+# spring
+#
+spring:
+  application:
+    name: newex-dax-perpetual-scheduler
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool:
+      max-active: @spring.redis.pool.max-active@
+      max-idle: @spring.redis.pool.max-idle@
+      max-wait: @spring.redis.pool.max-wait@
+      min-idle: @spring.redis.pool.min-idle@
+#
+# logging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+#
+# newex
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.perpetual.datasource.biz.url@
+        username: @newex.perpetual.datasource.biz.username@
+        password: @newex.perpetual.datasource.biz.password@
+        max-active: 10
+        min-idle: 0
+    config:
+      dkCurrency: @newex.perpetual.config.dkCurrency@
+      online: @newex.perpetual.config.online@
+      module: 4
+      systemBillPhones: @newex.perpetual.config.systemBillPhones@
+  feignClient:
+    dax:
+      users: @newex.feignClient.dax.users@
+      integration: @newex.feignClient.dax.integration@
+      extra: @newex.feignClient.dax.extra@
+      asset: @newex.feignClient.dax.asset@
+      market: @newex.feignClient.dax.market@
+xxl:
+  job:
+    accessToken: @xxl.job.accessToken@
+    admin:
+      addresses: @xxl.job.admin.addresses@
+    executor:
+      appname: @xxl.job.executor.appname@
+      ip: @xxl.job.executor.ip@
+      port: @xxl.job.executor.port@
+      logpath: @xxl.job.executor.logpath@
+      logretentiondays: @xxl.job.executor.logretentiondays@

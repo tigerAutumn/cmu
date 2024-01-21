@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>全局业务冻结</title>
+    <script th:src="@{'/js/modules/users/global-frozen.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div style="height: 96%; padding: 1px">
+    <div id="frozen-datagrid"></div>
+</div>
+<div id="frozen-dlg" style="padding: 30px">
+    <form id="frozen-form" name="frozen-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+                <tr>
+                    <td>代号(必须为英文字符):</td>
+                    <td><input class="easyui-textbox" type="text" id="code" name="code"
+                               data-options="required:true"
+                               style="width: 480px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>说明:</td>
+                    <td><input class="easyui-textbox" type="text" id="memo" name="memo"
+                               data-options="required:true"
+                               style="width: 480px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>券商:</td>
+                    <td><input class="easyui-textbox" type="text" id="brokerId" name="brokerId"
+                               data-options="required:true"
+                               style="width: 480px"/>
+                    </td>
+                </tr>
+                <input id="id" type="hidden" name="id" value=""/>
+                <input id="modal-action" type="hidden" name="action" value=""/>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

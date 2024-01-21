@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.market.data.FetchingDataPathRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="FetchingDataPathMap" type="cc.newex.dax.market.domain.FetchingDataPath">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="market_from" property="marketFrom" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="symbol" property="symbol" jdbcType="INTEGER"/>
+        <result column="web_name" property="webName" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="url_key" property="urlKey" jdbcType="VARCHAR"/>
+        <result column="ovm" property="ovm" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">fetching_data_path</sql>
+    <sql id="Base_Column_List_Without_Id">
+        market_from , create_time , path , symbol , web_name , modify_time , url_key , ovm , status
+    </sql>
+    <sql id="Base_Column_List">
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.marketFrom != null">market_from,</if>
+        <if test="record.createTime != null">create_time,</if>
+        <if test="record.path != null">path,</if>
+        <if test="record.symbol != null">symbol,</if>
+        <if test="record.webName != null">web_name,</if>
+        <if test="record.modifyTime != null">modify_time,</if>
+        <if test="record.key != null">url_key,</if>
+        <if test="record.ovm != null">ovm,</if>
+        <if test="record.status != null">status,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.marketFrom != null">#{record.marketFrom,jdbcType=TINYINT},</if>
+        <if test="record.createTime != null">#{record.createTime,jdbcType=TIMESTAMP},</if>
+        <if test="record.path != null">#{record.path,jdbcType=VARCHAR},</if>
+        <if test="record.symbol != null">#{record.symbol,jdbcType=VARCHAR},</if>
+        <if test="record.webName != null">#{record.webName,jdbcType=VARCHAR},</if>
+        <if test="record.modifyTime != null">#{record.modifyTime,jdbcType=TIMESTAMP},</if>
+        <if test="record.urlKßey != null">#{record.urlKey,jdbcType=VARCHAR},</if>
+        <if test="record.ovm != null">#{record.ovm,jdbcType=VARCHAR},</if>
+        <if test="record.status != null">#{record.status,jdbcType=TINYINT},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        #{record.marketFrom,jdbcType=TINYINT},
+        #{record.createTime,jdbcType=TIMESTAMP},
+        #{record.path,jdbcType=VARCHAR},
+        #{record.symbol,jdbcType=VARCHAR},
+        #{record.webName,jdbcType=VARCHAR},
+        #{record.modifyTime,jdbcType=TIMESTAMP},
+        #{record.urlKey,jdbcType=VARCHAR},
+        #{record.ovm,jdbcType=VARCHAR},
+        #{record.status,jdbcType=TINYINT},
+    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.marketFrom != null">market_from = #{record.marketFrom,jdbcType=TINYINT} ,</if>
+        <if test="record.createTime != null">create_time = #{record.createTime,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.path != null">path = #{record.path,jdbcType=VARCHAR} ,</if>
+        <if test="record.symbol != null">symbol = #{record.symbol,jdbcType=VARCHAR} ,</if>
+        <if test="record.webName != null">web_name = #{record.webName,jdbcType=VARCHAR} ,</if>
+        <if test="record.modifyTime != null">modify_time = #{record.modifyTime,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.urlKey != null">key = #{record.urlKey,jdbcType=VARCHAR} ,</if>
+        <if test="record.ovm != null">ovm = #{record.ovm,jdbcType=VARCHAR} ,</if>
+        <if test="record.status != null">status = #{record.status,jdbcType=TINYINT} ,</if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        market_from = VALUES(market_from) , create_time = VALUES(create_time) , path = VALUES(path) , symbol =
+        VALUES(symbol) , web_name = VALUES(web_name) , modify_time = VALUES(modify_time) , key = VALUES(key) , ovm =
+        VALUES(ovm) , status = VALUES(status)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id=#{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="FetchingDataPathMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="FetchingDataPathMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="FetchingDataPathMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="FetchingDataPathMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="FetchingDataPathMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <select id="selectDataPath" resultMap="FetchingDataPathMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where status = 1
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

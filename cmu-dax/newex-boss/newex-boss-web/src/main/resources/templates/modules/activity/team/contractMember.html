@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约战队</title>
+    <script th:src="@{'/js/modules/activity/team/contractMember.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    团队ID：<input class="easyui-textbox" type="text" id="contractMember-teamId" name="contractMember-teamId" style="width: 100px"/>
+    币种：<input class="easyui-textbox" type="text" id="contractMember-currencyCode" name="contractMember-currencyCode" style="width: 100px"/>
+    <a id="contractMember-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="contractMember-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<div id="contractMember-dlg">
+    <form id="contractMember-form" name="contractMember-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <input id="uid" name="uid" type="hidden"/>
+            <tr>
+                <td>团队</td>
+                <td>
+                    <input id="teamId" name="teamId" class="easyui-combobox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>成员ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input id="username" name="username" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+                <td>邀请人</td>
+                <td>
+                    <input id="inviteId" name="inviteId" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>总资产</td>
+                <td>
+                    <input id="balance" name="balance" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>虚拟总资产</td>
+                <td>
+                    <input id="virtualBalance" name="virtualBalance" class="easyui-textbox" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>盈亏</td>
+                <td>
+                    <input id="pnl" name="pnl" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>虚拟盈亏</td>
+                <td>
+                    <input id="virtualPnl" name="virtualPnl" class="easyui-textbox" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>当天活跃度</td>
+                <td>
+                    <input id="todayLiveness" name="todayLiveness" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>币种</td>
+                <td>
+                    <input id="currencyCode" name="currencyCode" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>累积活跃度</td>
+                <td>
+                    <input id="liveness" name="liveness" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>期数</td>
+                <td>
+                    <input id="term" name="term" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态</td>
+                <td>
+                    <select id="status" name="status" style="width: 200px" class="easyui-combobox">
+                        <option value="0" selected="selected">正常</option>
+                        <option value="1">禁用</option>
+                    </select>
+                </td>
+                <td>券商ID</td>
+                <td>
+                    <input id="brokerId" name="brokerId" class="easyui-combobox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

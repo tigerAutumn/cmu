@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.boss.report.data.ReportingRepository">
+    <select id="countByPagerWithCategory" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT count(t1.id) as total
+        FROM report_reporting t1
+        INNER JOIN report_category t2 ON category_id = t2.id
+        INNER JOIN report_data_source t3 ON ds_id = t3.id
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPagerWithCategory" resultMap="ReportingMap" parameterType="java.util.Map">
+        SELECT
+        t1.*,
+        t2.name AS category_name,
+        t3.name AS ds_name
+        FROM report_reporting t1
+        INNER JOIN report_category t2 ON category_id = t2.id
+        INNER JOIN report_data_source t3 ON ds_id = t3.id
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+</mapper>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>挖矿活动管理</title>
+    <script th:src="@{'/js/modules/extra/activity/mining.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div class="easyui-tabs" style="height: 96%;">
+    <div title="挖矿管理" style="width: 100%;">
+        <input id="modal-action" type="hidden" name="action" value=""/>
+        <div style="height: 93%;padding:2px">
+            <div id="mining-datagrid"></div>
+        </div>
+        <div id="mining-dlg">
+            <form id="mining-form" name="mining-form" method="post">
+                <table th:cols="6" style="margin: 30px auto" class="form-table">
+                    <tr>
+                        <td width="100px">Id</td>
+                        <td colspan="2"><input id="actId" name="actId" class="easyui-textbox" style="width:200px;"/></td>
+                        <td width="100px">活动Id</td>
+                        <td colspan="2"><input id="activityIdd" name="activityIdd" class="easyui-combobox" data-options="required:true" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">挖矿币种</td>
+                        <td colspan="2"><input id="currencyCode" name="currencyCode" class="easyui-textbox" data-options="required:true" style="width:200px;"/></td>
+                        <td width="100px">状态</td>
+                        <td colspan="2"><select id="finishFlag" name="finishFlag" class="easyui-combobox" data-options="required:true" style="width:200px;">
+                            <option value="0">未开始</option>
+                            <option value="1">已结束</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td width="150px">活动标题-中文</td>
+                        <td colspan="5"><input id="titleCN" name="titleCN" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+                    </tr>
+                    <tr>
+                        <td width="150px">活动标题-英文</td>
+                        <td colspan="5"><input id="titleEN" name="titleEN" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">活动时间</td>
+                        <td colspan="2"><input class="easyui-datetimebox" id="startDate" data-options="required:true" name="startDate" style="width:200px;"></td>
+                        <td colspan="2"><input class="easyui-datetimebox" id="endDate" data-options="required:true" name="endDate" style="width:200px;"/></td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 100px">添加币对</td>
+                        <td colspan="5"><input class="easyui-tagbox" id="productIds" data-options="required:true" name="productIds" style="width: 500px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">矿池总量</td>
+                        <td colspan="2"><input id="totalLimit" name="totalLimit" data-options="required:true" class="easyui-textbox" style="width: 200px;"/></td>
+                        <td style="width: 150px">挖矿奖励比例</td>
+                        <td colspan="2"><input id="reward" name="reward" data-options="required:true" class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">挖矿每日上限</td>
+                        <td colspan="2"><input id="dailyLimit" name="dailyLimit" data-options="required:true" class="easyui-textbox" style="width: 200px;"/></td>
+                        <td style="width: 100px">单人单日挖矿上限</td>
+                        <td colspan="2"><input id="personDailyLimit" name="personDailyLimit" data-options="required:true" class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">手续费返还持仓用户比例</td>
+                        <td colspan="2"><input id="feeHoldReturn" name="feeHoldReturn" data-options="required:true" class="easyui-textbox" style="width: 200px"/></td>
+                        <td style="width: 150px">手续费返还项目方比例</td>
+                        <td colspan="2"><input id="feeProjectReturn" name="feeProjectReturn" data-options="required:true" class="easyui-textbox" style="width: 200px"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">个人返还持仓上限</td>
+                        <td colspan="2"><input id="personHoldLimit" name="personHoldLimit" data-options="required:true" class="easyui-textbox" style="width:200px;"/></td>
+                        <td style="width: 150px">项目返回账号</td>
+                        <td colspan="2"><input id="projectAccount" name="projectAccount" data-options="required:true" class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">项目方是否返还</td>
+                        <td colspan="2"><select id="projectReturnFlag" name="projectReturnFlag" data-options="required:true" class="easyui-combobox" style="width:200px;">
+                            <option value="0">未返还</option>
+                            <option value="1">已返还</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">解释链接</td>
+                        <td colspan="5"><input class="easyui-textbox" id="explainLink" data-options="required:true" name="explainLink" style="width: 500px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">是否上线</td>
+                        <td colspan="2"><select id="online" name="online" data-options="required:true" class="easyui-combobox" style="width:200px;">
+                            <option value="0">未上线</option>
+                            <option value="1">上线</option>
+                            <option value="2">预发上线</option>
+                        </select></td>
+                        <td style="width: 100px">有效持仓总量</td>
+                        <td colspan="2"><input id="effectiveHoldMinings" name="effectiveHoldMinings" readonly class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">当前平台矿币总量</td>
+                        <td colspan="2"><input id="platformMinings" name="platformMinings" readonly class="easyui-textbox" style="width:200px;"/></td>
+                        <td style="width: 100px">挖矿产出总量</td>
+                        <td colspan="2"><input id="totalMinings" name="totalMinings" readonly class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">参与用户数</td>
+                        <td colspan="2"><input id="personMining" name="personMining" readonly class="easyui-textbox" style="width:200px;"/></td>
+                        <td style="width: 100px">送矿币折合BTC</td>
+                        <td colspan="2"><input id="miningReward" name="miningReward" readonly class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 100px">返还手续费折合BTC</td>
+                        <td colspan="2"><input id="feeReward" name="feeReward" readonly class="easyui-textbox" style="width: 200px"/></td>
+                        <td style="width: 100px">全部返还折合BTC</td>
+                        <td colspan="2"><input id="totalReward" name="totalReward" readonly class="easyui-textbox" style="width: 200px"/></td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </div>
+    <div title="挖矿分期" style="width: 100%;">
+        <div style="height: 93%;padding:2px">
+            <div id="sub-mining-datagrid"></div>
+        </div>
+        <div id="sub-mining-dlg">
+            <table th:cols="6" style="margin: 30px auto" class="form-table">
+                <form id="sub-mining-form" name="sub-mining-form" method="post">
+                    <tr>
+                        <td style="width: 150px">挖矿活动Id</td>
+                        <td colspan="2"><input id="miningId" name="miningId" readonly class="easyui-textbox" style="width: 200px;"/></td>
+                        <td style="width: 150px">账单Id</td>
+                        <td colspan="2"><input id="lastUserBillId" name="lastUserBillId" readonly class="easyui-textbox" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">添加币对</td>
+                        <td colspan="5"><input class="easyui-tagbox" name="productIds" style="width: 500px"></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">活动时间</td>
+                        <td colspan="2"><input class="easyui-datetimebox" readonly name="startDate" style="width:200px;"></td>
+                        <td colspan="2"><input class="easyui-datetimebox" readonly name="endDate" style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">挖币币种</td>
+                        <td colspan="2"><input name="totalLimit" class="easyui-textbox" readonly style="width: 200px;"/></td>
+                        <td style="width: 150px">挖矿奖励</td>
+                        <td colspan="2"><input name="reward" class="easyui-textbox" readonly style="width:200px;"/></td>
+                    </tr>
+                    <td style="width: 150px">每天限额</td>
+                    <td colspan="2"><input name="dailyLimit" class="easyui-textbox" readonly style="width: 200px;"/></td>
+                    <td style="width: 100px">挖矿奖励数量</td>
+                    <td colspan="2"><input name="miningRewardNum" class="easyui-textbox" readonly style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">服务费奖励</td>
+                        <td colspan="2"><input name="feeReward" class="easyui-textbox" readonly style="width: 200px;"/></td>
+                        <td style="width: 100px">总奖励</td>
+                        <td colspan="2"><input name="totalReward" class="easyui-textbox" readonly style="width:200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">结束标记</td>
+                        <td colspan="2"><input name="finishFlag" class="easyui-textbox" readonly style="width: 200px;"/></td>
+                        <td style="width: 100px">有效持仓</td>
+                        <td colspan="2"><input name="effectiveHoldMinings" class="easyui-textbox" readonly style="width:200px;"/></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

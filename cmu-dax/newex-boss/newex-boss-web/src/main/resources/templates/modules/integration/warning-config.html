@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>报警配置</title>
+    <script th:src="@{'/vendor/easyui/datagrid-cellediting.js'}"></script>
+    <script th:src="@{'/js/modules/integration/warning-config.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    配置Code：<input class="easyui-textbox" type="text" id="search-code" name="search-code" style="width: 200px"/>
+    详情：<input class="easyui-textbox" type="text" id="search-content" name="search-content" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="warning-config-datagrid"></div>
+</div>
+<div id="warning-config-dlg">
+    <form id="warning-config-form" name="warning-config-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table" style="padding: 20px">
+                <tr>
+                    <td>ID:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="id" name="id" readonly style="width: 80px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>配置code:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="code" name="code" data-options="required:true" style="width: 480px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>业务类型:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="bizType" name="bizType" data-options="required:true" style="width: 480px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>配置详情:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="content" name="content" data-options="required:true,multiline:true" style="width: 480px;height:
+                     130px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="memo" name="memo"
+                                           data-options="required:false,multiline:true" style="width: 480px;height: 80px"/>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>短信与邮件黑名单管理</title>
+    <script th:src="@{'/js/modules/integration/message-blacklist.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    属性:<select class="easyui-combobox" id="field-name" name="fieldName" style="width: 200px">
+    <option value="name">名称</option>
+</select> 关键字:<input class="easyui-textbox" type="text" id="keyword" name="keyword" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="messageBlacklist-datagrid"></div>
+</div>
+<div id="messageBlacklist-dlg">
+    <form id="messageBlacklist-form" name="messageBlacklist-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+                <tr>
+                    <td>类型:</td>
+                    <td colspan="3"><select class="easyui-combobox" id="type" name="type" style="width: 200px">
+                        <option selected="selected" value="sms">手机</option>
+                        <option value="mail">邮件</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>券商:</td>
+                    <td colspan="3"><input class="easyui-combobox" id="brokerId" data-options="required:true" name="brokerId" style="width: 200px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称（每行一个手机号或邮箱地址):</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="name" name="name"
+                                           data-options="required:true,multiline:true" style="width: 480px;height:150px"/>
+                        <input id="messageBlacklistId" type="hidden" name="id"/>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

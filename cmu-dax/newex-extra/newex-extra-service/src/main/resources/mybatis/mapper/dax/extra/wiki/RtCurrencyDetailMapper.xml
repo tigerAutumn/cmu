@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.extra.data.wiki.RtCurrencyDetailRepository">
+    <!-- CodeBuilder Generated -->
+    <resultMap id="RtCurrencyDetailMap" type="cc.newex.dax.extra.domain.wiki.RtCurrencyDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="cid" property="cid" jdbcType="VARCHAR"/>
+        <result column="circulating_supply" property="circulatingSupply" jdbcType="BIGINT"/>
+        <result column="issue_time" property="issueTime" jdbcType="VARCHAR"/>
+        <result column="exchange_num" property="exchangeNum" jdbcType="SMALLINT"/>
+        <result column="total_circulation" property="totalCirculation" jdbcType="VARCHAR"/>
+        <result column="symbol" property="symbol" jdbcType="VARCHAR"/>
+        <result column="issue_price" property="issuePrice" jdbcType="VARCHAR"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">
+        rt_currency_detail
+    </sql>
+    <sql id="Base_Column_List_Without_Id">
+        cid
+        ,
+        circulating_supply,
+        issue_time,
+        exchange_num,
+        total_circulation,
+        symbol,
+        issue_price,
+        created_date,
+        modify_date
+    </sql>
+    <sql id="Base_Column_List">
+        id,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.cid != null">
+            cid,
+        </if>
+        <if test="record.circulatingSupply != null">
+            circulating_supply,
+        </if>
+        <if test="record.issueTime != null">
+            issue_time,
+        </if>
+        <if test="record.exchangeNum != null">
+            exchange_num,
+        </if>
+        <if test="record.totalCirculation != null">
+            total_circulation,
+        </if>
+        <if test="record.symbol != null">
+            symbol,
+        </if>
+        <if test="record.issuePrice != null">
+            issue_price,
+        </if>
+        <if test="record.createdDate != null">
+            created_date,
+        </if>
+        <if test="record.modifyDate != null">
+            modify_date,
+        </if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.cid != null">
+            #{record.cid,jdbcType=VARCHAR},
+        </if>
+        <if test="record.circulatingSupply != null">
+            #{record.circulatingSupply,jdbcType=BIGINT},
+        </if>
+        <if test="record.issueTime != null">
+            #{record.issueTime,jdbcType=VARCHAR},
+        </if>
+        <if test="record.exchangeNum != null">
+            #{record.exchangeNum,jdbcType=SMALLINT},
+        </if>
+        <if test="record.totalCirculation != null">
+            #{record.totalCirculation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.symbol != null">
+            #{record.symbol,jdbcType=VARCHAR},
+        </if>
+        <if test="record.issuePrice != null">
+            #{record.issuePrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createdDate != null">
+            #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modifyDate != null">
+            #{record.modifyDate,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        #{record.cid,jdbcType=VARCHAR}
+        ,
+        #{record.circulatingSupply,jdbcType=BIGINT},
+        #{record.issueTime,jdbcType=VARCHAR},
+        #{record.exchangeNum,jdbcType=SMALLINT},
+        #{record.totalCirculation,jdbcType=VARCHAR},
+        #{record.symbol,jdbcType=VARCHAR},
+        #{record.issuePrice,jdbcType=VARCHAR},
+        #{record.createdDate,jdbcType=TIMESTAMP},
+        #{record.modifyDate,jdbcType=TIMESTAMP},
+    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.cid != null">
+            cid = #{record.cid,jdbcType=VARCHAR},
+        </if>
+        <if test="record.circulatingSupply != null">
+            circulating_supply = #{record.circulatingSupply,jdbcType=BIGINT},
+        </if>
+        <if test="record.issueTime != null">
+            issue_time = #{record.issueTime,jdbcType=VARCHAR},
+        </if>
+        <if test="record.exchangeNum != null">
+            exchange_num = #{record.exchangeNum,jdbcType=SMALLINT},
+        </if>
+        <if test="record.totalCirculation != null">
+            total_circulation = #{record.totalCirculation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.symbol != null">
+            symbol = #{record.symbol,jdbcType=VARCHAR},
+        </if>
+        <if test="record.issuePrice != null">
+            issue_price = #{record.issuePrice,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createdDate != null">
+            created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modifyDate != null">
+            modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        cid = VALUES(cid), circulating_supply = VALUES(circulating_supply), issue_time = VALUES(issue_time), exchange_num = VALUES(exchange_num), total_circulation =
+        VALUES(total_circulation), symbol = VALUES(symbol), issue_price = VALUES(issue_price), created_date = VALUES(created_date), modify_date = VALUES(modify_date)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id = #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" parameterType="java.util.Map" resultMap="RtCurrencyDetailMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="RtCurrencyDetailMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="RtCurrencyDetailMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="RtCurrencyDetailMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="RtCurrencyDetailMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != ''">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

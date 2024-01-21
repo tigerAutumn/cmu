@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>用户管理</title>
+    <script th:src="@{'/js/modules/admin/user.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    属性:<select class="easyui-combobox" id="field-name" name="fieldName" style="width: 200px">
+    <option value="account">账号</option>
+    <option value="name">姓名</option>
+    <option value="id">用户ID</option>
+    <option value="broker_id">券商ID</option>
+</select> 关键字:<input class="easyui-textbox" type="text" id="keyword" name="keyword" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="user-datagrid"></div>
+</div>
+<div id="user-dlg">
+    <form id="user-form" name="user-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>用户账号:</td>
+                    <td><input class="easyui-textbox" type="text" id="account" name="account"
+                                           data-options="required:true" style="width: 160px"/>
+                        <input id="userId" type="hidden" name="id"/>
+                    </td>
+
+                    <td>所属角色:</td>
+                    <td><select class="easyui-combobox" id="combox-roles" name="comboxRoles"
+                                            data-options="valueField:'value',textField:'name',multiple:true" style="width: 160px"></select>
+                        <input id="roles" type="hidden" name="roles"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>真实姓名:</td>
+                    <td><input class="easyui-textbox" type="text" id="name" name="name"
+                               data-options="required:true"
+                               style="width: 160px"/></td>
+                    <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+                    <td><input class="easyui-textbox" type="text" name="telephone" id="telephone"
+                               data-options="required:true" style="width: 160px"/></td>
+                </tr>
+                <tr>
+                    <td>E&nbsp;m&nbsp;a&nbsp;i&nbsp;l:</td>
+                    <td><input class="easyui-textbox" type="text" name="email" id="email"
+                                           data-options="required:true" style="width: 160px"/></td>
+
+                    <td>组织机构:</td>
+                    <td>
+                        <select class="easyui-combotree" id="groupId" name="groupId"
+                                data-options=""
+                                style="width: 160px"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                    <td>
+                        <input class="easyui-combobox" id="brokerId" data-options="required:true" name="brokerId" style="width: 160px"/>
+                    </td>
+                    <td>用户类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="type" name="type" style="width: 160px">
+                            <option selected="selected" value="1">客服人员</option>
+                            <option value="2">组长</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</td>
+                    <td>
+                        <select class="easyui-combobox" id="status" name="status" style="width: 160px">
+                            <option selected="selected" value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GoogleKey:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="totpKey" id="totpKey"
+                                           data-options="required:true" style="width: 330px"/>
+                        <a id="btn-generateKey" href="#" class="easyui-linkbutton" iconCls="icon-add"> 生成 </a>
+                        <img id="google"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>工单数量:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="orderNum" id="orderNum" value=""
+                                           data-options="required:true" style="width: 390px"/></td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="comment" id="comment"
+                                           style="width: 390px"/></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+<div id="reset-pwd-dlg" title="设置用户密码">
+    <form id="reset-pwd-form" name="reset-pwd-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>用户账号:</td>
+                    <td colspan="3">
+                        <span id="reset-account" class="name"></span>
+                        <input id="reset-userId" type="hidden" name="userId"/></td>
+                </tr>
+                <tr>
+                    <td>新密码:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="password" id="reset-password"
+                                           name="password"
+                                           data-options="required:true,validType:{length:[6,20]}"
+                                           style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>确认新密码:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="password" id="reset-repassword"
+                                           name="repassword"
+                                           data-options="required:true,validType:{
+							length:[6,20],
+							equals:'#reset-password'}" style="width: 380px"/></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

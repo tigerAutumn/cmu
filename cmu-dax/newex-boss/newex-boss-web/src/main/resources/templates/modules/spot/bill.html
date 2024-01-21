@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>信息管理</title>
+    <script th:src="@{'/js/modules/spot/bill_management.js?v='+${rnd}}"></script>
+    <style>
+
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    <form id="message">
+        币种:<input id="bill-currency-name" name="bill-currency-name" class="easyui-combobox"/>
+        开始时间：<input class="easyui-datetimebox" id="bill-startDateMillis" name="bill-startDateMillis" labelPosition="top" style="width:150px;">
+        结束时间：<input class="easyui-datetimebox" id="bill-endDateMillis" name="bill-endDateMillis" labelPosition="top" style="width:150px;">
+        账单类型<input id="bill-type" name="bill-type" class="easyui-combobox"/>
+    </select>
+
+        是否历史账单:
+        <select class="easyui-combobox" id="bill-history" name="history" style="width: 100px">
+            <option value="true">两天前账单</option>
+            <option value="false">当前账单</option>
+
+        </select>
+        <a id="bill-search" href="#" class="easyui-linkbutton" iconCls="icon-search"> 搜索 </a>
+        <input id="modal-action" type="hidden" name="action" value=""/>
+    </form>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="bill-datagrid"></div>
+</div>
+<div id="bill-dlg">
+    <form id="bill-form" name="bill-form" method="post">
+        <center>
+                <table width="100%" class="table">
+                <tr>
+                    <td >用户ID:</td>
+                    <td ><label id="spot_bill_userid"></label></td>
+                </tr>
+                <tr>
+                    <td >时&nbsp;&nbsp;&nbsp;&nbsp;间:</td>
+                    <td ><label id="spot_bill_createTime"></label></td>
+                </tr>
+                <tr>
+                    <td >币&nbsp;&nbsp;&nbsp;&nbsp;种:</td>
+                    <td ><label id="spot_bill_currency"></label></td>
+                </tr>
+                <tr>
+                    <td >类&nbsp;&nbsp;&nbsp;&nbsp;型:</td>
+                    <td ><label id="spot_bill_billType"></label></td>
+                </tr>
+                <tr>
+                    <td >金&nbsp;&nbsp;&nbsp;&nbsp;额:</td>
+                    <td ><label id="spot_bill_size"></label></td>
+                </tr>
+                <tr>
+                    <td >余&nbsp;&nbsp;&nbsp;&nbsp;额:</td>
+                    <td ><label id="spot_bill_afterBalance"></label></td>
+                </tr>
+                <tr>
+                    <td >手&nbsp;续费:</td>
+                    <td ><label id="spot_bill_fee"></label></td>
+                </tr>
+                <tr>
+                    <td >实际到账地址:</td>
+                    <td ><label id="spot_bill_adress"></label></td>
+                </tr>
+                <tr>
+                    <td >T&nbsp;X&nbsp;I&nbsp;D:</td>
+                    <td ><label id="spot_bill_txid"></label></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

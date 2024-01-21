@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>Banner公告</title>
+    <script th:src="@{'/js/modules/extra/cms/banner.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    类型:<select class="easyui-combobox" id="banner-type" name="banner-type" style="width: 200px">
+    <option value="">全部</option>
+    <option value="1">banner</option>
+    <option value="2">公告</option>
+    <option value="3">轮播图</option>
+    <option value="4">APP启动页</option>
+</select>
+    平台:<select class="easyui-combobox" id="banner-platform" name="banner-platform" style="width: 200px">
+    <option value="">全部</option>
+    <option value="1">PC</option>
+    <option value="2">IOS</option>
+    <option value="3">android</option>
+</select>
+    状态:<select class="easyui-combobox" id="banner-status" name="banner-status" style="width: 200px">
+    <option value="">全部</option>
+    <option value="0">已保存</option>
+    <option value="1">已发布</option>
+    <option value="2">已下架</option>
+    <option value="-1">已删除</option>
+</select>
+    模板语言:<input class="easyui-combobox" id="banner-locale" name="banner-locale" style="width: 180px" />
+    <!--关键字:<input class="easyui-textbox" type="text" id="keyword" name="keyword"/>-->
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="user-datagrid"></div>
+</div>
+<div id="user-dlg">
+    <form id="user-form" name="user-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</td>
+                <td colspan="3">
+                    <select class="easyui-combobox" data-options="required:true" id="type" name="type"
+                            style="width: 380px">
+                        <option selected="selected" value="1">banner</option>
+                        <option value="2">公告</option>
+                        <option value="3">轮播图</option>
+                        <option value="4">APP启动页</option>
+                    </select>
+                </td>
+                <td>平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台:</td>
+                <td colspan="3">
+                    <select class="easyui-combobox" data-options="required:true" id="platform" name="platform"
+                            style="width: 380px">
+                        <option selected="selected" value="1">PC</option>
+                        <option value="2">IOS</option>
+                        <option value="3">android</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           data-options="required:true" style="width: 380px"/>
+                </td>
+                <td>语&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言:</td>
+                <td colspan="3">
+                    <input class="easyui-combobox" data-options="required:true" id="locale" name="locale"
+                            style="width: 380px" />
+                </td>
+            </tr>
+            <tr>
+                <td>标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="title" name="title"
+                           data-options="" style="width: 380px"/>
+                </td>
+
+                <td>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</td>
+                <td colspan="3">
+                    <select class="easyui-combobox" id="status" data-options="required:true" name="status"
+                            style="width: 380px">
+                        <option selected="selected" value="0">已保存</option>
+                        <option value="1">已发布</option>
+                        <option value="2">已下架</option>
+                        <option value="-1">已删除</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>发布时间:</td>
+                <td colspan="3">
+                    <input class="easyui-datetimebox" data-options="required:true" labelPosition="top"
+                           style="width:380px;" id="startTime" name="startTime">
+                </td>
+
+                <td>截止时间:</td>
+                <td colspan="3">
+                    <input class="easyui-datetimebox" data-options="required:true" labelPosition="top"
+                           style="width:380px;" id="endTime"
+                           name="endTime">
+
+                </td>
+            </tr>
+            <tr>
+                <td>文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="text" name="text"
+                           data-options="" style="width: 380px"/>
+                </td>
+
+                <td>分享图片:</td>
+                <td colspan="3">
+                    <input class="easyui-filebox" name="imgfile2-filebox" id="imgfile2-filebox" data-options="" style="width:380px">
+
+                    <input id="shareImageUrl" type="hidden" name="shareImageUrl"/>
+                </td>
+            </tr>
+            <tr>
+                <td>图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</td>
+                <td colspan="3">
+                    <input class="easyui-filebox" name="imgfile-filebox" id="imgfile-filebox" data-options="" style="width:380px">
+
+                    <input id="imageUrl" type="hidden" name="imageUrl"/>
+                </td>
+
+                <td>原始图片:</td>
+                <td colspan="3">
+                    <input class="easyui-filebox" name="imgfile1-filebox" id="imgfile1-filebox" data-options="" style="width:380px">
+
+                    <input id="originalImageUrl" type="hidden" name="originalImageUrl"/>
+                </td>
+            </tr>
+            <tr>
+                <td>链接地址:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="link" name="link"
+                           style="width: 380px" data-options="required:true"/>
+                </td>
+
+                <td>分享链接:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="shareLink" name="shareLink"
+                           style="width: 380px" data-options="required:true"/>
+                </td>
+            </tr>
+            <tr>
+                <td>分享标题:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="shareTitle" name="shareTitle"
+                           style="width: 380px" data-options="required:true"/>
+                </td>
+
+                <td>分享内容:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="shareText" name="shareText"
+                           style="width: 380px" data-options="required:true" title=""/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId"
+                           style="width: 380px" data-options="required:true"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

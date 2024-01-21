@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.perpetual.data.UserPositionShardingRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="UserPositionMap" type="cc.newex.dax.perpetual.domain.UserPosition">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="pair_code" property="pairCode" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="lever" property="lever" jdbcType="DECIMAL" />
+    <result column="side" property="side" jdbcType="VARCHAR" />
+    <result column="position_quantity" property="positionQuantity" jdbcType="DECIMAL" />
+    <result column="close_position_hold" property="closePositionHold" jdbcType="INTEGER" />
+    <result column="open_margin" property="openMargin" jdbcType="DECIMAL" />
+    <result column="origin_open_margin" property="originOpenMargin" jdbcType="DECIMAL" />
+    <result column="maintenance_margin" property="maintenanceMargin" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="size" property="size" jdbcType="DECIMAL" />
+    <result column="pre_liqudate_price" property="preLiqudatePrice" jdbcType="DECIMAL" />
+    <result column="liqudate_price" property="liqudatePrice" jdbcType="DECIMAL" />
+    <result column="broker_price" property="brokerPrice" jdbcType="DECIMAL" />
+    <result column="margin" property="margin" jdbcType="DECIMAL" />
+    <result column="realized_surplus" property="realizedSurplus" jdbcType="DECIMAL" />
+    <result column="close_fee" property="closeFee" jdbcType="DECIMAL" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    ${shardTable.name}
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    user_id, pair_code, type, lever, side, position_quantity, close_position_hold, open_margin, 
+    origin_open_margin, maintenance_margin, price, size, pre_liqudate_price, liqudate_price, 
+    broker_price, margin, realized_surplus, close_fee, broker_id, created_date, modify_date
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.userId != null">
+      user_id,
+    </if>
+    <if test="record.pairCode != null">
+      pair_code,
+    </if>
+    <if test="record.type != null">
+      type,
+    </if>
+    <if test="record.lever != null">
+      lever,
+    </if>
+    <if test="record.side != null">
+      side,
+    </if>
+    <if test="record.positionQuantity != null">
+      position_quantity,
+    </if>
+    <if test="record.closePositionHold != null">
+      close_position_hold,
+    </if>
+    <if test="record.openMargin != null">
+      open_margin,
+    </if>
+    <if test="record.originOpenMargin != null">
+      origin_open_margin,
+    </if>
+    <if test="record.maintenanceMargin != null">
+      maintenance_margin,
+    </if>
+    <if test="record.price != null">
+      price,
+    </if>
+    <if test="record.size != null">
+      size,
+    </if>
+    <if test="record.preLiqudatePrice != null">
+      pre_liqudate_price,
+    </if>
+    <if test="record.liqudatePrice != null">
+      liqudate_price,
+    </if>
+    <if test="record.brokerPrice != null">
+      broker_price,
+    </if>
+    <if test="record.margin != null">
+      margin,
+    </if>
+    <if test="record.realizedSurplus != null">
+      realized_surplus,
+    </if>
+    <if test="record.closeFee != null">
+      close_fee,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.modifyDate != null">
+      modify_date,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.userId != null">
+      #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.pairCode != null">
+      #{record.pairCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.type != null">
+      #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.lever != null">
+      #{record.lever,jdbcType=DECIMAL},
+    </if>
+    <if test="record.side != null">
+      #{record.side,jdbcType=VARCHAR},
+    </if>
+    <if test="record.positionQuantity != null">
+      #{record.positionQuantity,jdbcType=DECIMAL},
+    </if>
+    <if test="record.closePositionHold != null">
+      #{record.closePositionHold,jdbcType=INTEGER},
+    </if>
+    <if test="record.openMargin != null">
+      #{record.openMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.originOpenMargin != null">
+      #{record.originOpenMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.maintenanceMargin != null">
+      #{record.maintenanceMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.price != null">
+      #{record.price,jdbcType=DECIMAL},
+    </if>
+    <if test="record.size != null">
+      #{record.size,jdbcType=DECIMAL},
+    </if>
+    <if test="record.preLiqudatePrice != null">
+      #{record.preLiqudatePrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.liqudatePrice != null">
+      #{record.liqudatePrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.brokerPrice != null">
+      #{record.brokerPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.margin != null">
+      #{record.margin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.realizedSurplus != null">
+      #{record.realizedSurplus,jdbcType=DECIMAL},
+    </if>
+    <if test="record.closeFee != null">
+      #{record.closeFee,jdbcType=DECIMAL},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.modifyDate != null">
+      #{record.modifyDate,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.userId,jdbcType=BIGINT},
+    #{record.pairCode,jdbcType=VARCHAR},
+    #{record.type,jdbcType=INTEGER},
+    #{record.lever,jdbcType=DECIMAL},
+    #{record.side,jdbcType=VARCHAR},
+    #{record.positionQuantity,jdbcType=DECIMAL},
+    #{record.closePositionHold,jdbcType=INTEGER},
+    #{record.openMargin,jdbcType=DECIMAL},
+    #{record.originOpenMargin,jdbcType=DECIMAL},
+    #{record.maintenanceMargin,jdbcType=DECIMAL},
+    #{record.price,jdbcType=DECIMAL},
+    #{record.size,jdbcType=DECIMAL},
+    #{record.preLiqudatePrice,jdbcType=DECIMAL},
+    #{record.liqudatePrice,jdbcType=DECIMAL},
+    #{record.brokerPrice,jdbcType=DECIMAL},
+    #{record.margin,jdbcType=DECIMAL},
+    #{record.realizedSurplus,jdbcType=DECIMAL},
+    #{record.closeFee,jdbcType=DECIMAL},
+    #{record.brokerId,jdbcType=INTEGER},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.modifyDate,jdbcType=TIMESTAMP},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.userId != null">
+      user_id = #{record.userId,jdbcType=BIGINT},
+    </if>
+    <if test="record.pairCode != null">
+      pair_code = #{record.pairCode,jdbcType=VARCHAR},
+    </if>
+    <if test="record.type != null">
+      type = #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.lever != null">
+      lever = #{record.lever,jdbcType=DECIMAL},
+    </if>
+    <if test="record.side != null">
+      side = #{record.side,jdbcType=VARCHAR},
+    </if>
+    <if test="record.positionQuantity != null">
+      position_quantity = #{record.positionQuantity,jdbcType=DECIMAL},
+    </if>
+    <if test="record.closePositionHold != null">
+      close_position_hold = #{record.closePositionHold,jdbcType=INTEGER},
+    </if>
+    <if test="record.openMargin != null">
+      open_margin = #{record.openMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.originOpenMargin != null">
+      origin_open_margin = #{record.originOpenMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.maintenanceMargin != null">
+      maintenance_margin = #{record.maintenanceMargin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.price != null">
+      price = #{record.price,jdbcType=DECIMAL},
+    </if>
+    <if test="record.size != null">
+      size = #{record.size,jdbcType=DECIMAL},
+    </if>
+    <if test="record.preLiqudatePrice != null">
+      pre_liqudate_price = #{record.preLiqudatePrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.liqudatePrice != null">
+      liqudate_price = #{record.liqudatePrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.brokerPrice != null">
+      broker_price = #{record.brokerPrice,jdbcType=DECIMAL},
+    </if>
+    <if test="record.margin != null">
+      margin = #{record.margin,jdbcType=DECIMAL},
+    </if>
+    <if test="record.realizedSurplus != null">
+      realized_surplus = #{record.realizedSurplus,jdbcType=DECIMAL},
+    </if>
+    <if test="record.closeFee != null">
+      close_fee = #{record.closeFee,jdbcType=DECIMAL},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.modifyDate != null">
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    user_id = VALUES(user_id), pair_code = VALUES(pair_code), type = VALUES(type), lever = VALUES(lever), side = VALUES(side), position_quantity = VALUES(position_quantity), close_position_hold = VALUES(close_position_hold), open_margin = VALUES(open_margin), origin_open_margin = VALUES(origin_open_margin), maintenance_margin = VALUES(maintenance_margin), price = VALUES(price), size = VALUES(size), pre_liqudate_price = VALUES(pre_liqudate_price), liqudate_price = VALUES(liqudate_price), broker_price = VALUES(broker_price), margin = VALUES(margin), realized_surplus = VALUES(realized_surplus), close_fee = VALUES(close_fee), broker_id = VALUES(broker_id), created_date = VALUES(created_date), modify_date = VALUES(modify_date)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="UserPositionMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="UserPositionMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="UserPositionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" resultMap="UserPositionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="UserPositionMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

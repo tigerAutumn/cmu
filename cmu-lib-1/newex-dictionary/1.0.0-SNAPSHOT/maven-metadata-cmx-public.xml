@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>cc.newex.commons</groupId>
+  <artifactId>newex-dictionary</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20181206.105049</timestamp>
+      <buildNumber>32</buildNumber>
+    </snapshot>
+    <lastUpdated>20181206105049</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0.0-20181206.105049-32</value>
+        <updated>20181206105049</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.0-20181206.105049-32</value>
+        <updated>20181206105049</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>javadoc</classifier>
+        <extension>jar</extension>
+        <value>1.0.0-20181206.105049-32</value>
+        <updated>20181206105049</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>sources</classifier>
+        <extension>jar</extension>
+        <value>1.0.0-20181206.105049-32</value>
+        <updated>20181206105049</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.boss.admin.data.UserRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="UserMap" type="cc.newex.dax.boss.admin.domain.User">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+    <result column="roles" jdbcType="VARCHAR" property="roles"/>
+    <result column="account" jdbcType="VARCHAR" property="account"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="type" jdbcType="INTEGER" property="type"/>
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath"/>
+    <result column="totp_key" jdbcType="VARCHAR" property="totpKey"/>
+    <result column="duty_status" jdbcType="INTEGER" property="dutyStatus"/>
+    <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+    <result column="comment" jdbcType="VARCHAR" property="comment"/>
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate"/>
+    <result column="broker_id" jdbcType="INTEGER" property="brokerId"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    admin_user
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    group_id, roles, account, password, name, email, telephone, status, type, image_path, 
+    totp_key, duty_status, order_num, comment, created_date, updated_date, broker_id
+  </sql>
+  <sql id="Base_Column_List">
+    id,
+    <include refid="Base_Column_List_Without_Id"/>
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.groupId != null">
+      group_id,
+    </if>
+    <if test="record.roles != null">
+      roles,
+    </if>
+    <if test="record.account != null">
+      account,
+    </if>
+    <if test="record.password != null">
+      password,
+    </if>
+    <if test="record.name != null">
+      name,
+    </if>
+    <if test="record.email != null">
+      email,
+    </if>
+    <if test="record.telephone != null">
+      telephone,
+    </if>
+    <if test="record.status != null">
+      status,
+    </if>
+    <if test="record.type != null">
+      type,
+    </if>
+    <if test="record.imagePath != null">
+      image_path,
+    </if>
+    <if test="record.totpKey != null">
+      totp_key,
+    </if>
+    <if test="record.dutyStatus != null">
+      duty_status,
+    </if>
+    <if test="record.orderNum != null">
+      order_num,
+    </if>
+    <if test="record.comment != null">
+      comment,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.groupId != null">
+      #{record.groupId,jdbcType=INTEGER},
+    </if>
+    <if test="record.roles != null">
+      #{record.roles,jdbcType=VARCHAR},
+    </if>
+    <if test="record.account != null">
+      #{record.account,jdbcType=VARCHAR},
+    </if>
+    <if test="record.password != null">
+      #{record.password,jdbcType=VARCHAR},
+    </if>
+    <if test="record.name != null">
+      #{record.name,jdbcType=VARCHAR},
+    </if>
+    <if test="record.email != null">
+      #{record.email,jdbcType=VARCHAR},
+    </if>
+    <if test="record.telephone != null">
+      #{record.telephone,jdbcType=VARCHAR},
+    </if>
+    <if test="record.status != null">
+      #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.type != null">
+      #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.imagePath != null">
+      #{record.imagePath,jdbcType=VARCHAR},
+    </if>
+    <if test="record.totpKey != null">
+      #{record.totpKey,jdbcType=VARCHAR},
+    </if>
+    <if test="record.dutyStatus != null">
+      #{record.dutyStatus,jdbcType=INTEGER},
+    </if>
+    <if test="record.orderNum != null">
+      #{record.orderNum,jdbcType=INTEGER},
+    </if>
+    <if test="record.comment != null">
+      #{record.comment,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.groupId,jdbcType=INTEGER},
+    #{record.roles,jdbcType=VARCHAR},
+    #{record.account,jdbcType=VARCHAR},
+    #{record.password,jdbcType=VARCHAR},
+    #{record.name,jdbcType=VARCHAR},
+    #{record.email,jdbcType=VARCHAR},
+    #{record.telephone,jdbcType=VARCHAR},
+    #{record.status,jdbcType=INTEGER},
+    #{record.type,jdbcType=INTEGER},
+    #{record.imagePath,jdbcType=VARCHAR},
+    #{record.totpKey,jdbcType=VARCHAR},
+    #{record.dutyStatus,jdbcType=INTEGER},
+    #{record.orderNum,jdbcType=INTEGER},
+    #{record.comment,jdbcType=VARCHAR},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=INTEGER},
+    <include refid="Batch_Insert_Values"/>
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.groupId != null">
+      group_id = #{record.groupId,jdbcType=INTEGER},
+    </if>
+    <if test="record.roles != null">
+      roles = #{record.roles,jdbcType=VARCHAR},
+    </if>
+    <if test="record.account != null">
+      account = #{record.account,jdbcType=VARCHAR},
+    </if>
+    <if test="record.password != null">
+      password = #{record.password,jdbcType=VARCHAR},
+    </if>
+    <if test="record.name != null">
+      name = #{record.name,jdbcType=VARCHAR},
+    </if>
+    <if test="record.email != null">
+      email = #{record.email,jdbcType=VARCHAR},
+    </if>
+    <if test="record.telephone != null">
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+    </if>
+    <if test="record.status != null">
+      status = #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.type != null">
+      type = #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.imagePath != null">
+      image_path = #{record.imagePath,jdbcType=VARCHAR},
+    </if>
+    <if test="record.totpKey != null">
+      totp_key = #{record.totpKey,jdbcType=VARCHAR},
+    </if>
+    <if test="record.dutyStatus != null">
+      duty_status = #{record.dutyStatus,jdbcType=INTEGER},
+    </if>
+    <if test="record.orderNum != null">
+      order_num = #{record.orderNum,jdbcType=INTEGER},
+    </if>
+    <if test="record.comment != null">
+      comment = #{record.comment,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey keyProperty="record.id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into
+    <include refid="Table_Name"/>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values"/>
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into
+    <include refid="Table_Name"/>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id"/>
+    </trim>
+    values
+    <foreach collection="records" index="index" item="record" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values"/>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into
+    <include refid="Table_Name"/>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    values
+    <foreach collection="records" index="index" item="record" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    group_id = VALUES(group_id), roles = VALUES(roles), account = VALUES(account), password = VALUES(password), name = VALUES(name), email = VALUES(email), telephone =
+    VALUES(telephone), status = VALUES(status), type = VALUES(type), image_path = VALUES(image_path), totp_key = VALUES(totp_key), duty_status = VALUES(duty_status), order_num =
+    VALUES(order_num), comment = VALUES(comment), created_date = VALUES(created_date), updated_date = VALUES(updated_date), broker_id = VALUES(broker_id)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from
+    <include refid="Table_Name"/>
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from
+    <include refid="Table_Name"/>
+    where id in
+    <foreach close=")" collection="records" index="index" item="record" open="(" separator=",">
+      #{record.id,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update
+    <include refid="Table_Name"/>
+    <set>
+      <include refid="Update_Set_From_Bean"/>
+    </set>
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update
+    <include refid="Table_Name"/>
+    <set>
+      <include refid="Update_Set_From_Bean"/>
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach close="" collection="records" index="index" item="record" open="" separator=";">
+      update
+      <include refid="Table_Name"/>
+      <set>
+        <include refid="Update_Set_From_Bean"/>
+      </set>
+      where id = #{record.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="UserMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Table_Name"/>
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByExample" parameterType="java.util.Map" resultMap="UserMap">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" parameterType="java.util.Map" resultMap="UserMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" parameterType="java.util.Map" resultMap="UserMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Table_Name"/>
+    where id in
+    <foreach close=")" collection="records" index="index" item="record" open="(" separator=",">
+      #{record.id,jdbcType=INTEGER}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <select id="selectByPager" parameterType="java.util.Map" resultMap="UserMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    <include refid="Table_Name"/>
+    <if test="example != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

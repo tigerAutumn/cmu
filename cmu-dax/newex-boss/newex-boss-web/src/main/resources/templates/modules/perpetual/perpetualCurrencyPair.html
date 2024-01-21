@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约币对</title>
+    <script th:src="@{'/js/modules/perpetual/perpetualCurrencyPair.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    交易货币:
+    <input id="query-base" name="query-base" class="easyui-combobox" style="width: 150px"/>
+
+    计价货币:
+    <select class="easyui-combobox" id="query-quote" name="query-quote" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="BTC">BTC</option>
+        <option value="ETH">ETH</option>
+        <option value="USDT">USDT</option>
+    </select>
+
+    业务分类:
+    <select class="easyui-combobox" id="query-biz" name="query-biz" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="perpetual">Perpetual</option>
+        <option value="future">Future</option>
+    </select>
+
+    是否已上线:
+    <select class="easyui-combobox" id="query-online" name="query-online" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="0">下线</option>
+        <option value="1">预发</option>
+        <option value="2">上线</option>
+    </select>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+</div>
+<div style="height: 94%; padding: 1px">
+    <input type="hidden" id="action" name="action"/>
+    <!--数据表格-->
+    <div id="perpetual-currency-pair-datagrid">
+    </div>
+
+    <!--模态框-->
+    <div id="perpetual-currency-pair-dlg">
+        <form id="perpetual-currency-pair-form" name="perpetual-currency-pair-form" method="post">
+            <table cellpadding="5" style="margin: 10px auto" class="form-table">
+                <input type="hidden" name="id" id="id"/>
+                <tr>
+                    <td>指数基础货币:</td>
+                    <td>
+                        <select class="easyui-combobox" id="indexBase" name="indexBase" style="width: 150px" data-options="required:true">
+                        </select>
+                    </td>
+
+                    <td>计价货币:</td>
+                    <td>
+                        <input class="easyui-combobox" id="quote" style="width: 150px" name="quote" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>交易货币:</td>
+                    <td>
+                        <input id="base" style="width: 150px;" name="base" class="easyui-combobox" data-options="required:true"/>
+                    </td>
+
+                    <td>是否测试盘:</td>
+                    <td>
+                        <select class="easyui-combobox" id="env" name="env" style="width: 150px" data-options="required:true">
+                            <option value="0">线上盘</option>
+                            <option value="1" selected="selected">测试盘</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>业务分类:</td>
+                    <td>
+                        <select class="easyui-combobox" id="biz" name="biz" style="width: 150px" data-options="required:true">
+                            <option value="perpetual" selected>Perpetual</option>
+                            <option value="future">Future</option>
+                        </select>
+                    </td>
+                    <td>交易/计价货币组合:</td>
+                    <td>
+                        <input class="easyui-textbox" id="pairCode" style="width: 150px" name="pairCode" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>合约对应的Quote面值:</td>
+                    <td>
+                        <input class="easyui-textbox" id="unitAmount" style="width: 150px" name="unitAmount" value="1"/>
+                    </td>
+
+                    <td>每笔最小挂单张数:</td>
+                    <td>
+                        <input class="easyui-textbox" id="minOrderAmount" style="width: 150px" name="minOrderAmount" value="1"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>每笔最大挂单张数:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxOrderAmount" style="width: 150px" name="maxOrderAmount" value="10000000"/>
+                    </td>
+
+                    <td>单人最大挂单订单数:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxOrders" style="width: 150px" name="maxOrders" value="100"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>基础货币最小交易小数位:</td>
+                    <td>
+                        <input class="easyui-textbox" id="minTradeDigit" style="width: 150px" name="minTradeDigit" data-options="prompt:'>0',required:true" value="8"/>
+                    </td>
+
+                    <td>计价货币最小交易小数位:</td>
+                    <td>
+                        <input class="easyui-textbox" id="minQuoteDigit" style="width: 150px" name="minQuoteDigit" data-options="prompt:'>0',required:true" value="8"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>保险金账号:</td>
+                    <td>
+                        <input class="easyui-textbox" id="insuranceAccount" style="width: 150px" name="insuranceAccount" data-options="required:true"/>
+                    </td>
+
+                    <td>预强平价格阈值:</td>
+                    <td>
+                        <input class="easyui-textbox" id="preLiqudatePriceThreshold" style="width: 150px" name="preLiqudatePriceThreshold"
+                               data-options="prompt:'0-1'" value="0.5"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>溢价指数阈值上限:</td>
+                    <td>
+                        <input class="easyui-textbox" id="premiumMaxRange" style="width: 150px" name="premiumMaxRange" value="-0.0005"/>
+                    </td>
+
+                    <td>溢价指数阈值下限:</td>
+                    <td>
+                        <input class="easyui-textbox" id="premiumMinRange" style="width: 150px" name="premiumMinRange" value="0.0005"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>溢价指数加权买卖价的取值深度:</td>
+                    <td>
+                        <input class="easyui-textbox" id="premiumDepth" style="width: 150px" name="premiumDepth" data-options="required:true"/>
+                    </td>
+
+                    <td>合约类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="type" name="type" style="width: 150px" data-options="required:true">
+                            <option value="perpetual" selected>永续</option>
+                            <option value="week">周</option>
+                            <option value="nextweek">次周</option>
+                            <option value="month">月</option>
+                            <option value="quarter">季度</option>
+                        </select>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>绝对的资金费率上限:</td>
+                    <td>
+                        <input class="easyui-textbox" id="fundingCeiling" style="width: 150px" name="fundingCeiling" value="0.75"/>
+                    </td>
+
+                    <td>最低档位:</td>
+                    <td>
+                        <input class="easyui-textbox" id="minGear" style="width: 150px" name="minGear" value="100.0"/>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+
+                    <td>每档的差值:</td>
+                    <td>
+                        <input class="easyui-textbox" id="diffGear" style="width: 150px" name="diffGear" value="100.0"/>
+                    </td>
+
+                    <td>最高档位:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxGear" style="width: 150px" name="maxGear" value="1000.0"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>清算周期:</td>
+                    <td>
+                        <input class="easyui-textbox" id="liquidationHour" style="width: 150px" name="liquidationHour" data-options="prompt:'<12',required:true" value="8"/>
+                    </td>
+
+                    <td>维持保证金费率:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maintainRate" style="width: 150px" name="maintainRate" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>状态:</td>
+                    <td>
+                        <select class="easyui-combobox" id="online" name="online" style="width: 150px" data-options="required:true">
+                            <option value="0" selected="selected">下线</option>
+                            <option value="1">预发</option>
+                            <option value="2">上线</option>
+                        </select>
+                    </td>
+
+                    <td>点卡抵扣手续费:</td>
+                    <td>
+                        <select class="easyui-combobox" id="dkFee" name="dkFee" style="width: 150px" data-options="required:true">
+                            <option value="1">使用</option>
+                            <option value="0" selected="selected">不使用</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>方向:</td>
+                    <td>
+                        <select class="easyui-combobox" id="direction" name="direction" style="width: 150px" data-options="required:true">
+                            <option value="0">正向</option>
+                            <option value="1" selected="selected">反向</option>
+                        </select>
+                    </td>
+
+                    <td>利率:</td>
+                    <td>
+                        <input class="easyui-textbox" id="interestRate" style="width: 150px" name="interestRate"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>标记价格最小单位:</td>
+                    <td>
+                        <input class="easyui-textbox" id="marketPriceDigit" style="width: 150px" name="marketPriceDigit"/>
+                    </td>
+
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

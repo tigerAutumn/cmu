@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 个人信息</title>
+</head>
+
+<body>
+
+<div th:fragment="copy">
+    <form id="reset-up-form" name="reset-up-form" method="post">
+        <input id="userId" name="userId" type="hidden" value=""/>
+        <div style="padding:20px 20px 20px 20px;">
+            <table width="100%" class="table">
+                <tr>
+                    <td>用户ID：</td>
+                    <td><label id="report-detail-id"/></td>
+                    <td>用户Email：</td>
+                    <td><label id="report-detail-email"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>手机号：</td>
+                    <td><label id="report-detail-mobile"/></td>
+                    <td>用户角色：</td>
+                    <td><label id="report-detail-authorities"/></td>
+                </tr>
+                <tr>
+                    <td>用户昵称：</td>
+                    <td><label id="report-detail-nickname"/></td>
+                    <td>用户名：</td>
+                    <td><label id="report-detail-realName"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>防钓鱼码：</td>
+                    <td><label id="report-detail-antiPhishingCode"/></td>
+                    <td>账户冻结状态：</td>
+                    <td><label id="report-detail-frozen"/></td>
+                </tr>
+                <tr>
+                    <td>用户类型：</td>
+                    <td><label id="report-detail-type"/></td>
+                    <td>手机编号：</td>
+                    <td><label id="report-detail-areaCode"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>用户状态：</td>
+                    <td><label id="report-detail-status"/></td>
+                    <td>注册IP：</td>
+                    <td><label id="report-detail-regIp"/></td>
+                </tr>
+
+                <tr>
+                    <td>邮箱验证状态：</td>
+                    <td><label id="report-detail-emailAuthFlag"/></td>
+                    <td>手机验证状态：</td>
+                    <td><label id="report-detail-mobileAuthFlag"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>注册时间：</td>
+                    <td><label id="report-detail-createdDate"/></td>
+                    <td>更新时间：</td>
+                    <td><label id="report-detail-updatedDate"/></td>
+                </tr>
+                <tr>
+                    <td>kyc1认证状态：</td>
+                    <td><label id="report-detail-kyc1"/></td>
+                    <td>kyc2认证状态：</td>
+                    <td><label id="report-detail-kyc2"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>Google验证码绑定状态：</td>
+                    <td><label id="report-detail-googleAuthFlag"/></td>
+                    <td>用户邀请码</td>
+                    <td><label id="report-detail-uid"/></td>
+                </tr>
+
+            </table>
+            <div style="height: 10px;"></div>
+            <table width="100%" class="table">
+                <tr class="alter">
+                    <td colspan="2">说明备注：</td>
+
+                </tr>
+                <tr>
+                    <td colspan="2"><label id="report-detail-memo"/></td>
+                </tr>
+            </table>
+            <div width="125px;" style="padding-top: 20px;">备注:</div>
+            <div style="">
+                <input class="easyui-textbox" data-options="multiline:true" type="text" id="remarks"
+                       name="remarks"
+                       style="width: 100%;height: 100px"/></div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+#
+# server
+#
+server:
+  port: @server.port@
+#
+# spring
+#
+spring:
+  cloud:
+    config:
+      server:
+        s3:
+          endpoint: @spring.cloud.config.server.s3.endpoint@
+          region: @spring.cloud.config.server.s3.region@
+          access-key-id: @spring.cloud.config.server.s3.accessKeyId@
+          access-key-secret: @spring.cloud.config.server.s3.accessKeySecret@
+          bucket-name: @spring.cloud.config.server.s3.bucketName@
+          basedir: @spring.cloud.config.server.s3.basedir@
+        encrypt:
+          enabled: false
+  application:
+    name: @newex.app.name@
+#
+# eureka
+#
+eureka:
+  client:
+    service-url:
+      defaultZone: @spring.cloud.eureka.serviceUrl@
+  instance:
+    prefer-ip-address: true
+    appname: @newex.app.name@
+#
+# management
+#
+management:
+  security:
+    enabled: false
+#
+# security
+#
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: newex,0987
+#
+# security
+#
+#security:
+#  user:
+#    name: @security.user.name@
+#    password: @security.user.password@
+#
+# logging config file location
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    springcloud: @logging.level.springcloud@
+#
+# newex app
+#
+newex:
+    app:
+      name: @newex.app.name@
+      version: @newex.app.version@
+      domain: @newex.app.domain@
+      env:
+        name: @newex.app.env.name@

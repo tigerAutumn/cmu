@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.integration.data.msg.MessageRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="MessageMap" type="cc.newex.dax.integration.domain.msg.Message">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP"/>
+        <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="email_address" property="emailAddress" jdbcType="VARCHAR"/>
+        <result column="from_alias" property="fromAlias" jdbcType="VARCHAR"/>
+        <result column="template_code" property="templateCode" jdbcType="VARCHAR"/>
+        <result column="template_params" property="templateParams" jdbcType="VARCHAR"/>
+        <result column="subject" property="subject" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="is_sent" property="isSent" jdbcType="TINYINT"/>
+        <result column="locale" property="locale" jdbcType="VARCHAR"/>
+        <result column="retry_times" property="retryTimes" jdbcType="INTEGER"/>
+        <result column="next_retry_time" property="nextRetryTime" jdbcType="TIMESTAMP"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">int_message</sql>
+    <sql id="Base_Column_List_Without_Id">
+        created_date ,modify_date ,country_code ,phone_number ,email_address ,from_alias ,template_code ,template_params
+        ,subject ,content ,is_sent ,locale ,retry_times ,next_retry_time , broker_id
+    </sql>
+    <sql id="Base_Column_List">
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.createdDate != null">created_date,</if>
+        <if test="record.modifyDate != null">modify_date,</if>
+        <if test="record.countryCode != null">country_code,</if>
+        <if test="record.phoneNumber != null">phone_number,</if>
+        <if test="record.emailAddress != null">email_address,</if>
+        <if test="record.fromAlias != null">from_alias,</if>
+        <if test="record.templateCode != null">template_code,</if>
+        <if test="record.templateParams != null">template_params,</if>
+        <if test="record.subject != null">subject,</if>
+        <if test="record.content != null">content,</if>
+        <if test="record.isSent != null">is_sent,</if>
+        <if test="record.locale != null">locale,</if>
+        <if test="record.retryTimes != null">retry_times,</if>
+        <if test="record.nextRetryTime != null">next_retry_time,</if>
+        <if test="record.brokerId != null">broker_id,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.createdDate != null">#{record.createdDate,jdbcType=TIMESTAMP},</if>
+        <if test="record.modifyDate != null">#{record.modifyDate,jdbcType=TIMESTAMP},</if>
+        <if test="record.countryCode != null">#{record.countryCode,jdbcType=VARCHAR},</if>
+        <if test="record.phoneNumber != null">#{record.phoneNumber,jdbcType=VARCHAR},</if>
+        <if test="record.emailAddress != null">#{record.emailAddress,jdbcType=VARCHAR},</if>
+        <if test="record.fromAlias != null">#{record.fromAlias,jdbcType=VARCHAR},</if>
+        <if test="record.templateCode != null">#{record.templateCode,jdbcType=VARCHAR},</if>
+        <if test="record.templateParams != null">#{record.templateParams,jdbcType=VARCHAR},</if>
+        <if test="record.subject != null">#{record.subject,jdbcType=VARCHAR},</if>
+        <if test="record.content != null">#{record.content,jdbcType=VARCHAR},</if>
+        <if test="record.isSent != null">#{record.isSent,jdbcType=TINYINT},</if>
+        <if test="record.locale != null">#{record.locale,jdbcType=VARCHAR},</if>
+        <if test="record.retryTimes != null">#{record.retryTimes,jdbcType=INTEGER},</if>
+        <if test="record.nextRetryTime != null">#{record.nextRetryTime,jdbcType=TIMESTAMP},</if>
+        <if test="record.brokerId != null">#{record.brokerId,jdbcType=INTEGER},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+ #{record.createdDate,jdbcType=TIMESTAMP},
+		 					 #{record.modifyDate,jdbcType=TIMESTAMP},
+		 					 #{record.countryCode,jdbcType=VARCHAR},
+		 					 #{record.phoneNumber,jdbcType=VARCHAR},
+		 					 #{record.emailAddress,jdbcType=VARCHAR},
+		 					 #{record.fromAlias,jdbcType=VARCHAR},
+		 					 #{record.templateCode,jdbcType=VARCHAR},
+		 					 #{record.templateParams,jdbcType=VARCHAR},
+		 					 #{record.subject,jdbcType=VARCHAR},
+		 					 #{record.content,jdbcType=VARCHAR},
+		 					 #{record.isSent,jdbcType=TINYINT},
+		 					 #{record.locale,jdbcType=VARCHAR},
+		 					 #{record.retryTimes,jdbcType=INTEGER},
+		 					 #{record.nextRetryTime,jdbcType=TIMESTAMP},
+        #{record.brokerId,jdbcType=INTEGER},
+		 	    </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.createdDate != null">created_date = #{record.createdDate,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.modifyDate != null">modify_date = #{record.modifyDate,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.countryCode != null">country_code = #{record.countryCode,jdbcType=VARCHAR} ,</if>
+        <if test="record.phoneNumber != null">phone_number = #{record.phoneNumber,jdbcType=VARCHAR} ,</if>
+        <if test="record.emailAddress != null">email_address = #{record.emailAddress,jdbcType=VARCHAR} ,</if>
+        <if test="record.fromAlias != null">from_alias = #{record.fromAlias,jdbcType=VARCHAR} ,</if>
+        <if test="record.templateCode != null">template_code = #{record.templateCode,jdbcType=VARCHAR} ,</if>
+        <if test="record.templateParams != null">template_params = #{record.templateParams,jdbcType=VARCHAR} ,</if>
+        <if test="record.subject != null">subject = #{record.subject,jdbcType=VARCHAR} ,</if>
+        <if test="record.content != null">content = #{record.content,jdbcType=VARCHAR} ,</if>
+        <if test="record.isSent != null">is_sent = #{record.isSent,jdbcType=TINYINT} ,</if>
+        <if test="record.locale != null">locale = #{record.locale,jdbcType=VARCHAR} ,</if>
+        <if test="record.retryTimes != null">retry_times = #{record.retryTimes,jdbcType=INTEGER} ,</if>
+        <if test="record.nextRetryTime != null">next_retry_time = #{record.nextRetryTime,jdbcType=TIMESTAMP} ,</if>
+        <if test="record.brokerId != null">broker_id = #{record.brokerId,jdbcType=INTEGER} ,</if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        created_date = VALUES(created_date) , modify_date = VALUES(modify_date) , country_code = VALUES(country_code) , phone_number = VALUES(phone_number) , email_address =
+        VALUES(email_address) , from_alias = VALUES(from_alias) , template_code = VALUES(template_code) , template_params = VALUES(template_params) , subject = VALUES(subject) ,
+        content = VALUES(content) , is_sent = VALUES(is_sent) , locale = VALUES(locale) , retry_times =
+        VALUES(retry_times) , next_retry_time = VALUES(next_retry_time) ,
+        broker_id = VALUES(broker_id)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id=#{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="MessageMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="MessageMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="MessageMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="MessageMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id IN
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="MessageMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

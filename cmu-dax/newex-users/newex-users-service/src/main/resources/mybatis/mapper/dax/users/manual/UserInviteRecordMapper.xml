@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.UserInviteRecordRepository">
+    <select id="selectUserInviteList" resultMap="UserInviteRecordMap" parameterType="java.util.Map">
+        select * from user_invite_record where id > #{id} limit #{pageSize}
+    </select>
+
+    <select id="inviteKyc2Count" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT count(t1.user_id) as total  FROM user_kyc_level t1, user_invite_record t2
+        WHERE t1.user_id=t2.user_id AND t1.level=2 AND t1.status=1
+        AND t2.`created_date` &gt;= #{startTime}  and t2.`created_date` &lt; #{endTime}
+    </select>
+</mapper>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.UserKycInfoRepository">
+    <resultMap id="UserKycAdminListMap" type="cc.newex.dax.users.dto.kyc.UserKycAdminListResDTO">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+        <result column="country" property="country" jdbcType="INTEGER"/>
+        <result column="first_name" property="firstName" jdbcType="VARCHAR"/>
+        <result column="middle_name" property="middleName" jdbcType="VARCHAR"/>
+        <result column="last_name" property="lastName" jdbcType="VARCHAR"/>
+        <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="created_date" property="createdDate" jdbcType="VARCHAR"/>
+        <result column="updated_date" property="updatedDate" jdbcType="VARCHAR"/>
+        <result column="deal_user_id" property="dealUserId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="UserKycAdminKycFirstDetailDTO" type="cc.newex.dax.users.dto.kyc.UserKycAdminKycFirstDetailDTO">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="first_name" property="firstName" jdbcType="VARCHAR"/>
+        <result column="middle_name" property="middleName" jdbcType="VARCHAR"/>
+        <result column="last_name" property="lastName" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="INTEGER"/>
+        <result column="card_type" property="cardType" jdbcType="VARCHAR"/>
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="valid_date" property="validDate" jdbcType="VARCHAR"/>
+        <result column="front_img" property="frontImg" jdbcType="VARCHAR"/>
+        <result column="back_img" property="backImg" jdbcType="VARCHAR"/>
+        <!--<result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />-->
+        <!--<result column="remarks" property="remarks" jdbcType="VARCHAR" />-->
+        <!--<result column="updated_date" property="updatedDate" jdbcType="VARCHAR" />-->
+        <!--<result column="deal_user_id" property="dealUserId" jdbcType="BIGINT" />-->
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="UserKycAdminKycSecondDetailDTO" type="cc.newex.dax.users.dto.kyc.UserKycAdminKycSecondDetailDTO">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="first_name" property="firstName" jdbcType="VARCHAR"/>
+        <result column="middle_name" property="middleName" jdbcType="VARCHAR"/>
+        <result column="last_name" property="lastName" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="INTEGER"/>
+        <result column="card_type" property="cardType" jdbcType="VARCHAR"/>
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="valid_date" property="validDate" jdbcType="VARCHAR"/>
+        <result column="front_img" property="frontImg" jdbcType="VARCHAR"/>
+        <result column="back_img" property="backImg" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+
+        <result column="address1" property="address1" jdbcType="VARCHAR"/>
+        <result column="address2" property="address2" jdbcType="VARCHAR"/>
+        <result column="address3" property="address3" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="zip_code" property="zipCode" jdbcType="VARCHAR"/>
+
+        <result column="hands_img" property="handsImg" jdbcType="VARCHAR"/>
+        <result column="address_img" property="addressImg" jdbcType="VARCHAR"/>
+        <result column="card_img" property="cardImg" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!-- replace  -->
+    <insert id="replace" parameterType="java.util.Map">
+        REPLACE into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+
+    <sql id="User_Kyc_Info_Admin_Column_List">
+        t1.user_id ,t1.country,t1.first_name ,t1.middle_name ,t1.last_name, t2.reject_reason ,t2.remarks,t2.created_date,
+        t1.broker_id,t1.card_number,t2.updated_date , t2.deal_user_id ,t2.`status`,t2.`level`,t2.id
+    </sql>
+    <select id="selectKycAdminListByPager" resultMap="UserKycAdminListMap"
+            parameterType="cc.newex.dax.users.dto.kyc.UserKycAdminListReqDTO">
+        select
+        <include refid="User_Kyc_Info_Admin_Column_List"/>
+        from user_kyc_info t1 left join user_kyc_level t2 on t1.user_id = t2.user_id
+        <where>
+            1=1
+            <if test="dto.userId != null">
+                and t1.user_id = #{dto.userId}
+            </if>
+            <if test="dto.cardNumber != null">
+                and t1.card_number = #{dto.cardNumber}
+            </if>
+            <if test="dto.brokerId != null">
+                and t1.broker_id = #{dto.brokerId}
+            </if>
+            <if test="dto.country == 1">
+                and t1.country = 156
+            </if>
+            <if test="dto.country == 2">
+                and t1.country != 156
+            </if>
+            <if test="dto.status != null">
+                and t2.status = #{dto.status}
+            </if>
+            <if test="dto.level != null">
+                and t2.level = #{dto.level}
+            </if>
+            <if test="dto.dealUserId != null">
+                and t2.deal_user_id = #{dto.dealUserId}
+            </if>
+            <if test="dto.createdDateStart != null">
+                and t2.created_date &gt; #{dto.createdDateStart}
+            </if>
+            <if test="dto.createdDateEnd != null">
+                and t2.created_date &lt;= #{dto.createdDateEnd}
+            </if>
+            <if test="dto.updatedDateStart != null">
+                and t2.updated_date &gt; #{dto.updatedDateStart}
+            </if>
+            <if test="dto.updatedDateEnd != null">
+                and t2.updated_date &lt;= #{dto.updatedDateEnd}
+            </if>
+        </where>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by t1.${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <select id="countKycAdminListByPager" resultMap="UserKycAdminListMap"
+            parameterType="cc.newex.dax.users.dto.kyc.UserKycAdminListReqDTO">
+        select count(t1.user_id) as total
+        from user_kyc_info t1 left join user_kyc_level t2 on t1.user_id = t2.user_id
+        <where>
+            1=1
+            <if test="dto.userId != null">
+                and t1.user_id = #{dto.userId}
+            </if>
+            <if test="dto.cardNumber != null">
+                and t1.card_number = #{dto.cardNumber}
+            </if>
+            <if test="dto.country == 1">
+                and t1.country = 156
+            </if>
+            <if test="dto.country == 2">
+                and t1.country != 156
+            </if>
+            <if test="dto.status != null">
+                and t2.status = #{dto.status}
+            </if>
+            <if test="dto.level != null">
+                and t2.level = #{dto.level}
+            </if>
+            <if test="dto.dealUserId != null">
+                and t2.deal_user_id = #{dto.dealUserId}
+            </if>
+            <if test="dto.createdDateStart != null">
+                and t2.created_date &gt; #{dto.createdDateStart}
+            </if>
+            <if test="dto.createdDateEnd != null">
+                and t2.created_date &lt;= #{dto.createdDateEnd}
+            </if>
+            <if test="dto.updatedDateStart != null">
+                and t2.updated_date &gt; #{dto.updatedDateStart}
+            </if>
+            <if test="dto.updatedDateEnd != null">
+                and t2.updated_date &lt;= #{dto.updatedDateEnd}
+            </if>
+        </where>
+    </select>
+    <select id="selectChinaFirstDetail" resultMap="UserKycAdminKycFirstDetailDTO" parameterType="java.util.Map">
+       select t1.first_name ,t1.middle_name ,t1.last_name,t1.country,t1.card_type ,t1.card_number
+       ,t1.gender,t1.valid_date ,t3.front_img ,t3.back_img ,t2.reject_reason ,t2.remarks,t2.updated_date
+        ,t2.deal_user_id,t2.status,t2.id,t2.level
+        from user_kyc_info t1,user_kyc_level t2,user_kyc_img t3
+        WHERE t1.user_id = t2.user_id and t2.user_id=t3.user_id
+        and t1.user_id = #{userId} and t2.level=#{level}
+    </select>
+    <select id="selectForeignFirstDetail" resultMap="UserKycAdminKycFirstDetailDTO" parameterType="java.util.Map">
+       select t1.first_name ,t1.middle_name ,t1.last_name,t1.country,
+        t1.card_type ,t1.card_number ,t2.reject_reason ,t2.remarks,
+        t2.updated_date ,t2.deal_user_id ,t2.status,t2.level,t2.id,t2.level
+        from user_kyc_info t1,user_kyc_level t2
+        WHERE t1.user_id = t2.user_id
+        and t1.user_id = #{userId} and t2.level=#{level}
+    </select>
+
+    <select id="selectKycAdminSecondDetail" resultMap="UserKycAdminKycSecondDetailDTO" parameterType="java.util.Map">
+       select t2.id, t1.first_name ,t1.middle_name ,t1.last_name,t1.country,t1.card_type ,t1.card_number
+       ,t1.gender,t1.valid_date ,t3.front_img ,t3.back_img ,t2.`status` ,t2.`level`,t1.address1
+        ,t1.address2,t1.address3,t1.city,t1.zip_code,t3.hands_img,t3.address_img,t3.card_img
+        from user_kyc_info t1,user_kyc_level t2,user_kyc_img t3
+        WHERE t1.user_id = t2.user_id and t2.user_id=t3.user_id
+        and t1.user_id = #{userId} and t2.level=#{level}
+    </select>
+</mapper>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>模版管理</title>
+
+    <script th:src="@{'/js/modules/users/country.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    语言:<select class="easyui-combobox" id="count_locale" name="locale" data-options="required:true"
+               style="width: 200px">
+    <option value="">请选择</option>
+    <option value="zh-cn">中文</option>
+    <option value="en-us">英文</option>
+</select>
+    状态:<select class="easyui-combobox" id="count_status" name="status" data-options="required:true"
+               style="width: 200px">
+    <option value="">请选择</option>
+    <option value="0">不可注册</option>
+    <option value="1">可注册</option>
+</select>
+    国家名称:<input class="easyui-textbox" type="text" id="count_name" name="name"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="ds-datagrid"></div>
+</div>
+<div id="ds-dlg">
+    <form id="ds-form" name="ds-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+
+                <tr>
+                    <td>语言:</td>
+                    <td><select class="easyui-combobox" id="locale" name="locale" data-options="required:true"
+                                style="width: 200px">
+                        <option value="zh-cn">中文</option>
+                        <option value="en-us">英文</option>
+                    </select></td>
+                    <td>缩写:</td>
+                    <td><input class="easyui-textbox" type="text" id="abbr" name="abbr"
+                               data-options="required:true"
+                               style="width: 200px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>国家名称:</td>
+                    <td><input class="easyui-textbox" type="text" id="name" name="name"
+                               data-options="required:true"
+                               style="width: 200px"/></td>
+
+                    <td>首都:</td>
+                    <td><input class="easyui-textbox" type="text" id="capital" name="capital"
+                               data-options="required:true"
+                               style="width: 200px"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>地区代码:</td>
+                    <td><input class="easyui-textbox" type="text" id="areaCode" name="areaCode"
+                               data-options="required:true"
+                               style="width: 200px"/></td>
+
+                    <td>国家编码:</td>
+                    <td><input class="easyui-textbox" type="text" id="countryCode" name="countryCode"
+                               data-options="required:true"
+                               style="width: 200px"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>货币代码:</td>
+                    <td><input class="easyui-textbox" type="text" id="currencyCode" name="currencyCode"
+                               data-options="required:true"
+                               style="width: 200px"/></td>
+
+                    <td>货币名称:</td>
+                    <td><input class="easyui-textbox" type="text" id="currencyName" name="currencyName"
+                               data-options="required:true"
+                               style="width: 200px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>字符编码2:</td>
+                    <td><input class="easyui-textbox" type="text" id="letterCode2" name="letterCode2"
+                               data-options="required:true"
+                               style="width: 200px"/></td>
+
+                    <td>字符编码3:</td>
+                    <td><input class="easyui-textbox" type="text" id="letterCode3" name="letterCode3"
+                               data-options="required:true"
+                               style="width: 200px"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>国家顶级域名:</td>
+                    <td><input class="easyui-textbox" type="text" id="domainCode" name="domainCode"
+                               data-options="required:true"
+                               style="width: 200px"/></td>
+
+                    <td>状态:</td>
+                    <td><select class="easyui-combobox" id="status" name="status" data-options="required:true"
+                                style="width: 200px">
+                        <option value="1">可注册</option>
+                        <option value="0">不可注册</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <input id="id" type="hidden" name="id" value=""/>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

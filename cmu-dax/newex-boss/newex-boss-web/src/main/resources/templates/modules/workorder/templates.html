@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>模版管理</title>
+    <script th:src="@{'/js/modules/workorder/templates.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    菜单ID:
+          <select class="easyui-combotree" id="menuId" name="menuId"
+            data-options=""
+            style="width: 200px"></select>
+    <!--<input class="easyui-textbox" type="text" id="menuId" name="subject"/>-->
+    问题模版:<input class="easyui-textbox" type="text" id="template" name="subject" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="ds-datagrid"></div>
+</div>
+<div id="ds-dlg">
+    <form id="ds-form" name="ds-form" method="post">
+        <center>
+        <table cellpadding="5" class="form-table">
+
+                <tr>
+                    <td>菜单ID:</td>
+                    <td><input class="easyui-textbox" type="text" id="temp_menuId" name="menuId"
+                               data-options="required:true"
+                               style="width: 300px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>问题模版:</td>
+                    <td><input class="easyui-textbox" type="text" id="temp_template" name="template"
+                               data-options="required:true"
+                               style="width: 300px"/></td>
+                </tr>
+
+                <input id="id" type="hidden" name="id" value=""/>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

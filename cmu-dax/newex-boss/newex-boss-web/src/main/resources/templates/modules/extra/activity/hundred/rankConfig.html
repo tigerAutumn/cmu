@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>CT-USDT交易排行榜活动时间配置</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/rankConfig.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    券商:<input class="easyui-combobox" id="rankConfig-brokerId" name="rankConfig-brokerId" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="rankConfig-datagrid"></div>
+</div>
+<div id="rankConfig-dlg">
+    <form id="rankConfig-form" name="rankConfig-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td>期数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="term" name="term"
+                           data-options="required:true, min:1, prompt: '请输入正数'" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券商:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>开始时间:</td>
+                <td>
+                    <input class="easyui-datetimebox" id="startDate" name="startDate" style="width:500px;"
+                           data-options="required:true, prompt: '2099-12-31 00:00:00'"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>结束时间:</td>
+                <td>
+                    <input class="easyui-datetimebox" id="endDate" name="endDate" style="width:500px;"
+                           data-options="required:true, prompt: '2099-12-31 00:00:00'"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input class="easyui-combobox" data-options="required:true" id="status" name="status"
+                           style="width: 500px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

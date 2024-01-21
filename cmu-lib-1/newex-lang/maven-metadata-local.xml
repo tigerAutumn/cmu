@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>cc.newex.commons</groupId>
+  <artifactId>newex-lang</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20181106113356</lastUpdated>
+  </versioning>
+</metadata>

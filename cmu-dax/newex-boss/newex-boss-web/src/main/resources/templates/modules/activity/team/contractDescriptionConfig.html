@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约战队</title>
+    <script th:src="@{'/js/modules/activity/team/contractDescriptionConfig.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    开始区间：<input class="easyui-textbox" type="text" id="contractDescriptionConfig-start" name="contractDescriptionConfig-start" style="width: 100px"/>
+    结束区间：<input class="easyui-textbox" type="text" id="contractDescriptionConfig-end" name="contractDescriptionConfig-end" style="width: 100px"/>
+    <a id="contractDescriptionConfig-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="contractDescriptionConfig-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<div id="contractDescriptionConfig-dlg">
+    <form id="contractDescriptionConfig-form" name="contractDescriptionConfig-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>开始区间</td>
+                <td>
+                    <input id="startInterval" name="startInterval" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>结束区间</td>
+                <td>
+                    <input id="endInterval" name="endInterval" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>区间描述</td>
+                <td>
+                    <input id="description" name="description" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

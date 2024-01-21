@@ -1,0 +1,28 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cc.newex.spring.boot.autoconfigure.memcached.XMemcachedAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.fileupload.oss.OssAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.fileupload.s3.S3AutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.security.SecurityAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.web.WebSupportAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.swagger.SwaggerAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.openapi.OpenApiAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.openapi.OpenApiKeyAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.session.SessionAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.session.MemcachedSessionAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.session.RedisSessionAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.ucenter.UCenterAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.ucenter.memcached.UCenterMemcachedAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.ucenter.redis.UCenterRedisAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.feign.MyFeignAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.redis.MyRedisAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.hystrix.HystrixRequestAttributeAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.config.RefreshSpringCloudConfigAutoConfiguration,\
+  cc.newex.spring.boot.autoconfigure.ratelimiter.RateLimiterAutoConfiguration
+#
+# Bootstrap components
+#
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+cc.newex.spring.boot.autoconfigure.kms.properties.AliyunKmsPropertySourceAutoConfiguration,\
+cc.newex.spring.boot.autoconfigure.kms.properties.AwsKmsPropertySourceAutoConfiguration,\
+cc.newex.spring.boot.autoconfigure.kms.encryptor.AliyunKmsEncryptionAutoConfiguration,\
+cc.newex.spring.boot.autoconfigure.kms.encryptor.AwsKmsEncryptionAutoConfiguration

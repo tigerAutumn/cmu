@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.integration.data.msg.MessageRepository">
+    <select id="selectOutboxMessages" resultType="cc.newex.dax.integration.domain.msg.Message"
+            parameterType="java.util.Map">
+        <![CDATA[
+        SELECT * FROM int_message WHERE is_sent=0 AND retry_times<3 AND created_date>=#{date}  ORDER BY id ASC LIMIT #{offset},#{length}
+        ]]>
+    </select>
+</mapper>

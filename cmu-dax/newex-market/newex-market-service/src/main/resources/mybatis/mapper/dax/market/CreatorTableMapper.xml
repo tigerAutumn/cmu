@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.market.data.CreatorTableRepository">
+
+    <update id="createMarketData" parameterType="java.lang.Integer">
+        CREATE TABLE  IF NOT EXISTS `market_data_${marketFrom}` (
+          `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '交易数据',
+          `market_from` int(4) NOT NULL DEFAULT '0' COMMENT '',
+          `open` double(16,8) NOT NULL DEFAULT '0.00000000' COMMENT '开盘价',
+          `high` double(16,8) NOT NULL DEFAULT '0.00000000' COMMENT '最高价',
+          `low` double(16,8) NOT NULL DEFAULT '0.00000000' COMMENT '最低价',
+          `close` double(16,8) NOT NULL DEFAULT '0.00000000' COMMENT '收盘价',
+          `volume` double(20,8) NOT NULL DEFAULT '0.00000000' COMMENT '成交量',
+          `coin_volume` double(16,8) DEFAULT '0.00000000' COMMENT '币总数',
+          `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0:1分钟 1:5分钟 2:15分钟 3:日 4:周 5:月',
+          `start_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '起始id',
+          `end_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '结束id',
+          `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+          PRIMARY KEY (`id`),
+          KEY `idx_md${marketFrom}_type_create_date` (`type`,`created_date`) USING BTREE,
+          KEY `idx_md${marketFrom}_type` (`type`) USING BTREE
+        ) ENGINE=InnoDB AUTO_INCREMENT=33955807 DEFAULT CHARSET=utf8;
+    </update>
+
+
+
+    <update id="createMarketIndexRecord" parameterType="java.lang.Integer">
+        CREATE TABLE  IF NOT EXISTS `market_index_record_${marketFrom}` (
+          `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+          `market_from` int(11) NOT NULL COMMENT '站点',
+          `price` decimal(32,16) NOT NULL DEFAULT '0.0000000000000000' COMMENT '价格',
+          `middle_price` decimal(32,16) NOT NULL DEFAULT '0.0000000000000000' COMMENT '中间价格',
+          `invalid` tinyint(2) NOT NULL DEFAULT '0' COMMENT '默认0有效、1无效',
+          `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录时间',
+          PRIMARY KEY (`id`),
+          KEY `idx_mir${marketFrom}_market_from` (`market_from`) USING BTREE,
+          KEY `idx_mir${marketFrom}_created_date` (`created_date`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    </update>
+
+
+    <select id="checkTableName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM information_schema.tables WHERE table_name = ${tableName}
+    </select>
+
+</mapper>

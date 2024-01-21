@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 法币账单</title>
+</head>
+
+<body>
+<div th:fragment="copy" id="tabl11" class="easyui-tabs" style="height: 100%">
+    <div title="账单记录" style="width: 100%">
+        <div class="toolbar">
+            类型:<input class="easyui-combobox" id="legalTender" name="legalTender" style="width:150px">
+
+            币种:<input class="easyui-combobox" id="currency" name="currency" style="width: 150px"/>
+
+            <a id="account-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 92%;padding:1px">
+            <div id="c2c-bill" style="width: 100%;"></div>
+        </div>
+        <div id="bill-detail-dlg" title="详细信息">
+            <table class="table" width="100%">
+                <tr>
+                    <td>用户Id</td>
+                    <td><label id="bill-userId"/></td>
+                    <td>币种类型</td>
+                    <td><label id="bill-currencySymbol"/></td>
+                </tr>
+                <tr>
+                    <td>类型：</td>
+                    <td><label id="bill-typeDescription"/></td>
+                    <td>创建时间</td>
+                    <td><label id="bill-createdDate"/></td>
+                </tr>
+                <tr>
+                    <td>金额</td>
+                    <td><label id="bill-amountStr"/></td>
+                    <td>余额:</td>
+                    <td><label id="bill-afterBalance"/></td>
+                </tr>
+                <tr>
+                    <td>Txid:</td>
+                    <td colspan="3"><label id="bill-tradeNo"/></td>
+                </tr>
+                <tr>
+                    <td>地址:</td>
+                    <td colspan="3"><label id="bill-to"/></td>
+                </tr>
+                <tr>
+                    <td>手续费：</td>
+                    <td><label id="bill-fee"/></td>
+                    <td>实际到帐时间：</td>
+                    <td><label id="bill-real"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div title="广告单" style="width: 100%">
+        <div class="toolbar">
+            委托单号:<input class="easyui-textbox" id="postId" name="postId" style="width: 150px"/>
+
+            委托单类型:<select class="easyui-combobox" id="postType" name="postType" style="width: 150px">
+            <option value="-1">全部</option>
+            <option value="0">卖</option>
+            <option value="1">买</option>
+        </select>
+
+            委托单状态:<select class="easyui-combobox" id="postStatus" name="postStatus" style="width: 150px">
+            <option value="-1">全部</option>
+            <option value="0">无效数据</option>
+            <option value="1">新订单</option>
+            <option value="2">已取消</option>
+            <option value="3">已完成</option>
+        </select>
+
+            <a id="post-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 92%;padding:1px">
+            <div id="c2c-post" style="width: 100%"></div>
+        </div>
+    </div>
+
+    <div title="订单记录" style="width: 100%">
+        <div class="toolbar">
+            订单号:<input class="easyui-textbox" id="orderId" name="orderId" style="width: 150px">
+
+            币种:<input class="easyui-combobox" id="currency2" name="currency2" style="width: 150px"/>
+
+            状态:<select class="easyui-combobox" id="payType2" name="payType2" style="width: 150px;height: auto">
+            <option value="-1">全部</option>
+            <option value="0">银行卡</option>
+            <option value="1">支付宝</option>
+            <option value="2">微信</option>
+        </select>
+
+            <a id="c2corder-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+        </div>
+        <div style="height: 92%;padding:1px">
+            <div id="c2c-order" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

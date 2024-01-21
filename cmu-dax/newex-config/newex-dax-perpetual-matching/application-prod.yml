@@ -1,0 +1,50 @@
+# mysql
+newex:
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.223:3306/perpetual?allowMultiQueries=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        max-active: 10
+        min-idle: 0
+    config:
+      online: 0
+      module: 3
+      dk-currency: cmdk
+      robot: 10000080
+      system-bill-phones:
+  feignClient:
+    dax:
+      asset: newex-dax-asset
+      users: newex-dax-users
+      integration: newex-dax-integration
+      market: newex-dax-market
+#
+# spring redis
+#
+spring:
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    password: xxx
+    pool:
+      max-active: 10
+      max-idle: 5
+      max-wait: -1
+      min-idle: 2
+
+#
+# logging
+#
+logging:
+  config: classpath:logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-perpetual-matching
+  level:
+    default: info
+    commons: info
+    dax: info
+    mybatis: info

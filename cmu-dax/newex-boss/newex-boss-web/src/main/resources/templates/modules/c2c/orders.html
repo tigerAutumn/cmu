@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>订单列表</title>
+    <script th:src="@{'/js/modules/c2c/order.js?v='+${rnd}}"></script>
+    <style>
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+
+        .table tr.alter {
+            background-color: #f5fafe;
+        }
+
+        h1.b1, h2.b2, h3.b3 {
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        body a {
+            transition: 0.5s all;
+            -webkit-transition: 0.5s all;
+            -moz-transition: 0.5s all;
+            -o-transition: 0.5s all;
+            -ms-transition: 0.5s all;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .clear {
+
+            clear: both;
+            display: block;
+
+            content: ".";
+        }
+
+        .top1 {
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        .top1 ul li {
+            padding-left: 10px;
+            border: 1px solid #ccc;
+            padding: 0px 10px 0px 10px;
+            text-align: center;
+            float: left;
+        }
+
+        .top2 {
+
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script>
+        function imgOpen(img) {
+            var simg = document.getElementById(img.id).src;
+            $('#img-dlg').dialog({
+                title: '预览',
+                width: 710,
+                height: window.screen.height - 550,
+                resizable: true,
+                closed: false,
+                cache: false,
+                modal: true
+            });
+            $("#bigimg").attr("src", simg);
+        }
+    </script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<!--<div style="border:1px solid #ccc;padding-top: 10px;padding-bottom: 10px;margin-bottom: 10px;">-->
+<!--<div style="float: left;padding-left:40px;"><a id="btn-user" href="#" class="easyui-linkbutton"> 用户订单列表 </a></div>-->
+<!--<div style="padding-left: 30px;float: left;"><a id="btn-merchant" href="#" class="easyui-linkbutton"> 商家订单列表 </a>-->
+<!--</div>-->
+<!--<div class="clear"></div>-->
+<!--</div>-->
+
+<div id="toolbar" class="toolbar">
+    <div style="border-right: 1px solid #444;width: 55%; float: left;">
+        <div style="padding-top: 5px;">
+            订 单 I D：<input class="easyui-textbox" type="text" id="order-publicOrderId" name="order-publicOrderId"
+                           style="width: 120px;" data-options=""/>
+            买 家 I D：<input class="easyui-textbox" type="text" id="order-buy" name="order-buy"
+                           style="width: 120px;" data-options=""/>
+            卖 家 I D：<input class="easyui-textbox" type="text" id="order-sell" name="order-sell"
+                           style="width: 120px" data-options=""/>
+            法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;币：<input id="order-legalCurrencySymbol" name="order-legalCurrencySymbol" class="easyui-combobox" style="width: 120px"/>
+
+        </div>
+        <div style="padding-top: 5px;">
+            转账类型：<select class="easyui-combobox" id="order-paymentType" name="order-paymentType"
+                         style="width: 120px">
+            <option selected="selected" value="">全部</option>
+            <option value="1">银行转账</option>
+            <option value="2">微信转账</option>
+            <option value="3">支付宝转账</option>
+        </select>
+            订单状态：<select class="easyui-combobox" id="order-orderStatus" name="order-orderStatus" style="width: 120px">
+            <option value="">全部</option>
+            <option value="1">新订单</option>
+            <option value="2">已取消</option>
+            <option value="3">已完成</option>
+        </select>
+            冻结状态：<select class="easyui-combobox" id="order-freezeType" name="order-freezeType" style="width: 120px">
+            <option selected="selected" value="">全部</option>
+            <option value="1">已冻结</option>
+            <option value="0">未冻结</option>
+        </select>
+            数 字货币：<input id="order-digitalCurrencySymbol" name="order-digitalCurrencySymbol" class="easyui-combobox" style="width: 120px"/>
+
+        </div>
+        <div style="padding-top: 5px;">
+            支付状态：<select class="easyui-combobox" id="order-paymentStatus" name="order-paymentStatus"
+                         style="width: 120px">
+            <option selected="selected" value="">全部</option>
+            <option value="1">未付款</option>
+            <option value="2">已付款</option>
+            <option value="3">已确认</option>
+            <option value="4">已经驳回</option>
+        </select>
+            开始时间：<input class="easyui-datetimebox" id="beginTime" name="beginTime" labelPosition="top"
+                        style="width:120px;">
+            结束时间：<input class="easyui-datetimebox" id="endTime" name="endTime" labelPosition="top" style="width:120px;">
+
+            <a id="btn-search" style="margin-left: 65px;" href="#" class="easyui-linkbutton" iconCls="icon-search">搜索 </a>
+
+        </div>
+        <div style="padding-top: 5px;">
+
+            <input id="modal-action" type="hidden" name="action" value=""/>
+        </div>
+    </div>
+    <div style="border: 0px solid #ff0000; float: right; width: 44%;">
+        <div class="top1" style="">
+            <ul>
+                <li>
+                    <div style="font-weight: bold;font-size: 18px;"><label style="font-size: 20px;"
+                                                                           id="report-detail-allOrderCount"/></div>
+                    <div style="color: #666;">当日完成订单</div>
+                </li>
+                <li>
+                    <div style="font-weight: bold;font-size: 18px;"><label style="font-size: 20px;"
+                                                                           id="report-detail-cancelledOrderCount"/>
+                    </div>
+                    <div style="color: #666;">当日客服取消订单</div>
+                </li>
+                <li>
+                    <div style="font-weight: bold;font-size: 18px;"><label style="font-size: 20px;"
+                                                                           id="report-detail-completedOrderCount"/>
+                    </div>
+                    <div style="color: #666;">当日客诉订单</div>
+                </li>
+                <li>
+                    <div style="font-weight: bold;font-size: 18px;"><label style="font-size: 20px;"
+                                                                           id="report-detail-frozenCount"/></div>
+                    <div style="color: #666;">当日全部订单</div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="top2" style="">
+            <div id="currencyList">
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br/>
+
+</div>
+<div style="height: 445px;padding:2px;">
+    <div id="user-datagrid"></div>
+</div>
+
+<div id="report-detail-dlg" title="订单详情">
+    <form id="reset-up-form" name="reset-up-form" method="post">
+        <div style="padding:20px 20px 20px 20px;">
+            <div style="padding-bottom: 20px;">
+                <div style="float: left;font-size: 30px;"></div>
+                <div style="float: right;">订单状态：<label style="font-size: 30px; color: #33CC99;"
+                                                       id="report-detail-type"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+            <table width="100%" class="table">
+                <tr>
+                    <td>订单ID：</td>
+                    <td><label id="report-detail-tradingOrderId"/></td>
+                    <td>转账方式：</td>
+                    <td><label id="report-detail-receiptAccountType"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>总金额：</td>
+                    <td><label id="report-detail-orderTotal"/></td>
+                    <td>收款人：</td>
+                    <td><label id="report-detail-bankCard"/></td>
+                </tr>
+                <tr>
+                    <td>价格：</td>
+                    <td><label id="report-detail-exchangeRate"/></td>
+                    <td>开户银行：</td>
+                    <td><label id="report-detail-accountOpeningBank"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>交易数量：</td>
+                    <td><label id="report-detail-buyerInAmount"/></td>
+                    <td>银行卡号：</td>
+                    <td><label id="report-detail-bankCardNumber"/></td>
+                </tr>
+                <tr>
+                    <td>手续费：</td>
+                    <td><label id="report-detail-platformInAmount"/></td>
+                    <td>确认支付时间：</td>
+                    <td><label id="report-detail-paidDate"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>支付状态：</td>
+                    <td><label id="report-detail-paymentStatus"/></td>
+                    <td>确认收款时间：</td>
+                    <td><label id="report-detail-modifyDate"/></td>
+                </tr>
+                <tr>
+                    <td>放币状态：</td>
+                    <td><label id="report-detail-dispatch"/></td>
+                    <td>放币时间：</td>
+                    <td><label id="report-detail-completeDate"/></td>
+                </tr>
+                <tr class="alter">
+                    <td>冻结状态：</td>
+                    <td><label id="report-detail-isFrozen"/></td>
+                    <td></td>
+                    <td><label id="report-detail-16"/></td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-left:20px;margin-right:20px;background: #ccc;padding-top: 20px;padding-left:20px;padding-bottom: 20px;">
+            <div style="width: 200px;float: left;">买家：<label id="report-detail-buyName"/></div>
+            <div style="width: 200px;float: left;">买家账号：<label id="report-detail-buyMobile"/></div>
+            <div style="width: 200px;float: left;">卖家：<label id="report-detail-sellName"/></div>
+            <div style="width: 200px;float: left;">卖家账号：<label id="report-detail-sellMobile"/></div>
+            <div class="clear"></div>
+        </div>
+
+        <div style="padding:20px 20px 20px 20px;">
+            <div class="imglist" id="imglist" style="display: none;">
+                <div style="padding-top: 20px;font-size:18px;font-weight: bold;">凭证照片</div>
+                <div style="padding-top: 10px;" id="imgrow">
+                </div>
+
+            </div>
+            <div style="padding-top: 20px;font-size:18px;font-weight: bold;">备注</div>
+            <div style="padding-top:10px;">
+                <input class="easyui-textbox" data-options="multiline:true" type="text" id="remarks"
+                       name="remarks"
+                       style="width: 100%;height: 100px"/></div>
+            <div style="padding-top: 20px;font-size:18px;font-weight: bold;">历史记录</div>
+            <div style="padding-top:10px;">
+                <div style="font-size: 18px;" id="remarkslist"></div>
+            </div>
+        </div>
+        <input id="orderId" type="hidden" name="orderId" value=""/>
+
+
+    </form>
+</div>
+<div id="img-dlg" title="预览">
+    <img id="bigimg" src="" width="100%">
+</div>
+
+</body>
+</html>

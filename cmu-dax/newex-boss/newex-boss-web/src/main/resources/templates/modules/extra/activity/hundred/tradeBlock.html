@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>交易黑名单</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/tradeBlock.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div style="height: 96%; padding: 1px">
+    <div id="trade-block-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增交易黑名单纪录 -->
+<div id="trade-block-dlg">
+    <form id="trade-block-form" name="trade-block-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>用户ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>邮箱</td>
+                <td>
+                    <input class="easyui-textbox" id="email" name="email" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>手机号</td>
+                <td>
+                    <input class="easyui-textbox" id="mobile" name="mobile" style="width: 450px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">NewEx-BOSS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+        <!-- common css -->
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <!-- easyui css -->
+        <link rel="stylesheet" th:href="@{/vendor/easyui/themes/bootstrap/easyui.css}"/>
+        <link rel="stylesheet" th:href="@{/vendor/easyui/themes/icon.css}"/>
+        <link rel="stylesheet" th:href="@{/custom/easyui/themes/icon.css}"/>
+        <!-- jquery viewer -->
+        <link rel="stylesheet" th:href="@{/vendor/viewer/css/viewer.css}"/>
+        <!-- common js -->
+        <script th:src="@{/vendor/jquery.min.js}"></script>
+        <script th:src="@{/vendor/jquery.extension.js}"></script>
+        <script th:src="@{/vendor/jquery.number.min.js}"></script>
+        <script th:src="@{/vendor/jquery-form/jquery.form.min.js}"></script>
+        <script th:src="@{/vendor/jquery-form/jquery.formautofill.min.js}"></script>
+        <script th:src="@{/vendor/juicer-min.js}"></script>
+        <script th:src="@{/vendor/moment-with-locales.min.js}"></script>
+        <!-- easyui js -->
+        <script th:src="@{/vendor/easyui/jquery.easyui.min.js}"></script>
+        <script th:src="@{/custom/easyui/validate.extension.js}"></script>
+        <script th:src="@{/vendor/easyui/locale/easyui-lang-zh_CN.js}"></script>
+        <!-- custom css -->
+        <script th:src="@{'/js/utils/easyui.utils.js?v='+${rnd}}"></script>
+        <script th:src="@{'/js/global.js?v='+${rnd}}"></script>
+        <!-- kindeditor js -->
+        <script th:src="@{/vendor/editor/kindeditor-all-min.js}"></script>
+        <script th:src="@{/vendor/editor/lang/zh-CN.js}"></script>
+        <!-- jquery viewer -->
+        <script th:src="@{/vendor/viewer/js/viewer.js}"></script>
+        <script th:src="@{/vendor/viewer/js/jquery-viewer.js}"></script>
+    </head>
+    <body layout:fragment="content"></body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.dao.XxlJobLogBakDao">
+
+	<sql id="Base_Column_List">
+		id,
+		job_group,
+		job_id,
+		glue_type,
+		executor_address,
+		executor_handler,
+		executor_param,
+		trigger_time,
+		trigger_code,
+		trigger_msg,
+		handle_time,
+		handle_code,
+		handle_msg
+	</sql>
+
+	<update id="replaceData" >
+		REPLACE INTO XXL_CUSTOM_QRTZ_TRIGGER_LOG_BAK SELECT * FROM XXL_JOB_QRTZ_TRIGGER_LOG where id&lt;=#{id}
+		<!--REPLACE INTO XXL_CUSTOM_QRTZ_TRIGGER_LOG_BAK(<include refid="Base_Column_List" />)-->
+		<!--VALUES(SELECT <include refid="Base_Column_List" /> FROM XXL_JOB_QRTZ_TRIGGER_LOG WHERE id&lt;=#{id})-->
+	</update>
+
+</mapper>

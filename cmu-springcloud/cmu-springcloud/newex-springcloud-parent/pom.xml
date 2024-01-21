@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.commons</groupId>
+        <artifactId>newex-spring-boot-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cc.newex.springcloud</groupId>
+    <artifactId>newex-springcloud-parent</artifactId>
+    <packaging>pom</packaging>
+    <description>newex-springcloud所有项目的maven parent pom项目</description>
+    <url>http://www.newex.com</url>
+    <properties>
+        <newex-springcloud.version>1.0.0-SNAPSHOT</newex-springcloud.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- newex springcloud jars -->
+        </dependencies>
+    </dependencyManagement>
+    <inceptionYear>2018</inceptionYear>
+    <developers>
+        <developer>
+            <id>newex-team</id>
+            <name>newex-team</name>
+            <email>newex-team@newex.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <url>http://www.newex.com</url>
+            <organization>newex</organization>
+            <organizationUrl>http://www.newex.com</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+</project>

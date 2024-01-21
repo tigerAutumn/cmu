@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.UserInfoRepository">
+    <resultMap id="UserLoginInfoMap" type="cc.newex.dax.users.domain.UserLoginInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="area_code" property="areaCode" jdbcType="INTEGER"/>
+        <result column="frozen" property="frozen" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="anti_phishing_code" property="antiPhishingCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="UserDetailInfoMap" type="cc.newex.dax.users.domain.UserDetailInfo" extends="UserInfoMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="trade_password" property="tradePassword" jdbcType="VARCHAR"/>
+        <result column="google_code" property="googleCode" jdbcType="VARCHAR"/>
+        <result column="authorities" property="authorities" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="area_code" property="areaCode" jdbcType="INTEGER"/>
+        <result column="anti_phishing_code" property="antiPhishingCode" jdbcType="VARCHAR"/>
+        <result column="channel" property="channel" jdbcType="INTEGER"/>
+        <result column="frozen" property="frozen" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="reg_from" property="regFrom" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="reg_ip" property="regIp" jdbcType="BIGINT"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="login_auth_flag" property="loginAuthFlag" jdbcType="INTEGER"/>
+        <result column="google_auth_flag" property="googleAuthFlag" jdbcType="INTEGER"/>
+        <result column="email_auth_flag" property="emailAuthFlag" jdbcType="INTEGER"/>
+        <result column="mobile_auth_flag" property="mobileAuthFlag" jdbcType="INTEGER"/>
+        <result column="trade_auth_flag" property="tradeAuthFlag" jdbcType="INTEGER"/>
+        <result column="login_pwd_strength" property="loginPwdStrength" jdbcType="INTEGER"/>
+        <result column="trade_pwd_strength" property="tradePwdStrength" jdbcType="INTEGER"/>
+        <result column="trade_pwd_input" property="tradePwdInput" jdbcType="INTEGER"/>
+        <result column="alipay_auth_flag" property="alipayAuthFlag" jdbcType="INTEGER"/>
+        <result column="wechat_pay_auth_flag" property="wechatPayAuthFlag" jdbcType="INTEGER"/>
+        <result column="bank_pay_auth_flag" property="bankPayAuthFlag" jdbcType="INTEGER"/>
+        <result column="spot_frozen_flag" property="spotFrozenFlag" jdbcType="INTEGER"/>
+        <result column="c2c_frozen_flag" property="c2cFrozenFlag" jdbcType="INTEGER"/>
+        <result column="contracts_frozen_flag" property="contractsFrozenFlag" jdbcType="INTEGER"/>
+        <result column="asset_frozen_flag" property="assetFrozenFlag" jdbcType="INTEGER"/>
+        <result column="spot_protocol_flag" property="spotProtocolFlag" jdbcType="INTEGER"/>
+        <result column="c2c_protocol_flag" property="c2cProtocolFlag" jdbcType="INTEGER"/>
+        <result column="portfolio_protocol_flag" property="portfolioProtocolFlag" jdbcType="INTEGER"/>
+        <result column="perpetual_protocol_flag" property="perpetualProtocolFlag" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <resultMap id="UserStatisticsInfoMap" type="cc.newex.dax.users.domain.UserStatisticsInfo">
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="channel_code" property="channelCode" jdbcType="VARCHAR"/>
+        <result column="channel_name" property="channelName" jdbcType="VARCHAR"/>
+        <result column="channel_full_name" property="channelFullName" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="User_Info_Without_Password_Column_List">
+        id ,parent_id,uid ,email ,mobile ,authorities ,nickname ,real_name ,avatar ,anti_phishing_code
+        ,google_code ,channel ,frozen ,type ,area_code ,reg_from ,status ,version ,reg_ip ,memo,created_date
+        ,updated_date,broker_id
+    </sql>
+    <sql id="User_Detail_Info_Without_Password_Column_List">
+        t1.id, t1.parent_id, t1.uid, t1.email, t1.mobile, t1.password, t1.authorities, t1.broker_id,
+        t1.nickname, t1.real_name, t1.avatar, t1.anti_phishing_code, t1.google_code, t1.channel,
+        t1.frozen, t1.type, t1.area_code, t1.reg_from, t1.status, t1.version,
+        t1.reg_ip, t1.memo, t1.created_date, t1.updated_date,
+        t2.login_auth_flag, t2.google_auth_flag, t2.email_auth_flag, t2.mobile_auth_flag, t2.trade_auth_flag,
+        t2.login_pwd_strength, t2.trade_pwd_strength, t2.trade_pwd_input, t2.alipay_auth_flag, t2.wechat_pay_auth_flag, t2.bank_pay_auth_flag,
+        t2.spot_frozen_flag, t2.c2c_frozen_flag, t2.contracts_frozen_flag, t2.asset_frozen_flag,
+        t2.spot_protocol_flag, t2.c2c_protocol_flag, t2.portfolio_protocol_flag, t2.perpetual_protocol_flag
+    </sql>
+    <sql id="Login_User_Info_With_Password_Column_List">
+        id ,email ,mobile,password, frozen ,area_code ,status ,anti_phishing_code
+    </sql>
+    <select id="selectUserLoginInfoByMobile" resultMap="UserLoginInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Login_User_Info_With_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserLoginInfoByEmail" resultMap="UserLoginInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Login_User_Info_With_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserLoginInfoById" resultMap="UserLoginInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Login_User_Info_With_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserDetailInfo" resultMap="UserDetailInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Detail_Info_Without_Password_Column_List"/>
+        from user_info t1 INNER JOIN user_settings t2 on t1.id = t2.user_id
+        where t1.id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectDetailUserInfoByMobile" resultMap="UserDetailInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Detail_Info_Without_Password_Column_List"/>
+        from user_info t1 INNER JOIN user_settings t2 on t1.id = t2.user_id
+        where t1.mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="selectDetailUserInfoByEmail" resultMap="UserDetailInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Detail_Info_Without_Password_Column_List"/>
+        from user_info t1 INNER JOIN user_settings t2 on t1.id = t2.user_id
+        where t1.email = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserInfoById" resultMap="UserInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Info_Without_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectUserInfoByMobile" resultMap="UserInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Info_Without_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserInfoByEmail" resultMap="UserInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="User_Info_Without_Password_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserStatisticsInfoByTime" resultMap="UserStatisticsInfoMap" parameterType="java.util.Map">
+        select u.id as user_id,c.channel_code,c.channel_name,c.channel_full_name,l.level
+        from
+        user_info u inner join user_invitation_channel c on u.channel=c.channel_code
+        left join user_kyc_level l on u.id=l.user_id
+        where u.created_date >= #{beginDate,jdbcType=TIMESTAMP} and u.created_date &lt;= #{endDate,jdbcType=TIMESTAMP}
+    </select>
+
+    <select id="selectUid" resultType="string" parameterType="java.util.Map">
+        select uid from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+
+</mapper>

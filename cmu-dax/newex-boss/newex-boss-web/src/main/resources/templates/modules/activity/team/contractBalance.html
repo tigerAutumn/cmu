@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约模拟金</title>
+    <script th:src="@{'/js/modules/activity/team/contractBalance.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    成员ID：<input class="easyui-textbox" type="text" id="contractBalance-userId" name="contractBalance-userId" style="width: 100px"/>
+    币种：<input class="easyui-textbox" type="text" id="contractBalance-currencyCode" name="contractBalance-currencyCode" style="width: 100px"/>
+    <a id="contractBalance-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="contractBalance-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<div id="contractBalance-dlg">
+    <form id="contractBalance-form" name="contractBalance-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>成员ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>币种</td>
+                <td>
+                    <input id="currencyCode" name="currencyCode" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>模拟金</td>
+                <td>
+                    <input id="amount" name="amount" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+                <td>券商ID</td>
+                <td>
+                    <input id="brokerId" name="brokerId" class="easyui-combobox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

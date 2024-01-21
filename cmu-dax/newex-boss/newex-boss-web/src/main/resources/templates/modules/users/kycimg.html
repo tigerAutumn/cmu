@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>KYC图片管理</title>
+    <script th:src="@{'/js/modules/users/kycimg.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    用户ID:<input class="easyui-textbox" type="text" id="search_userId" name="search_userId"
+                style="width: 100px" data-options=""/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="img-datagrid"></div>
+</div>
+<div id="img-dlg" title="">
+    <form id="img-form" name="img-form" method="post">
+        <input id="id" name="id" hidden/>
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td width="100px">用户Id</td>
+                <td colspan="5"><input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="100px">文件名称</td>
+                <td colspan="5"><input id="fileName" name="fileName" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">类型</td>
+                <td colspan="2"><select class="easyui-combobox" id="fileType" data-options="required:true,panelHeight:200" name="fileType" style="width: 200px">
+                    <option value="image">图片</option>
+                    <option value="video">视频</option>
+                    <option value="file">文件</option>
+                    <option value="kyc2">KYC2</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">请选择图片:</td>
+                <td colspan="5">
+                    <input class="easyui-filebox" id="file" name="file"
+                           data-options="buttonText:'选择上传文件'"
+                           style="width: 400px"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px">图片相对路径</td>
+                <td colspan="5"><input class="easyui-textbox" id="filePath" data-options="multiline:true" readonly name="filePath" style="width: 400px;height: 80px;"></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">备注</td>
+                <td colspan="5"><input class="easyui-textbox" id="note" data-options="multiline:true" name="note" style="width: 400px;height: 80px"></td>
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+<div id="kyc-dlg" style="padding-top: 60px;padding-left: 30px;padding-right:30px">
+    <form id="kyc-form" name="kyc-form" enctype="multipart/form-data" method="post">
+        <input class="easyui-filebox" id="kyc-file" name="file"
+               data-options="buttonText:'选择上传文件',multiple:true"
+               style="width: 400px"/>
+    </form>
+</div>
+</body>
+</html>

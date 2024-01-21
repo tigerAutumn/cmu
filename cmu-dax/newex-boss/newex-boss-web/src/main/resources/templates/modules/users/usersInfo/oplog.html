@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 操作日志信息</title>
+</head>
+
+<body>
+
+<div th:fragment="copy" id="tabl9" class="easyui-tabs" style="height: 100%">
+    <div title="客服操作日志" style="width: 100%;">
+        <div style="height: 95%;padding:1px">
+            <div id="custom-oplog-datagrid"></div>
+        </div>
+        <div id="custom-dlg" style="padding: 30px">
+            <input hidden id="id" name="id">
+            <input class="easyui-textbox" type="text" id="custom-memo" name="custom-memo" style="width: 300px;height: 100px" data-options="multiline:true"/>
+        </div>
+    </div>
+    <div title="用户操作日志" style="width: 100%;">
+        <div style="height: 95%;padding:1px">
+            <div id="user-oplog-datagrid"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

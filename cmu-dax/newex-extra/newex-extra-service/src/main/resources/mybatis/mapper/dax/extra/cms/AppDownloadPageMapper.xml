@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.extra.data.cms.AppDownloadPageRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="AppDownloadPageMap" type="cc.newex.dax.extra.domain.cms.AppDownloadPage">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="logo_img" property="logoImg" jdbcType="VARCHAR" />
+    <result column="locale" property="locale" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="android_url" property="androidUrl" jdbcType="VARCHAR" />
+    <result column="ios_url" property="iosUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="template_id" property="templateId" jdbcType="INTEGER" />
+    <result column="first_title" property="firstTitle" jdbcType="VARCHAR" />
+    <result column="first_intro" property="firstIntro" jdbcType="VARCHAR" />
+    <result column="first_img" property="firstImg" jdbcType="VARCHAR" />
+    <result column="second_title" property="secondTitle" jdbcType="VARCHAR" />
+    <result column="second_intro" property="secondIntro" jdbcType="VARCHAR" />
+    <result column="second_img" property="secondImg" jdbcType="VARCHAR" />
+    <result column="third_feature_1" property="thirdFeature1" jdbcType="VARCHAR" />
+    <result column="third_feature_2" property="thirdFeature2" jdbcType="VARCHAR" />
+    <result column="third_feature_3" property="thirdFeature3" jdbcType="VARCHAR" />
+    <result column="third_feature_4" property="thirdFeature4" jdbcType="VARCHAR" />
+    <result column="third_intro_1" property="thirdIntro1" jdbcType="VARCHAR" />
+    <result column="third_intro_2" property="thirdIntro2" jdbcType="VARCHAR" />
+    <result column="third_intro_3" property="thirdIntro3" jdbcType="VARCHAR" />
+    <result column="third_intro_4" property="thirdIntro4" jdbcType="VARCHAR" />
+    <result column="third_img_1" property="thirdImg1" jdbcType="VARCHAR" />
+    <result column="third_img_2" property="thirdImg2" jdbcType="VARCHAR" />
+    <result column="third_img_3" property="thirdImg3" jdbcType="VARCHAR" />
+    <result column="third_img_4" property="thirdImg4" jdbcType="VARCHAR" />
+    <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    cms_app_download_page
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    name, logo_img, locale, uid, link, android_url, ios_url, status, template_id, first_title, 
+    first_intro, first_img, second_title, second_intro, second_img, third_feature_1, 
+    third_feature_2, third_feature_3, third_feature_4, third_intro_1, third_intro_2, 
+    third_intro_3, third_intro_4, third_img_1, third_img_2, third_img_3, third_img_4, 
+    publisher_id, created_date, updated_date, broker_id
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.name != null">
+      name,
+    </if>
+    <if test="record.logoImg != null">
+      logo_img,
+    </if>
+    <if test="record.locale != null">
+      locale,
+    </if>
+    <if test="record.uid != null">
+      uid,
+    </if>
+    <if test="record.link != null">
+      link,
+    </if>
+    <if test="record.androidUrl != null">
+      android_url,
+    </if>
+    <if test="record.iosUrl != null">
+      ios_url,
+    </if>
+    <if test="record.status != null">
+      status,
+    </if>
+    <if test="record.templateId != null">
+      template_id,
+    </if>
+    <if test="record.firstTitle != null">
+      first_title,
+    </if>
+    <if test="record.firstIntro != null">
+      first_intro,
+    </if>
+    <if test="record.firstImg != null">
+      first_img,
+    </if>
+    <if test="record.secondTitle != null">
+      second_title,
+    </if>
+    <if test="record.secondIntro != null">
+      second_intro,
+    </if>
+    <if test="record.secondImg != null">
+      second_img,
+    </if>
+    <if test="record.thirdFeature1 != null">
+      third_feature_1,
+    </if>
+    <if test="record.thirdFeature2 != null">
+      third_feature_2,
+    </if>
+    <if test="record.thirdFeature3 != null">
+      third_feature_3,
+    </if>
+    <if test="record.thirdFeature4 != null">
+      third_feature_4,
+    </if>
+    <if test="record.thirdIntro1 != null">
+      third_intro_1,
+    </if>
+    <if test="record.thirdIntro2 != null">
+      third_intro_2,
+    </if>
+    <if test="record.thirdIntro3 != null">
+      third_intro_3,
+    </if>
+    <if test="record.thirdIntro4 != null">
+      third_intro_4,
+    </if>
+    <if test="record.thirdImg1 != null">
+      third_img_1,
+    </if>
+    <if test="record.thirdImg2 != null">
+      third_img_2,
+    </if>
+    <if test="record.thirdImg3 != null">
+      third_img_3,
+    </if>
+    <if test="record.thirdImg4 != null">
+      third_img_4,
+    </if>
+    <if test="record.publisherId != null">
+      publisher_id,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.name != null">
+      #{record.name,jdbcType=VARCHAR},
+    </if>
+    <if test="record.logoImg != null">
+      #{record.logoImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.locale != null">
+      #{record.locale,jdbcType=VARCHAR},
+    </if>
+    <if test="record.uid != null">
+      #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.link != null">
+      #{record.link,jdbcType=VARCHAR},
+    </if>
+    <if test="record.androidUrl != null">
+      #{record.androidUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.iosUrl != null">
+      #{record.iosUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.status != null">
+      #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.templateId != null">
+      #{record.templateId,jdbcType=INTEGER},
+    </if>
+    <if test="record.firstTitle != null">
+      #{record.firstTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.firstIntro != null">
+      #{record.firstIntro,jdbcType=VARCHAR},
+    </if>
+    <if test="record.firstImg != null">
+      #{record.firstImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondTitle != null">
+      #{record.secondTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondIntro != null">
+      #{record.secondIntro,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondImg != null">
+      #{record.secondImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature1 != null">
+      #{record.thirdFeature1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature2 != null">
+      #{record.thirdFeature2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature3 != null">
+      #{record.thirdFeature3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature4 != null">
+      #{record.thirdFeature4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro1 != null">
+      #{record.thirdIntro1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro2 != null">
+      #{record.thirdIntro2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro3 != null">
+      #{record.thirdIntro3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro4 != null">
+      #{record.thirdIntro4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg1 != null">
+      #{record.thirdImg1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg2 != null">
+      #{record.thirdImg2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg3 != null">
+      #{record.thirdImg3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg4 != null">
+      #{record.thirdImg4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.publisherId != null">
+      #{record.publisherId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.name,jdbcType=VARCHAR},
+    #{record.logoImg,jdbcType=VARCHAR},
+    #{record.locale,jdbcType=VARCHAR},
+    #{record.uid,jdbcType=VARCHAR},
+    #{record.link,jdbcType=VARCHAR},
+    #{record.androidUrl,jdbcType=VARCHAR},
+    #{record.iosUrl,jdbcType=VARCHAR},
+    #{record.status,jdbcType=INTEGER},
+    #{record.templateId,jdbcType=INTEGER},
+    #{record.firstTitle,jdbcType=VARCHAR},
+    #{record.firstIntro,jdbcType=VARCHAR},
+    #{record.firstImg,jdbcType=VARCHAR},
+    #{record.secondTitle,jdbcType=VARCHAR},
+    #{record.secondIntro,jdbcType=VARCHAR},
+    #{record.secondImg,jdbcType=VARCHAR},
+    #{record.thirdFeature1,jdbcType=VARCHAR},
+    #{record.thirdFeature2,jdbcType=VARCHAR},
+    #{record.thirdFeature3,jdbcType=VARCHAR},
+    #{record.thirdFeature4,jdbcType=VARCHAR},
+    #{record.thirdIntro1,jdbcType=VARCHAR},
+    #{record.thirdIntro2,jdbcType=VARCHAR},
+    #{record.thirdIntro3,jdbcType=VARCHAR},
+    #{record.thirdIntro4,jdbcType=VARCHAR},
+    #{record.thirdImg1,jdbcType=VARCHAR},
+    #{record.thirdImg2,jdbcType=VARCHAR},
+    #{record.thirdImg3,jdbcType=VARCHAR},
+    #{record.thirdImg4,jdbcType=VARCHAR},
+    #{record.publisherId,jdbcType=INTEGER},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.name != null">
+      name = #{record.name,jdbcType=VARCHAR},
+    </if>
+    <if test="record.logoImg != null">
+      logo_img = #{record.logoImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.locale != null">
+      locale = #{record.locale,jdbcType=VARCHAR},
+    </if>
+    <if test="record.uid != null">
+      uid = #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.link != null">
+      link = #{record.link,jdbcType=VARCHAR},
+    </if>
+    <if test="record.androidUrl != null">
+      android_url = #{record.androidUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.iosUrl != null">
+      ios_url = #{record.iosUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.status != null">
+      status = #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.templateId != null">
+      template_id = #{record.templateId,jdbcType=INTEGER},
+    </if>
+    <if test="record.firstTitle != null">
+      first_title = #{record.firstTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.firstIntro != null">
+      first_intro = #{record.firstIntro,jdbcType=VARCHAR},
+    </if>
+    <if test="record.firstImg != null">
+      first_img = #{record.firstImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondTitle != null">
+      second_title = #{record.secondTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondIntro != null">
+      second_intro = #{record.secondIntro,jdbcType=VARCHAR},
+    </if>
+    <if test="record.secondImg != null">
+      second_img = #{record.secondImg,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature1 != null">
+      third_feature_1 = #{record.thirdFeature1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature2 != null">
+      third_feature_2 = #{record.thirdFeature2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature3 != null">
+      third_feature_3 = #{record.thirdFeature3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdFeature4 != null">
+      third_feature_4 = #{record.thirdFeature4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro1 != null">
+      third_intro_1 = #{record.thirdIntro1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro2 != null">
+      third_intro_2 = #{record.thirdIntro2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro3 != null">
+      third_intro_3 = #{record.thirdIntro3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdIntro4 != null">
+      third_intro_4 = #{record.thirdIntro4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg1 != null">
+      third_img_1 = #{record.thirdImg1,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg2 != null">
+      third_img_2 = #{record.thirdImg2,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg3 != null">
+      third_img_3 = #{record.thirdImg3,jdbcType=VARCHAR},
+    </if>
+    <if test="record.thirdImg4 != null">
+      third_img_4 = #{record.thirdImg4,jdbcType=VARCHAR},
+    </if>
+    <if test="record.publisherId != null">
+      publisher_id = #{record.publisherId,jdbcType=INTEGER},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updatedDate != null">
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    name = VALUES(name), logo_img = VALUES(logo_img), locale = VALUES(locale), uid = VALUES(uid), link = VALUES(link), android_url = VALUES(android_url), ios_url = VALUES(ios_url), status = VALUES(status), template_id = VALUES(template_id), first_title = VALUES(first_title), first_intro = VALUES(first_intro), first_img = VALUES(first_img), second_title = VALUES(second_title), second_intro = VALUES(second_intro), second_img = VALUES(second_img), third_feature_1 = VALUES(third_feature_1), third_feature_2 = VALUES(third_feature_2), third_feature_3 = VALUES(third_feature_3), third_feature_4 = VALUES(third_feature_4), third_intro_1 = VALUES(third_intro_1), third_intro_2 = VALUES(third_intro_2), third_intro_3 = VALUES(third_intro_3), third_intro_4 = VALUES(third_intro_4), third_img_1 = VALUES(third_img_1), third_img_2 = VALUES(third_img_2), third_img_3 = VALUES(third_img_3), third_img_4 = VALUES(third_img_4), publisher_id = VALUES(publisher_id), created_date = VALUES(created_date), updated_date = VALUES(updated_date), broker_id = VALUES(broker_id)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteIn" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="AppDownloadPageMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="AppDownloadPageMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="AppDownloadPageMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="selectIn" resultMap="AppDownloadPageMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id in 
+    <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+      #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="AppDownloadPageMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

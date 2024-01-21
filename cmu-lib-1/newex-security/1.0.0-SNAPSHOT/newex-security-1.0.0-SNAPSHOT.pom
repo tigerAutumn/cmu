@@ -1,0 +1,62 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.commons</groupId>
+        <artifactId>newex-spring-boot-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>newex-security</artifactId>
+    <name>newex-security</name>
+    <description>newex基于spring security的公共安全组件</description>
+    <properties>
+        <project.gitlab.group>https://git.cmx.com/newex-commons</project.gitlab.group>
+        <project.gitlab.url>git@git.cmx.com:newex-commons/newex-security.git</project.gitlab.url>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-spring-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <developers>
+        <developer>
+            <id>newex-team</id>
+            <name>newex-team</name>
+            <email>newex-team@newex.cc</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <url>http://www.newex.cc</url>
+            <organization>newex</organization>
+            <organizationUrl>http://www.newex.cc</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+</project>

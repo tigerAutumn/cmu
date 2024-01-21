@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>猜价格活动</title>
+    <script th:src="@{'/js/modules/extra/activity/guess.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 93%;padding:2px">
+    <div id="guess-datagrid"></div>
+</div>
+<div id="guess-dlg">
+    <form id="guess-form" name="guess-form" method="post">
+        <table th:cols="4" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td style="width: 100px;">最低价</td>
+                <td colspan="3"><input id="minPrice" type="number" name="minPrice" class="easyui-textbox" data-options="required:true,prompt:'>0'" style="width: 380px"/></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">最高价</td>
+                <td colspan="3"><input id="maxPrice" type="number" name="maxPrice" class="easyui-textbox" data-options="required:true,prompt:'>0'" style="width: 380px"/></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">数量</td>
+                <td colspan="3"><input id="count" type="number" name="count" class="easyui-textbox" data-options="required:true,prompt:'1~100'" style="width: 380px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

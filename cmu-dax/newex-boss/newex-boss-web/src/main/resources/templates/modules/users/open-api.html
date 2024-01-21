@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>IP限流管理</title>
+    <script th:src="@{'/js/modules/users/open-api.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div class="easyui-tabs" style="height: 100%;">
+    <div title="IP限流" style="width: 100%;">
+        <div class="toolbar">
+            IP:<input class="easyui-textbox" type="text" id="ip" name="ip" style="width: 200px"/>
+            备注:<input class="easyui-textbox" type="text" id="memo" name="memo" style="width: 200px"/>
+
+            <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+            <input id="modal-action" type="hidden" name="action" value=""/>
+        </div>
+        <div style="height: 96%; padding: 1px">
+            <div id="ipRateLimit-datagrid"></div>
+        </div>
+    </div>
+    <div title="api secrets" style="width: 100%;">
+        <div class="toolbar">
+            用户ID:<input class="easyui-textbox" type="text" id="userid" name="userid" style="width: 200px"/>
+            apiKey:<input class="easyui-textbox" type="text" id="apikey" name="apikey" style="width: 200px"/>
+
+            <a id="ip-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+
+        </div>
+        <div style="height: 96%; padding: 1px">
+            <div id="api-secret-datagrid"></div>
+        </div>
+    </div>
+</div>
+
+<div id="ipRateLimit-dlg">
+    <form id="ipRateLimit-form" name="ipRateLimit-form" method="post">
+        <center>
+            <table cellpadding="5" class="form-table">
+
+                <tr>
+                    <td>IP:</td>
+                    <td><input class="easyui-textbox" type="text" id="us_ip" name="ip"
+                               data-options="required:true"
+                               style="width: 300px"/></td>
+                </tr>
+                <tr>
+                    <td>券商:</td>
+                    <td><input class="easyui-textbox" type="text" id="brokerId-ip" name="brokerId"
+                               data-options="required:true"
+                               style="width: 300px"/></td>
+                </tr>
+                <tr>
+                    <td>请求次数限制:</td>
+                    <td><input class="easyui-textbox" type="text" id="us_rateLimit" name="rateLimit"
+                               data-options="required:true"
+                               style="width: 300px"/>eg:格式：20/2,2秒20次
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注:</td>
+                    <td style="padding-top:10px;">
+                        <input class="easyui-textbox" data-options="multiline:true" type="text" id="us_memo"
+                               name="memo"
+                               style="width: 99%;height: 100px"/></td>
+
+                </tr>
+                <input id="id" type="hidden" name="id" value=""/>
+            </table>
+        </center>
+    </form>
+</div>
+<div id="ratelimit-dlg" title="修改api secret限流与ip白名单">
+    <form id="ratelimit-form" name="ratelimit-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>限流次数:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="ratelimit"
+                                           name="ratelimit"
+                                           data-options="required:true"
+                                           style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>权限:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="authorities"
+                                           name="authorities"
+                                           data-options="required:true"
+                                           style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>IP白名单列表(多个ip用英文逗号分开):</td>
+                    <td colspan="3">
+                        <input class="easyui-textbox" type="text" id="ipWhiteLists" name="ipWhiteLists"
+                               data-options="required:false,multiline:true" style="width: 380px;height:150px"/>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

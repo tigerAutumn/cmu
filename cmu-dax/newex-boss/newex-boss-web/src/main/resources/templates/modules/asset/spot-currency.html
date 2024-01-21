@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>币币 - 币种管理</title>
+    <script th:src="@{'/js/modules/asset/spot-currency.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    币种简称:<input class="easyui-textbox" type="text" id="currency-symbol" name="currency-symbol" style="width: 150px"/>
+
+    可否提现:<input type="text" id="currency-withdrawable" name="currency-withdrawable" style="width: 150px"/>
+
+    可否充值:<input type="text" id="currency-rechargeable" name="currency-rechargeable" style="width: 150px"/>
+
+    上线状态:<input type="text" id="currency-online" name="currency-online" style="width: 150px"/>
+
+    业务线:<input type="text" id="currency-biz" name="currency-biz" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 92%; padding: 1px">
+    <div id="currency-datagrid"></div>
+</div>
+<div id="currency-dlg">
+    <form id="currency-form" name="currency-form" method="post">
+
+        <table cellpadding="5" style="margin: 10px auto" class="form-table">
+
+
+            <tr>
+                <td>币种简称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="symbol" name="symbol"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>币种全称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="fullName" name="fullName"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种符号:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sign" name="sign"
+                           style="width: 350px"/>
+                </td>
+
+                <td>币种图片:</td>
+                <td>
+                    <input class="easyui-filebox" name="imgfile"
+                           id="imgfile"
+                           data-options="onChange:function(){imgupdate()},prompt:'选择图片',buttonText:'&nbsp;选&nbsp;择&nbsp;',"
+                           style="width:350px">
+                    <input class="easyui-textbox" id="currencyPictureUrl" type="hidden" name="currencyPictureUrl"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>产品线:</td>
+                <td>
+                    <input type="text" id="biz" name="biz" style="width: 350px"/>
+                </td>
+
+                <td>排序:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="sort" name="sort"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+            <tr>
+
+            <tr>
+                <td>上线状态:</td>
+                <td>
+                    <input type="text" id="online" name="online" style="width: 350px"/>
+                </td>
+
+                <td>上线板块:</td>
+                <td>
+                    <input type="text" id="zone" name="zone" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>未来下线:</td>
+                <td>
+                    <input type="text" id="futureDown" name="futureDown" style="width: 350px"/>
+                </td>
+
+                <td>下线时间:</td>
+                <td>
+                    <input class="easyui-datebox" id="expireDate" name="expireDate" style="width: 350px"/>
+                </td>
+            <tr>
+
+            <tr>
+                <td>可否提现:</td>
+                <td>
+                    <input type="text" id="withdrawable" name="withdrawable" style="width: 350px"/>
+                </td>
+
+                <td>可否充值:</td>
+                <td>
+                    <input type="text" id="rechargeable" name="rechargeable" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>可否兑换:</td>
+                <td>
+                    <input type="text" id="exchange" name="exchange" style="width: 350px"/>
+                </td>
+
+                <td>可否划转:</td>
+                <td>
+                    <input type="text" id="transfer" name="transfer" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否领取:</td>
+                <td>
+                    <input type="text" id="receive" name="receive" style="width: 350px"/>
+                </td>
+
+                <td>是否弹窗:</td>
+                <td colspan="3">
+                    <input type="text" id="needAlert" name="needAlert" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>充值确认数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="depositConfirm" name="depositConfirm"
+                           data-options="prompt:'≥1且为整数',required:true, min:1" style="width: 350px"/>
+                </td>
+
+                <td>最小充值数量:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="minDepositAmount" name="minDepositAmount"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>提现手续费:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="withdrawFee" name="withdrawFee"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+
+                <td>最小提现数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="minWithdrawAmount" name="minWithdrawAmount"
+                           data-options="prompt:'>0',required:true, min:0, precision:8" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>提现确认数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="withdrawConfirm" name="withdrawConfirm"
+                           data-options="prompt:'≥1且为整数',required:true, min:1" style="width: 350px"/>
+                </td>
+
+                <td>最大提现数:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="maxWithdrawAmount" name="maxWithdrawAmount"
+                           data-options="prompt:'≥1且为整数',required:true, min:1" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>交易ID浏览器地址:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="txExplorerUrl" name="txExplorerUrl"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+
+                <td>区块浏览器地址:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="blockBrowser" name="blockBrowser"
+                           data-options="required:true" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否需要tag:</td>
+                <td>
+                    <input type="text" id="needTag" name="needTag" style="width: 350px"/>
+                </td>
+
+                <td>tagField:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="tagField" name="tagField"
+                           style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种链接(中文):</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="cnWikiUrl" name="cnWikiUrl"
+                           data-options="" style="width: 350px"/>
+                </td>
+
+                <td>币种链接(英文):</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="usWikiUrl" name="usWikiUrl"
+                           data-options="" style="width: 350px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="spotBrokerId" name="brokerId"
+                           style="width: 350px" data-options="required:true"/>
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+</div>
+
+<div id="currency-unhold-dlg">
+    <form id="currency-unhold-form" name="currency-unhold-form" method="post">
+        <input type="hidden" id="brokerId" name="brokerId"/>
+        <input type="hidden" id="currencyId" name="currencyId"/>
+
+        <table cellpadding="5" style="margin: 10px auto" class="form-table">
+            <tr>
+                <td>用户ID:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="userId" name="userId"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>解冻数量:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="amount" name="amount"
+                           data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>

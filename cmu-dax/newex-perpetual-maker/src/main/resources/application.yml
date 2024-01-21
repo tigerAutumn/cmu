@@ -1,0 +1,10 @@
+maker:
+  pairs: @maker.trade.pairs@
+  prod: @maker.trade.prod@
+
+#
+# logging config
+#
+logging:
+  path: @logging.path@
+

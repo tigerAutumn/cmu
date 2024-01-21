@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>活动时间配置</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/timeConfig.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<form id="time-config-form" name="time-config-form" method="POST">
+    <table th:cols="6" style="margin: 30px auto" class="form-table">
+
+        <tr>
+            <td>大转盘抽奖开始时间</td>
+            <td>
+                <input id="wheelStartDate" name="wheelStartDate" class="easyui-datetimebox" data-options="required:true,showSeconds:true" style="width: 450px"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>大转盘抽奖结束时间</td>
+            <td>
+                <input class="easyui-datetimebox" id="wheelEndDate" data-options="required:true,showSeconds:true" name="wheelEndDate" style="width: 450px"/>
+            </td>
+        </tr>
+
+        <!--/*
+        <tr>
+            <td>交易排行榜开始时间</td>
+            <td>
+                <input class="easyui-datetimebox" id="rankStartDate" data-options="required:true,showSeconds:true" name="rankStartDate" style="width: 450px"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>交易排行榜结束时间</td>
+            <td>
+                <input class="easyui-datetimebox" id="rankEndDate" data-options="required:true,showSeconds:true" name="rankEndDate" style="width: 450px"/>
+            </td>
+        </tr>
+        */-->
+
+        <tr>
+            <td>抢购活动开始时间</td>
+            <td>
+                <input class="easyui-datetimebox" id="rushStartDate" data-options="required:true,showSeconds:true" name="rushStartDate" style="width: 450px"/>
+            </td>
+        </tr>
+        <tr>
+            <td>抢购活动结束时间</td>
+            <td>
+                <input class="easyui-datetimebox" id="rushEndDate" data-options="required:true,showSeconds:true" name="rushEndDate" style="width: 450px"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id="timeConfigBtn" type="button" class="easyui-linkbutton" style="width: 50px">修改</button>
+            </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>活动奖品配置</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/prize.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div style="height: 96%; padding: 1px">
+    <div id="prize-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增中奖纪录 -->
+<div id="prize-dlg">
+    <form id="prize-form" name="hundred-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <tr>
+                <td>奖品级别</td>
+                <td>
+                    <input id="level" name="level" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>奖品描述</td>
+                <td>
+                    <input class="easyui-textbox" id="desc" data-options="required:true" name="desc" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>中奖概率</td>
+                <td>
+                    <input class="easyui-textbox" id="probability" data-options="required:true" name="probability" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>每日数量上限</td>
+                <td>
+                    <input class="easyui-textbox" id="dayLimit" data-options="required:true" name="dayLimit" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>总数量上限</td>
+                <td>
+                    <input class="easyui-textbox" id="allLimit" data-options="required:true" name="allLimit" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>当日发送数量</td>
+                <td>
+                    <input class="easyui-textbox" id="grant" data-options="" name="grant" style="width: 450px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

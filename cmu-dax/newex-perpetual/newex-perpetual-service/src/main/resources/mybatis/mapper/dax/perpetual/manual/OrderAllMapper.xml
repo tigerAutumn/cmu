@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cc.newex.dax.perpetual.data.OrderAllRepository">
+	<insert id="batchInsertOrderAllDealOnDuplicate">
+	    insert into 
+	    <include refid="Table_Name" />
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <include refid="Base_Column_List" />
+	    </trim>
+	    values 
+	    <foreach collection="records" item="record" index="index" separator=",">
+	      <trim prefix="(" suffix=")" suffixOverrides=",">
+	        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+	      </trim>
+	    </foreach>
+	    ON DUPLICATE KEY UPDATE
+		user_id = VALUES(user_id), contract_code = VALUES(contract_code), clazz = VALUES(clazz), must_maker = VALUES(must_maker), side = VALUES(side), detail_side =
+		VALUES(detail_side), amount = VALUES(amount), price = VALUES(price), avg_price = VALUES(avg_price), deal_amount = VALUES(deal_amount), size = VALUES(size), deal_size =
+		VALUES(deal_size), open_margin = VALUES(open_margin), extra_margin = VALUES(extra_margin), status = VALUES(status), order_from = VALUES(order_from), system_type =
+		VALUES(system_type), relation_order_id = VALUES(relation_order_id), profit = VALUES(profit), fee = VALUES(fee), reason = VALUES(reason), broker_id = VALUES(broker_id),
+		created_date = VALUES(created_date), modify_date = VALUES(modify_date)
+	  </insert>
+
+	<delete id="deleteByOrderIds" parameterType="java.util.Map">
+		delete from
+		<include refid="Table_Name" />
+		where order_id in
+		<foreach collection="records" item="record" index="index"
+			open="(" separator="," close=")">
+			#{record.orderId,jdbcType=BIGINT}
+		</foreach>
+	</delete>
+</mapper>

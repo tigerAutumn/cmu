@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="#{view.login.title}">NewEx-业务运营支撑系统(BOSS)</title>
+    <link th:href="@{/favicon.ico}" rel="shortcut icon"/>
+    <link th:href="@{'/css/login.css?v='+${rnd}}" rel="stylesheet"/>
+    <script th:src="@{/vendor/jquery.min.js}"></script>
+    <script th:src="@{/vendor/jquery.extension.js}"></script>
+    <script th:src="@{/vendor/jquery-form/jquery.formautofill.min.js}"></script>
+    <script th:src="@{/vendor/jquery-form/jquery.form.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validate/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validate/additional-methods.min.js}"></script>
+    <script th:src="@{'/js/global.js?v='+${rnd}}"></script>
+    <script th:src="@{'/js/login.js?v='+${rnd}}"></script>
+    <script type="text/javascript">
+        if (window !== top) {
+            top.location.href = location.href;
+        }
+    </script>
+</head>
+<body>
+<div class="header2">
+    <div class="logo1">
+        <a th:href="@{'https://'+${domain}}">
+            <img alt="" th:src="@{/images/logo.png}" style="width: 50px;height:50px"/></a>
+        <span class="header-dis" th:text="#{view.login.title}">NewEx-业务运营支撑系统(BOSS)</span>
+    </div>
+</div>
+<div class="logo-bg">
+    <img style="top:67px;" th:src="@{/images/banner2.jpg}"/>
+</div>
+<div class="texts">
+    <h1 th:text="#{view.login.texts.h1}">安全 稳定 高效</h1>
+    <p th:text="#{view.login.texts.p}">全球化数字资产交易平台</p>
+</div>
+<div class="login-from ml0">
+    <div class="tit box-t">
+        <div class="txt-tip txt-tip-wrong"></div>
+    </div>
+    <form id="login-form" name="login-form">
+        <div class="info-box">
+            <div id="hintInfo" class="hint-box" style="display: block;"></div>
+            <div id="emptyInfo" class="hint-box" style="display: block;"></div>
+        </div>
+
+        <div class="item1"><span class="login7-ico"></span>
+            <input id="account"
+                   name="account"
+                   class="txt placeholder"
+                   type="text"
+                   placeholder="用户名"
+                   value=""
+                   maxlength="50"
+                   th:placeholder="#{view.login.account}"/>
+        </div>
+        <div class="item1"><span class="login7-ico login7-ico1"></span>
+            <input id="password"
+                   type="password"
+                   class="txt placeholder"
+                   placeholder="密码"
+                   value=""
+                   maxlength="20"
+                   th:placeholder="#{view.login.password}"/>
+        </div>
+        <div class="item1">
+            <input id="captcha"
+                   name="captcha"
+                   class="txt placeholder"
+                   type="text"
+                   placeholder="Google验证码"
+                   value=""
+                   maxlength="6"
+                   th:placeholder="#{view.login.captcha}"/>
+        </div>
+        <div class="item1 item2">
+            <button id="btnLogin"
+                    name="btnLogin"
+                    class="btn"
+                    type="button"
+                    th:text="#{view.login.btnLogin}">登录
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

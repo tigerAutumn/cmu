@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>资产信息 - 组合账单</title>
+    <script th:src="@{'/js/modules/portfolio/portfolio-bill.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div style="height: 96%; padding: 1px">
+    <div class="easyui-tabs" style="width: 100%; height: 100%;">
+        <div title="申购记录">
+            <div id="purch-bill-datagrid"></div>
+        </div>
+        <div title="赎回记录">
+            <div id="redeem-bill-datagrid"></div>
+        </div>
+    </div>
+</div>
+
+<div id="redeem-bill-detail-dlg" title="手续费详情">
+
+</div>
+
+</body>
+</html>

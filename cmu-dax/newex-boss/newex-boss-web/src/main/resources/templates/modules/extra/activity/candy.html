@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>发币管理</title>
+    <script th:src="@{'/js/modules/extra/activity/giveCandy.js?v='+${rnd}}"></script>
+    <style>
+        .clear {
+            clear: both;
+            display: block;
+            content: ".";
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<form id="user-form" name="user-form" method="post">
+    <div style="color:#ff0000; padding-left: 30px; padding-top: 30px; font-size: 30px;">
+        发活动币之前，请确认按照模板填写数据，上传前切记上传正确已编好的模板!
+    </div>
+    <div style="padding-left: 30px; padding-top: 30px;float: left;">
+        发活动币导入excel：<input class="easyui-filebox" name="excelfile"
+                           id="excelfile"
+                           data-options=""
+
+                           style="width:380px">
+        <div id="ms" style="font-size: 30px; padding-top: 25px;font-size: 25px; "></div>
+    </div>
+    <div style="float:left;width: 600px;">
+        <div style="padding-left: 30px; padding-top: 30px;">
+            查询发币情况： <input class="easyui-textbox" data-options="prompt:'活动ID'" name="activityid"
+                           id="activityid"  style="width:200px;">
+            <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search"> 搜索 </a>
+            <div id="all" style="font-size: 25px; padding-top: 20px;"></div>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</form>
+</body>
+</html>

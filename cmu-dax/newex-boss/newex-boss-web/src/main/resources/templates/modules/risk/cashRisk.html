@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>提现风控管理</title>
+    <script th:src="@{'/js/modules/risk/cashRisk.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div style="height: 96%; padding: 1px">
+    <p style="font-size: 20px; padding: 20px">
+        你好，<span id="user-name-label" style="font-size: 20px;color: #FF0000"></span>
+    </p>
+
+    <p style="font-size: 20px; padding: 20px">
+        1、大额提现触发身份验证配置：<span id="max-amount-val" style="font-size: 20px;color: #FF0000"></span>&nbsp;&nbsp;BTC
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a id="max-amount-edit-button" href="#">修改</a>
+    </p>
+
+    <p style="font-size: 20px; padding: 20px">
+        2、提现审核额度配置：<span id="check-amount-val" style="font-size: 20px;color: #FF0000"></span>&nbsp;&nbsp;BTC
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a id="check-amount-edit-button" href="#">修改</a>
+    </p>
+</div>
+
+<div id="risk-dlg">
+    <form id="risk-form" name="risk-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td style="text-align: center;font-weight: bold;font-size: 20px;">
+                    大额提现触发身份验证配置
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    <input class="easyui-numberbox" type="text" id="maxAmount" name="maxAmount"
+                           data-options="required:true, min:0, precision:8, prompt: '0.00000000', suffix: ' BTC'" style="width: 500px"/>
+
+                </td>
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+<div id="withdraw-checker-dlg">
+    <form id="withdraw-checker-form" name="withdraw-checker-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td style="text-align: center;font-weight: bold;font-size: 20px;">
+                    提现审核额度配置
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    <input class="easyui-numberbox" type="text" id="checkAmount" name="checkAmount"
+                           data-options="required:true, min:0, precision:8, prompt: '0.00000000', suffix: ' BTC'" style="width: 500px"/>
+
+                </td>
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

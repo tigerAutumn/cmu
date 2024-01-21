@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>newex-spring-boot-starters</artifactId>
+        <groupId>cc.newex.commons</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>newex-aliyun-kms-refresh-spring-cloud-config-starter</artifactId>
+    <name>newex-aliyun-kms-refresh-spring-cloud-config-starter</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cc.newex.commons</groupId>
+            <artifactId>newex-spring-cloud-config-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-kms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

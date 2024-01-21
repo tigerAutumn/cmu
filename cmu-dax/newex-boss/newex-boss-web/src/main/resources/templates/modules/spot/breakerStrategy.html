@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>熔断策略</title>
+    <script th:src="@{'/js/modules/spot/breakerStrategy.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    策略ID:<input class="easyui-textbox" type="text" id="breakerStrategy-id" name="breakerStrategy-id"/>
+
+    预置策略:<input class="easyui-combobox" type="text" id="breakerStrategy-preset" name="breakerStrategy-preset"/>
+
+    监控方向:<input class="easyui-combobox" type="text" id="breakerStrategy-direction" name="breakerStrategy-direction"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="breakerStrategy-datagrid"></div>
+</div>
+<div id="breakerStrategy-dlg">
+    <form id="breakerStrategy-form" name="breakerStrategy-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>预置策略:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="breakerPreset" name="breakerPreset" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>监控方向:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="breakerDirection" name="breakerDirection" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>监控周期:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="monitorTime" name="monitorTime"
+                           data-options="required:true, min:0, suffix:' 秒', prompt:'以秒计'" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>触发熔断比例:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="triggerRatio" name="triggerRatio"
+                           data-options="required:true, min:0, suffix:'%', prompt:'200%'" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>暂停时长:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="pauseTime" name="pauseTime"
+                           data-options="required:true, min:0, suffix:' 秒', prompt:'以秒计'" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>任务间隔时长:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="intervalTime" name="intervalTime"
+                           data-options="required:true, min:0, suffix:' 秒', prompt:'以秒计'" style="width: 400px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>备注:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="remark" name="remark"
+                           data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

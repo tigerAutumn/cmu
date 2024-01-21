@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.asset.dao.TransferRecordRepository">
+    <select id="getUnconfirmedRecordSum" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        currency, sum(amount) amount
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <if test="transferType != null">
+                and transfer_type = #{transferType}
+            </if>
+            and status != 3
+        </where>
+        group by currency
+    </select>
+
+    <select id="selectAndLockOneByExample" resultMap="TransferRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        limit 1 FOR UPDATE
+    </select>
+</mapper>

@@ -1,0 +1,118 @@
+#
+# tomcat server
+#
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+#
+# newex
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  boss:
+    datasource:
+      master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: @newex.boss.datasource.master.url@
+        username: @newex.boss.datasource.master.username@
+        password: @newex.boss.datasource.master.password@
+        pool-name: @newex.app.name@-hikari
+        minimum-idle: 5
+        maximum-pool-size: 20
+        connection-test-query: 'SELECT 1'
+  security:
+    csrf:
+      referer-pattern: @newex.security.csrf.refererPattern@
+      exclude-path-patterns: @newex.security.csrf.excludePathPatterns@
+    xss:
+      url-patterns: @newex.security.xss.urlPatterns@
+  fileupload:
+    s3:
+      vpc-endpoint: @newex.fileupload.s3.vpc-endpoint@
+      endpoint: @newex.fileupload.s3.endpoint@
+      access-key-id: @newex.fileupload.s3.access-key-id@
+      access-key-secret: @newex.fileupload.s3.access-key-secret@
+      bucket-name: @newex.fileupload.s3.bucket-name@
+      path: @newex.fileupload.s3.path@
+      region: @newex.fileupload.s3.region@
+      extraPath: @newex.fileupload.s3.extraPath@
+  feignClient:
+    dax:
+      asset: @newex.feignClient.dax.asset@
+      c2c: @newex.feignClient.dax.c2c@
+      users: @newex.feignClient.dax.users@
+      extra: @newex.feignClient.dax.extra@
+      futures: @newex.feignClient.dax.futures@
+      spot: @newex.feignClient.dax.spot@
+      integration: @newex.feignClient.dax.integration@
+      activity: @newex.feignClient.dax.activity@
+      market: @newex.feignClient.dax.market@
+      portfolio: @newex.feignClient.dax.portfolio@
+      perpetual: @newex.feignClient.dax.perpetual@
+  web:
+    support:
+      message-converter:
+        enabled: false
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  thymeleaf:
+    mode: HTML
+  aop:
+    proxy-target-class: true
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool:
+       max-active: @spring.redis.pool.max-active@
+       max-idle: @spring.redis.pool.max-idle@
+       max-wait: @spring.redis.pool.max-wait@
+       min-idle: @spring.redis.pool.min-idle@
+#
+# logging
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false

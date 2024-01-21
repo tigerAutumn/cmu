@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 个人设置</title>
+</head>
+
+<body>
+
+<div th:fragment="copy">
+    <div style="font-weight: bold;padding-top: 30px;padding-left: 30px; font-size: 20px;">解绑设置</div>
+    <div style="padding-top: 30px;">
+        <div style="float: left;padding-left: 80px;">
+            <a href="javascript:" onclick="PersonalSettingsUtils.google()" class="easyui-linkbutton"
+               data-options="text: '解绑用户google码', iconCls: 'icon-ok'"></a>
+        </div>
+        <div style="float: left;padding-left: 50px;">
+            <a href="javascript:" onclick="PersonalSettingsUtils.mobile()" class="easyui-linkbutton"
+               data-options="text: '解绑用户手机', iconCls: 'icon-ok'"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div style="font-weight: bold;padding-top: 30px;padding-left: 30px; font-size: 20px;">法币设置</div>
+    <div style="padding-top: 20px; padding-left: 80px;">
+        <div style="float: left;padding-left: 30px;">法币商家状态:<label
+                style="font-weight: bold;font-size: 20px;" id="report-c2c-type"/>
+        </div>
+        <div style="float: left;padding-left: 20px;">
+            <a href="javascript:" style="display: none" onclick="PersonalSettingsUtils.C2CUserType(0)" class="easyui-linkbutton"
+               data-options="text: '取消',id: 'c2ccancelBttOne', iconCls: 'icon-no'"></a>
+
+            <a href="javascript:" style="display: none" onclick="PersonalSettingsUtils.C2CUserType(1)" class="easyui-linkbutton"
+               data-options="text: '开通',id: 'c2ccompleteBttOne', iconCls: 'icon-ok'"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div style="font-weight: bold;padding-top: 30px;padding-left: 30px; font-size: 20px;">用户解冻</div>
+    <div style="padding-top: 30px;padding-left: 30px">
+        <table cellpadding="5" class="form-table">
+            <tr>
+                <td>解锁24h内不能提现:</td>
+                <td><a href="javascript:" onclick="PersonalSettingsUtils.freezeEmail24Hours()" class="easyui-linkbutton"
+                       data-options="text: '解锁24h内不能提现',iconCls: 'icon-ok'"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>所有业务冻结:</td>
+                <td><input class="easyui-switchbutton" id="frozenSwitch" style="width:140px;">&nbsp;&nbsp;(<span style="color: #FF0000">ON:已冻结;OFF:未冻结</span>)
+                </td>
+            </tr>
+            <tr>
+                <td>现货业务冻结:</td>
+                <td><input class="easyui-switchbutton" id="spotFrozenSwitch" style="width:140px;">&nbsp;&nbsp;(<span style="color: #FF0000">ON:已冻结;OFF:未冻结</span>)
+                </td>
+            </tr>
+            <tr>
+                <td>法币业务冻结:</td>
+                <td><input class="easyui-switchbutton" id="c2cFrozenSwitch" style="width:140px;">&nbsp;&nbsp;(<span style="color: #FF0000">ON:已冻结;OFF:未冻结</span>)
+                </td>
+            </tr>
+            <tr>
+                <td>合约业务冻结:</td>
+                <td><input class="easyui-switchbutton" id="contractsFrozenSwitch" style="width:140px;">&nbsp;&nbsp;(<span style="color: #FF0000">ON:已冻结;OFF:未冻结</span>)
+                </td>
+            </tr>
+            <tr>
+                <td>资金业务冻结:</td>
+                <td><input class="easyui-switchbutton" id="assetFrozenSwitch" style="width:140px;">&nbsp;&nbsp;(<span style="color: #FF0000">ON:已冻结;OFF:未冻结</span>)
+                </td>
+            </tr>
+        </table>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

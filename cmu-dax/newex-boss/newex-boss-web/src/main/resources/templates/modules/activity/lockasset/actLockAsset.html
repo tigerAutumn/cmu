@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>锁仓活动管理</title>
+    <script th:src="@{'/vendor/easyui/datagrid-cellediting.js'}"></script>
+    <script th:src="@{'/js/modules/activity/lockasset/actLockAsset.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div id="toolbar" class="toolbar">
+    活动标识:<input class="easyui-textbox" type="text" id="search-actIdentify" name="search-actIdentify" style="width: 200px"/>
+    活动名称:<input class="easyui-textbox" type="text" id="search-actName" name="search-actName" style="width: 200px"/>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+</div>
+<div style="height: 93%;padding:2px">
+    <div id="lockasset-datagrid"></div>
+</div>
+<div id="lockasset-dlg">
+    <form id="lockasset-form" name="lockasset-form" method="post">
+        <input id="id" name="id" hidden/>
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td width="80px">活动标识：</td>
+                <td colspan="5"><input id="actIdentify" name="actIdentify" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">券商ID：</td>
+                <td colspan="5"><input class="easyui-combobox" id="brokerId" name="brokerId" style="width: 400px" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td width="80px">活动名称：</td>
+                <td colspan="5"><input id="actName" name="actName" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">活动链接：</td>
+                <td colspan="5"><input id="actUrl" name="actUrl" class="easyui-textbox" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">活动开始时间：</td>
+                <td colspan="5"><input class="easyui-datetimebox"  id="startTime" name="startTime" data-options="required:false" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">活动结束时间：</td>
+                <td colspan="5"><input class="easyui-datetimebox"  id="endTime" name="endTime" data-options="required:false" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">锁仓币种：</td>
+                <td colspan="5"><input class="easyui-combobox" id="currencyId" name="currencyId" style="width: 400px" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td width="80px">锁仓总额度：</td>
+                <td colspan="5"><input id="amoutTotal" name="amoutTotal" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">已抢购数量：</td>
+                <td colspan="5"><input id="amoutUsed" name="amoutUsed" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">单人锁仓上限：</td>
+                <td colspan="5"><input id="amoutLimitMax" name="amoutLimitMax" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">单次起购数量：</td>
+                <td colspan="5"><input id="amoutLimitMin" name="amoutLimitMin" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">单人锁仓次数：</td>
+                <td colspan="5"><input id="timesLimit" name="timesLimit" class="easyui-textbox" data-options="required:true" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">已参与人数：</td>
+                <td colspan="5"><input id="baseCount" name="baseCount" class="easyui-textbox" data-options="required:false" style="width: 400px"/></td>
+            </tr>
+            <tr>
+                <td width="80px">选择语言：</td>
+                <td colspan="5">
+                    <select class="easyui-combobox" data-options="required:true" id="locale" name="locale"
+                            style="width: 400px">
+                        <option selected="selected" value="zh-cn">简体中文</option>
+                        <option value="en-us">English</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="80px">锁仓类型：</td>
+                <td colspan="5">
+                    <input class="easyui-combobox" id="type" name="type" data-options="required:true" style="width: 400px"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="80px">是否分红：</td>
+                <td colspan="5">
+                    <select class="easyui-combobox" data-options="required:false" id="havaReward" name="havaReward"
+                            style="width: 400px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <!--<tr id="rateTr1">-->
+                <!--<td width="80px">首次解锁比例（单位%）：</td>-->
+                <!--<td colspan="5"><input id="unlockRateFirst" name="unlockRateFirst" class="easyui-textbox" data-options="required:false" style="width: 400px"/></td>-->
+            <!--</tr>-->
+            <tr id="rateTr2">
+                <td width="80px">每次解锁比例（单位%）：</td>
+                <td colspan="5"><input id="unlockRateRemainder" name="unlockRateRemainder" class="easyui-textbox" data-options="required:false" style="width: 400px"/></td>
+            </tr>
+            <!--<tr id="rateTr3">-->
+                <!--<td width="80px">解锁周期单位：</td>-->
+                <!--<td colspan="5">-->
+                    <!--<select class="easyui-combobox" data-options="required:false" id="unit" name="unit"-->
+                            <!--style="width: 400px">-->
+                        <!--<option value="2">天</option>-->
+                    <!--</select>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr id="rateTr4">
+                <td width="80px">解锁周期长度(天)：</td>
+                <td colspan="5"><input id="period" name="period" class="easyui-textbox" data-options="required:false" style="width: 400px"/></td>
+            </tr>
+            <tr id="rateTr5">
+                <td style="vertical-align: top" width="80px">锁仓奖励：</td>
+                <td colspan="5">
+                    <div id="lockasset-options-datagrid" style="width: 500px"></div>
+                    <input id="reward" type="hidden" name="reward"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="80px">活动banner图：</td>
+                <td colspan="5">
+                    <input type="text" id="bannerUrl-file" name="bannerUrl-file" style="width: 400px"/>
+                    <input type="hidden" id="bannerUrl"  name="bannerUrl"  style="width:400px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="80px">活动规则：</td>
+                <td colspan="5"><textarea id="rules" name="rules"  data-options="required:true" style="width:400px; height:300px;"></textarea></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

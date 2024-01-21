@@ -1,0 +1,41 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.newex.dax</groupId>
+        <artifactId>newex-dax-parent</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>newex-extra</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>newex交易平台-辅助服务项目</description>
+    <modules>
+        <module>newex-extra-dto</module>
+        <module>newex-extra-service</module>
+        <module>newex-extra-rest</module>
+        <module>newex-extra-client</module>
+        <module>newex-extra-scheduler</module>
+    </modules>
+    <properties>
+        <project.gitlab.group>https://gitlab.com/newex-dax</project.gitlab.group>
+        <project.gitlab.url>git@gitlab.newex.cc:newex-dax/newex-extra.git</project.gitlab.url>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- newex-dax-extra modules -->
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-extra-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.newex.dax</groupId>
+                <artifactId>newex-extra-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

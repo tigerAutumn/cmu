@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>币种wiki管理 - 币种基本信息</title>
+    <script th:src="@{'/js/modules/extra/currency/currencyBaseInfo.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    简称:<input class="easyui-textbox" type="text" id="currencyInfo-code" name="currencyInfo-code" style="width: 200px"/>
+    全称:<input class="easyui-textbox" type="text" id="currencyInfo-name" name="currencyInfo-name" style="width: 200px"/>
+
+    <a id="currency-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="currencyInfo-base-datagrid"></div>
+</div>
+<div id="currencyInfo-base-dlg">
+    <div id="currencyInfo-tabs" class="easyui-tabs" style="width:100%;height:100%;">
+        <div title="币种配置">
+            <form id="currencyInfo-base-form" name="currencyInfo-base-form" method="post">
+                <input type="hidden" id="currencyInfo-base-id" name="id"/>
+
+                <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+                    <tr>
+                        <td>币种简称:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="code" name="code"
+                                   data-options="required:true" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>币种全称:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="name" name="name"
+                                   data-options="required:true" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>币种图标:</td>
+                        <td>
+                            <input type="text" id="imgUrl-file" name="imgUrl-file" style="width: 500px"/>
+                            <input type="hidden" id="imgUrl" name="imgUrl"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>发行日期:</td>
+                        <td>
+                            <input class="easyui-datebox" type="text" id="issueDate" name="issueDate"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>发行价格:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="issuePrice" name="issuePrice"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>发行总量:</td>
+                        <td>
+                            <input class="easyui-numberbox" type="text" id="maxSupply" name="maxSupply"
+                                   data-options="required:true, min:0" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>当前流通数量:</td>
+                        <td>
+                            <input class="easyui-numberbox" type="text" id="circulatingSupply" name="circulatingSupply"
+                                   data-options="min:0" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>官网:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="officalWebsite" name="officalWebsite"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>区块浏览器地址:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="explorer" name="explorer"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>源代码:</td>
+                        <td>
+                            <input class="easyui-textbox" type="text" id="sourceCodeUrl" name="sourceCodeUrl"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>排序:</td>
+                        <td>
+                            <input class="easyui-numberbox" type="text" id="sort" name="sort" value="10"
+                                   data-options="min:1" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>状态:</td>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="status" name="status" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <a id="base-btn-save" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">保存</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+        <div title="币种详情">
+            <form id="currencyInfo-detail-form" name="currencyInfo-detail-form" method="post">
+                <input type="hidden" id="currencyInfo-detail-id" name="id"/>
+
+                <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+                    <tr>
+                        <td>币种简称:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-code" name="code"
+                                   data-options="required:true, readonly:true" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>语言:</td>
+                        <td colspan="3">
+                            <input class="easyui-combobox" type="text" id="currencyInfo-detail-locale" name="locale"
+                                   data-options="required:true" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>币种概念:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-concept" name="concept"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>白皮书:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-whitePaper" name="whitePaper"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Telegram:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-telegram" name="telegram"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Facebook:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-facebook" name="facebook"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Twitter:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-twitter" name="twitter"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Weibo:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-weibo" name="weibo"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>数字货币行情链接:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-coinMarketCapUrl" name="coinMarketCapUrl"
+                                   data-options="" style="width: 500px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>详细介绍:</td>
+                        <td colspan="3">
+                            <input class="easyui-textbox" type="text" id="currencyInfo-detail-introduction" name="introduction"
+                                   data-options="required:true, multiline:true" style="width: 500px;height: 250px"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <a id="detail-btn-save" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">保存</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="currencyInfo-tag-dlg">
+    <div id="currencyInfo-tag-tabs" class="easyui-tabs" style="width:900px;height:500px">
+        <input type="hidden" id="currency-code" name="code"/>
+        <input type="hidden" id="currency-id" name="code"/>
+        <ul id="tag-tree" class="tag-tree">
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

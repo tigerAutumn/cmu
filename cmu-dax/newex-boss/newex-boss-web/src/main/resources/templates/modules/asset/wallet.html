@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>模版管理</title>
+
+    <script th:src="@{'/js/modules/asset/wallet.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    <form id="message">
+        币种:<input id="wallet-currency-name" name="wallet-currency-name" class="easyui-combobox" style="width:200px;"/>
+        时间：<input class="easyui-datetimebox" id="startDateMillis" name="startDateMillis" labelPosition="top"
+                  style="width:200px;">
+        <a id="wallet-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+        <input id="modal-action" type="hidden" name="action" value=""/>
+    </form>
+
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="ds-datagrid"></div>
+</div>
+<div id="reset-threshold-dlg" title="修改参考值">
+    <form id="reset-threshold-form" name="reset-threshold-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr>
+                    <td>参考值:</td>
+                    <td colspan="3">
+                        <span id="reset-threshold" th:name="reset-threshold" class="threshold"></span>
+                        <input id="reset-currencyId" type="hidden" name="reset-currencyId"/></td>
+                </tr>
+                <tr>
+                    <td>新参考值:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="reset-newthreshold"
+                                           name="reset-newthreshold"
+                                           data-options="required:true"
+                                           style="width: 380px"/></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>

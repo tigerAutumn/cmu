@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.asset.dao.TransferRecordRepository">
+    <!-- CodeBuilder Generated -->
+    <resultMap id="TransferRecordMap" type="cc.newex.dax.asset.domain.TransferRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="from" property="from" jdbcType="VARCHAR"/>
+        <result column="to" property="to" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="fee" property="fee" jdbcType="DECIMAL"/>
+        <result column="confirmation" property="confirmation" jdbcType="INTEGER"/>
+        <result column="currency" property="currency" jdbcType="INTEGER"/>
+        <result column="biz" property="biz" jdbcType="INTEGER"/>
+        <result column="trader_no" property="traderNo" jdbcType="VARCHAR"/>
+        <result column="transfer_type" property="transferType" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">
+    transfer_record
+  </sql>
+    <sql id="Base_Column_List_Without_Id">
+    user_id, `from`,`to`, amount, fee, confirmation, currency, biz, trader_no, transfer_type,status, remark, create_date, update_date, broker_id
+  </sql>
+    <sql id="Base_Column_List">
+        id,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.userId != null">
+            user_id,
+        </if>
+        <if test="record.from != null">
+            `from`,
+        </if>
+        <if test="record.to != null">
+            `to`,
+        </if>
+        <if test="record.amount != null">
+            amount,
+        </if>
+        <if test="record.fee != null">
+            fee,
+        </if>
+        <if test="record.confirmation != null">
+            confirmation,
+        </if>
+        <if test="record.currency != null">
+            currency,
+        </if>
+        <if test="record.biz != null">
+            biz,
+        </if>
+        <if test="record.traderNo != null">
+            trader_no,
+        </if>
+        <if test="record.transferType != null">
+            transfer_type,
+        </if>
+        <if test="record.status != null">
+            status,
+        </if>
+        <if test="record.remark != null">
+            remark,
+        </if>
+        <if test="record.createDate != null">
+            create_date,
+        </if>
+        <if test="record.updateDate != null">
+            update_date,
+        </if>
+        <if test="record.brokerId != null">
+            broker_id,
+        </if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.userId != null">
+            #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.from != null">
+            #{record.from,jdbcType=VARCHAR},
+        </if>
+        <if test="record.to != null">
+            #{record.to,jdbcType=VARCHAR},
+        </if>
+        <if test="record.amount != null">
+            #{record.amount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.fee != null">
+            #{record.fee,jdbcType=DECIMAL},
+        </if>
+        <if test="record.confirmation != null">
+            #{record.confirmation,jdbcType=INTEGER},
+        </if>
+        <if test="record.currency != null">
+            #{record.currency,jdbcType=INTEGER},
+        </if>
+        <if test="record.biz != null">
+            #{record.biz,jdbcType=INTEGER},
+        </if>
+        <if test="record.traderNo != null">
+            #{record.traderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.transferType != null">
+            #{record.transferType,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null">
+            #{record.status,jdbcType=TINYINT},
+        </if>
+        <if test="record.remark != null">
+            #{record.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createDate != null">
+            #{record.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateDate != null">
+            #{record.updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.brokerId != null">
+            #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+    #{record.userId,jdbcType=BIGINT},
+    #{record.from,jdbcType=VARCHAR},
+    #{record.to,jdbcType=VARCHAR},
+    #{record.amount,jdbcType=DECIMAL},
+    #{record.fee,jdbcType=DECIMAL},
+    #{record.confirmation,jdbcType=INTEGER},
+    #{record.currency,jdbcType=INTEGER},
+    #{record.biz,jdbcType=INTEGER},
+    #{record.traderNo,jdbcType=VARCHAR},
+    #{record.transferType,jdbcType=INTEGER},
+    #{record.status,jdbcType=TINYINT},
+    #{record.remark,jdbcType=VARCHAR},
+    #{record.createDate,jdbcType=TIMESTAMP},
+    #{record.updateDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.userId != null">
+            user_id = #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.from != null">
+            `from` = #{record.from,jdbcType=VARCHAR},
+        </if>
+        <if test="record.to != null">
+            `to` = #{record.to,jdbcType=VARCHAR},
+        </if>
+        <if test="record.amount != null">
+            amount = #{record.amount,jdbcType=DECIMAL},
+        </if>
+        <if test="record.fee != null">
+            fee = #{record.fee,jdbcType=DECIMAL},
+        </if>
+        <if test="record.confirmation != null">
+            confirmation = #{record.confirmation,jdbcType=INTEGER},
+        </if>
+        <if test="record.currency != null">
+            currency = #{record.currency,jdbcType=INTEGER},
+        </if>
+        <if test="record.biz != null">
+            biz = #{record.biz,jdbcType=INTEGER},
+        </if>
+        <if test="record.traderNo != null">
+            trader_no = #{record.traderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.transferType != null">
+            transfer_type = #{record.transferType,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null">
+            status = #{record.status,jdbcType=TINYINT},
+        </if>
+        <if test="record.remark != null">
+            remark = #{record.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createDate != null">
+            create_date = #{record.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateDate != null">
+            update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.brokerId != null">
+            broker_id = #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        user_id = VALUES(user_id), `from` = VALUES(`from`), `to` = VALUES(`to`), amount = VALUES(amount), fee =
+        VALUES(fee),
+        confirmation = VALUES(confirmation), currency = VALUES(currency), biz = VALUES(biz), trader_no =
+        VALUES(trader_no),
+        transfer_type = VALUES(transfer_type), status = VALUES(status), remark = VALUES(remark), create_date =
+        VALUES(create_date), update_date = VALUES(update_date), broker_id = VALUES(broker_id)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id = #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" parameterType="java.util.Map" resultMap="TransferRecordMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="TransferRecordMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="TransferRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="TransferRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="TransferRecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != ''">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

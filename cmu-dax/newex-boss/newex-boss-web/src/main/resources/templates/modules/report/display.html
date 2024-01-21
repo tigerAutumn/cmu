@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title th:text="${report.name}"></title>
+    <link rel="stylesheet" th:href="@{/vendor/tablesorter/css/theme.dark.css}"/>
+    <link rel="stylesheet" th:href="@{/js/modules/report/themes/content/default.css}"/>
+    <script th:src="@{/vendor/tablesorter/jquery.tablesorter.min.js}"></script>
+    <script th:src="@{/vendor/jquery.fileDownload.js}"></script>
+    <script th:src="@{/vendor/jquery.fixtableheader.js}"></script>
+    <script th:src="@{/vendor/echarts.min.js}"></script>
+    <script th:src="@{'/js/modules/report/themes/content/chart.js?v='+${rnd}}"></script>
+    <script th:src="@{'/js/modules/report/themes/content/table.js?v='+${rnd}}"></script>
+    <script th:src="@{'/js/modules/report/display.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div region="center" style="border-top-width: 0">
+    <div id="report-main-tabs" class="easyui-tabs" border="false" fit="true">
+        <div title="表格" data-options="iconCls:'icon-table'"></div>
+        <div title="图表" data-options="iconCls:'icon-chart4'"></div>
+        <input id="report-main-uid" type="hidden" name="uid" th:value="${report.uid}"/>
+    </div>
+</div>
+</body>
+</html>

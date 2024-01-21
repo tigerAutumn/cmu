@@ -1,0 +1,77 @@
+server:
+  port: 7001
+
+#  数据库配置
+spring:
+  datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      username: ppl_user
+      password: xxx
+      url: jdbc:mysql://192.168.1.223:3306/scheduler_admin?useUnicode=true&characterEncoding=UTF-8
+      hikari:
+        minimum-idle: 5
+        maximum-pool-size: 20
+        connection-test-query: 'SELECT 1'
+  freemarker:
+    request-context-attribute: request  #req访问request
+    suffix: .ftl  #后缀名
+    content-type: text/html
+    enabled: true
+    cache: false #缓存配置
+    template-loader-path: classpath:/template/ #模板加载路径 按需配置
+    charset: UTF-8 #编码格式
+    settings:
+        number_format: '0.##'   #数字格式化，无小数点
+
+
+newex:
+  app:
+    name: newex-dax-scheduler-amdin
+    version: 2.0
+    domain: test
+    env:
+      name: dev
+  feignClient:
+    dax:
+      integration: newex-dax-integration
+  common:
+    evn: test
+    ip:
+    adminEmail:
+    adminPhone:
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+xxl:
+  job:
+    accessToken: newex_!*0127aim
+    mail:
+      host:
+      port:
+      username: test
+      password:
+      sendNick:
+    login:
+      username: test
+      password:
+    i18n:
+
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-dax-scheduler-admin/
+  level:
+    default: INFO
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002

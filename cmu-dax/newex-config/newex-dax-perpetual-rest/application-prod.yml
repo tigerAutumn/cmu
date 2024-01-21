@@ -1,0 +1,120 @@
+#
+# tomcat server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 5
+  connection-timeout: 5000
+#
+# spring
+#
+spring:
+  application:
+    name: newex-dax-perpetual-rest
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    password: xxx
+    pool:
+      max-active: 1000
+      max-idle: 500
+      max-wait: 2000
+      min-idle: 2
+#
+# logging
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-perpetual
+  level:
+    default: INFO
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002
+#
+# newex
+#
+newex:
+  app:
+    name: newex-dax-perpetual-rest
+    version: 1.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+  ucenter:
+    redis:
+      host: 192.168.1.225
+      port: 16379
+      timeout: 60000
+      password: xxx
+      pool:
+        max-active: 10
+        max-idle: 5
+        max-wait: -1
+        min-idle: 2
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.223:3306/perpetual?allowMultiQueries=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        max-active: 1000
+        min-idle: 0
+    config:
+      online: 0
+      module: 1
+      dk-currency: cmdk
+      robot: 10000080
+      marketId: 10120416
+      system-bill-phones:
+  security:
+    csrf:
+      referer-pattern: all
+      exclude-path-patterns: /admin/**,/inner/**
+    xss:
+      url-patterns: /v1/*
+    jwt:
+      secret: 'ZwwXGHRDUy1wUWgv'
+      crypto-key: 'Dk4nIS49RksJJRoB'
+      exclude-path-patterns: /customError/**,/admin/**,/inner/**,/v1/perpetual/public/**,/inner/v1/perpetual/**,/admin/v1/perpetual/**
+      validate-ip-and-device: false
+    frozen:
+      biz-type: 'contracts'
+      url-patterns:
+        include-url-patterns: /v1/perpetual/products/**/order*,/v1/perpetual/products/**/order/**
+        exclude-url-patterns: /customError/**,/admin/**,/inner/**,/v1/perpetual/public/**,/inner/v1/perpetual/**,/admin/v1/perpetual/**
+  feignClient:
+    dax:
+      users: newex-dax-users
+      integration: newex-dax-integration
+      asset: newex-dax-asset
+      market: newex-dax-market

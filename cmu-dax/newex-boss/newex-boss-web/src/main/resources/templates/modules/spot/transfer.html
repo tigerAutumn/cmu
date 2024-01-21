@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>资金划转</title>
+    <script th:src="@{'/js/modules/spot/transfer.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+    开始时间:<input class="easyui-datetimebox" type="text" id="transfer-beginTime" name="transfer-beginTime" style="width: 200px"/>
+
+    结束时间:<input class="easyui-datetimebox" type="text" id="transfer-endTime" name="transfer-endTime" style="width: 200px"/>
+
+    用户ID:<input class="easyui-textbox" type="text" id="transfer-userId" name="transfer-userId" style="width: 200px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 94%; padding: 1px">
+    <div id="transfer-datagrid"></div>
+</div>
+<div id="transfer-dlg">
+    <form id="transfer-form" name="transfer-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>券商ID</td>
+                <td colspan="3">
+                    <input class="easyui-combobox" type="text" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>从</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="fromUserId" name="fromUserId"
+                           data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>划转至</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="toUserId" name="toUserId"
+                           data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>划转币种:</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="currencyId" name="currencyId"
+                           data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>划转数量:</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="amount" name="amount"
+                           data-options="required:true, min:0, precision:8" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>备注:</td>
+                <td colspan="3">
+                    <input class="easyui-textbox" type="text" id="remark" name="remark"
+                           data-options="required:true, multiline:true" style="width: 485px; height: 100px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+<div id="batch-transfer-dlg">
+    <form id="batch-transfer-form" name="batch-transfer-form" method="post">
+        <table cellpadding="5" style="margin: 30px auto" class="form-table">
+
+            <tr>
+                <td>券商ID</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="batchBrokerId" name="batchBrokerId"
+                           data-options="required:true" style="width: 500px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>备注:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="batchRemark" name="batchRemark"
+                           data-options="required:true, multiline:true" style="width: 500px; height: 50px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>划转数据:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="batchTransferData" name="batchTransferData"
+                           data-options="required:true, multiline:true, prompt:'行之间用换行符分割，字段之间用逗号分割；字段顺序：fromUserId, toUserId, currencyId, amount；'"
+                           style="width: 500px; height: 300px"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

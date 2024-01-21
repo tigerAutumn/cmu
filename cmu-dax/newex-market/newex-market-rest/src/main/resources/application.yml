@@ -1,0 +1,96 @@
+#
+# server
+#
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 3000
+    accept-count: 6000
+    max-connections: 20000
+    min-spare-threads: 5
+  connection-timeout: 2000
+#
+#  datasource
+#
+newex:
+  app:
+    name: @newex.app.name@
+    version: @newex.app.version@
+    domain: @newex.app.domain@
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: @newex.app.env.name@
+  market:
+    datasource:
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.market.datasource.master.url@
+        username: @newex.market.datasource.master.username@
+        password: @newex.market.datasource.master.password@
+        max-active: 10
+        min-idle: 0
+    data-key: @newex.market.dataKey@
+    intra-prefix: @newex.market.intraPrefix@
+    intra-version: @newex.market.intraVersion@
+  swagger:
+    terms-of-service-url: http://www.cointobe.com
+    contact:
+      url: http://www.cointobe.com
+      name: newex
+      email: admin@cointobe.com
+    dockets:
+      - name: docket-web
+        group-name: '1.web/移动端外部接口文档'
+        base-package: cc.newex.dax.market.rest.controller
+        title: @newex.app.name@-Web
+        version: @newex.app.version@
+        description: newex行情图表、对比、指数服务接口文档
+  security:
+    csrf:
+      referer-pattern: @newex.security.csrf.refererPattern@
+    xss:
+      url-patterns: @newex.security.xss.urlPatterns@
+#
+# spring 
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+    pool:
+      max-active: @spring.redis.pool.max-active@
+      max-idle: @spring.redis.pool.max-idle@
+      max-wait: @spring.redis.pool.max-wait@
+      min-idle: @spring.redis.pool.min-idle@
+#
+# logging config file location
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false

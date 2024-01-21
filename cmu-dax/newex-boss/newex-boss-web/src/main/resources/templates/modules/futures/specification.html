@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约列表</title>
+    <script th:src="@{'/js/modules/futures/specification.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    交易货币:<input class="easyui-textbox" id="trade-bit" name="trade-bit" style="width: 200px">
+    交易货币:<input class="easyui-textbox" id="price-bit" name="price-bit" style="width: 200px">
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 93%;padding:2px;width: 100%" >
+    <div id="futures-datagrid" style="width: 100%"></div>
+</div>
+
+
+</body>

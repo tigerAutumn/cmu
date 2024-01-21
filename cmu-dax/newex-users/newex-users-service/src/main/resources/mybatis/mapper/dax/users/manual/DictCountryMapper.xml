@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.newex.dax.users.data.DictCountryRepository">
+    <select id="selectCountriesByLocale" resultMap="DictCountryMap" parameterType="java.util.Map">
+        select
+        id,abbr , name , area_code , status,country_code,letter_code2
+        from
+        <include refid="Table_Name"/>
+        where locale = #{locale,jdbcType=VARCHAR}
+        order by letter_code2 asc
+    </select>
+    <select id="selectCountriesWithMainField" resultMap="DictCountryMap" parameterType="java.util.Map">
+        select
+        id,abbr , name , area_code , status,country_code,locale,letter_code2
+        from
+        <include refid="Table_Name"/>
+        order by letter_code2 asc
+    </select>
+</mapper>

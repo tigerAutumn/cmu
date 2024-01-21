@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>合约战队</title>
+    <script th:src="@{'/js/modules/activity/team/contractTeam.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    团队ID：<input class="easyui-textbox" type="text" id="contractTeam-uid" name="contractTeam-uid" style="width: 100px"/>
+    团队名称Zh_Cn：<input class="easyui-textbox" type="text" id="contractTeam-teamName" name="contractTeam-teamName" style="width: 100px"/>
+    团队名称En_Us：<input class="easyui-textbox" type="text" id="contractTeam-teamNameEnUs" name="contractTeam-teamNameEnUs" style="width: 100px"/>
+    团队人数：<input class="easyui-textbox" type="text" id="contractTeam-teamNumber" name="contractTeam-teamNumber" style="width: 100px"/>
+    总资产：<input class="easyui-textbox" type="text" id="contractTeam-balance" name="contractTeam-balance" style="width: 100px"/>
+    <a id="contractTeam-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="contractTeam-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<div id="contractTeam-dlg">
+    <form id="contractTeam-form" name="contractTeam-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+            <input id="uid" name="uid" type="hidden"/>
+            <tr>
+                <td>团队名称en_us</td>
+                <td>
+                    <input id="teamNameEnUs" name="teamNameEnUs" class="easyui-textbox" style="width: 200px"/>
+                </td>
+
+                <td>团队名称zh_cn</td>
+                <td>
+                    <input id="teamName" name="teamName" class="easyui-textbox" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>宣传语en_us</td>
+                <td>
+                    <input id="sloganEnUs" name="sloganEnUs" class="easyui-textbox" style="width: 200px"/>
+                </td>
+
+                <td>宣传语zh_cn</td>
+                <td>
+                    <input id="slogan" name="slogan" class="easyui-textbox" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>团队人数</td>
+                <td>
+                    <input id="teamNumber" name="teamNumber" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>团队头像</td>
+                <td>
+                    <input id="avatar-file" class="avatar-file" name="avatar-file" style="width: 200px"/>
+                    <input id="avatar" name="avatar" type="hidden"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>团长名称en_us</td>
+                <td>
+                    <input id="leaderNameEnUs" name="leaderNameEnUs" class="easyui-textbox" style="width: 200px"/>
+                </td>
+
+                <td>团长名称zh_cn</td>
+                <td>
+                    <input id="leaderName" name="leaderName" class="easyui-textbox" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>团长ID</td>
+                <td>
+                    <input id="leaderId" name="leaderId" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+
+                <td>团长账号</td>
+                <td>
+                    <input id="leaderAccount" name="leaderAccount" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>总资产</td>
+                <td>
+                    <input id="balance" name="balance" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+                <td>币种</td>
+                <td>
+                    <input id="currencyCode" name="currencyCode" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>状态</td>
+                <td>
+                    <select id="status" name="status" style="width: 200px" class="easyui-combobox">
+                        <option value="0" selected="selected">正常</option>
+                        <option value="1">禁用</option>
+                    </select>
+                </td>
+
+                <td>当前盈亏</td>
+                <td>
+                    <input id="pnl" name="pnl" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>活跃度</td>
+                <td>
+                    <input id="liveness" name="liveness" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+                <td>期数</td>
+                <td>
+                    <input id="term" name="term" class="easyui-textbox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>券商ID</td>
+                <td>
+                    <input id="brokerId" name="brokerId" class="easyui-combobox" data-options="required:true" style="width: 200px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

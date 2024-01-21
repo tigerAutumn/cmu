@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>项目审核</title>
+    <script th:src="@{'/js/modules/extra/cgm/project-check.js?v='+${rnd}}"></script>
+    <style>
+        table {
+            table-layout: fixed;
+            empty-cells: show;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            height: 30px;
+        }
+
+        .table {
+            border: 1px solid #cad9ea;
+            color: #666;
+        }
+
+        .table tr.alter {
+            background-color: #f5fafe;
+        }
+
+        .table th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
+
+        .table td, .table th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
+    </style>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<input id="grididname" type="hidden" name="grididname" value=""/>
+<input id="currentGridUrl" type="hidden" name="currentGridUrl" value=""/>
+
+<div id="tabl" class="easyui-tabs" style="width:100%;height:100%;">
+    <div title="待审核">
+        <div style="height: 93%;padding:2px">
+            <div id="wait-datagrid"></div>
+        </div>
+        <div id="wait-dlg" style="padding: 30px">
+            <form id="wait-form" name="wait-form" method="post">
+                <table th:cols="2" style="margin: 30px auto" class="form-table">
+                    <tr>
+                        <td style="width: 100px">CT保证金数量</td>
+                        <td><input class="easyui-textbox" data-options="required:true" type="text" id="deposit" name="deposit" style="width: 180px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">代币糖果数量</td>
+                        <td><input class="easyui-textbox" type="text" data-options="required:true" id="tokenNumber" name="tokenNumber" style="width: 180px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">代币糖果地址</td>
+                        <td><input class="easyui-textbox" type="text" data-options="required:true" id="tokenUrl" name="tokenUrl" style="width: 180px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">商务对接人</td>
+                        <td><input class="easyui-textbox" type="text" data-options="required:true" id="contacts" name="contacts" style="width: 180px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">对接微信</td>
+                        <td><input class="easyui-textbox" type="text" data-options="required:true" id="wechat" name="wechat" style="width: 180px;"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="reject-dlg" style="padding: 30px">
+            <label>拒绝理由：</label><br/>
+            <input class="easyui-textbox" type="text" id="reason" name="reason" data-options="multiline:true" style="height:100px;width:400px">
+        </div>
+    </div>
+    <div title="初始审核">
+        <div style="height: 93%;padding:2px">
+            <div id="check-datagrid"></div>
+        </div>
+        <div id="check-dlg" style="padding: 30px">
+            <form>
+                <input type="hidden" id="scheduleId" name="scheduleId">
+                <table th:cols="3" class="table">
+                    <tr>
+                        <td colspan="3"><label style="color:red">请确认已经完成保证金及糖果活动币的收取，收取后方可安排排期上线</label></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">保证金支付情况</td>
+                        <td width="100px">交易号</td>
+                        <td width="400px"><label id="deposit_tradeNo"></label></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">保证金数量</td>
+                        <td><label id="deposit_number"></label></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">支付时间</td>
+                        <td><label id="deposit_time"></label></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">糖果支付情况</td>
+                        <td width="100px">交易号</td>
+                        <td><label id="token_tradeNo"></label></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">保证金数量</td>
+                        <td><label id="token_number"></label></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">转账地址</td>
+                        <td><label id="token_address"></label></td>
+                    </tr>
+                    <tr>
+                        <td width="100px">支付时间</td>
+                        <td><label id="token_time"></label></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1">排期</td>
+                        <td width="100px">上线时间</td>
+                        <td rowspan="2"><input style="width:250px" class="easyui-datetimebox" id="schedule" data-options="required:true"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div title="待上线">
+        <div style="height: 93%;padding:2px">
+            <div id="pre-datagrid"></div>
+        </div>
+    </div>
+    <div title="已上线">
+        <div style="height: 93%;padding:2px">
+            <div id="online-datagrid"></div>
+        </div>
+    </div>
+    <div title="淘汰">
+        <div style="height: 93%;padding:2px">
+            <div id="fail-datagrid"></div>
+        </div>
+        <div id="fail-dlg" style="padding: 30px">
+            <label>拒绝原因：</label><br/>
+            <label id="fail-reason" style="padding-top: 5px"></label>
+        </div>
+    </div>
+
+</div>
+<div id="info-dlg" style="padding: 30px">
+    <table width="100%" class="table">
+        <tr>
+            <td rowspan="2">联系人</td>
+
+            <td>姓名</td>
+            <td><label id="name" class="info"/></td>
+
+            <td>职务</td>
+            <td><label id="companyPosition" class="info"/></td>
+        </tr>
+        <tr class="alter">
+            <td>邮箱地址</td>
+            <td><label id="email" class="info"/></td>
+
+            <td>联系电话</td>
+            <td><label id="mobile" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="6">币种</td>
+
+            <td>币种全称</td>
+            <td><label id="token" class="info"/></td>
+
+            <td>币种简称</td>
+            <td><label id="tokenSymbol" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td>币种logo</td>
+            <td><a id="imgName" href="" target="_Blank">查看币种logo</a></td>
+
+            <td>发币时间</td>
+            <td><label id="startTime" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td>已上线交易所</td>
+            <td><label id="exchangeName" class="info"/></td>
+
+            <td>24小时成交量</td>
+            <td><label id="tradeVolume" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td>发行总量</td>
+            <td><label id="issue" class="info"/></td>
+
+            <td>流通总量</td>
+            <td><label id="circulating" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td>当前价格</td>
+            <td><label id="price" class="info"/></td>
+
+            <td>用户数量</td>
+            <td><label id="possessUsers" class="info"/></td>
+        </tr>
+        <tr>
+            <td>coinmarketcap url</td>
+            <td><label id="coinmarketcap" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="7">关于项目</td>
+
+            <td>公司名称</td>
+            <td><label id="company" class="info"/></td>
+
+            <td>官方网址</td>
+            <td><label id="website" class="info"/></td>
+        </tr>
+        <tr>
+            <td>白皮书地址</td>
+            <td><a id="whitePaper" href="" target="_Blank">查看白皮书</a></td>
+
+            <td>gitHub</td>
+            <td><label id="githubUrl" class="info"/></td>
+        </tr>
+        <tr>
+            <td>项目简介</td>
+            <td colspan="3"><label id="projectInfo" class="info"/></td>
+        </tr>
+        <tr>
+            <td>项目阶段</td>
+            <td colspan="3"><label id="projectStage" class="info"/></td>
+        </tr>
+        <tr>
+            <td>项目长期实现目标</td>
+            <td colspan="3"><label id="projectObjective" class="info"/></td>
+        </tr>
+        <tr>
+            <td>项目进展</td>
+            <td colspan="3"><label id="projectProgress" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td>项目产品地址</td>
+            <td colspan="3"><label id="productAddress" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="2">项目成员</td>
+            <td>项目成员</td>
+            <td><label id="team" class="info"/></td>
+            <td>团队顾问</td>
+            <td><label id="teamCounselor" class="info"/></td>
+        </tr>
+        <tr>
+            <td>全职人员</td>
+            <td><label id="fulltimeNumber" class="info"/></td>
+            <td>非全职人员</td>
+            <td><label id="noFulltimeNumber" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="4">关于私募</td>
+            <td>私募总量</td>
+            <td><label id="raiseTotal" class="info"/></td>
+            <td>私募价格</td>
+            <td><label id="raisePrice" class="info"/></td>
+        </tr>
+        <tr>
+            <td>投资者数量</td>
+            <td><label id="raiseInvest" class="info"/></td>
+            <td>私募比例</td>
+            <td><label id="raiseRatio" class="info"/></td>
+        </tr>
+        <tr>
+            <td>私募发币规则</td>
+            <td colspan="3"><label id="raiseRule" class="info"/></td>
+        </tr>
+        <tr>
+            <td>私募时间</td>
+            <td><label id="raiseDate" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="4">关于ICO</td>
+            <td>ICO总量</td>
+            <td><label id="icoTotal" class="info"/></td>
+            <td>ICO价格</td>
+            <td><label id="icoPrice" class="info"/></td>
+        </tr>
+        <tr>
+            <td>参与人数</td>
+            <td><label id="icoInvest" class="info"/></td>
+            <td>ICO比例</td>
+            <td><label id="icoRatio" class="info"/></td>
+        </tr>
+        <tr>
+            <td>ICO发币规则</td>
+            <td colspan="3"><label id="icoRule" class="info"/></td>
+        </tr>
+        <tr>
+            <td>ICO时间</td>
+            <td><label id="icoDate" class="info"/></td>
+        </tr>
+
+        <tr>
+            <td rowspan="6">关于社群</td>
+            <td>Telegram</td>
+            <td><label id="telegramLink" class="info"/></td>
+            <td>telegram人数</td>
+            <td><label id="telegramLinkMembers" class="info"/></td>
+        </tr>
+        <tr>
+            <td>微信</td>
+            <td><label id="wechatLink" class="info"/></td>
+            <td>微信人数</td>
+            <td><label id="wechatLinkMembers" class="info"/></td>
+        </tr>
+        <tr>
+            <td>QQ群</td>
+            <td><label id="qq" class="info"/></td>
+            <td>Facebook</td>
+            <td><label id="facebook" class="info"/></td>
+        </tr>
+        <tr>
+            <td>twitter</td>
+            <td><label id="twitter" class="info"/></td>
+            <td>reddit</td>
+            <td><label id="reddit" class="info"/></td>
+        </tr>
+        <tr>
+            <td>微博</td>
+            <td><label id="weibo" class="info"/></td>
+            <td>kakaoTalk</td>
+            <td><label id="kakaoTalk" class="info"/></td>
+        </tr>
+        <tr>
+            <td>others</td>
+            <td><label id="others" class="info"/></td>
+        </tr>
+        <tr>
+            <td rowspan="3">关于钱包</td>
+            <td>合约地址</td>
+            <td colspan="3"><label id="contract" class="info"/></td>
+        </tr>
+        <tr>
+            <td>钱包说明</td>
+            <td colspan="3"><label id="wallet" class="info"/></td>
+        </tr>
+        <tr>
+            <td>钱包类型</td>
+            <td><label id="walletType" class="info"/></td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+<div id="projectInfo-dlg">
+    <form id="projectInfo-form" name="projectInfo-form" method="post">
+        <table cellpadding="5" style="margin: 80px auto" class="form-table">
+            <input type="hidden" name="tokenInfoId" id="tokenInfoId"/>
+            <input type="hidden" name="applyInfoId" id="applyInfoId"/>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">币种信息</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+            <tr>
+                <td>公司名称:</td>
+                <td>
+                    <input class="easyui-textbox" id="company"  name="company" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>币种全称:</td>
+                <td>
+                    <input class="easyui-textbox" id="token"  name="token" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>币种简称:</td>
+                <td>
+                    <input class="easyui-textbox" id="tokenSymbol" name="tokenSymbol" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>币种logo:</td>
+                <td>
+                    <input type="text" id="imgName-file" name="imgName-file" style="width: 300px"/>
+                    <input type="hidden" id="imgName"  name="imgName"  style="width:300px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>币种类型:</td>
+                <td>
+                    <select class="easyui-combobox"  id="type" name="type" data-options="required:true" style="width: 300px">
+                        <option value="zhuwangbi">主网币</option>
+                        <option value="daibi">代币</option>
+                    </select>
+                </td>
+
+                <td>发行总量:</td>
+                <td>
+                    <input class="easyui-textbox" id="issue" name="issue" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>流通总量:</td>
+                <td>
+                    <input class="easyui-textbox" id="circulating" name="circulating" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>coinmarketcap地址:</td>
+                <td>
+                    <input class="easyui-textbox" id="coinmarketcap" name="coinmarketcap" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>其它交易所:</td>
+                <td>
+                    <select class="easyui-combobox" id="online" name="online" data-options="required:true" style="width: 300px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+
+                <td>上线交易所:</td>
+                <td>
+                    <input class="easyui-textbox" id="exchangeName" name="exchangeName" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>24h交易量:</td>
+                <td>
+                    <input class="easyui-textbox" id="tradeVolume" name="tradeVolume" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>发行价格（美元）:</td>
+                <td>
+                    <input class="easyui-textbox" id="price" name="price" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>发币时间:</td>
+                <td>
+                    <input class="easyui-datebox"  id="startTime" name="startTime" data-options="required:false" style="width: 300px"/>
+                </td>
+
+                <td>拥有用户数:</td>
+                <td>
+                    <input class="easyui-textbox" id="possessUsers"  name="possessUsers" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商:</td>
+                <td>
+                    <input class="easyui-combobox" id="brokerId" name="brokerId" style="width: 300px" data-options="required:true"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">关于项目</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+            <tr>
+                <td>用户ID:</td>
+                <td>
+                    <input class="easyui-textbox"  id="userId" name="userId" data-options="required:true" style="width:300px;"/>
+                </td>
+                <td>用户名称:</td>
+                <td>
+                    <input class="easyui-textbox"  id="name" name="name" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+            <tr>
+
+                <td>公司职务:</td>
+                <td>
+                    <input class="easyui-textbox"  id="companyPosition" name="companyPosition" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>联系方式:</td>
+                <td>
+                    <input class="easyui-textbox"  id="mobile" name="mobile" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td>用户邮箱:</td>
+                <td>
+                    <input class="easyui-textbox"  id="email" name="email" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>官方网站:</td>
+                <td>
+                    <input class="easyui-textbox"  id="website" name="website" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>白皮书:</td>
+                <td>
+                    <input type="text" id="whitePaper-file" name="whitePaper-file" style="width: 300px"/>
+                    <input type="hidden" id="whitePaper"  name="whitePaper"  style="width:300px;"/>
+                </td>
+
+                <td>项目简介:</td>
+                <td>
+                    <input class="easyui-textbox" id="projectInfo" name="projectInfo" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>项目阶段:</td>
+                <td>
+                    <input class="easyui-textbox" id="projectStage" name="projectStage" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>项目目标:</td>
+                <td>
+                    <input class="easyui-textbox" id="projectObjective" name="projectObjective" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>项目进展:</td>
+                <td>
+                    <input class="easyui-textbox" id="projectProgress" name="projectProgress" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>是否可看产品:</td>
+                <td>
+                    <input class="easyui-combobox" id="see" name="see" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>产品地址:</td>
+                <td>
+                    <input class="easyui-textbox" id="productAddress" name="productAddress" data-options="required:false" disabled="disabled" style="width: 300px"/>
+                </td>
+
+                <td>GitHub地址:</td>
+                <td>
+                    <input class="easyui-textbox" id="githubUrl" name="githubUrl" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td>团队成员:</td>
+                <td>
+                    <input class="easyui-textbox" id="team" name="team" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>团队顾问:</td>
+                <td>
+                    <input class="easyui-textbox" id="teamCounselor" name="teamCounselor" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td>成员人数:</td>
+                <td>
+                    <input class="easyui-textbox" id="fulltimeNumber" name="fulltimeNumber" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>非全职人员数:</td>
+                <td>
+                    <input class="easyui-textbox" id="noFulltimeNumber" name="noFulltimeNumber" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">私募 / ICO</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+            <tr>
+                <td>是否进行私募:</td>
+                <td>
+                    <select class="easyui-combobox" id="raise" name="raise" data-options="required:true" style="width: 300px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+
+                <td>私募总量:</td>
+                <td>
+                    <input class="easyui-textbox" id="raiseTotal" name="raiseTotal" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>私募价格:</td>
+                <td>
+                    <input class="easyui-textbox" id="raisePrice" name="raisePrice" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>私募投资参与人数:</td>
+                <td>
+                    <input class="easyui-textbox" id="raiseInvest" name="raiseInvest" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>私募比例:</td>
+                <td>
+                    <input class="easyui-textbox"  id="raiseRatio"  name="raiseRatio"  data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>私募时间:</td>
+                <td>
+                    <input class="easyui-datebox" id="raiseDate" name="raiseDate"  data-options="required:false" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>私募规则:</td>
+                <td>
+                    <input class="easyui-textbox"  id="raiseRule" name="raiseRule" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>是否ico:</td>
+                <td>
+                    <select class="easyui-combobox" id="ico" name="ico" data-options="required:true" style="width: 300px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>ico私募总量:</td>
+                <td>
+                    <input class="easyui-textbox"  id="icoTotal" name="icoTotal" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>ico价格:</td>
+                <td>
+                    <input class="easyui-textbox"  id="icoPrice" name="icoPrice" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>ico投资人数:</td>
+                <td>
+                    <input class="easyui-textbox"  id="icoInvest" name="icoInvest" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>ico比例:</td>
+                <td>
+                    <input class="easyui-textbox"  id="icoRatio" name="icoRatio" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>ico时间:</td>
+                <td>
+                    <input class="easyui-datebox" id="icoDate" name="icoDate" data-options="required:false" style="width:300px;"/>
+                </td>
+
+                <td>ico规则:</td>
+                <td>
+                    <input class="easyui-textbox" id="icoRule" name="icoRule" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="color: #0088ff;font-weight: bold;font-size: 14px">社群&钱包</td>
+                <td colspan="5">
+                    <hr/>
+                </td>
+            </tr>
+            <tr>
+                <td>telegram链接:</td>
+                <td>
+                    <input class="easyui-textbox"  id="telegramLink" name="telegramLink" data-options="required:true" style="width: 300px"/>
+                </td>
+
+                <td>telegram会员人数:</td>
+                <td>
+                    <input class="easyui-textbox" id="telegramLinkMembers" name="telegramLinkMembers" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>微信群链接:</td>
+                <td>
+                    <input class="easyui-textbox"  id="wechatLink" name="wechatLink" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>微信群人数:</td>
+                <td>
+                    <input class="easyui-textbox"  id="wechatLinkMembers" name="wechatLinkMembers" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>qq群:</td>
+                <td>
+                    <input class="easyui-textbox"  id="qq" name="qq" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>Kakao Talk:</td>
+                <td>
+                    <input class="easyui-textbox" id="kakaoTalk" name="kakaoTalk" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Twitter:</td>
+                <td>
+                    <input class="easyui-textbox" id="twitter" name="twitter" data-options="required:true" style="width:300px;"/>
+                </td>
+                <td>Facebook:</td>
+                <td>
+                    <input class="easyui-textbox"  id="facebook" name="facebook" data-options="required:true" style="width:300px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td>微博:</td>
+                <td>
+                    <input class="easyui-textbox" id="weibo" name="weibo" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>Reddit:</td>
+                <td>
+                    <input class="easyui-textbox"  id="reddit" name="reddit" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>其它:</td>
+                <td>
+                    <input class="easyui-textbox" id="others" name="others" data-options="required:true" style="width:300px;"/>
+                </td>
+
+                <td>是否ERC20代币:</td>
+                <td>
+                    <select class="easyui-combobox" id="walletType" name="walletType" data-options="required:true" style="width: 300px">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>合约地址:</td>
+                <td>
+                    <input class="easyui-textbox" id="contract" name="contract" data-options="required:true" style="width:300px;" />
+                </td>
+
+                <td>钱包说明:</td>
+                <td>
+                    <input class="easyui-textbox" id="wallet" name="wallet" data-options="required:true" style="width: 300px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# mysql
+newex:
+  perpetual:
+    datasource:
+      biz:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @newex.perpetual.datasource.biz.url@
+        username: @newex.perpetual.datasource.biz.username@
+        password: @newex.perpetual.datasource.biz.password@
+        max-active: 10
+        min-idle: 0
+    config:
+      online: @newex.perpetual.config.online@
+      dk-currency: cmdk
+      robot: 51889
+
+  feignClient:
+    dax:
+      asset: @newex.feignClient.dax.asset@
+      users: @newex.feignClient.dax.users@
+      integration: @newex.feignClient.dax.integration@
+      market: @newex.feignClient.dax.market@
+#
+# spring redis
+#
+spring:
+  redis:
+    host: @spring.redis.host@
+    port: @spring.redis.port@
+    pool:
+      max-active: @spring.redis.pool.max-active@
+      max-idle: @spring.redis.pool.max-idle@
+      min-idle: @spring.redis.pool.min-idle@
+      max-wait: @spring.redis.pool.max-wait@
+    timeout: @spring.redis.timeout@
+    password: @spring.redis.password@
+
+#
+# logging
+#
+logging:
+  config: classpath:logging/logback-spring.xml
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    dax: @logging.level.dax@
+    mybatis: @logging.level.mybatis@
+    

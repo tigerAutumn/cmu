@@ -1,0 +1,70 @@
+#
+# server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 4000
+    max-connections: 2000
+    min-spare-threads: 50
+  connection-timeout: 5000
+#
+#  datasource
+#
+newex:
+  portal:
+     urls:
+       seoStaticUrl: ''
+       accountStaticUrl: v1
+       spotStaticUrl: v1
+  app:
+    name: newex-dax-portal
+    version: 2.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: dev
+  security:
+    csrf:
+      referer-pattern: all
+    xss:
+      url-patterns: /v1/*
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  thymeleaf:
+    mode: HTML
+    cache: true
+#
+#
+# logging config file location
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-portal
+  level:
+    default: WARN
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002

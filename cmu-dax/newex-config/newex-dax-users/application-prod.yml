@@ -1,0 +1,146 @@
+#
+# tomcat server
+#
+server:
+  port: 7001
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 2000
+    accept-count: 2000
+    max-connections: 4000
+    min-spare-threads: 45
+  connection-timeout: 5000
+#
+# spring
+#
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  http:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+  messages:
+    basename: messages/messages
+    always-use-message-format: true
+    cache-seconds: 3600
+    fallback-to-system-locale: false
+  redis:
+    host: 192.168.1.225
+    port: 16379
+    timeout: 60000
+    password: xxx
+    pool:
+       max-active: 1000
+       max-idle: 500
+       max-wait: 2000
+       min-idle: 2
+#
+# logging
+#
+logging:
+  config: classpath:conf/logging/logback-spring.xml
+  path: /home/admin/logs/newex/newex-users
+  level:
+    default: INFO
+    commons: INFO
+    dax: INFO
+    mybatis: INFO
+#
+# actuator
+#
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+  port: 7002
+#
+# newex
+#
+newex:
+  app:
+    name: newex-dax-users
+    version: 1.0
+    domain: coinmex.com
+    supported-locales: 'en|en-US|zh-CN|zh-TW|zh-HK'
+    env:
+      name: dev
+  users:
+    common:
+      site-id: 3
+    channelink:
+          uri: http://test.cmx.com
+    datasource:
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.223:3306/user?characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true
+        username: ppl_user
+        password: xxx
+        max-active: 100
+        min-idle: 0
+
+  security:
+    csrf:
+      referer-pattern: all
+      exclude-path-patterns: /admin/**,/inner/**,/v1/users/support/thirdparty/**,/v1/users/support/activity/**
+    xss:
+      url-patterns: /v1/*
+    jwt:
+      expiration: 604800
+      secret: 'ZwwXGHRDUy1wUWgv'
+      crypto-key: 'Dk4nIS49RksJJRoB'
+      exclude-path-patterns: /customError/**,/admin/**,/inner/**,/v1/users/membership/**,/v1/users/support/public/**,/v1/users/support/thirdparty/**,/v1/users/support/activity/**
+  fileupload:
+    oss:
+      vpc-endpoint: https://oss-cn-beijing.aliyuncs.com
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      access-key-id: xxx
+      access-key-secret: xxx
+      bucket-name: sg-cmx-test-dx
+      path: users/test/pay/images
+      region: oss-cn-beijing
+  feignClient:
+    dax:
+        integration: newex-dax-integration
+  faceid:
+    api_key: xxx
+    api_secret: xxx
+    ocridcard_url: https://chinaproxy.coinmex.com:633/faceid/v1/ocridcard
+    ocridcard_referer: https://api.faceid.com
+    token_url: https://chinaproxy.coinmex.com:633/faceid/lite/get_token
+    token_referer: https://api.megvii.com
+    result_url: https://chinaproxy.coinmex.com:633/faceid/lite/get_result
+    result_referer: https://api.megvii.com
+    verify_url: https://chinaproxy.coinmex.com:633/faceid/v2/verify
+    verify_referer: https://api.megvii.com
+    return_url: https://www.coinmex.com/cmx/static/success.html
+    notify_url: http://test.cmx.com/v1/users/support/thirdparty/kyc/get-result
+    precision: 0.8
+    edited: 0.5
+  activity:
+    url: http://test.cmx.com/invitation/signup/%s/%s
+  openapi:
+    apikey:
+      prefix: 'cmx-'
+  session:
+    max-inactive-interval: 86400000
+  ucenter:
+    redis:
+      host: 192.168.1.225
+      port: 16379
+      timeout: 60000
+      password: xxx
+      pool:
+         max-active: 10
+         max-idle: 5
+         max-wait: -1
+         min-idle: 2
+  ratelimiter:
+    ip-rate-limiter:
+      enabled: true
+      interceptor:
+        include-url-patterns: '/v1/users/support/public/username/validation,/v1/users/membership/forget-pwd/**'

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.extra.data.cgm.ProjectTokenInfoRepository">
+    <!-- CodeBuilder Generated -->
+    <resultMap id="ProjectTokenInfoMap" type="cc.newex.dax.extra.domain.cgm.ProjectTokenInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="token_symbol" property="tokenSymbol" jdbcType="VARCHAR"/>
+        <result column="img_name" property="imgName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="issue" property="issue" jdbcType="VARCHAR"/>
+        <result column="circulating" property="circulating" jdbcType="VARCHAR"/>
+        <result column="coinmarketcap" property="coinmarketcap" jdbcType="VARCHAR"/>
+        <result column="online" property="online" jdbcType="TINYINT"/>
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="trade_volume" property="tradeVolume" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="possess_users" property="possessUsers" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="deposit" property="deposit" jdbcType="DECIMAL"/>
+        <result column="token_number" property="tokenNumber" jdbcType="DECIMAL"/>
+        <result column="token_url" property="tokenUrl" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
+        <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="deposit_status" property="depositStatus" jdbcType="TINYINT"/>
+        <result column="sweets_status" property="sweetsStatus" jdbcType="TINYINT"/>
+        <result column="broker_id" property="brokerId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Table_Name">
+    project_token_info
+  </sql>
+    <sql id="Base_Column_List_Without_Id">
+    user_id, name, email, token, token_symbol, img_name, type, issue, circulating, coinmarketcap,
+    online, exchange_name, trade_volume, price, possess_users, status, deposit, token_number,
+    token_url, contacts, wechat, online_time, start_time, created_date, updated_date,
+    mobile, deposit_status, sweets_status, broker_id
+  </sql>
+    <sql id="Base_Column_List">
+        id,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
+    <sql id="Insert_Columns">
+        <if test="record.userId != null">
+            user_id,
+        </if>
+        <if test="record.name != null">
+            name,
+        </if>
+        <if test="record.email != null">
+            email,
+        </if>
+        <if test="record.token != null">
+            token,
+        </if>
+        <if test="record.tokenSymbol != null">
+            token_symbol,
+        </if>
+        <if test="record.imgName != null">
+            img_name,
+        </if>
+        <if test="record.type != null">
+            type,
+        </if>
+        <if test="record.issue != null">
+            issue,
+        </if>
+        <if test="record.circulating != null">
+            circulating,
+        </if>
+        <if test="record.coinmarketcap != null">
+            coinmarketcap,
+        </if>
+        <if test="record.online != null">
+            online,
+        </if>
+        <if test="record.exchangeName != null">
+            exchange_name,
+        </if>
+        <if test="record.tradeVolume != null">
+            trade_volume,
+        </if>
+        <if test="record.price != null">
+            price,
+        </if>
+        <if test="record.possessUsers != null">
+            possess_users,
+        </if>
+        <if test="record.status != null">
+            status,
+        </if>
+        <if test="record.deposit != null">
+            deposit,
+        </if>
+        <if test="record.tokenNumber != null">
+            token_number,
+        </if>
+        <if test="record.tokenUrl != null">
+            token_url,
+        </if>
+        <if test="record.contacts != null">
+            contacts,
+        </if>
+        <if test="record.wechat != null">
+            wechat,
+        </if>
+        <if test="record.onlineTime != null">
+            online_time,
+        </if>
+        <if test="record.startTime != null">
+            start_time,
+        </if>
+        <if test="record.createdDate != null">
+            created_date,
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date,
+        </if>
+        <if test="record.mobile != null">
+            mobile,
+        </if>
+        <if test="record.depositStatus != null">
+            deposit_status,
+        </if>
+        <if test="record.sweetsStatus != null">
+            sweets_status,
+        </if>
+        <if test="record.brokerId != null">
+            broker_id,
+        </if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="record.userId != null">
+            #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.name != null">
+            #{record.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.email != null">
+            #{record.email,jdbcType=VARCHAR},
+        </if>
+        <if test="record.token != null">
+            #{record.token,jdbcType=VARCHAR},
+        </if>
+        <if test="record.tokenSymbol != null">
+            #{record.tokenSymbol,jdbcType=VARCHAR},
+        </if>
+        <if test="record.imgName != null">
+            #{record.imgName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.type != null">
+            #{record.type,jdbcType=VARCHAR},
+        </if>
+        <if test="record.issue != null">
+            #{record.issue,jdbcType=VARCHAR},
+        </if>
+        <if test="record.circulating != null">
+            #{record.circulating,jdbcType=VARCHAR},
+        </if>
+        <if test="record.coinmarketcap != null">
+            #{record.coinmarketcap,jdbcType=VARCHAR},
+        </if>
+        <if test="record.online != null">
+            #{record.online,jdbcType=TINYINT},
+        </if>
+        <if test="record.exchangeName != null">
+            #{record.exchangeName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.tradeVolume != null">
+            #{record.tradeVolume,jdbcType=VARCHAR},
+        </if>
+        <if test="record.price != null">
+            #{record.price,jdbcType=DECIMAL},
+        </if>
+        <if test="record.possessUsers != null">
+            #{record.possessUsers,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null">
+            #{record.status,jdbcType=TINYINT},
+        </if>
+        <if test="record.deposit != null">
+            #{record.deposit,jdbcType=DECIMAL},
+        </if>
+        <if test="record.tokenNumber != null">
+            #{record.tokenNumber,jdbcType=DECIMAL},
+        </if>
+        <if test="record.tokenUrl != null">
+            #{record.tokenUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.contacts != null">
+            #{record.contacts,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechat != null">
+            #{record.wechat,jdbcType=VARCHAR},
+        </if>
+        <if test="record.onlineTime != null">
+            #{record.onlineTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.startTime != null">
+            #{record.startTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createdDate != null">
+            #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.mobile != null">
+            #{record.mobile,jdbcType=VARCHAR},
+        </if>
+        <if test="record.depositStatus != null">
+            #{record.depositStatus,jdbcType=TINYINT},
+        </if>
+        <if test="record.sweetsStatus != null">
+            #{record.sweetsStatus,jdbcType=TINYINT},
+        </if>
+        <if test="record.brokerId != null">
+            #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+    #{record.userId,jdbcType=BIGINT},
+    #{record.name,jdbcType=VARCHAR},
+    #{record.email,jdbcType=VARCHAR},
+    #{record.token,jdbcType=VARCHAR},
+    #{record.tokenSymbol,jdbcType=VARCHAR},
+    #{record.imgName,jdbcType=VARCHAR},
+    #{record.type,jdbcType=VARCHAR},
+    #{record.issue,jdbcType=VARCHAR},
+    #{record.circulating,jdbcType=VARCHAR},
+    #{record.coinmarketcap,jdbcType=VARCHAR},
+    #{record.online,jdbcType=TINYINT},
+    #{record.exchangeName,jdbcType=VARCHAR},
+    #{record.tradeVolume,jdbcType=VARCHAR},
+    #{record.price,jdbcType=DECIMAL},
+    #{record.possessUsers,jdbcType=INTEGER},
+    #{record.status,jdbcType=TINYINT},
+    #{record.deposit,jdbcType=DECIMAL},
+    #{record.tokenNumber,jdbcType=DECIMAL},
+    #{record.tokenUrl,jdbcType=VARCHAR},
+    #{record.contacts,jdbcType=VARCHAR},
+    #{record.wechat,jdbcType=VARCHAR},
+    #{record.onlineTime,jdbcType=TIMESTAMP},
+    #{record.startTime,jdbcType=TIMESTAMP},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updatedDate,jdbcType=TIMESTAMP},
+    #{record.mobile,jdbcType=VARCHAR},
+    #{record.depositStatus,jdbcType=TINYINT},
+    #{record.sweetsStatus,jdbcType=TINYINT},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+    <sql id="Batch_Insert_Values_On_DuplicateKey">
+        #{record.id,jdbcType=BIGINT},
+        <include refid="Batch_Insert_Values"/>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="record.userId != null">
+            user_id = #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.name != null">
+            name = #{record.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.email != null">
+            email = #{record.email,jdbcType=VARCHAR},
+        </if>
+        <if test="record.token != null">
+            token = #{record.token,jdbcType=VARCHAR},
+        </if>
+        <if test="record.tokenSymbol != null">
+            token_symbol = #{record.tokenSymbol,jdbcType=VARCHAR},
+        </if>
+        <if test="record.imgName != null">
+            img_name = #{record.imgName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.type != null">
+            type = #{record.type,jdbcType=VARCHAR},
+        </if>
+        <if test="record.issue != null">
+            issue = #{record.issue,jdbcType=VARCHAR},
+        </if>
+        <if test="record.circulating != null">
+            circulating = #{record.circulating,jdbcType=VARCHAR},
+        </if>
+        <if test="record.coinmarketcap != null">
+            coinmarketcap = #{record.coinmarketcap,jdbcType=VARCHAR},
+        </if>
+        <if test="record.online != null">
+            online = #{record.online,jdbcType=TINYINT},
+        </if>
+        <if test="record.exchangeName != null">
+            exchange_name = #{record.exchangeName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.tradeVolume != null">
+            trade_volume = #{record.tradeVolume,jdbcType=VARCHAR},
+        </if>
+        <if test="record.price != null">
+            price = #{record.price,jdbcType=DECIMAL},
+        </if>
+        <if test="record.possessUsers != null">
+            possess_users = #{record.possessUsers,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null">
+            status = #{record.status,jdbcType=TINYINT},
+        </if>
+        <if test="record.deposit != null">
+            deposit = #{record.deposit,jdbcType=DECIMAL},
+        </if>
+        <if test="record.tokenNumber != null">
+            token_number = #{record.tokenNumber,jdbcType=DECIMAL},
+        </if>
+        <if test="record.tokenUrl != null">
+            token_url = #{record.tokenUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.contacts != null">
+            contacts = #{record.contacts,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wechat != null">
+            wechat = #{record.wechat,jdbcType=VARCHAR},
+        </if>
+        <if test="record.onlineTime != null">
+            online_time = #{record.onlineTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.startTime != null">
+            start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createdDate != null">
+            created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updatedDate != null">
+            updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.mobile != null">
+            mobile = #{record.mobile,jdbcType=VARCHAR},
+        </if>
+        <if test="record.depositStatus != null">
+            deposit_status = #{record.depositStatus,jdbcType=TINYINT},
+        </if>
+        <if test="record.sweetsStatus != null">
+            sweets_status = #{record.sweetsStatus,jdbcType=TINYINT},
+        </if>
+        <if test="record.brokerId != null">
+            broker_id = #{record.brokerId,jdbcType=INTEGER},
+        </if>
+    </sql>
+    <!-- insert -->
+    <insert id="insert" parameterType="java.util.Map">
+        <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List_Without_Id"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+        insert into
+        <include refid="Table_Name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="records" item="record" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values_On_DuplicateKey"/>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        user_id = VALUES(user_id), name = VALUES(name), email = VALUES(email), token = VALUES(token), token_symbol = VALUES(token_symbol), img_name = VALUES(img_name), type =
+        VALUES(type), issue = VALUES(issue), circulating = VALUES(circulating), coinmarketcap = VALUES(coinmarketcap), online = VALUES(online), exchange_name =
+        VALUES(exchange_name), trade_volume = VALUES(trade_volume), price = VALUES(price), possess_users = VALUES(possess_users), status = VALUES(status), deposit =
+        VALUES(deposit), token_number = VALUES(token_number), token_url = VALUES(token_url), contacts = VALUES(contacts), wechat = VALUES(wechat), online_time =
+        VALUES(online_time), start_time = VALUES(start_time), created_date = VALUES(created_date), updated_date = VALUES(updated_date), mobile = VALUES(mobile), deposit_status =
+        VALUES(deposit_status), sweets_status = VALUES(sweets_status), broker_id = VALUES(broker_id)
+    </insert>
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <delete id="deleteIn" parameterType="java.util.Map">
+        delete from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{record.id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByExample" parameterType="java.util.Map">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+            update
+            <include refid="Table_Name"/>
+            <set>
+                <include refid="Update_Set_From_Bean"/>
+            </set>
+            where id = #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" parameterType="java.util.Map" resultMap="ProjectTokenInfoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByExample" resultMap="ProjectTokenInfoMap" parameterType="java.util.Map">
+        select
+        <if test="example != null and example.distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="ProjectTokenInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="example != null and example.orderByClause != null">
+            order by ${example.orderByClause}
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="ProjectTokenInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        where id in
+        <foreach collection="records" item="record" index="index" open="(" separator="," close=")">
+            #{record.id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) as total from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectByPager" resultMap="ProjectTokenInfoMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Table_Name"/>
+        <if test="example != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="pager.sortItem != null and pager.sortItem != ''">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <!-- end select -->
+    <!-- My Custom Interfaces -->
+</mapper>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>红包管理</title>
+    <script th:src="@{'/js/modules/activity/redenvelope/redpacket.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    用户ID:
+    <input id="query-red-packet-userId" name="query-red-packet-userId" class="easyui-textbox" style="width: 150px"/>
+
+    红包类型:
+    <select class="easyui-combobox" id="query-red-packet-type" name="query-red-packet-type" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="1">普通红包</option>
+        <option value="2">口令红包</option>
+    </select>
+
+    红包有效期:
+    <select class="easyui-combobox" id="query-red-packet-valid-time" name="query-red-packet-valid-time" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="1">24小时</option>
+        <option value="2">3天</option>
+        <option value="3">7天</option>
+    </select>
+
+    红包状态:
+    <select class="easyui-combobox" id="query-red-packet-status" name="query-red-packet-status" style="width: 150px">
+        <option selected="selected" value="">全部</option>
+        <option value="1">初始化</option>
+        <option value="2">领取中</option>
+        <option value="3">领完</option>
+        <option value="4">过期</option>
+        <option value="5">已退回</option>
+    </select>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+</div>
+<div style="height: 94%; padding: 1px">
+    <input type="hidden" id="action" name="action"/>
+    <!--数据表格-->
+    <div id="red-packet-datagrid">
+    </div>
+
+    <!--模态框-->
+    <div id="red-packet-dlg">
+        <form id="red-packet-form" name="red-packet-form" method="post">
+            <table cellpadding="5" style="margin: 10px auto" class="form-table">
+                <input type="hidden" name="id" id="id"/>
+                <tr>
+                    <td>发红包的人:</td>
+                    <td>
+                        <input class="easyui-textbox" id="userId" name="userId" style="width: 150px" data-options="required:true">
+                        </input>
+                    </td>
+
+                    <td>红包类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="redType" name="redType" style="width: 150px" data-options="required:true">
+                            <option value="1">普通红包</option>
+                            <option value="2">口令红包</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>红包口令:</td>
+                    <td>
+                        <input id="code" style="width: 150px;" name="code" class="easyui-textbox"/>
+                    </td>
+
+                    <td>红包额度类型:</td>
+                    <td>
+                        <select class="easyui-combobox" id="amountType" name="amountType" style="width: 150px" data-options="required:true">
+                            <option value="1">固定数量</option>
+                            <option value="2">随机数量</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>单个数量:</td>
+                    <td>
+                        <input class="easyui-textbox" id="singleAmount" style="width: 150px" name="singleAmount"/>
+                    </td>
+
+                    <td>随机数量:</td>
+                    <td>
+                        <input class="easyui-textbox" id="randomAmount" style="width: 150px" name="randomAmount"/>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>币种ID:</td>
+                    <td>
+                        <input class="easyui-combobox" id="currencyId" style="width: 150px" name="currencyId" data-options="required:true"/>
+                    </td>
+
+                    <td>红包中币种的总数量:</td>
+                    <td>
+                        <input class="easyui-textbox" id="amount" style="width: 150px" name="amount" value="1"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>红包个数:</td>
+                    <td>
+                        <input class="easyui-textbox" id="number" style="width: 150px" name="number" value="10000000"/>
+                    </td>
+
+                    <td>红包主题:</td>
+                    <td>
+                        <input class="easyui-combobox" id="themeId" style="width: 150px" name="themeId"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>祝福语:</td>
+                    <td>
+                        <input class="easyui-textbox" id="greeting" style="width: 150px" name="greeting" value="8"/>
+                    </td>
+
+                    <td>昵称:</td>
+                    <td>
+                        <input class="easyui-textbox" id="nickName" style="width: 150px" name="nickName" data-options="required:true" value="8"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>头像:</td>
+                    <td>
+                        <input class="easyui-textbox" id="avatarUrl-file" style="width: 150px" name="avatarUrl-file"/>
+                        <input type="hidden" id="avatarUrl" style="width: 150px" name="avatarUrl"/>
+                    </td>
+
+                    <td>介绍:</td>
+                    <td>
+                        <input class="easyui-textbox" id="intro" style="width: 150px" name="intro"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>红包有效期:</td>
+                    <td>
+                        <select class="easyui-combobox" id="validityPeriod" style="width: 150px" name="validityPeriod" data-options="required:true">
+                            <option value="1" selected="selected">24小时</option>
+                            <option value="2">3天</option>
+                            <option value="3">7天</option>
+                        </select>
+                    </td>
+
+                    <td>红包过期时间:</td>
+                    <td>
+                        <input class="easyui-datetimebox" id="expiredDate" style="width: 150px" name="expiredDate" data-options="required:true"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>红包状态:</td>
+                    <td>
+                        <select class="easyui-combobox" id="status" name="status" style="width: 150px" data-options="required:true">
+                            <option value="1" selected="selected">初始化</option>
+                            <option value="2">领取中</option>
+                            <option value="3">领完</option>
+                            <option value="4">过期</option>
+                            <option value="5">已退回</option>
+                        </select>
+                    </td>
+
+                    <td>券商ID:</td>
+                    <td>
+                        <input class="easyui-combobox" id="brokerId" style="width: 150px" name="brokerId"/>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

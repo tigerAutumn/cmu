@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.perpetual.data.MatchingCacheRepository">
+    <select id="selectContractCode" resultType="java.lang.String">
+        SELECT DISTINCT contract_code
+        FROM
+        <include refid="Table_Name"/>
+    </select>
+    <select id="selectBatchForUpdate" resultMap="MatchingCacheMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Table_Name"/>
+        WHERE contract_code=#{contractCode}
+        ORDER BY id ASC FOR UPDATE
+    </select>
+</mapper>

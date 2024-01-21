@@ -1,0 +1,4 @@
+task:
+  center:
+    serverList: testing
+    namespace: elastic-job-ext

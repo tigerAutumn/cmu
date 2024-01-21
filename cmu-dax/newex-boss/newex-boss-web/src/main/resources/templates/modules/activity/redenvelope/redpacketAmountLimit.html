@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>红包管理</title>
+    <script th:src="@{'/js/modules/activity/redenvelope/redpacketAmountLimit.js?v='+${rnd}}"></script>
+
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+    币种ID:
+    <input id="query-red-packet-amount-limit-currencyId" name="query-red-packet-amount-limit-currencyId" class="easyui-textbox" style="width: 150px"/>
+
+    <a id="btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>&nbsp;&nbsp;
+</div>
+<div style="height: 94%; padding: 1px">
+    <input type="hidden" id="action" name="action"/>
+    <!--数据表格-->
+    <div id="red-packet-amount-limit-datagrid">
+    </div>
+
+    <!--模态框-->
+    <div id="red-packet-amount-limit-dlg">
+        <form id="red-packet-amount-limit-form" name="red-packet-amount-limit-form" method="post">
+            <table cellpadding="5" style="margin: 10px auto" class="form-table">
+                <input type="hidden" name="id" id="id"/>
+
+                <tr>
+
+                    <td>币种ID:</td>
+                    <td>
+                        <input class="easyui-combobox" id="currencyId" style="width: 150px" name="currencyId" data-options="required:true"/>
+                    </td>
+
+                    <td>币种名称:</td>
+                    <td>
+                        <input class="easyui-textbox" id="currencyCode" style="width: 150px" name="currencyCode"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>币种最小限额:</td>
+                    <td>
+                        <input class="easyui-textbox" id="minAmount" style="width: 150px" name="minAmount"/>
+                    </td>
+
+                    <td>券商ID:</td>
+                    <td>
+                        <input class="easyui-combobox" id="brokerId" style="width: 150px" name="brokerId"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>红包个数限制:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxNumber" style="width: 150px" name="maxNumber"/>
+                    </td>
+
+                    <td>币种数量小数位数限制:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxDigit" style="width: 150px" name="maxDigit"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>币种最大限额:</td>
+                    <td>
+                        <input class="easyui-textbox" id="maxAmount" style="width: 150px" name="maxAmount"/>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

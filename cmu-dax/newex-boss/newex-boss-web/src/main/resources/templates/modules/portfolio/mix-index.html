@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>混合指数</title>
+    <script th:src="@{'/vendor/easyui/datagrid-cellediting.js'}"></script>
+    <script th:src="@{'/js/modules/portfolio/mix-index.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<input id="modal-action" type="hidden" name="action" value=""/>
+<div style="height: 93%;padding:2px">
+    <div id="mix-index-datagrid"></div>
+</div>
+<div id="mix-index-dlg">
+    <form id="mix-index-form" name="mix-index-form" method="post">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <tr>
+                <td style="width: 100px">ID：</td>
+                <td colspan="2"><input id="id" name="id" class="easyui-textbox" readonly style="width:200px;"/></td>
+                <td style="width: 80px">指数Id：</td>
+                <td colspan="2"><input id="symbol" name="symbol" class="easyui-textbox" data-options="required:true" style="width:200px;"/></td>
+
+            </tr>
+            <tr>
+                <td style="width: 100px">指数名称：</td>
+                <td colspan="5"><input id="symbolName" name="symbolName" class="easyui-textbox" data-options="required:true" style="width: 500px"/></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">初始化时间:</td>
+                <td colspan="2"><input class="easyui-datetimebox" id="initialDate" data-options="required:true" name="initialDate" style="width: 200px"></td>
+                <td style="width: 80px">状态：</td>
+                <td colspan="2">
+                    <select id="status" name="status" class="easyui-combobox" data-options="required:true" style="width: 200px">
+                    <option>请选择</option>
+                    <option value="0">上线</option>
+                    <option value="1">预发</option>
+                    <option value="2">下线</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100px">币种：</td>
+                <td colspan="5"><input class="easyui-tagbox" id="currency" data-options="required:true" name="currency" style="width: 500px"></td>
+            </tr>
+            <tr>
+                <td style="width: 100px">配置项:</td>
+                <td colspan="5">
+                    <div id="mix-index-options-datagrid" style="width: 500px"></div>
+                    <input id="configs" type="hidden" name="configs"/>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+</html>

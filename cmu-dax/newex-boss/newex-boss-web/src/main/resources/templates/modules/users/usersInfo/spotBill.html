@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户详情 - 币币账单</title>
+</head>
+
+<body>
+
+<div th:fragment="copy" id="tabl9" class="easyui-tabs" style="height: 100%">
+    <div title="账单记录" style="width: 100%">
+        <div class="toolbar">
+            <div style="margin: 5px;">
+                币&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种:<input id="bill-currency-name" style="width: 150px;" name="bill-currency-name"
+                                                              class="easyui-combobox"/>
+
+                开始时间:<input class="easyui-datetimebox" id="bill-startDateMillis"
+                            name="bill-startDateMillis" labelPosition="top" style="width:150px;">
+
+                结束时间:<input class="easyui-datetimebox" id="bill-endDateMillis" name="bill-endDateMillis"
+                            labelPosition="top" style="width:150px;">
+            </div>
+
+            <div style="margin: 5px;">
+                账单类型:<input id="bill-type" style="width: 150px;" name="bill-type" class="easyui-combobox"/>
+
+                历史账单:<select class="easyui-combobox" id="bill-history" name="history" style="width: 150px">
+                <option value="false">当前账单</option>
+                <option value="true">两天前账单</option>
+            </select>
+
+                <a id="bill-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+            </div>
+
+        </div>
+
+        <div style="height: 90%;padding:1px">
+            <div id="bill-datagrid"></div>
+        </div>
+
+        <div id="bill-dlg">
+            <form id="bill-form" name="bill-form" method="post">
+                <table width="100%" class="table">
+                    <tr>
+                        <td>用户ID:</td>
+                        <td><label id="spot_bill_userid"></label></td>
+                    </tr>
+                    <tr>
+                        <td>时&nbsp;&nbsp;&nbsp;&nbsp;间:</td>
+                        <td><label id="spot_bill_createTime"></label></td>
+                    </tr>
+                    <tr>
+                        <td>币&nbsp;&nbsp;&nbsp;&nbsp;种:</td>
+                        <td><label id="spot_bill_currency"></label></td>
+                    </tr>
+                    <tr>
+                        <td>类&nbsp;&nbsp;&nbsp;&nbsp;型:</td>
+                        <td><label id="spot_bill_billType"></label></td>
+                    </tr>
+                    <tr>
+                        <td>金&nbsp;&nbsp;&nbsp;&nbsp;额:</td>
+                        <td><label id="spot_bill_size"></label></td>
+                    </tr>
+                    <tr>
+                        <td>余&nbsp;&nbsp;&nbsp;&nbsp;额:</td>
+                        <td><label id="spot_bill_afterBalance"></label></td>
+                    </tr>
+                    <tr>
+                        <td>手&nbsp;续费:</td>
+                        <td><label id="spot_bill_fee"></label></td>
+                    </tr>
+                    <tr>
+                        <td>实际到账地址:</td>
+                        <td><label id="spot_bill_adress"></label></td>
+                    </tr>
+                    <tr>
+                        <td>T&nbsp;X&nbsp;I&nbsp;D:</td>
+                        <td><label id="spot_bill_txid"></label></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div title="当前委托订单" style="width: 100%">
+        <div class="toolbar">
+            <div style="margin: 5px;">
+                币对:<input id="order-currencyCode" name="code" class="easyui-combobox"
+                          style="width: 150px;"/>
+
+                委托价:<input id="order-price" name="price" class="easyui-textbox"
+                           style="width: 150px;"/>
+
+                开始时间:<input class="easyui-datetimebox" id="order-startDateMillis"
+                            name="order-startDateMillis" style="width:150px;">
+
+                结束时间:<input class="easyui-datetimebox" id="order-endDateMillis"
+                            name="order-endDateMillis" style="width:150px;">
+            </div>
+
+            <div style="margin: 5px;">
+                类型:<select class="easyui-combobox" id="order-type" name="type" style="width: 150px">
+                <option value="">全部</option>
+                <option value="LIMITED">限价单</option>
+                <option value="MARKET">市价单</option>
+            </select>
+
+                资&nbsp;&nbsp;&nbsp;源:<select class="easyui-combobox" id="order-source" name="source"
+                                             style="width: 150px">
+                <option value="">全部</option>
+                <option value="web">web</option>
+                <option value="app">app</option>
+                <option value="android">android</option>
+                <option value="ios">ios</option>
+            </select>
+
+                <a id="order-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+            </div>
+        </div>
+
+        <div style="height: 90%;padding:1px">
+            <div id="order-datagrid"></div>
+        </div>
+
+        <div id="order-dlg">
+            <form id="order-form" name="order-form" method="post">
+                <table width="100%" class="table">
+
+                    <tr>
+                        <td>用户ID:</td>
+                        <td><label id="spot_order_userid"></label>
+
+                    </tr>
+                    <tr>
+                        <td>时间:</td>
+                        <td><label id="spot_order_createdata"></label></td>
+                    </tr>
+                    <tr>
+                        <td>币对:</td>
+                        <td><label id="spot_order_code"></label></td>
+                    </tr>
+                    <tr>
+                        <td>类型:</td>
+                        <td><label id="spot_order_orderType"></label></td>
+                    </tr>
+                    <tr>
+                        <td>委托价:</td>
+                        <td><label id="spot_order_price"></label></td>
+
+                    </tr>
+                    <tr>
+                        <td>委托量:</td>
+                        <td><label id="spot_order_volume"></label></td>
+
+                    </tr>
+                    <tr>
+                        <td>订单来源:</td>
+                        <td><label id="spot_order_source"></label></td>
+                    </tr>
+                    <tr>
+                        <td>已成交:</td>
+                        <td><label id="spot_order_filledVolume"></label></td>
+
+                    </tr>
+                    <tr>
+                        <td>成交均价:</td>
+                        <td><label id="spot_order_averagePrice"></label></td>
+
+                    </tr>
+                    <tr>
+                        <td>状态:</td>
+                        <td><label id="spot_order_status"></label></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div title="历史委托订单" style="width: 100%;height: 100%">
+        <div class="toolbar">
+            <div style="margin: 5px;">
+                币对:<input id="his-currencyCode" name="code" class="easyui-combobox"
+                          style="width: 150px;"/>
+
+                委托价:<input id="his-price" name="his-price" class="easyui-textbox"
+                           style="width: 150px;"/>
+
+                开始时间:<input class="easyui-datetimebox" id="his_startDateMillis"
+                            name="his_startDateMillis" style="width:150px;">
+
+                结束时间:<input class="easyui-datetimebox" id="his_endDateMillis"
+                            name="his_endDateMillis" style="width:150px;">
+            </div>
+
+            <div style="margin: 5px;">
+                类型:<select class="easyui-combobox" id="his_type" name="his_type"
+                           style="width: 150px">
+                <option value="">全部</option>
+                <option value="LIMITED">限价单</option>
+                <option value="MARKET">市价单</option>
+            </select>
+
+                资&nbsp;&nbsp;&nbsp;源:<select class="easyui-combobox" id="his_source" name="his_source"
+                                             style="width: 150px">
+                <option value="">全部</option>
+                <option value="web">web</option>
+                <option value="app">app</option>
+                <option value="android">android</option>
+                <option value="ios">ios</option>
+            </select>
+
+                历史订单:<select class="easyui-combobox" id="order-history" name="history"
+                             style="width: 150px">
+                <option value="true">两天前订单</option>
+                <option value="false" selected>当前两天订单</option>
+            </select>
+
+                <a id="history-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+            </div>
+
+        </div>
+        <div style="height: 90%;padding:1px">
+            <div id="his-datagrid"></div>
+        </div>
+        <div id="history-dlg">
+            <form id="history-form" name="history-form" method="post">
+                <table width="100%" class="table">
+
+                    <tr>
+                        <td>用户ID:</td>
+                        <td><label id="spot_his_userid"></label></td>
+
+
+                    </tr>
+                    <tr>
+                        <td>时&nbsp;&nbsp;&nbsp;&nbsp;间:</td>
+
+                        <td><label id="spot_his_createdata"></label></td>
+
+                    </tr>
+                    <tr>
+                        <td>币&nbsp;&nbsp;&nbsp;&nbsp;对:</td>
+                        <td><label id="spot_his_code"></label></td>
+                    </tr>
+                    <tr>
+                        <td>类&nbsp;&nbsp;&nbsp;&nbsp;型:</td>
+                        <td><label id="spot_his_orderType"></label></td>
+                    </tr>
+                    <tr>
+                        <td>委&nbsp;托&nbsp;价:</td>
+                        <td><label id="spot_his_price"></label></td>
+                    </tr>
+                    <tr>
+                        <td>委&nbsp;托&nbsp;量:</td>
+                        <td><label id="spot_his_volume"></label></td>
+                    </tr>
+                    <tr>
+                        <td>订单来源:</td>
+                        <td><label id="spot_his_source"></label></td>
+                    </tr>
+                    <tr>
+                        <td>已&nbsp;成&nbsp;交:</td>
+                        <td><label id="spot_his_filledVolume"></label></td>
+                    </tr>
+                    <tr>
+                        <td>成交均价:</td>
+                        <td><label id="spot_his_averagePrice"></label></td>
+                    </tr>
+                    <tr>
+                        <td>状&nbsp;&nbsp;&nbsp;&nbsp;态:</td>
+                        <td><label id="spot_his_status"></label></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

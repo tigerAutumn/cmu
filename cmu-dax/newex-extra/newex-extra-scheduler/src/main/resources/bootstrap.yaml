@@ -1,0 +1,38 @@
+#
+# spring cloud eureka
+#
+eureka:
+  client:
+    service-url:
+      defaultZone: @spring.cloud.eureka.serviceUrl@
+  instance:
+    prefer-ip-address: true
+#
+# spring cloud config
+#
+spring:
+  application:
+    name: @newex.app.name@
+  cloud:
+    config:
+      name: @spring.cloud.config.name@
+      profile: @spring.cloud.config.profile@
+      enabled: @spring.cloud.config.enabled@
+      discovery:
+        enabled: @spring.cloud.config.discovery.enabled@
+        service-id: @spring.cloud.config.serviceId@
+      fail-fast: true
+      #uri: http://172.17.166.102:8762/
+#
+# spring cloud feign
+#
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 40000
+  hystrix:
+    enabled: false
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 30000

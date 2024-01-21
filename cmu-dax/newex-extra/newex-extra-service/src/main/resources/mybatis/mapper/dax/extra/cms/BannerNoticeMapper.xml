@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.newex.dax.extra.data.cms.BannerNoticeRepository">
+  <!-- CodeBuilder Generated -->
+  <resultMap id="BannerNoticeMap" type="cc.newex.dax.extra.domain.cms.BannerNotice">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="title" property="title" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="locale" property="locale" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="original_image_url" property="originalImageUrl" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="TINYINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="publish_user" property="publishUser" jdbcType="VARCHAR" />
+    <result column="rnd_num" property="rndNum" jdbcType="VARCHAR" />
+    <result column="share_title" property="shareTitle" jdbcType="VARCHAR" />
+    <result column="share_text" property="shareText" jdbcType="VARCHAR" />
+    <result column="share_image_url" property="shareImageUrl" jdbcType="VARCHAR" />
+    <result column="share_link" property="shareLink" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="broker_id" property="brokerId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Table_Name">
+    cms_banner_notice
+  </sql>
+  <sql id="Base_Column_List_Without_Id">
+    uid, type, locale, text, image_url, original_image_url, link, platform, start_time, 
+    end_time, status, sort, publish_user, rnd_num, share_title, share_text, share_image_url, 
+    share_link, created_date, update_date, broker_id
+  </sql>
+  <sql id="Base_Column_List">
+    id, 
+    title, 
+    <include refid="Base_Column_List_Without_Id" />
+  </sql>
+  <sql id="Insert_Columns">
+    <if test="record.uid != null">
+      uid,
+    </if>
+    <if test="record.title != null">
+      title,
+    </if>
+    <if test="record.type != null">
+      type,
+    </if>
+    <if test="record.locale != null">
+      locale,
+    </if>
+    <if test="record.text != null">
+      text,
+    </if>
+    <if test="record.imageUrl != null">
+      image_url,
+    </if>
+    <if test="record.originalImageUrl != null">
+      original_image_url,
+    </if>
+    <if test="record.link != null">
+      link,
+    </if>
+    <if test="record.platform != null">
+      platform,
+    </if>
+    <if test="record.startTime != null">
+      start_time,
+    </if>
+    <if test="record.endTime != null">
+      end_time,
+    </if>
+    <if test="record.status != null">
+      status,
+    </if>
+    <if test="record.sort != null">
+      sort,
+    </if>
+    <if test="record.publishUser != null">
+      publish_user,
+    </if>
+    <if test="record.rndNum != null">
+      rnd_num,
+    </if>
+    <if test="record.shareTitle != null">
+      share_title,
+    </if>
+    <if test="record.shareText != null">
+      share_text,
+    </if>
+    <if test="record.shareImageUrl != null">
+      share_image_url,
+    </if>
+    <if test="record.shareLink != null">
+      share_link,
+    </if>
+    <if test="record.createdDate != null">
+      created_date,
+    </if>
+    <if test="record.updateDate != null">
+      update_date,
+    </if>
+    <if test="record.brokerId != null">
+      broker_id,
+    </if>
+  </sql>
+  <sql id="Insert_Values">
+    <if test="record.uid != null">
+      #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.title != null">
+      #{record.title,jdbcType=VARCHAR},
+    </if>
+    <if test="record.type != null">
+      #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.locale != null">
+      #{record.locale,jdbcType=VARCHAR},
+    </if>
+    <if test="record.text != null">
+      #{record.text,jdbcType=VARCHAR},
+    </if>
+    <if test="record.imageUrl != null">
+      #{record.imageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.originalImageUrl != null">
+      #{record.originalImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.link != null">
+      #{record.link,jdbcType=VARCHAR},
+    </if>
+    <if test="record.platform != null">
+      #{record.platform,jdbcType=TINYINT},
+    </if>
+    <if test="record.startTime != null">
+      #{record.startTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.endTime != null">
+      #{record.endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.status != null">
+      #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.sort != null">
+      #{record.sort,jdbcType=INTEGER},
+    </if>
+    <if test="record.publishUser != null">
+      #{record.publishUser,jdbcType=VARCHAR},
+    </if>
+    <if test="record.rndNum != null">
+      #{record.rndNum,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareTitle != null">
+      #{record.shareTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareText != null">
+      #{record.shareText,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareImageUrl != null">
+      #{record.shareImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareLink != null">
+      #{record.shareLink,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updateDate != null">
+      #{record.updateDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <sql id="Batch_Insert_Values">
+    #{record.title,jdbcType=VARCHAR},
+    #{record.uid,jdbcType=VARCHAR},
+    #{record.type,jdbcType=INTEGER},
+    #{record.locale,jdbcType=VARCHAR},
+    #{record.text,jdbcType=VARCHAR},
+    #{record.imageUrl,jdbcType=VARCHAR},
+    #{record.originalImageUrl,jdbcType=VARCHAR},
+    #{record.link,jdbcType=VARCHAR},
+    #{record.platform,jdbcType=TINYINT},
+    #{record.startTime,jdbcType=TIMESTAMP},
+    #{record.endTime,jdbcType=TIMESTAMP},
+    #{record.status,jdbcType=INTEGER},
+    #{record.sort,jdbcType=INTEGER},
+    #{record.publishUser,jdbcType=VARCHAR},
+    #{record.rndNum,jdbcType=VARCHAR},
+    #{record.shareTitle,jdbcType=VARCHAR},
+    #{record.shareText,jdbcType=VARCHAR},
+    #{record.shareImageUrl,jdbcType=VARCHAR},
+    #{record.shareLink,jdbcType=VARCHAR},
+    #{record.createdDate,jdbcType=TIMESTAMP},
+    #{record.updateDate,jdbcType=TIMESTAMP},
+    #{record.brokerId,jdbcType=INTEGER},
+  </sql>
+  <sql id="Batch_Insert_Values_On_DuplicateKey">
+    #{record.id,jdbcType=BIGINT},
+    #{record.title,jdbcType=VARCHAR},
+    <include refid="Batch_Insert_Values" />
+  </sql>
+  <sql id="Update_Set_From_Bean">
+    <if test="record.title != null">
+      title = #{record.title,jdbcType=VARCHAR},
+    </if>
+    <if test="record.uid != null">
+      uid = #{record.uid,jdbcType=VARCHAR},
+    </if>
+    <if test="record.type != null">
+      type = #{record.type,jdbcType=INTEGER},
+    </if>
+    <if test="record.locale != null">
+      locale = #{record.locale,jdbcType=VARCHAR},
+    </if>
+    <if test="record.text != null">
+      text = #{record.text,jdbcType=VARCHAR},
+    </if>
+    <if test="record.imageUrl != null">
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.originalImageUrl != null">
+      original_image_url = #{record.originalImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.link != null">
+      link = #{record.link,jdbcType=VARCHAR},
+    </if>
+    <if test="record.platform != null">
+      platform = #{record.platform,jdbcType=TINYINT},
+    </if>
+    <if test="record.startTime != null">
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.endTime != null">
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.status != null">
+      status = #{record.status,jdbcType=INTEGER},
+    </if>
+    <if test="record.sort != null">
+      sort = #{record.sort,jdbcType=INTEGER},
+    </if>
+    <if test="record.publishUser != null">
+      publish_user = #{record.publishUser,jdbcType=VARCHAR},
+    </if>
+    <if test="record.rndNum != null">
+      rnd_num = #{record.rndNum,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareTitle != null">
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareText != null">
+      share_text = #{record.shareText,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareImageUrl != null">
+      share_image_url = #{record.shareImageUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="record.shareLink != null">
+      share_link = #{record.shareLink,jdbcType=VARCHAR},
+    </if>
+    <if test="record.createdDate != null">
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.updateDate != null">
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="record.brokerId != null">
+      broker_id = #{record.brokerId,jdbcType=INTEGER},
+    </if>
+  </sql>
+  <!-- insert -->
+  <insert id="insert" parameterType="java.util.Map">
+    <selectKey resultType="java.lang.Long" keyProperty="record.id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Columns" />
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Insert_Values" />
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List_Without_Id" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values" />
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="batchInsertOnDuplicateKey" parameterType="java.util.Map">
+    insert into 
+    <include refid="Table_Name" />
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    values 
+    <foreach collection="records" item="record" index="index" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <include refid="Batch_Insert_Values_On_DuplicateKey" />
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    title = VALUES(title), uid = VALUES(uid), type = VALUES(type), locale = VALUES(locale), text = VALUES(text), image_url = VALUES(image_url), original_image_url = VALUES(original_image_url), link = VALUES(link), platform = VALUES(platform), start_time = VALUES(start_time), end_time = VALUES(end_time), status = VALUES(status), sort = VALUES(sort), publish_user = VALUES(publish_user), rnd_num = VALUES(rnd_num), share_title = VALUES(share_title), share_text = VALUES(share_text), share_image_url = VALUES(share_image_url), share_link = VALUES(share_link), created_date = VALUES(created_date), update_date = VALUES(update_date), broker_id = VALUES(broker_id)
+  </insert>
+  <!-- end insert -->
+  <!-- delete -->
+  <delete id="deleteById" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="java.util.Map">
+    delete from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <!-- end delete -->
+  <!-- update -->
+  <update id="updateById" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    where id = #{record.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByExample" parameterType="java.util.Map">
+    update 
+    <include refid="Table_Name" />
+    <set>
+      <include refid="Update_Set_From_Bean" />
+    </set>
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="batchUpdate" parameterType="java.util.Map">
+    <foreach collection="records" item="record" index="index" open="" close="" separator=";">
+      update 
+      <include refid="Table_Name" />
+      <set>
+        <include refid="Update_Set_From_Bean" />
+      </set>
+      where id = #{record.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- end update -->
+  <!-- select -->
+  <select id="selectById" parameterType="java.util.Map" resultMap="BannerNoticeMap">
+    select 
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByExample" resultMap="BannerNoticeMap" parameterType="java.util.Map">
+    select
+    <if test="example != null and example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectOneByExample" resultMap="BannerNoticeMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example != null and example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+    limit 1
+  </select>
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByPager" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(1) as total from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPager" resultMap="BannerNoticeMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from 
+    <include refid="Table_Name" />
+    <if test="example != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="pager.sortItem != null and pager.sortItem != ''">
+      order by ${pager.sortItem} ${pager.sortType}
+    </if>
+    limit #{pager.startIndex} , #{pager.pageSize}
+  </select>
+  <!-- end select -->
+  <!-- My Custom Interfaces -->
+</mapper>

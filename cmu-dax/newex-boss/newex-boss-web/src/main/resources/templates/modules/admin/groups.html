@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>组织机构</title>
+    <script th:src="@{'/js/modules/admin/groups.js?v='+${rnd}}"></script>
+</head>
+<body id="body-layout" class="easyui-layout" layout:fragment="content">
+<!-- 左边tree -->
+<div id="west" data-options="region:'west',split:true" title="组织机构树" style="width: 220px;">
+    <div class="easyui-panel" style="padding: 5px; border: none">
+        <ul id="group-tree"></ul>
+    </div>
+</div>
+<div region="center" data-options="region:'center'">
+    <div style="width: 100%; height: 99%">
+        <div id="group-datagrid"></div>
+        <input id="modal-action" type="hidden" name="action" value=""/>
+    </div>
+</div>
+<div id="group-dlg">
+    <form id="group-form" name="group-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 30px auto" class="form-table">
+                <tr id="tr-parent-group-name">
+                    <td>父模块:</td>
+                    <td colspan="3"><label id="parent-group-name"></label></td>
+                </tr>
+                <tr>
+                    <td>名称:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="name" id="name" value=""
+                                           data-options="required:true" style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>券商:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" name="brokerId" id="brokerId" value=""
+                                           data-options="required:true" style="width: 380px"/></td>
+                </tr>
+                <tr>
+                    <td>状态:</td>
+                    <td><select class="easyui-combobox" id="status" name="status" style="width: 150px">
+                        <option selected="selected" value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select></td>
+                    <td>机构类型:</td>
+                    <td><select class="easyui-combobox" id="type" name="type" style="width: 150px">
+                        <option selected="selected" value="1">总部</option>
+                        <option value="2">分部</option>
+                        <option value="3">海外</option>
+                        <option value="4">工单</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>排序:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="sequence" name="sequence"
+                                           data-options="required:true,validType:'digit'" style="width: 380px"/></td>
+                    <input id="parentId" type="hidden" name="parentId" value="0"/>
+                    <input id="groupId" type="hidden" name="id" value="0"/>
+                </tr>
+            </table>
+        </center>
+    </form>
+</div>
+<!-- tree右键菜单  -->
+<div id="tree_ctx_menu" class="easyui-menu" style="width: 120px;">
+    <div id="m-add" data-options="name:'add',iconCls:'icon-add'">增加</div>
+    <div id="m-edit" data-options="name:'edit',iconCls:'icon-edit'">修改</div>
+    <div id="m-remove" data-options="name:'remove',iconCls:'icon-remove'">删除</div>
+</div>
+</body>
+</html>

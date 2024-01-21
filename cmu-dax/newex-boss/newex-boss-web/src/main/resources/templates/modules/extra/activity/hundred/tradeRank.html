@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>交易排行榜</title>
+    <script th:src="@{'/js/modules/extra/activity/hundred/tradeRank.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+
+<div class="toolbar">
+    用户名：<input class="easyui-textbox" type="text" id="trade-rank-username" name="trade-rank-username" style="width: 100px"/>
+    <a id="trade-rank-btn-search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px">搜索</a>
+    <a id="trade-rank-btn-export" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">导出</a>
+</div>
+
+<div style="height: 96%; padding: 1px">
+    <div id="trade-rank-datagrid"></div>
+</div>
+
+<input type="hidden" id="action">
+<!-- 新增排行榜纪录 -->
+<div id="trade-rank-dlg">
+    <form id="trade-rank-form" name="trade-rank-form" method="POST">
+        <table th:cols="6" style="margin: 30px auto" class="form-table">
+            <input id="id" name="id" type="hidden"/>
+
+            <tr>
+                <td>期数</td>
+                <td>
+                    <input class="easyui-numberbox" type="text" id="term" name="term"
+                           data-options="required:true, min:1, prompt: '请输入正数'" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>券商</td>
+                <td>
+                    <input class="easyui-combobox" type="text" id="brokerId" name="brokerId"
+                           data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户ID</td>
+                <td>
+                    <input id="userId" name="userId" class="easyui-textbox" data-options="required:true" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input class="easyui-textbox" id="username" data-options="required:true" name="username" style="width: 450px"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>折合USDT交易额</td>
+                <td>
+                    <input class="easyui-textbox" id="amount" data-options="required:true" name="amount" style="width: 450px"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

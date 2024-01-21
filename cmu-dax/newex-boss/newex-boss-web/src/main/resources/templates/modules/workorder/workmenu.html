@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/common}">
+<head>
+    <title>工单菜单</title>
+    <script th:src="@{'/js/modules/workorder/workmenu.js?v='+${rnd}}"></script>
+</head>
+<body class="easyui-layout" layout:fragment="content">
+<div id="toolbar" class="toolbar">
+
+
+    菜单名称：<input class="easyui-textbox" type="text" id="workmenu-name" name="workmenu-name"
+                style="width: 200px" data-options=""/>
+    状态:<select class="easyui-combobox" id="workmenu-status" name="workmenu-status" style="width: 200px">
+    <option selected="selected" value="">全部</option>
+    <option value="0">启用</option>
+    <option value="1">停用</option>
+</select>
+    <a id="btn-search" href="#" class="easyui-linkbutton" iconCls="icon-search" style="margin-left:50px;"> 搜索 </a>
+    <input id="modal-action" type="hidden" name="action" value=""/>
+</div>
+<div style="height: 96%; padding: 1px">
+    <div id="WorkMenu-datagrid"></div>
+</div>
+<div id="WorkMenu-dlg">
+    <form id="WorkMenu-form" name="WorkMenu-form" method="post">
+        <center>
+            <table cellpadding="5" style="margin: 10px auto;padding-top: 50px;" class="form-table">
+                <tr>
+                    <td>菜单父级ID:</td>
+                    <td colspan="3">
+                        <input id="parentId" style="width: 380px;" name="parentId"
+                               class="easyui-combotree"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>本地化语言:</td>
+                    <td colspan="3">
+                        <input class="easyui-combobox" id="locale" style="width: 380px" name="locale"
+                               data-options="
+		                valueField: 'label',
+	                	textField: 'value',
+	                	data: [{label: 'zh-cn',value: 'zh-cn'},{label: 'en-us',value: 'en-us'}]"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>菜单名称:</td>
+                    <td colspan="3"><input class="easyui-textbox" type="text" id="name" name="name"
+                                           style="width: 380px" data-options="required:true"/></td>
+                </tr>
+                <tr>
+                    <td>组织机构:</td>
+                    <td colspan="3">
+                        <select class="easyui-combotree" id="groupId" name="groupId"
+                                data-options=""
+                                style="width: 380px"></select>
+                        <input id="groupList" name="groupList" type="hidden" value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>状态:</td>
+                    <td colspan="3">
+                        <select class="easyui-combobox" id="status" name="status" style="width: 380px">
+                            <option selected="selected" value="0">启用</option>
+                            <option value="1">停用</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form>
+</div>
+</body>
+</html>
